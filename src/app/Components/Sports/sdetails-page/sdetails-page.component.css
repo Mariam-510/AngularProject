@@ -1,0 +1,446 @@
+/* Updated CSS */
+
+.smooth-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    top: none !important;
+    z-index: 1000;
+  }
+  
+  .fixed-event-card {
+    position: fixed !important;
+    top: calc(20px + var(--sticky-header-height)) !important;
+  
+   
+  }
+  .sticky-header {
+    position: relative;
+    overflow: hidden;
+    height: 100px; /* Initial height (Title Height) */
+    transition: height 0.5s ease-in-out;
+  }
+  
+  .event-title {
+    background: black;
+    color: white;
+    height: 100px; /* Initial Height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: height 0.3s ease, opacity 0.3s ease;}
+  
+  .event-image {
+    width: 100%;
+    height: 0; /* Initially Hidden */
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+  
+  .fixed-event-card .sticky-header {
+    height: 100px; /* Keep the title height consistent */
+}
+
+.fixed-event-card .event-title {
+    height: 100px; /* Keep the title visible */
+    opacity: 1;
+    visibility: visible;
+}
+
+.fixed-event-card .event-image {
+    height: 0; /* Hide Image */
+    opacity: 0;
+    visibility: hidden;
+}
+
+  
+  
+  
+  
+  :root {
+    --sticky-header-height: 0px; /* Default value */
+  }
+  
+    
+    @media (max-width: 768px) {
+      .smooth-card {
+        width: 280px !important;
+        right: 10px !important;
+      }
+      .fixed-event-card {
+        transform: translateY(10px) !important;
+      }
+    }
+    
+    /* Keep existing banner styles */
+    .banner-rounded {
+      position: relative;
+      overflow: hidden;
+      border-bottom-left-radius: 50% 50px;
+      border-bottom-right-radius: 50% 50px;
+      margin-bottom: 2%;
+    }
+    .rounded-bottom {
+      clip-path: ellipse(90% 100% at center top);
+    }
+    .team-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .card {
+      transition: transform 0.2s;
+      border-radius: 0.75rem;
+    }
+    .card-header{
+      background-color: #e1dedeaf;
+        }
+    .bg-lightgray { background-color: #e1dedeaf; }
+    .bg-gray { background-color: #3b3838; }
+    .content-section {
+      background: #f9f9f9; /* Light gray background */
+      max-width: 750px;
+       /* Limit width */
+      /* Center the section */
+      
+    }
+    
+    .icon-circle {
+      width: 40px;
+      height: 40px;
+      background: #007bff; /* Blue background */
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+   /* Button group container */
+  .sticky-buttons {
+      position: relative; /* Default position */
+      transition: all 0.3s ease-in-out;
+    }
+    
+   
+    
+  
+    .content-section {
+      margin-left:10%;
+      justify-content: start;
+      border-bottom: 2px solid #ddd;
+     
+    }
+    
+   
+    
+    .sticky {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 56%;
+      background: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    
+    * --------------------------------------------------------------------------------------------- */
+    .tab-links {
+      width: 70% !important;
+      display: flex;
+      gap: 20px;
+      padding: 15px;
+      border-bottom: 2px solid #ddd;
+      background-color: white;
+      position: relative;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    .tab-links a {
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: black;
+      padding: 8px 12px;
+      font-size: medium;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+    }
+    
+    .tab-links a.active::after,
+    .tab-links a:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 3px;
+      background-color: red;
+    
+    }
+    
+    .sticky {
+      position: fixed !important;
+      top: 0;
+      left: 30px;
+      width: 70%;
+      background: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    
+    section {
+      width: 72%;
+    }
+    
+    
+    /* --------------------------------------------------------------------------------------------- */
+    
+    .event-scroll-wrapper {
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+      width: 90%;
+      padding-bottom: 10px;
+    }
+    
+    .event-scroll-wrapper .row {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 15px;
+    }
+    
+    .event-card {
+      width: 400px;
+      height: 550px;
+      /* min-width: 300px; */
+      /* Ensures horizontal scrolling */
+    }
+    
+    .scroll-container {
+      display: flex;
+      align-items: center;
+      /* justify-content: center; */
+      position: relative;
+    }
+    
+    .scroll-btn {
+      background-color: #f8f9fa;
+      border: none;
+      cursor: pointer;
+      padding: 10px 15px;
+      font-size: 24px;
+      color: #dc3545;
+      transition: 0.3s;
+    }
+    
+    .scroll-btn:hover {
+      background-color: #dc3545;
+      color: white;
+    }
+    
+    
+    /* --------------------------------------------------------------------------------------------- */
+    .heading-line {
+      /* border-bottom: 3px solid #dc3545; */
+      border-bottom: 3px solid #dc3545;
+      padding-bottom: 5px;
+      display: inline-block;
+    }
+    
+    /* --------------------------------------------------------------------------------------------- */
+    .schedule-table {
+      display: flex;
+      flex-direction: column;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #f8f9fa;
+      width: 90%;
+      /* margin: auto; */
+      /* Centers the table horizontally */
+    }
+    
+    /* Centered Header */
+    .schedule-header {
+      display: flex;
+      justify-content: space-around;
+      font-weight: bold;
+      background: #dc3545;
+      color: white;
+      border-radius: 5px 5px 0 0;
+      text-align: center;
+      padding: 10px;
+    }
+    
+    .schedule-row {
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+    }
+    
+    .schedule-row:last-child {
+      border-bottom: none;
+    }
+    
+    /* Align items in rows */
+    .schedule-header span,
+    .schedule-row span {
+      flex: 1;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+    
+    .schedule-header span {
+      font-size: 1.1rem;
+    }
+    
+    /* Responsive Scrolling */
+    .scrollable {
+      overflow-y: auto;
+      max-height: 300px;
+    }
+    
+    /* Responsive Centering */
+    @media (max-width: 768px) {
+      .schedule-table {
+        width: 100%;
+      }
+    }
+    
+    
+    /* --------------------------------------------------------------------------------------------- */
+    /* Ensure the buttons are visible */
+    /* .scrollTicketBtn {
+      z-index: 10;
+    } */
+    
+    .ticket-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* .scrollTicketBtn {
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } */
+    .team-card {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    
+    .team-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Accio Tickets button */
+    .accio-button {
+      background: #e63946;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: bold;
+      display: inline-block;
+      margin: 1.5rem 0;
+      transition: transform 0.2s ease;
+    }
+    
+    .accio-button:hover {
+      transform: translateY(-2px);
+      color: white;
+    }
+    
+    /* Age warning styling */
+    .age-warning {
+      background: #fff3cd;
+      padding: 1rem;
+      border-left: 4px solid #ffc107;
+      margin: 1.5rem 0;
+    }
+    
+    #stop-scroll {
+      padding-top: 100px;
+    }
+    .team-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 1rem !important;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important;
+    }
+    
+ 
+    
+    .shadow-hover {
+      box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.08);
+    }
+    
+    .main-logo {
+height: 180px;
+object-fit: contain;
+transition: transform 0.3s ease;
+}
+    
+    .section-title .heading-line {
+      position: relative;
+      padding-left: 1rem;
+    }
+    
+    .section-title .heading-line::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #dc3545, #0d6efd);
+      border-radius: 2px;
+    }
+    .text-gradient-primary {
+      background: linear-gradient(45deg, #dc3545, #0d6efd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .term-item {
+      transition: transform 0.3s ease;
+    }
+    
+    .term-item:hover {
+      transform: scale(1.1);
+    }
+    
+    .hover-shadow-lg {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-shadow-lg:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 1rem 2rem rgba(126, 124, 124, 0.15) !important;
+    }
+    
+
+    
+    .terms-list {
+      border-radius: 1.5rem;
+      overflow: hidden;
+    }
+    
+    @media (max-width: 768px) {
+      .heading-line {
+        font-size: 2rem;
+      }
+    }
