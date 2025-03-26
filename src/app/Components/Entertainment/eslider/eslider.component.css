@@ -1,0 +1,57 @@
+.carousel-rounded {
+  position: relative;
+  overflow: hidden;
+  border-bottom-left-radius: 50% 50px;
+  border-bottom-right-radius: 50% 50px;
+}
+
+.text-overlay {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  background: rgba(40, 37, 37, 0.5);
+  padding: 0rem 1rem;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  min-height: 500px;
+}
+
+.event-card {
+  width: 320px;
+  right: 2rem;
+  top: 50%;
+  /* transform: translateY(-50%); */
+}
+
+@media (max-width: 768px) {
+  .carousel-rounded {
+    border-bottom-left-radius: 30% 30px;
+    border-bottom-right-radius: 30% 30px;
+  }
+
+  .event-card {
+    width: 90%;
+    right: 50%;
+    top: auto;
+    bottom: 1rem;
+    transform: translateX(50%);
+  }
+
+  .text-overlay {
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+  }
+}
+
+.rounded-bottom {
+  clip-path: ellipse(90% 100% at center top);
+}
