@@ -98,7 +98,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 .tab-links {
-  width: 70% !important;
+  width: 100% !important;
   display: flex;
   /* gap: 0px; */
   padding: 15px;
@@ -134,11 +134,11 @@
 .sticky {
   position: fixed !important;
   top: 0;
-  left: 30px;
-  width: 70%;
+  /* left: 30px; */
+  /* width: 100%; */
   background: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: 2000;
 }
 
 section {
