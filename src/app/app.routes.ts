@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { NotfoundComponent } from './Components/notfound/notfound.component';
 import { TesttComponent } from './Components/testt/testt.component';
 import { EHomePageComponent } from './Components/Entertainment/ehome-page/ehome-page.component';
@@ -16,9 +17,13 @@ import { FootballBookingDetailsComponent } from './Components/football-booking-d
 import { BookingHistoryComponent } from './Components/booking-history/booking-history.component';
 import { BookingComponent } from './Components/booking/booking.component';
 import { BookingDetailsComponent } from './Components/booking-details/booking-details.component';
+import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
+import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
 
 export const routes: Routes = [
-  { path: "", redirectTo: "entertainment", pathMatch: "full" },
+ 
+    {path:'home',component:SHomePageComponent,title:"Home"},
+    {path:'home/:id',component:SDetailsPageComponent,title:"Match Details"},
   {
     path: 'entertainment', component: EHomePageComponent, title: "Entertainment", children: [
       { path: '', redirectTo: "all", pathMatch: 'full' },
@@ -28,6 +33,7 @@ export const routes: Routes = [
       { path: "dance", component: DanceComponent },
       { path: "standUpComedy", component: StandUpComedyComponent },
       { path: "other", component: OtherComponent },
+      
     ]
   },
   { path: "shows", component: ShowsComponent, title: "Shows" },
@@ -39,6 +45,8 @@ export const routes: Routes = [
     { path: 'shows', component: BookingComponent, title: 'Book a match'},
     { path: 'matches', component: BookingDetailsComponent, title: 'Match booking details' },
   { path: "**", component: NotfoundComponent }
+  
+
 
 
 
