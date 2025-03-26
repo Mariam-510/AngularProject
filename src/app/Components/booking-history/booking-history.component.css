@@ -1,0 +1,453 @@
+/* booking-history.component.css */
+
+/* 1. Soft Pink Background for the Main Wrapper */
+.booking-history-wrapper {
+  background: #fff5f5;
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: "Inter", sans-serif;
+}
+
+/* Container that holds everything inside */
+.booking-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 2. Page Header (Title + Filter Buttons in One Row) */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Title on left, filters on right */
+  background: #ffffff; /* White bar behind the header row */
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Title on the Left */
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* The text "Booking Timeline" */
+.page-heading {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* 3. Filter Buttons Container (on the Right) */
+.filter-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Filter Button (Pill-Shaped) */
+.filter-button {
+  background: #ffffff; /* White background */
+  color: #dc2626; /* Red text */
+  border: 1px solid #dc2626; /* Red border */
+  padding: 0.5rem 1rem;
+  border-radius: 20px; /* Pill shape */
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background: #ffe5e7; /* Slight pink hover effect */
+}
+
+/* Active State: Solid Red with White Text */
+.filter-button.active {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+/* 4. Bookings Grid */
+.bookings-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  padding: 0 1rem;
+}
+
+/* 5. Booking Card: White, Rounded, Subtle Shadow */
+.booking-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 6. Event Header */
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #dc2626; /* Gray background for the header portion */
+  color: white;
+}
+
+.event-type-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Booking Status color-coded backgrounds */
+.booking-status {
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+.booking-status.Confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+.booking-status.Completed {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.booking-status.Cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.booking-status.Upcoming {
+  background: #fef3c7;
+  color: #92400e;
+}
+.booking-status:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Football Match Layout */
+.match-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: #f8fafc;
+  gap: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  height: 200px;
+}
+
+/* Concert Layout */
+.concert-details {
+  padding: 1.5rem !important;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.artist-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #dc2626;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.artist-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.tour-info {
+  color: #64748b;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* 8. Common Event Details (Venue & Date) */
+.event-meta {
+  padding: 1.5rem 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  position: relative;
+}
+.event-meta::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.venue-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.city {
+  color: #64748b;
+  font-size: 0.9em;
+}
+.event-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+/* 9. Team Styles (Football) */
+.team {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  padding: 0.5rem 0;
+}
+.team-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.team-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.match-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 80px;
+  justify-content: center;
+}
+.vs {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #dc2626;
+  line-height: 1;
+}
+.score {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+/* 10. Ticket Summary */
+.ticket-summary {
+  padding: 1.5rem;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.ticket-info {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.quantity {
+  font-size: 1rem;
+  color: #1e293b;
+  white-space: nowrap;
+}
+.category {
+  font-size: 1rem;
+  color: #64748b;
+  white-space: nowrap;
+  position: relative;
+  padding-left: 0.75rem;
+}
+.category::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #64748b;
+}
+
+/* Ticket Actions (View & Cancel) */
+.ticket-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+.view-tickets {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+.view-tickets:hover {
+  background: #b91c1c;
+}
+.cancel-booking {
+  background: none;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+.cancel-booking:hover {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+/* 11. Booking Footer */
+.booking-footer {
+  padding: 1rem 1.5rem;
+  background: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.booking-id {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+.total-price {
+  font-weight: 700;
+  color: #dc2626;
+  font-size: 1.1rem;
+}
+
+/* 12. Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  grid-column: 1 / -1;
+}
+.empty-state i {
+  font-size: 3rem;
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+.empty-state h3 {
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+.empty-state p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+.browse-events {
+  background: #dc2626;
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.browse-events:hover {
+  background: #b91c1c;
+}
+
+/* 13. Responsive Tweaks */
+@media (max-width: 768px) {
+  /* Stack header elements vertically if there's not enough space */
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .bookings-grid {
+    grid-template-columns: 1fr;
+  }
+  .match-details {
+    flex-direction: column;
+    height: auto;
+    padding: 1.5rem !important;
+  }
+  .concert-details {
+    height: auto;
+  }
+  .team {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .ticket-actions {
+    flex-direction: column;
+  }
+  .view-tickets,
+  .cancel-booking {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .booking-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .filter-button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

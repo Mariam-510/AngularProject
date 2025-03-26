@@ -1,0 +1,128 @@
+<!-- booking-details.component.html -->
+<div class="checkout-wrapper">
+  <div class="checkout-container">
+    <div class="checkout-header">
+      <h1 class="checkout-title">Complete Your Purchase</h1>
+    </div>
+
+    <div class="checkout-grid">
+      <!-- Left Column -->
+      <div class="checkout-column">
+        <!-- User Details Card -->
+        <div class="checkout-card user-card">
+          <h2 class="card-title text-center">
+            <i class="bi bi-person-badge"></i>
+            Attendee Information
+          </h2>
+          <div class="user-details">
+            <div class="detail-item">
+              <label><i class="bi bi-person"></i> Full Name</label>
+              <div class="detail-value">{{ bookingData.buyer.name }}</div>
+            </div>
+            <div class="detail-item">
+              <label><i class="bi bi-envelope"></i> Contact Email</label>
+              <div class="detail-value">{{ bookingData.buyer.email }}</div>
+            </div>
+            <div class="detail-item">
+              <label><i class="bi bi-phone"></i> Mobile Number</label>
+              <div class="detail-value">{{ bookingData.buyer.phone }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Card -->
+        <div class="checkout-card payment-card">
+          <div class="payment-header">
+            <h2 class="card-title">
+              <i class="bi bi-credit-card"></i>
+              Payment Method
+            </h2>
+          </div>
+          <div #paypalButton class="paypal-container"></div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="checkout-column">
+        <!-- Event Card -->
+        <div class="checkout-card event-card">
+          <div class="event-header">
+            <div class="event-time">
+              <i class="bi bi-calendar2-event"></i>
+              {{ bookingData.date | date }} • {{ bookingData.time }}
+            </div>
+
+            <ng-container
+              *ngIf="bookingData.eventType === 'football'; else eventDisplay"
+            >
+              <div class="teams-display">
+                <div class="team home-team">
+                  <img [src]="bookingData.homeTeam?.logo" class="team-logo" />
+                  <div class="team-name">{{ bookingData.homeTeam?.name }}</div>
+                </div>
+                <div class="vs-circle">VS</div>
+                <div class="team away-team">
+                  <img [src]="bookingData.awayTeam?.logo" class="team-logo" />
+                  <div class="team-name">{{ bookingData.awayTeam?.name }}</div>
+                </div>
+              </div>
+              <div class="stadium-info">
+                <img
+                  src="Images/stadiumLogo.png"
+                  width="30"
+                  class="me-2 mb-2"
+                />
+                {{ bookingData.stadium?.name }}
+              </div>
+            </ng-container>
+
+            <ng-template #eventDisplay>
+              <div class="event-display">
+                <div class="event-poster">
+                  <img [src]="bookingData.eventImage" class="poster-image" />
+                  <div class="event-title">{{ bookingData.title }}</div>
+                </div>
+                <div class="venue-info">
+                  <i class="bi bi-geo-alt-fill"></i>
+                  {{ bookingData.venue?.name }} •
+                  {{ bookingData.venue?.location }}
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <!-- Order Summary Card -->
+        <div class="checkout-card summary-card">
+          <h2 class="card-title text-center">
+            <i class="bi bi-receipt"></i>
+            Order Summary
+          </h2>
+
+          <div class="ticket-summary">
+            @for (ticket of bookingData.tickets; track $index) {
+            <div class="ticket-item">
+              <div class="ticket-info">
+                <span class="ticket-quantity">{{ ticket.quantity }}</span>
+                <span class="ticket-type">{{ ticket.category }} Tickets</span>
+                <span class="ticket-price">EGP {{ ticket.price }} each</span>
+              </div>
+              <div class="ticket-total">
+                EGP {{ ticket.price * ticket.quantity }}
+              </div>
+            </div>
+            }
+          </div>
+
+          <div class="total-summary">
+            <div class="total-line">
+              <span><i class="bi bi-cash"></i> Total Due:</span>
+              <span class="total-amount">EGP {{ bookingData.totalPrice }}</span>
+            </div>
+            <div class="tax-notice">Includes all service fees and taxes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

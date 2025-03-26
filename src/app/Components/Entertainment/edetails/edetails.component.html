@@ -1,0 +1,304 @@
+<div class="carousel-inner carousel-rounded">
+  <img [src]="item.image" class="d-block w-100" alt="Event Img" style="max-height: 550px; object-fit: cover;">
+
+  <!-- <div class="text-overlay mb-5 ms-5">
+    <h1 class="fw-bold text-uppercase text-white fs-1">{{ item.location }}</h1>
+    <p class="fw-bold text-white fs-5">{{ item.category }}</p>
+  </div> -->
+
+  <!-- Event Card -->
+  <div class="position-absolute top-50 end-0 translate-middle-y bg-white shadow rounded me-5" style="width: 320px;">
+    <div
+      class="bg-dark text-white p-3 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
+      style="height: 100px;">
+      <h3 class="m-0">{{ item.title }}</h3>
+    </div>
+    <div class="p-3">
+      <p class="border-bottom pb-2"><i class="bi bi-calendar-event"></i> <strong> {{ item.date }}</strong></p>
+      <p class="border-bottom pb-2"><i class="bi bi-geo-alt"></i> {{ item.location }}</p>
+      <p class="border-bottom pb-2"><i class="bi bi-ticket-perforated me-2 fs-5"></i> Prices from ${{ item.price }}</p>
+
+      <!-- Star Ratings -->
+      <div class="text-center text-danger mb-2">
+        <ng-container *ngFor="let star of [].constructor(5); let i = index">
+          <i class="bi" [ngClass]="{
+                                                          'bi-star-fill': i < Math.floor(item.rating),
+                                                          'bi-star-half': i === Math.floor(item.rating) && item.rating % 1 !== 0,
+                                                          'bi-star': i >= Math.ceil(item.rating)
+                                                        }"></i>
+        </ng-container>
+      </div>
+
+      <!-- <p class="fst-italic text-muted">{{ item.description }}</p> -->
+
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-2 mt-2 w-100">
+        <button class="btn btn-light fav-btn d-flex align-items-center" (click)="toggleFavorite(item)">
+          <span class="text-danger">Add to Wishlist </span>
+          <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+        </button>
+
+        <button class="btn btn-light text-danger d-flex align-items-center" (click)="shareItem(item)">
+          Share it <i class="bi bi-share-fill ms-2"></i>
+        </button>
+      </div>
+
+
+      <a class="btn btn-danger w-100 mt-1"><i class="bi bi-ticket-perforated"></i> GET TICKET</a>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ---------------------------------------------------------------------------------------------------------- -->
+
+
+
+<div class="p-5">
+  <div class="tab-links" #tabLinks>
+    <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active">
+      <i class="bi bi-info-circle-fill me-2"></i>Overview
+    </a>
+
+    <a href="#location" (click)="scrollToSection($event, 'location')">
+      <i class="bi bi-geo-alt-fill me-2"></i>Location
+    </a>
+
+    <a href="#schedule" (click)="scrollToSection($event, 'schedule')">
+      <i class="bi bi-calendar3 me-2"></i>
+      Schedule
+    </a>
+
+    <a href="#tickets" (click)="scrollToSection($event, 'tickets')">Tickets</a>
+    <a href="#cast" (click)="scrollToSection($event, 'cast')">Cast</a>
+    <a href="#terms-conditions" (click)="scrollToSection($event, 'terms-conditions')">Terms & Conditions</a>
+    <a href="#reviews" (click)="scrollToSection($event, 'reviews')">Reviews</a>
+  </div>
+
+
+  <section id="overview" class="mt-3 p-2">
+    <!-- Section Title -->
+    <h2 class="mb-3">
+      <i class="bi bi-info-circle-fill text-danger me-2"></i>
+      <span class="heading-line">Overview</span>
+    </h2>
+
+    <div class="ps-5">
+      <!-- Subtitle Before Description -->
+      <h4>
+        <i class="bi bi-lightbulb-fill me-2"></i> Get to know more about this event
+      </h4>
+
+      <!-- Description -->
+      <p class="lead">{{ item.description }}</p>
+
+      <hr class="mt-4">
+    </div>
+  </section>
+
+
+  <section id="location" class="p-2">
+    <!-- Section Title -->
+    <h2 class="mb-3">
+      <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+      <span class="heading-line">Location</span>
+    </h2>
+
+    <div class="ps-5">
+      <!-- Subtitle Before Description -->
+      <h4>
+        <i class="bi bi-map me-2"></i> Check out the venue on the map
+      </h4>
+
+      <!-- Flexbox Container for Location & Map -->
+      <div class="d-flex align-items-start mt-2 mb-4">
+
+        <!-- Buttons: Hide Map & Share Location -->
+        <div class="mt-3">
+          <button class="btn btn-light text-danger me-2" (click)="toggleMap()">
+            <i class="bi" [ngClass]="isMapVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+            {{ isMapVisible ? 'Hide Map' : 'Show Map' }}
+          </button>
+
+          <!-- Share Location Button -->
+          <button class="btn bg-danger text-white" (click)="openShareModal()">
+            <i class="bi bi-share-fill"></i> Share Location
+          </button>
+
+          <!-- Bootstrap Modal -->
+          <div class="modal fade" id="shareLocationModal" tabindex="-1" aria-labelledby="shareLocationModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="shareLocationModalLabel">Share Location</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Copy the link below to share the location:</p>
+                  <input type="text" class="form-control" [value]="locationUrl" readonly>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn bg-danger text-white" (click)="copyToClipboard()">Copy Link</button>
+                  <button type="button" class="btn btn-light text-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- Map Container (Next to Location) -->
+      <!-- <div class="ms-4" *ngIf="isMapVisible">
+        <app-leaflet-map [locationName]="item.fullLocation" [styleTxt]="{ 'height': '350px', width: '80%' }">
+        </app-leaflet-map>
+      </div> -->
+
+      <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
+    'height': '350px',
+    'width': '80%',
+    'display': 'block',
+    'margin': '0 auto'
+  }">
+      </app-leaflet-map>
+
+      <hr class="mt-4">
+    </div>
+  </section>
+
+
+  <section id="schedule" class="p-2">
+    <!-- Section Title with Icon -->
+    <h2 class="mb-3">
+      <i class="bi bi-calendar3 text-danger me-2"></i>
+      <span class="heading-line">Schedule</span>
+    </h2>
+
+    <div class="ps-5">
+      <!-- Subtitle Before Table -->
+      <h4 class="mt-3">
+        <i class="bi bi-hourglass-split me-2"></i> Check the event schedule below
+      </h4>
+
+      <!-- Schedule Table with Scroll -->
+      <div class="schedule-table text-center" [class.scrollable]="schedules.length > 4">
+        <!-- Table Header (Centered) -->
+        <div class="schedule-header p-2 d-flex justify-content-center gap-4">
+          <span><i class="bi bi-calendar-event me-2"></i> Day</span>
+          <span><i class="bi bi-calendar-date me-2"></i> Date</span>
+          <span><i class="bi bi-clock me-2"></i> Time</span>
+        </div>
+
+        <!-- Table Rows -->
+        <div *ngFor="let item of schedules" class="schedule-row p-2 d-flex justify-content-center gap-4">
+          <span>{{ item.day }}</span>
+          <span>{{ item.date | date:'dd-MM-yyyy' }}</span>
+          <span>{{ item.time }}</span>
+        </div>
+      </div>
+
+      <hr class="mt-4">
+    </div>
+  </section>
+
+
+
+
+
+  <section id="tickets" style="min-height: 100vh;">
+    <h2>Tickets</h2>
+    <p>Tickets...</p>
+  </section>
+
+  <section id="cast" style="min-height: 100vh;">
+    <h2>Cast</h2>
+    <p>List of performers...</p>
+  </section>
+
+  <section id="terms-conditions" style="min-height: 100vh;">
+    <h2>Terms & Conditions</h2>
+    <p>Important details about the show...</p>
+  </section>
+
+  <section id="reviews" style="min-height: 100vh;">
+    <h2>Reviews</h2>
+    <p>Audience feedback...</p>
+  </section>
+
+
+
+
+
+  <!-- --------------------------------------------------------------------------------------------------------------- -->
+
+  <section id="stop-scroll" class="mt-5">
+    <h2 class="fw-bold">
+      <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
+    </h2>
+
+    <hr>
+
+    <!-- Scroll Buttons -->
+    <div class="scroll-container d-flex">
+      <button class="scroll-btn left" (click)="scrollLeft()">&#10094;</button>
+
+      <!-- Scrollable Event List -->
+      <div class="event-scroll-wrapper">
+        <div class="row flex-nowrap" id="eventContainer">
+          @for (event of eventList; track event) {
+          <div class="col-md-4 event-card">
+            <div class="card shadow-sm position-relative">
+              <img [src]="event.image" class="card-img-top rounded-top" [alt]="event.title">
+
+              <!-- Rating Badge -->
+              <span class="position-absolute bg-white text-dark px-3 py-1 rounded fw-bold m-2">
+                {{ event.rating }} ★
+              </span>
+
+              <div class="card-body text-center">
+                <h5 class="fw-bold">{{ event.title }}</h5>
+                <div class="mb-1">{{ event.venue }}</div>
+
+                <!-- Star Ratings -->
+                <div class="text-danger mb-3 mt-1">
+                  <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                    <i class="bi" [ngClass]="{
+                                      'bi-star-fill': i < Math.floor(event.rating),
+                                      'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
+                                      'bi-star': i >= Math.ceil(event.rating)
+                                    }"></i>
+                  </ng-container>
+                </div>
+
+                <div class="btn btn-light w-100 fw-bold">
+                  <i class="bi bi-calendar"></i> {{ event.date }}
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-center gap-2 mt-2">
+                  <button class="btn btn-light fav-btn px-4 py-2 d-flex align-items-center"
+                    (click)="toggleFavorite(event)">
+                    <span class="text-danger"> Wishlist </span>
+                    <i class="bi ms-2"
+                      [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+                  </button>
+
+                  <a routerLink="/details/5" class="btn btn-light text-danger px-4 py-2">
+                    More info
+                  </a>
+                </div>
+
+                <a class="btn btn-danger w-100 mt-2">
+                  BOOK TICKETS <i class="bi bi-ticket"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+
+      <button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
+    </div>
+  </section>

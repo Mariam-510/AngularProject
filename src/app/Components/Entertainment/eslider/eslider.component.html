@@ -1,0 +1,49 @@
+<!-- Slider -->
+<div id="heroCarousel" class="carousel slide mt-2 carousel-rounded" data-bs-ride="carousel" data-bs-interval="1500">
+  <div class="carousel-indicators">
+    <button *ngFor="let item of carouselItems; let i = index" type="button" [attr.data-bs-target]="'#heroCarousel'"
+      [attr.data-bs-slide-to]="i" [class.active]="i === 0">
+    </button>
+  </div>
+
+  <div class="carousel-inner">
+    <div *ngFor="let item of carouselItems; let first = first" class="carousel-item position-relative"
+      [class.active]="first">
+      <img [src]="item.image" class="d-block w-100" alt="{{ item.title }}"
+        style="max-height: 550px; object-fit: cover;">
+
+      <div class="text-overlay mb-5 ms-5">
+        <h1 class="fw-bold text-uppercase text-white fs-1">{{ item.location }}</h1>
+        <p class="fw-bold text-white fs-5">{{ item.category }}</p>
+      </div>
+
+      <!-- Event Card -->
+      <div class="position-absolute top-50 end-0 translate-middle-y bg-white shadow rounded me-5" style="width: 320px;">
+        <div
+          class="bg-dark text-white p-3 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
+          style="height: 100px;">
+          <h3 class="m-0">{{ item.title }}</h3>
+        </div>
+        <div class="p-3">
+          <p class="border-bottom pb-2"><i class="bi bi-calendar-event"></i> <strong> {{ item.date }}</strong></p>
+          <p class="border-bottom pb-2"><i class="bi bi-geo-alt"></i> {{ item.location }}</p>
+
+          <!-- Star Ratings -->
+          <div class="text-center text-danger mb-2">
+            <ng-container *ngFor="let star of [].constructor(5); let i = index">
+              <i class="bi" [ngClass]="{
+                                          'bi-star-fill': i < Math.floor(item.rating),
+                                          'bi-star-half': i === Math.floor(item.rating) && item.rating % 1 !== 0,
+                                          'bi-star': i >= Math.ceil(item.rating)
+                                        }"></i>
+            </ng-container>
+          </div>
+
+          <p class="fst-italic text-muted">{{ item.description }}</p>
+          <a routerLink="/details/5" class="btn btn-light w-100 mb-2 text-danger">Read more</a>
+          <a class="btn btn-danger w-100"><i class="bi bi-ticket-perforated"></i> GET TICKET</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

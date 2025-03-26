@@ -7,7 +7,11 @@ import { CommonModule } from '@angular/common';
   selector: 'app-leaflet-map',
   imports: [CommonModule],
   templateUrl: './leaflet-map.component.html',
+
   styleUrl: './leaflet-map.component.css'
+
+
+
 })
 export class LeafletMapComponent implements AfterViewInit {
   private map!: L.Map;
