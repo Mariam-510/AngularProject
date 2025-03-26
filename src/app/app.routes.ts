@@ -36,9 +36,9 @@ export const routes: Routes = [
   { path: "t", component: TesttComponent, title: "t" },
   { path: "l", component: LeafletMapComponent, title: "l" },
   { path: 'about', component: BookingHistoryComponent, title: 'Booking history' },
-    { path: 'shows', component: BookingComponent, title: 'Book a match'},
-    { path: 'matches', component: BookingDetailsComponent, title: 'Match booking details' },
+  { path: 'shows', component: BookingComponent, title: 'Book a match' },
+  { path: 'matches', component: BookingDetailsComponent, title: 'Match booking details' },
   { path: "**", component: NotfoundComponent }
-
+]
 
 

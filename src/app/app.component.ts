@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./Components/header/header.component";
 import { FooterComponent } from "./Components/footer/footer.component";
-import { ToBeDeletedComponent } from "./Components/to-be-deleted/to-be-deleted.component";
 import { FootballBookingComponent } from "./Components/football-booking/football-booking.component";
 import { FootballBookingDetailsComponent } from './Components/football-booking-details/football-booking-details.component';
 import { BookingHistoryComponent } from './Components/booking-history/booking-history.component';
@@ -17,7 +16,6 @@ import { BookingDetailsComponent } from './Components/booking-details/booking-de
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    ToBeDeletedComponent,
     FootballBookingComponent,
     FootballBookingDetailsComponent,
     BookingHistoryComponent,
