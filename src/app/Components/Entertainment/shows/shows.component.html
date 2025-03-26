@@ -1,0 +1,212 @@
+<!-- ---------------------------------------------------------------------------------------------------- -->
+<!-- Slider -->
+<app-eslider></app-eslider>
+
+
+<!-- ---------------------------------------------------------------------------------------------------- -->
+<div class="mx-5">
+
+  <!-- Controls: Search, Sort, Filter, View Toggle -->
+  <div class="controls d-flex flex-wrap justify-content-between align-items-center p-3 bg-light rounded mb-3">
+
+    <!-- Search -->
+    <div class="d-flex align-items-center w-25">
+      <input type="text" class="form-control flex-grow-1" placeholder="Search by name..." [(ngModel)]="searchTerm"
+        (input)="applyFilters()">
+      <button (click)="clearSearch()" class="btn">
+        <i class="bi bi-x-circle-fill text-danger fs-6"></i>
+      </button>
+    </div>
+
+
+    <!-- Sort -->
+    <select class="custom-select form-select w-25 me-2" [(ngModel)]="sortBy" (change)="applyFilters()">
+      <option value="">Sort By</option>
+      <option value="Date [Earliest]">Date [Earliest]</option>
+      <option value="Date [Latest]">Date [Latest]</option>
+      <option value="[A-Z]">Alphabetical [A-Z]</option>
+      <option value="[Z-A]">Alphabetical [Z-A]</option>
+      <option value="Rating [Lowest]">Rating [Lowest]</option>
+      <option value="Rating [Highest]">Rating [Highest]</option>
+      <option value="Price [Lowest]">Price [Lowest]</option>
+      <option value="Price [Highest]">Price [Highest]</option>
+    </select>
+
+
+    <!-- Filter by Category -->
+    <select class="custom-select form-select w-25 me-2" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+      <option value="">All Categories</option>
+      @for (category of categories; track $index)
+      {
+      <option [value]="category">{{ category }}</option>
+      }
+    </select>
+
+
+    <!-- View Toggle -->
+    <div class="view-toggle">
+      <button (click)="toggleView(true)" [class.active]="isGridView">
+        <i class="bi bi-grid-3x3-gap"></i> Grid
+      </button>
+      <button (click)="toggleView(false)" [class.active]="!isGridView">
+        <i class="bi bi-list-ul"></i> List
+      </button>
+    </div>
+
+
+
+  </div>
+
+  <div [ngSwitch]="isGridView">
+
+    <!-- Grid View -->
+    <div *ngSwitchCase="true">
+      <div class="row">
+        <div *ngFor="let event of filteredEvents" class="col-lg-3 col-md-6 col-sm-12 d-flex mb-3">
+          <div
+            class="show-containerV p-1 rounded bg-white mx-2 my-2 d-flex flex-column border-bottom position-relative">
+            <!-- Event Image -->
+            <img [src]="event.image" class="img-fluid rounded-bottom-5 mb-2" alt="Event Image">
+
+            <!-- Fav Button (Top-right) -->
+            <button class="btn btn-light fav-btn d-flex align-items-center position-absolute"
+              (click)="toggleFavorite(event)" style="top: 12px; right: 15px;">
+              <i class="bi" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+            </button>
+
+
+            <!-- Event Title -->
+            <h3 class="text-center flex-grow-0">{{ event.title }}</h3>
+
+            <!-- Star Rating -->
+            <div class="text-danger mb-2 flex-grow-0 fs-5">
+              <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                <i class="bi" [ngClass]="{
+                      'bi-star-fill': i < Math.floor(event.rating),
+                      'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
+                      'bi-star': i >= Math.ceil(event.rating)
+                    }"></i>
+              </ng-container>
+            </div>
+
+            <!-- Event Description -->
+            <p class="text-muted flex-grow-1">{{ (event.description | slice:0:120) + '...' }}</p>
+
+            <!-- Event Info Box -->
+            <div class="info-boxV px-3 py-1 rounded bg-light text-dark text-start flex-grow-0">
+              <p class="mb-2 fw-bold pb-1 border-bottom">
+                <i class="bi bi-calendar3 fs-5 me-2"></i>
+                <strong>{{ event.date }}</strong>
+              </p>
+              <p class="mb-2 pb-1 border-bottom">
+                <i class="bi bi-geo-alt me-2 fs-5"></i>
+                <strong>{{ event.location }}</strong>
+              </p>
+              <p class="mb-0">
+                <i class="bi bi-ticket-perforated me-2 fs-5"></i>
+                <strong>Prices from ${{ event.price }}</strong>
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex mt-3 w-100">
+              <a routerLink="/details/5" class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
+                <i class="bi bi-info-circle me-2"></i> More Info
+              </a>
+              <a class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
+                <i class="bi bi-ticket me-2"></i> BOOK TICKETS
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- List View -->
+    <div *ngSwitchCase="false">
+
+      <div *ngFor="let event of filteredEvents">
+        <div class="show-container d-flex align-items-start py-2 px-3 border-bottom rounded bg-white mx-2 my-2">
+          <!-- Event Image -->
+          <img [src]="event.image" class="imgH img-fluid me-4" alt="Event Image"
+            style="max-width: 400px; max-height: 200px;">
+
+          <div class="d-flex w-100">
+            <!-- Left Section (60%): Title & Description -->
+            <div class="content-text w-60 pe-3  position-relative">
+              <h2>{{ event.title }}</h2>
+
+              <button class="btn fav-btn d-flex align-items-center position-absolute fs-5"
+                (click)="toggleFavorite(event)" style="top: 12px; right: 5px;">
+                <i class="bi" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+              </button>
+
+              <div class="text-danger mb-2 fs-5">
+                <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                  <i class="bi" [ngClass]="{
+                        'bi-star-fill': i < Math.floor(event.rating),
+                        'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
+                        'bi-star': i >= Math.ceil(event.rating)
+                      }"></i>
+                </ng-container>
+              </div>
+              <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
+            </div>
+
+            <!-- Right Section (40%): Event Info & Action Buttons -->
+            <div class="event-info-actions w-40 ps-5 d-flex flex-column">
+              <!-- Event Info Box -->
+              <div class="info-box px-4 rounded bg-light text-dark">
+                <!-- <p class="mb-2 fw-bold pb-1 border-bottom border-1">
+                  <i class="bi bi-calendar3 me-2 fs-5"></i> {{ event.date }}
+                </p>
+                <p class="mb-2 pb-1 border-bottom border-1">
+                  <i class="bi bi-geo-alt me-2 fs-5"></i> {{ event.location }}
+                </p>
+                <p class="mb-0 pb-1">
+                  <i class="bi bi-ticket-perforated me-2 fs-5"></i> Prices from ${{ event.price }}
+                </p> -->
+
+                <h6 class="border-bottom py-2 mt-2 d-flex align-items-center">
+                  <i class="bi bi-calendar3 fs-5 me-2"></i>
+                  <strong>{{ event.date }}</strong>
+                </h6>
+
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-geo-alt-fill fs-5 me-2"></i>
+                  <span>{{ event.location }}</span>
+                </h6>
+
+                <h6 class="py-2 d-flex align-items-center">
+                  <i class="bi bi-cash-stack fs-5 me-2"></i>
+                  <span>Prices from <strong>${{ event.price }}</strong></span>
+                </h6>
+
+
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="d-flex mt-2">
+                <a routerLink="/details/5" class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
+                  <i class="bi bi-info-circle me-2"></i> More Info
+                </a>
+                <a
+                  class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
+                  <i class="bi bi-ticket me-2"></i> BOOK TICKETS
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="mb-4"></div>
