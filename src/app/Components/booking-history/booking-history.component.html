@@ -1,0 +1,172 @@
+<div class="booking-history-wrapper">
+  <div class="booking-container">
+    <!-- Page Header Row -->
+    <div class="page-header">
+      <!-- Title on the Left -->
+      <div class="header-title">
+        <i class="bi bi-ticket-perforated"></i>
+        <span class="page-heading">My Event Bookings</span>
+      </div>
+
+      <!-- Filter Buttons on the Right -->
+      <div class="filter-buttons">
+        <!-- 'All' -->
+        <button
+          class="filter-button"
+          [ngClass]="{ active: activeFilter === 'All' }"
+          (click)="filterBookings('All')"
+        >
+          All
+        </button>
+
+        <!-- 'Upcoming' -->
+        <button
+          class="filter-button"
+          [ngClass]="{ active: activeFilter === 'Upcoming' }"
+          (click)="filterBookings('Upcoming')"
+        >
+          Upcoming
+        </button>
+
+        <!-- 'Completed' -->
+        <button
+          class="filter-button"
+          [ngClass]="{ active: activeFilter === 'Completed' }"
+          (click)="filterBookings('Completed')"
+        >
+          Completed
+        </button>
+
+        <!-- 'Pending' (if you want to rename 'Confirmed') -->
+        <button
+          class="filter-button"
+          [ngClass]="{ active: activeFilter === 'Confirmed' }"
+          (click)="filterBookings('Confirmed')"
+        >
+          Pending
+        </button>
+
+        <!-- 'Cancelled' -->
+        <button
+          class="filter-button"
+          [ngClass]="{ active: activeFilter === 'Cancelled' }"
+          (click)="filterBookings('Cancelled')"
+        >
+          Cancelled
+        </button>
+      </div>
+    </div>
+
+    <!-- Bookings Grid -->
+    <div class="bookings-grid">
+      @for (booking of filteredBookings; track $index) {
+      <!-- Booking Card -->
+      <div class="booking-card" [ngClass]="booking.status">
+        <!-- Event Header -->
+        <div class="event-header">
+          <div class="event-type-badge">
+            {{ booking.eventType }}
+          </div>
+          <div class="booking-status" [ngClass]="booking.status">
+            {{ booking.status }}
+          </div>
+        </div>
+
+        <!-- Event Main -->
+        <div class="event-main">
+          <!-- Football Match Layout -->
+          @switch (booking.eventType) { @case ('Football Match') {
+          <div
+            class="match-details"
+            *ngIf="booking.eventType === 'Football Match'"
+          >
+            <div class="team home-team">
+              <img [src]="booking.homeTeam?.logo" class="team-logo" />
+              <div class="team-name">{{ booking.homeTeam?.name }}</div>
+            </div>
+            <div class="match-info">
+              <!-- If Completed, show score; otherwise show VS -->
+              @if (booking.status === 'Completed') {
+              <div class="score">
+                {{ booking.homeTeam?.score }} - {{ booking.awayTeam?.score }}
+              </div>
+              } @else {
+              <div class="vs">VS</div>
+              }
+
+              <div class="match-time">
+                {{ booking.date | date : "shortTime" }}
+              </div>
+            </div>
+            <div class="team away-team">
+              <img [src]="booking.awayTeam?.logo" class="team-logo" />
+              <div class="team-name">{{ booking.awayTeam?.name }}</div>
+            </div>
+          </div>
+          } @case ('Concert') {
+          <!-- Concert Layout -->
+          @if (booking.eventType === 'Concert') {
+          <div class="concert-details">
+            <div class="artist-info">
+              <img [src]="booking.artist?.image" class="artist-image" />
+              <div class="artist-name">{{ booking.artist?.name }}</div>
+            </div>
+            <div class="tour-info">
+              <i class="bi bi-music-note"></i>
+              {{ booking.tourName }}
+            </div>
+          </div>
+          } } }
+
+          <!-- Common Event Details -->
+          <div class="event-meta">
+            <div class="venue-info">
+              <i class="bi bi-geo-alt"></i>
+              {{ booking.venue.name }}
+              <span class="city">• {{ booking.venue.city }}</span>
+            </div>
+            <div class="event-date">
+              <i class="bi bi-calendar-event"></i>
+              {{ booking.date | date : "fullDate" }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Ticket Summary -->
+        <div class="ticket-summary">
+          <div class="ticket-info">
+            <span class="quantity">{{ booking.tickets.length }} tickets</span>
+            <span class="category">{{ booking.tickets[0].category }}</span>
+          </div>
+          <div class="ticket-actions">
+            <button class="view-tickets" (click)="viewTickets(booking)">
+              <i class="bi bi-qr-code"></i>
+              View Tickets
+            </button>
+            @if (booking.status === 'Confirmed'){
+            <button class="cancel-booking" (click)="cancelBooking(booking)">
+              Cancel Booking
+            </button>
+            }
+          </div>
+        </div>
+
+        <!-- Booking Footer -->
+        <div class="booking-footer">
+          <div class="booking-id">Booking ID: {{ booking.id }}</div>
+          <div class="total-price">{{ booking.totalPrice | currency }}</div>
+        </div>
+      </div>
+      }
+      <!-- Empty State -->
+      @if (filteredBookings.length === 0) {
+      <div class="empty-state">
+        <i class="bi bi-calendar-x"></i>
+        <h3>No Upcoming Events</h3>
+        <p>Your booked matches and shows will appear here</p>
+        <button class="browse-events">Browse Upcoming Events</button>
+      </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,1 +1,84 @@
-<p>footer works!</p>
+<footer class="footer-container">
+  <!-- Main Footer Content -->
+  <div class="footer-content">
+    <!-- Logo and Description -->
+    <div class="footer-section">
+      <div class="footer-logo">
+        <a routerLink="/">ShowBooking</a>
+      </div>
+      <p class="footer-description">
+        Your premier destination for booking live shows, sports events, and
+        unforgettable experiences.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <nav>
+        <ul>
+          <li>
+            <a routerLink="/shows"
+              ><i class="bi bi-music-note"></i> Shows & Events</a
+            >
+          </li>
+          <li>
+            <a routerLink="/matches"
+              ><i class="fa fa-soccer-ball-o"></i> Matches</a
+            >
+          </li>
+          <li>
+            <a routerLink="/about"
+              ><i class="fa fa-info-circle"></i> About Us</a
+            >
+          </li>
+          <li>
+            <a routerLink="/contact"><i class="fa fa-phone"></i> Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Legal -->
+    <div class="footer-section">
+      <h4>Legal</h4>
+      <nav>
+        <ul>
+          <li>
+            <a routerLink="/privacy"
+              ><i class="fa fa-shield"></i> Privacy Policy</a
+            >
+          </li>
+          <li>
+            <a routerLink="/terms"
+              ><i class="fa fa-file-text"></i> Terms of Service</a
+            >
+          </li>
+          <li>
+            <a routerLink="/faq"><i class="fa fa-question-circle"></i> FAQ</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Contact & Social -->
+    <div class="footer-section">
+      <h4>Connect With Us</h4>
+      <div class="social-links">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+      </div>
+      <div class="contact-info">
+        <p><i class="fa fa-envelope"></i> support&#64;showbooking.com</p>
+        <p><i class="fa fa-phone"></i> +1 (555) 123-4567</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright Notice -->
+  <div class="copyright">
+    <p>&copy; {{ currentYear }} ShowBooking. All rights reserved.</p>
+  </div>
+</footer>

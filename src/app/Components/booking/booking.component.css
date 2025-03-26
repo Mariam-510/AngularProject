@@ -1,0 +1,422 @@
+/* unified-booking.component.css */
+/* Global Styles */
+.booking-wrapper {
+  background: #fff5f5;
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: "Inter", sans-serif;
+}
+
+.booking-wrapper .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.booking-wrapper .card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Football Booking Styles */
+.football-booking .team-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.football-booking .team-card:hover {
+  transform: translateY(-5px);
+}
+
+.football-booking .logo-container {
+  background: white;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.football-booking .team-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.football-booking .vs-badge {
+  background: #dc3545;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.football-booking .stadium-card {
+  background: white;
+  border-radius: 15px;
+  max-width: 500px;
+  /* margin: 0 auto; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.football-booking .stadium-image {
+  /* width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px; */
+
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.football-booking .detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.football-booking .detail-item {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Event Booking Styles */
+.event-booking .event-header {
+  margin-bottom: 2.5rem;
+}
+
+.event-booking .header-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.event-booking .poster-container {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.event-booking .event-poster {
+  /* width: 100%;
+  height: 350px;
+  object-fit: cover; */
+
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.event-booking .event-type-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: linear-gradient(135deg, #dc3545 0%, #a71e2d 100%);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.event-booking .event-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.event-booking .venue-info {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.event-booking .venue-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-booking .venue-item i {
+  font-size: 1.8rem;
+  color: #dc3545;
+}
+
+/* FOOTBALL ICON COLORING */
+.match-details .detail-item i {
+  color: #dc3545;
+}
+
+.event-booking .venue-item h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+  color: #34495e;
+}
+
+.event-booking .venue-item p {
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.event-booking .date-time {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.event-booking .date-item,
+.event-booking .time-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.event-booking .date-item i,
+.event-booking .time-item i {
+  color: #dc3545;
+}
+
+.event-booking .venue-preview {
+  margin: 2.5rem 0;
+}
+
+.event-booking .venue-image {
+  /* width: 100%; */
+  max-width: 500px;
+  /* height: 300px; */
+  object-fit: contain;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  display: block;
+
+  /* background: white;
+  border-radius: 15px;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+}
+
+/* Common Ticket Styles */
+.ticket-selector {
+  margin-bottom: 2rem;
+}
+
+.ticket-selector .section-title {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.ticket-selector .badge {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.ticket-categories {
+  display: grid;
+  gap: 15px;
+}
+
+.ticket-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.ticket-card:hover {
+  transform: translateX(10px);
+}
+
+.ticket-card .ticket-info {
+  flex: 1;
+}
+
+.ticket-card small {
+  opacity: 0.8;
+}
+
+.ticket-controls {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-plus,
+.btn-minus {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-plus:hover,
+.btn-minus:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Football Ticket Colors */
+.football-booking .vip {
+  background: linear-gradient(135deg, #93000c 0%, #6a0013 100%);
+}
+
+.football-booking .category-1 {
+  background: linear-gradient(135deg, #ff8800 0%, #cc6d00 100%);
+}
+
+.football-booking .category-2 {
+  background: linear-gradient(135deg, #d49c01 0%, #ad8000 100%);
+}
+
+.football-booking .category-3 {
+  background: linear-gradient(135deg, #efc621 0%, #d4ad1d 100%);
+}
+
+/* Event Ticket Colors */
+.event-booking .level-1 {
+  background: linear-gradient(135deg, #ec9cc4 0%, #d774a1 100%);
+}
+
+.event-booking .level-2 {
+  background: linear-gradient(135deg, #da8bff 0%, #b971db 100%);
+}
+
+.event-booking .level-3 {
+  background: linear-gradient(135deg, #93d88e 0%, #70b86b 100%);
+}
+
+.event-booking .level-4 {
+  background: linear-gradient(135deg, #f9bb72 0%, #ec9c41 100%);
+}
+
+.event-booking .level-5 {
+  background: linear-gradient(135deg, #4fb3bf 0%, #33949f 100%);
+}
+
+/* Checkout Section */
+.total-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.total-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.btn-checkout {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.btn-checkout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-checkout:disabled {
+  background: #6c757d;
+  opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .event-booking .header-content {
+    grid-template-columns: 1fr;
+  }
+
+  .event-booking .event-poster {
+    height: 400px;
+  }
+
+  .event-booking .event-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .detail-grid,
+  .date-time {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-card {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .event-booking .event-title {
+    font-size: 1.8rem;
+  }
+
+  .event-booking .venue-image {
+    height: 250px;
+  }
+
+  .card {
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .event-booking .event-title {
+    font-size: 1.5rem;
+  }
+
+  .event-booking .venue-item h3 {
+    font-size: 1.2rem;
+  }
+}
