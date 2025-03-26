@@ -120,7 +120,7 @@ export class TesttComponent {
       const stopPoint = this.stopSection.offsetTop - 200;
 
       if (scrollingDown) {
-        if (scrollPosition >= stopPoint - 350) {
+        if (scrollPosition >= stopPoint - 500) {
           this.renderer.removeClass(card, 'fixed-event-card');
 
           // this.renderer.setStyle(card, 'position', 'absolute');

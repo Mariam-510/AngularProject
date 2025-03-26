@@ -81,9 +81,9 @@
 
 
 
-<div class="px-5 py-2">
+<div class="py-2">
   <div class="tab-links" #tabLinks>
-    <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active fs-5">
+    <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active fs-5 ms-2">
       <i class="bi bi-info-circle-fill me-1"></i>Overview
     </a>
 
@@ -112,340 +112,342 @@
   </div>
 
 
-  <section id="overview" class="mt-3 p-2">
-    <!-- Section Title -->
-    <h2 class="mb-3">
-      <i class="bi bi-info-circle-fill text-danger me-2"></i>
-      <span class="heading-line">Overview</span>
-    </h2>
-
-    <div class="ps-5">
-      <!-- Subtitle Before Description -->
-      <h4>
-        <i class="bi bi-lightbulb-fill me-2"></i> Get to know more about this event
-      </h4>
-
-      <!-- Description -->
-      <p class="lead ms-3 text-justify fw-light fst-italic">
-        {{ showMore ? item.description : (item.description | slice:0:200) + '...' }}
-      </p>
-
-      <!-- Show More / Show Less Button -->
-      <button class="btn btn-light text-danger me-2" (click)="showMore = !showMore">
-        <i class="bi" [ngClass]="showMore ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
-        {{ showMore ? 'Show Less' : 'Show More' }}
-      </button>
-
-
-      <hr class="mt-4">
-    </div>
-  </section>
-
-
-  <section id="location" class="p-2">
-    <!-- Section Title -->
-    <h2 class="mb-3">
-      <i class="bi bi-geo-alt-fill text-danger me-2"></i>
-      <span class="heading-line">Location</span>
-    </h2>
-
-    <div class="ps-5">
-      <!-- Subtitle Before Description -->
-      <h4>
-        <i class="bi bi-map me-2"></i> Check out the venue on the map
-      </h4>
-
-      <!-- Flexbox Container for Location & Map -->
-      <div class="d-flex align-items-start mt-2 mb-4">
-
-        <!-- Buttons: Hide Map & Share Location -->
-        <div class="mt-3">
-          <button class="btn btn-light text-danger me-2" (click)="toggleMap()">
-            <i class="bi" [ngClass]="isMapVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
-            {{ isMapVisible ? 'Hide Map' : 'Show Map' }}
-          </button>
-
-          <!-- Share Location Button -->
-          <button class="btn bg-danger text-white" (click)="openShareModal()">
-            <i class="bi bi-share-fill"></i> Share Location
-          </button>
-
-          <!-- Bootstrap Modal -->
-          <div class="modal fade" id="shareLocationModal" tabindex="-1" aria-labelledby="shareLocationModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="shareLocationModalLabel">Share Location</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>Copy the link below to share the location:</p>
-                  <input type="text" class="form-control" [value]="locationUrl" readonly>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn bg-danger text-white" (click)="copyToClipboard()">Copy Link</button>
-                  <button type="button" class="btn btn-light text-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-
-      <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
-    'height': '350px',
-    'width': '85%',
-    'display': 'block',
-    'margin-left': '15px'
-  }">
-        <!-- 'margin': '0 auto' -->
-      </app-leaflet-map>
-
-      <hr class="mt-4">
-    </div>
-  </section>
-
-
-  <section id="schedule" class="p-2">
-    <!-- Section Title with Icon -->
-    <h2 class="mb-3">
-      <i class="bi bi-calendar3 text-danger me-2"></i>
-      <span class="heading-line">Schedule</span>
-    </h2>
-
-    <div class="ps-5">
-      <!-- Subtitle Before Table -->
-      <h4 class="mt-3">
-        <i class="bi bi-hourglass-split me-2"></i> Check the event schedule below
-      </h4>
-
-      <!-- Schedule Table with Scroll -->
-      <div class="schedule-table text-center" [class.scrollable]="schedules.length > 4">
-        <!-- Table Header (Centered) -->
-        <div class="schedule-header p-2 d-flex justify-content-center gap-4">
-          <span><i class="bi bi-calendar-event me-2"></i> Day</span>
-          <span><i class="bi bi-calendar-date me-2"></i> Date</span>
-          <span><i class="bi bi-clock me-2"></i> Time</span>
-        </div>
-
-        <!-- Table Rows -->
-        <div *ngFor="let item of schedules" class="schedule-row p-2 d-flex justify-content-center gap-4">
-          <span>{{ item.day }}</span>
-          <span>{{ item.date | date:'dd-MM-yyyy' }}</span>
-          <span>{{ item.time }}</span>
-        </div>
-      </div>
-
-      <hr class="mt-4">
-    </div>
-  </section>
-
-
-  <section id="tickets" class="p-4">
-    <div class="container-fluid">
-      <!-- Section Heading -->
-      <h2 class="mb-4">
-        <i class="bi bi-ticket-detailed-fill text-danger me-2"></i>
-        <span class="heading-line">Tickets</span>
+  <div class="px-5">
+    <section id="overview" class="mt-3 p-2">
+      <!-- Section Title -->
+      <h2 class="mb-3">
+        <i class="bi bi-info-circle-fill text-danger me-2"></i>
+        <span class="heading-line">Overview</span>
       </h2>
 
-      <div>
+      <div class="ps-5">
+        <!-- Subtitle Before Description -->
+        <h4>
+          <i class="bi bi-lightbulb-fill me-2"></i> Get to know more about this event
+        </h4>
 
-        <!-- Choose Your Ticket with Buttons on the Right -->
-        <div class="d-flex justify-content-between align-items-center mt-3 ps-4 pe-4">
-          <h4>
-            <i class="bi bi-cart-check-fill me-2"></i> Choose Your Ticket
-            <span class="text-muted ms-2 fs-5">({{ tickets.length }} Types Available)</span>
-          </h4>
-          <div class="me-5">
-            <button class="btn btn-danger me-2" (click)="scrollLeftTicket()" [disabled]="!canScrollLeft">
-              <i class="bi bi bi-chevron-left text-white fs-5"></i>
-            </button>
+        <!-- Description -->
+        <p class="lead ms-3 text-justify fw-light fst-italic">
+          {{ showMore ? item.description : (item.description | slice:0:200) + '...' }}
+        </p>
 
-            <button class="btn btn-danger" (click)="scrollRightTicket()" [disabled]="!canScrollRight">
-              <i class="bi bi-chevron-right text-white fs-5"></i>
-            </button>
-          </div>
-        </div>
-
-
-        <!-- Scrollable Ticket List -->
-        <div class="d-flex justify-content-start align-items-center overflow-hidden pe-5 ms-2">
-          <div #ticketContainer class="d-flex gap-3 scroll-container pb-2"
-            style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; padding-left: 1rem;">
-
-            <div *ngFor="let ticket of tickets" class="card ticket-card border-0 shadow-sm flex-shrink-0"
-              style="min-width: 250px; border-radius: 10px;">
-
-              <div class="card-body d-flex flex-column justify-content-between p-3">
-                <!-- Ticket Type with Icon -->
-                <h5 class="fw-bold text-danger d-flex align-items-center">
-                  <i class="bi bi-ticket-perforated-fill me-2 fs-4"></i> {{ ticket.type }}
-                </h5>
-
-                <!-- Description -->
-                <div class="text-muted mb-2 py-1">{{ ticket.description }}</div>
-
-                <!-- Price Badge -->
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="badge bg-danger text-white py-2 px-2 fs-6">{{ ticket.price }} EGP</span>
-                  <button class="btn btn-sm btn-outline-danger fs-6">Buy Now</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+        <!-- Show More / Show Less Button -->
+        <button class="btn btn-light text-danger me-2" (click)="showMore = !showMore">
+          <i class="bi" [ngClass]="showMore ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+          {{ showMore ? 'Show Less' : 'Show More' }}
+        </button>
 
 
         <hr class="mt-4">
       </div>
-    </div>
-  </section>
+    </section>
 
 
-  <section id="cast" style="min-height: 50vh;">
-    <h2>Cast</h2>
-    <p>List of performers...</p>
-  </section>
+    <section id="location" class="p-2">
+      <!-- Section Title -->
+      <h2 class="mb-3">
+        <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+        <span class="heading-line">Location</span>
+      </h2>
 
+      <div class="ps-5">
+        <!-- Subtitle Before Description -->
+        <h4>
+          <i class="bi bi-map me-2"></i> Check out the venue on the map
+        </h4>
 
-  <section id="terms-conditions" class="mt-3 p-2">
-    <!-- Section Title -->
-    <h2 class="mb-3">
-      <i class="bi bi-file-text-fill text-danger me-2"></i>
-      <span class="heading-line">Terms & Conditions</span>
-    </h2>
+        <!-- Flexbox Container for Location & Map -->
+        <div class="d-flex align-items-start mt-2 mb-4">
 
+          <!-- Buttons: Hide Map & Share Location -->
+          <div class="mt-3">
+            <button class="btn btn-light text-danger me-2" (click)="toggleMap()">
+              <i class="bi" [ngClass]="isMapVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+              {{ isMapVisible ? 'Hide Map' : 'Show Map' }}
+            </button>
 
-    <div class="ps-5 row justify-content-center ">
+            <!-- Share Location Button -->
+            <button class="btn bg-danger text-white" (click)="openShareModal()">
+              <i class="bi bi-share-fill"></i> Share Location
+            </button>
 
-      <div class="col-lg-12 ">
-        <div class="terms-list card border-0 shadow-sm hover-shadow-lg  transition-all pb-5">
-          <div class="card-body pb-2">
-            <ul class="list-unstyled m-0 row g-4">
-              <li class="col-md-6 d-flex">
-                <div class="term-item pe-3">
-                  <i class="bi bi-x-octagon-fill text-danger fs-3 me-3"></i>
+            <!-- Bootstrap Modal -->
+            <div class="modal fade" id="shareLocationModal" tabindex="-1" aria-labelledby="shareLocationModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="shareLocationModalLabel">Share Location</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Copy the link below to share the location:</p>
+                    <input type="text" class="form-control" [value]="locationUrl" readonly>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn bg-danger text-white" (click)="copyToClipboard()">Copy Link</button>
+                    <button type="button" class="btn btn-light text-danger" data-bs-dismiss="modal">Close</button>
+                  </div>
                 </div>
-                <div>
-                  <h5 class="text-dark mb-2">Non-Transferable Tickets</h5>
-                  <p class="text-muted mb-0">Tickets are non-refundable and non-transferable under any circumstances
-                  </p>
-                </div>
-              </li>
+              </div>
+            </div>
 
-              <li class="col-md-6 d-flex">
-                <div class="term-item pe-3">
-                  <i class="bi bi-person-fill-check text-primary fs-3 me-3"></i>
-                </div>
-                <div>
-                  <h5 class="text-dark mb-2">Entry Policy</h5>
-                  <p class="text-muted mb-0">Strict one ticket per person policy with no re-entry after scanning</p>
-                </div>
-              </li>
-
-              <li class="col-md-6 d-flex">
-                <div class="term-item pe-3">
-                  <i class="bi bi-shield-fill-check text-success fs-2 me-3"></i>
-                </div>
-                <div>
-                  <h5 class="text-dark mb-2">Security Screening</h5>
-                  <p class="text-muted mb-0">Mandatory security checks for all attendees</p>
-                </div>
-              </li>
-
-              <li class="col-md-6 d-flex">
-                <div class="term-item pe-3">
-                  <i class="bi bi-cup-straw text-warning fs-2 me-3"></i>
-                </div>
-                <div>
-                  <h5 class="text-dark mb-2">Prohibited Items</h5>
-                  <p class="text-muted mb-0">No outside food, drinks, or restricted items allowed</p>
-                </div>
-              </li>
-
-              <li class="col-md-6 d-flex">
-                <div class="term-item pe-3">
-                  <i class="bi bi-person-hearts text-info fs-3 me-3"></i>
-                </div>
-                <div>
-                  <h5 class="text-dark mb-2">Child Policy</h5>
-                  <p class="text-muted mb-0">Children under 12 must be accompanied by an adult</p>
-                </div>
-              </li>
-              <li class="col-md-6  d-flex">
-                <div class="term-item pe-3">
-                  <i class="bi bi-exclamation-octagon-fill text-purple fs-3 me-3"></i>
-                </div>
-                <div>
-                  <h5 class="text-dark mb-2">Right to Refuse Entry</h5>
-                  <p class="text-muted mb-0">Management reserves the right to refuse admission without reason</p>
-                </div>
-              </li>
-            </ul>
 
           </div>
+        </div>
 
+
+        <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
+        'height': '350px',
+        'width': '85%',
+        'display': 'block',
+        'margin-left': '15px'
+      }">
+          <!-- 'margin': '0 auto' -->
+        </app-leaflet-map>
+
+        <hr class="mt-4">
+      </div>
+    </section>
+
+
+    <section id="schedule" class="p-2">
+      <!-- Section Title with Icon -->
+      <h2 class="mb-3">
+        <i class="bi bi-calendar3 text-danger me-2"></i>
+        <span class="heading-line">Schedule</span>
+      </h2>
+
+      <div class="ps-5">
+        <!-- Subtitle Before Table -->
+        <h4 class="mt-3">
+          <i class="bi bi-hourglass-split me-2"></i> Check the event schedule below
+        </h4>
+
+        <!-- Schedule Table with Scroll -->
+        <div class="schedule-table text-center" [class.scrollable]="schedules.length > 4">
+          <!-- Table Header (Centered) -->
+          <div class="schedule-header p-2 d-flex justify-content-center gap-4">
+            <span><i class="bi bi-calendar-event me-2"></i> Day</span>
+            <span><i class="bi bi-calendar-date me-2"></i> Date</span>
+            <span><i class="bi bi-clock me-2"></i> Time</span>
+          </div>
+
+          <!-- Table Rows -->
+          <div *ngFor="let item of schedules" class="schedule-row p-2 d-flex justify-content-center gap-4">
+            <span>{{ item.day }}</span>
+            <span>{{ item.date | date:'dd-MM-yyyy' }}</span>
+            <span>{{ item.time }}</span>
+          </div>
+        </div>
+
+        <hr class="mt-4">
+      </div>
+    </section>
+
+
+    <section id="tickets" class="p-4">
+      <div class="container-fluid">
+        <!-- Section Heading -->
+        <h2 class="mb-4">
+          <i class="bi bi-ticket-detailed-fill text-danger me-2"></i>
+          <span class="heading-line">Tickets</span>
+        </h2>
+
+        <div>
+
+          <!-- Choose Your Ticket with Buttons on the Right -->
+          <div class="d-flex justify-content-between align-items-center mt-3 ps-4 pe-4">
+            <h4>
+              <i class="bi bi-cart-check-fill me-2"></i> Choose Your Ticket
+              <span class="text-muted ms-2 fs-5">({{ tickets.length }} Types Available)</span>
+            </h4>
+            <div class="me-5">
+              <button class="btn btn-danger me-2" (click)="scrollLeftTicket()" [disabled]="!canScrollLeft">
+                <i class="bi bi bi-chevron-left text-white fs-5"></i>
+              </button>
+
+              <button class="btn btn-danger" (click)="scrollRightTicket()" [disabled]="!canScrollRight">
+                <i class="bi bi-chevron-right text-white fs-5"></i>
+              </button>
+            </div>
+          </div>
+
+
+          <!-- Scrollable Ticket List -->
+          <div class="d-flex justify-content-start align-items-center overflow-hidden pe-5 ms-2">
+            <div #ticketContainer class="d-flex gap-3 scroll-container pb-2"
+              style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; padding-left: 1rem;">
+
+              <div *ngFor="let ticket of tickets" class="card ticket-card border-0 shadow-sm flex-shrink-0"
+                style="min-width: 250px; border-radius: 10px;">
+
+                <div class="card-body d-flex flex-column justify-content-between p-3">
+                  <!-- Ticket Type with Icon -->
+                  <h5 class="fw-bold text-danger d-flex align-items-center">
+                    <i class="bi bi-ticket-perforated-fill me-2 fs-4"></i> {{ ticket.type }}
+                  </h5>
+
+                  <!-- Description -->
+                  <div class="text-muted mb-2 py-1">{{ ticket.description }}</div>
+
+                  <!-- Price Badge -->
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge bg-danger text-white py-2 px-2 fs-6">{{ ticket.price }} EGP</span>
+                    <button class="btn btn-sm btn-outline-danger fs-6">Buy Now</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <hr class="mt-4">
         </div>
       </div>
-      <hr class="mt-4">
-    </div>
-
-  </section>
+    </section>
 
 
-  <section id="reviews" class="p-4">
-    <!-- Section Heading -->
-    <h2 class="mb-4">
-      <i class="bi bi-chat-dots-fill text-danger me-2"></i>
-      <span class="heading-line">Reviews</span>
-    </h2>
+    <section id="cast" style="min-height: 50vh;">
+      <h2>Cast</h2>
+      <p>List of performers...</p>
+    </section>
 
-    <!-- Review List Container -->
-    <div class="review-container p-3 border rounded  shadow-sm ms-5"
-      style="width: 97%; max-height: 400px; overflow-y: auto;">
 
-      <!-- Review Cards (Vertical Layout) -->
-      <div class="row">
-        <div class="col-12 mb-3" *ngFor="let review of reviews">
-          <div class="card shadow border-0">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-2">
-                <i class="bi bi-person-circle text-danger fs-3 me-2"></i>
-                <p class="m-0 fs-4">{{ review.user }}</p>
+    <section id="terms-conditions" class="mt-3 p-2">
+      <!-- Section Title -->
+      <h2 class="mb-3">
+        <i class="bi bi-file-text-fill text-danger me-2"></i>
+        <span class="heading-line">Terms & Conditions</span>
+      </h2>
+
+
+      <div class="ps-5 row justify-content-center ">
+
+        <div class="col-lg-12 ">
+          <div class="terms-list card border-0 shadow-sm hover-shadow-lg  transition-all pb-5">
+            <div class="card-body pb-2">
+              <ul class="list-unstyled m-0 row g-4">
+                <li class="col-md-6 d-flex">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-x-octagon-fill text-danger fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Non-Transferable Tickets</h5>
+                    <p class="text-muted mb-0">Tickets are non-refundable and non-transferable under any circumstances
+                    </p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-person-fill-check text-primary fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Entry Policy</h5>
+                    <p class="text-muted mb-0">Strict one ticket per person policy with no re-entry after scanning</p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-shield-fill-check text-success fs-2 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Security Screening</h5>
+                    <p class="text-muted mb-0">Mandatory security checks for all attendees</p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-cup-straw text-warning fs-2 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Prohibited Items</h5>
+                    <p class="text-muted mb-0">No outside food, drinks, or restricted items allowed</p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-person-hearts text-info fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Child Policy</h5>
+                    <p class="text-muted mb-0">Children under 12 must be accompanied by an adult</p>
+                  </div>
+                </li>
+                <li class="col-md-6  d-flex">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-exclamation-octagon-fill text-purple fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Right to Refuse Entry</h5>
+                    <p class="text-muted mb-0">Management reserves the right to refuse admission without reason</p>
+                  </div>
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+        </div>
+        <hr class="mt-4">
+      </div>
+
+    </section>
+
+
+    <section id="reviews" class="p-4">
+      <!-- Section Heading -->
+      <h2 class="mb-4">
+        <i class="bi bi-chat-dots-fill text-danger me-2"></i>
+        <span class="heading-line">Reviews</span>
+      </h2>
+
+      <!-- Review List Container -->
+      <div class="review-container p-3 border rounded  shadow-sm ms-5"
+        style="width: 97%; max-height: 400px; overflow-y: auto;">
+
+        <!-- Review Cards (Vertical Layout) -->
+        <div class="row">
+          <div class="col-12 mb-3" *ngFor="let review of reviews">
+            <div class="card shadow border-0">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-person-circle text-danger fs-3 me-2"></i>
+                  <p class="m-0 fs-4">{{ review.user }}</p>
+                </div>
+
+                <!-- Star Ratings -->
+                <div class="text-warning mb-2 fs-6">
+                  <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                    <i class="bi" [ngClass]="{
+                                                                                    'bi-star-fill': i < Math.floor(review.rating),
+                                                                                    'bi-star-half': i === Math.floor(review.rating) && review.rating % 1 !== 0,
+                                                                                    'bi-star': i >= Math.ceil(review.rating)
+                                                                                  }"></i>
+                  </ng-container>
+                </div>
+
+                <div class="lead text-justify fw-light fst-italic small fs-5">{{ review.comment }}</div>
               </div>
-
-              <!-- Star Ratings -->
-              <div class="text-warning mb-2 fs-6">
-                <ng-container *ngFor="let star of [].constructor(5); let i = index">
-                  <i class="bi" [ngClass]="{
-                                                                                'bi-star-fill': i < Math.floor(review.rating),
-                                                                                'bi-star-half': i === Math.floor(review.rating) && review.rating % 1 !== 0,
-                                                                                'bi-star': i >= Math.ceil(review.rating)
-                                                                              }"></i>
-                </ng-container>
-              </div>
-
-              <div class="lead text-justify fw-light fst-italic small fs-5">{{ review.comment }}</div>
             </div>
           </div>
         </div>
+
       </div>
+      <hr class="mt-4">
+    </section>
 
-    </div>
-    <hr class="mt-4">
-  </section>
-
+  </div>
 
 
   <!-- --------------------------------------------------------------------------------------------------------------- -->
 
-  <div id="stop-scroll" class="mt-5">
+  <div id="stop-scroll" class="mt-5 px-5">
     <h2 class="fw-bold">
       <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
     </h2>

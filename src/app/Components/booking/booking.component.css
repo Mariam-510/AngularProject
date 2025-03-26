@@ -1,7 +1,7 @@
 /* unified-booking.component.css */
 /* Global Styles */
 .booking-wrapper {
-  background: #fff5f5;
+  /* background: #fff5f5; */
   min-height: 100vh;
   padding: 2rem 0;
   font-family: "Inter", sans-serif;
@@ -384,6 +384,7 @@
 }
 
 @media (max-width: 768px) {
+
   .detail-grid,
   .date-time {
     grid-template-columns: 1fr;
