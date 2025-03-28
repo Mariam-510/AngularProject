@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ShowComponent } from "../show/show.component";
 
 @Component({
   selector: 'app-all',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ShowComponent],
   templateUrl: './all.component.html',
   styleUrl: './all.component.css'
 })
@@ -54,31 +55,5 @@ export class AllComponent {
     }
   ];
 
-  Math = Math;
-
-  toggleFavorite(event: any) {
-    event.isFavorite = !event.isFavorite;
-  }
-
-  currentPage = 1;
-  itemsPerPage = 3;
-
-  // Calculate the total number of pages
-  get totalPages() {
-    return Math.ceil(this.eventList.length / this.itemsPerPage);
-  }
-
-  // Get paginated events
-  get paginatedEvents() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.eventList.slice(start, start + this.itemsPerPage);
-  }
-
-  // Change Page
-  changePage(page: number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-    }
-  }
 
 }

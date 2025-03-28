@@ -1,25 +1,59 @@
-<div class="carousel-inner carousel-rounded">
-  <img [src]="item.image" class="d-block w-100" alt="Event Img" style="max-height: 550px; object-fit: cover;">
+<div #heroSection class="position-relative d-flex justify-content-center ">
+  <img src="img/1.jpg" class="img-fluid w-100 banner-rounded " alt="Event Banner"
+    style="max-height: 600px; object-fit: cover;">
 
-  <!-- <div class="text-overlay mb-5 ms-5">
-    <h1 class="fw-bold text-uppercase text-white fs-1">{{ item.location }}</h1>
-    <p class="fw-bold text-white fs-5">{{ item.category }}</p>
-  </div> -->
+  <div class="text-overlay mb-5 ms-5">
+    <h1 class="fw-bold text-uppercase text-white fs-1">Experience the Best Moments!</h1>
+    <p class="fw-bold text-white fs-5">Unforgettable events, unforgettable memories.</p>
+  </div>
+
 
   <!-- Event Card -->
-  <div class="position-absolute top-50 end-0 translate-middle-y bg-white shadow rounded me-5" style="width: 320px;">
+  <div #eventCard
+    class="position-absolute end-0 bg-white shadow rounded me-5 mt-4 smooth-card custom-card card border-0  "
+    style="max-width: 100%; width: 375px;">
+
     <div
-      class="bg-dark text-white p-3 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
-      style="height: 100px;">
+      class="bg-dark text-white p-5 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
+      style="height: 120px;">
       <h3 class="m-0">{{ item.title }}</h3>
     </div>
-    <div class="p-3">
-      <p class="border-bottom pb-2"><i class="bi bi-calendar-event"></i> <strong> {{ item.date }}</strong></p>
-      <p class="border-bottom pb-2"><i class="bi bi-geo-alt"></i> {{ item.location }}</p>
-      <p class="border-bottom pb-2"><i class="bi bi-ticket-perforated me-2 fs-5"></i> Prices from ${{ item.price }}</p>
+
+    <div class="d-flex gap-2 align-items-center mt-3 ms-3">
+      <span class="badge-item bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3">
+        {{ categoryIcons[item.category] }} {{ item.category }}
+      </span>
+
+      <span class="badge-item bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3">
+        ⭐ {{ item.rating }}
+      </span>
+
+      <span class="badge-item bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3">
+        🔥 {{ item.word }}
+      </span>
+    </div>
+
+
+    <div class="mx-2 px-3 py-1 mt-1">
+
+      <h6 class="border-bottom py-2 d-flex align-items-center">
+        <i class="bi bi-calendar3 fs-5 me-2"></i>
+        <strong>{{ item.date }}</strong>
+      </h6>
+
+      <h6 class="border-bottom py-2 d-flex align-items-center">
+        <i class="bi bi-geo-alt-fill fs-5 me-2"></i>
+        <span>{{ item.location }}</span>
+      </h6>
+
+      <h6 class="border-bottom py-2 d-flex align-items-center">
+        <i class="bi bi-cash-stack fs-5 me-2"></i>
+        <span>Prices from <strong>${{ item.price }}</strong></span>
+      </h6>
+
 
       <!-- Star Ratings -->
-      <div class="text-center text-danger mb-2">
+      <div class="text-center text-danger mb-2 fs-5">
         <ng-container *ngFor="let star of [].constructor(5); let i = index">
           <i class="bi" [ngClass]="{
                                                           'bi-star-fill': i < Math.floor(item.rating),
@@ -27,213 +61,514 @@
                                                           'bi-star': i >= Math.ceil(item.rating)
                                                         }"></i>
         </ng-container>
+        <div class="text-muted small ms-1 fst-italic" *ngIf="item.reviews > 0">
+          Reviewed by {{ item.reviews }} people
+        </div>
+        <div class="text-muted small ms-1 fst-italic" *ngIf="item.reviews === 0">
+          No reviews yet. Be the first to review!
+        </div>
       </div>
 
-      <!-- <p class="fst-italic text-muted">{{ item.description }}</p> -->
-
-      <div class="d-flex flex-wrap justify-content-center gap-2 mb-2 mt-2 w-100">
-        <button class="btn btn-light fav-btn d-flex align-items-center" (click)="toggleFavorite(item)">
+      <div class="d-flex gap-2 justify-content-center mb-2 mt-2">
+        <button
+          class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
+          (click)="toggleFavorite(item)">
           <span class="text-danger">Add to Wishlist </span>
-          <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+          <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
         </button>
 
-        <button class="btn btn-light text-danger d-flex align-items-center" (click)="shareItem(item)">
+        <button
+          class="more-info btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center fs-6 shadow"
+          (click)="shareItem(item)">
           Share it <i class="bi bi-share-fill ms-2"></i>
         </button>
       </div>
 
-
-      <a class="btn btn-danger w-100 mt-1"><i class="bi bi-ticket-perforated"></i> GET TICKET</a>
+      <a class="ticket-btn btn btn-danger w-100 mt-2 py-2 fs-5 mb-2"><i class="bi bi-ticket-perforated"></i> GET
+        TICKET</a>
     </div>
   </div>
 
 </div>
 
 
-<!-- ---------------------------------------------------------------------------------------------------------- -->
 
-
-
-<div class="p-5">
-  <div class="tab-links" #tabLinks>
-    <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active">
-      <i class="bi bi-info-circle-fill me-2"></i>Overview
+<div>
+  <div class="tab-links px-5 py-4" #tabLinks>
+    <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active ms-2 me-3">
+      <i class="bi bi-info-circle-fill me-2 fs-6"></i> <span class="fs-5">Overview</span>
     </a>
 
-    <a href="#location" (click)="scrollToSection($event, 'location')">
-      <i class="bi bi-geo-alt-fill me-2"></i>Location
+    <a href="#location" (click)="scrollToSection($event, 'location')" class="me-3">
+      <i class="bi bi-geo-alt-fill me-2 fs-6"></i>
+      <span class="fs-5">Location</span>
     </a>
 
-    <a href="#schedule" (click)="scrollToSection($event, 'schedule')">
-      <i class="bi bi-calendar3 me-2"></i>
-      Schedule
+    <a href="#schedule" (click)="scrollToSection($event, 'schedule')" class="me-3">
+      <i class="bi bi-calendar3 me-2 fs-6"></i>
+      <span class="fs-5">Schedule</span>
     </a>
 
-    <a href="#tickets" (click)="scrollToSection($event, 'tickets')">Tickets</a>
-    <a href="#cast" (click)="scrollToSection($event, 'cast')">Cast</a>
-    <a href="#terms-conditions" (click)="scrollToSection($event, 'terms-conditions')">Terms & Conditions</a>
-    <a href="#reviews" (click)="scrollToSection($event, 'reviews')">Reviews</a>
+    <a href="#tickets" (click)="scrollToSection($event, 'tickets')" class="me-3">
+      <i class="bi bi-tags-fill me-2 fs-6"></i>
+      <span class="fs-5">Tickets</span>
+    </a>
+
+    <a href="#cast" (click)="scrollToSection($event, 'cast')" class="me-3">
+      <i class="bi bi-people-fill me-2 fs-6"></i>
+      <span class="fs-5">Performers</span>
+    </a>
+
+    <a href="#terms-conditions" (click)="scrollToSection($event, 'terms-conditions')" class="me-3">
+      <i class="bi bi-file-earmark-text-fill me-2 fs-6"></i>
+      <span class="fs-5">Terms & Conditions</span>
+    </a>
+
+    <a href="#reviews" (click)="scrollToSection($event, 'reviews')">
+      <i class="bi bi-chat-dots-fill me-2 fs-6"></i>
+      <span class="fs-5">Reviews</span>
+    </a>
   </div>
 
 
-  <section id="overview" class="mt-3 p-2">
-    <!-- Section Title -->
-    <h2 class="mb-3">
-      <i class="bi bi-info-circle-fill text-danger me-2"></i>
-      <span class="heading-line">Overview</span>
-    </h2>
+  <div class="px-5">
+    <section id="overview" class="mt-3 p-2">
+      <!-- Section Title -->
+      <h2 class="mb-3">
+        <i class="bi bi-info-circle-fill text-danger me-2"></i>
+        <span class="heading-line">Overview</span>
+      </h2>
 
-    <div class="ps-5">
-      <!-- Subtitle Before Description -->
-      <h4>
-        <i class="bi bi-lightbulb-fill me-2"></i> Get to know more about this event
+      <div class="ps-5">
+        <!-- Subtitle Before Description -->
+        <h4>
+          <i class="bi bi-lightbulb me-2"></i> Get to know more about this event
+        </h4>
+
+        <!-- Description -->
+        <p class="lead ms-3 text-justify fw-light fst-italic">
+          {{ showMore ? item.description : (item.description | slice:0:200) + '...' }}
+        </p>
+
+        <!-- Show More / Show Less Button -->
+        <button class="btn btn-light text-danger me-2" (click)="showMore = !showMore">
+          <i class="bi" [ngClass]="showMore ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+          {{ showMore ? 'Show Less' : 'Show More' }}
+        </button>
+
+
+        <hr class="mt-4">
+      </div>
+    </section>
+
+
+    <section id="location" class="p-2">
+      <!-- Section Title -->
+      <h2 class="mb-3">
+        <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+        <span class="heading-line">Location</span>
+      </h2>
+
+      <div class="ps-5">
+        <!-- Subtitle Before Description -->
+        <h4>
+          <i class="bi bi-map me-2"></i> Check out the venue on the map
+        </h4>
+
+        <!-- Flexbox Container for Location & Map -->
+        <div class="d-flex align-items-start mt-2 mb-4">
+
+          <!-- Buttons: Hide Map & Share Location -->
+          <div class="mt-3">
+            <button class="btn btn-light text-danger me-2" (click)="toggleMap()">
+              <i class="bi" [ngClass]="isMapVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+              {{ isMapVisible ? 'Hide Map' : 'Show Map' }}
+            </button>
+
+            <!-- Share Location Button -->
+            <button class="btn bg-danger text-white" (click)="openShareModal()">
+              <i class="bi bi-share-fill"></i> Share Location
+            </button>
+
+            <!-- Bootstrap Modal -->
+            <div class="modal fade" id="shareLocationModal" tabindex="-1" aria-labelledby="shareLocationModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="shareLocationModalLabel">Share Location</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Copy the link below to share the location:</p>
+                    <input type="text" class="form-control" [value]="locationUrl" readonly>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn bg-danger text-white" (click)="copyToClipboard()">Copy Link</button>
+                    <button type="button" class="btn btn-light text-danger" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
+                'height': '350px',
+                'width': '95%',
+                'display': 'block',
+                'margin-left': '15px'
+              }">
+          <!-- 'margin': '0 auto' -->
+        </app-leaflet-map>
+
+        <hr class="mt-4">
+      </div>
+    </section>
+
+
+    <section id="schedule" class="p-2">
+      <!-- Section Title with Icon -->
+      <h2 class="mb-3">
+        <i class="bi bi-calendar3 text-danger me-2"></i>
+        <span class="heading-line">Schedule</span>
+      </h2>
+
+      <!-- Subtitle -->
+
+      <h4 class="ps-5">
+        <i class="bi bi-hourglass-split me-2"></i> Check the event schedule below
       </h4>
+      <!--
+          <button class="btn bg-secondary text-white me-2 opacity-100"
+            [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftSchedule}" (click)="scrollLeftSchedule()"
+            [disabled]="!canScrollLeft">
+            <i class="bi bi-chevron-left fs-6"></i>
+          </button>
 
-      <!-- Description -->
-      <p class="lead">{{ item.description }}</p>
+          <button class="btn bg-secondary text-white opacity-100"
+            [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightSchedule}" (click)="scrollRightSchedule()"
+            [disabled]="!canScrollRight">
+            <i class="bi bi-chevron-right fs-6"></i>
+          </button> -->
+
+      <div class="d-flex align-items-center">
+        <!-- Left Scroll Button -->
+        <button class="btn text-secondary opacity-100 border-0"
+          [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftSchedule}" (click)="scrollLeftSchedule()"
+          [disabled]="!canScrollLeftSchedule">
+          <i class="bi bi-chevron-left fs-4"></i>
+        </button>
+
+        <!-- Scrollable Container -->
+        <div #scheduleContainer class="schedule-scroll-container py-2">
+          <div class="schedule-list">
+            <div *ngFor="let item of schedules" class="schedule-card shadow-sm px-4 py-3 mx-1">
+              <div class="schedule-content">
+                <h5 class="text-danger mb-2">
+                  {{ item.day }}
+                </h5>
+                <p class="text-muted mb-1">
+                  <!-- <i class="bi bi-calendar-date"></i> -->
+                  📅 <span class="fst-italic ms-1"> {{ item.date | date:'dd-MM-yyyy' }}</span>
+                </p>
+                <p class="text-muted mt-2">
+                  <!-- <i class="bi bi-clock"></i> -->
+                  🕗 <span class="fst-italic">{{ item.time }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Scroll Button -->
+        <button class="btn text-secondary opacity-100 border-0"
+          [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightSchedule}" (click)="scrollRightSchedule()"
+          [disabled]="!canScrollRightSchedule">
+          <i class="bi bi-chevron-right fs-4"></i>
+        </button>
+      </div>
 
       <hr class="mt-4">
-    </div>
-  </section>
+    </section>
 
 
-  <section id="location" class="p-2">
-    <!-- Section Title -->
-    <h2 class="mb-3">
-      <i class="bi bi-geo-alt-fill text-danger me-2"></i>
-      <span class="heading-line">Location</span>
-    </h2>
+    <section id="tickets" class="p-2">
+      <!-- Section Heading -->
+      <h2 class="mb-4">
+        <i class="bi  bi-tags-fill text-danger me-2"></i>
+        <span class="heading-line">Tickets</span>
+      </h2>
 
-    <div class="ps-5">
-      <!-- Subtitle Before Description -->
-      <h4>
-        <i class="bi bi-map me-2"></i> Check out the venue on the map
+      <!-- Choose Your Ticket with Buttons on the Right -->
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <h4 class="ps-5">
+          <i class="bi bi-cart-check me-2"></i> Tickets Available – Grab Yours Today!
+          <span class="text-muted ms-2 fs-5 fw-light fst-italic">({{ tickets.length }} Types Available)</span>
+        </h4>
+        <div>
+
+        </div>
+      </div>
+
+      <!-- Scrollable Ticket List -->
+      <div class="d-flex justify-content-start align-items-center overflow-hidden">
+
+        <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeft}"
+          (click)="scrollLeftTicket()" [disabled]="!canScrollLeft">
+          <i class="bi bi-chevron-left fs-4"></i>
+        </button>
+
+        <div #ticketContainer class="d-flex gap-3 scroll-container py-2 px-1"
+          style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;">
+
+          <div *ngFor="let ticket of tickets" class="card ticket-card border-0 shadow-sm flex-shrink-0 px-2"
+            style="min-width: 250px; border-radius: 10px;">
+
+            <div class="card-body d-flex flex-column justify-content-between p-3">
+              <!-- Ticket Type with Icon -->
+              <h5 class="fw-bold d-flex align-items-center text-danger">
+                <i class="bi bi-ticket-perforated-fill me-2 fs-4"></i> {{ ticket.type }}
+              </h5>
+
+
+              <!-- Description -->
+              <div class="text-muted mb-2 py-1 fst-italic">{{ ticket.description }}</div>
+
+              <!-- Price Badge -->
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <!-- Price Badge -->
+                <span class="badge fst-italic bg-secondary text-white py-2 px-2 fs-6 ticket-price opacity-75">
+                  {{ ticket.price }} EGP
+                </span>
+
+                <!-- Buy Now Button -->
+                <button class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollRight}"
+          (click)="scrollRightTicket()" [disabled]="!canScrollRight">
+          <i class="bi bi-chevron-right fs-4"></i>
+        </button>
+
+      </div>
+
+
+
+
+      <hr class="mt-4">
+    </section>
+
+
+    <section id="cast" class="p-2">
+      <!-- Section Title -->
+      <h2 class="mb-3">
+        <i class="bi bi-people-fill text-danger me-2"></i>
+        <span class="heading-line">Performers</span>
+      </h2>
+
+      <h4 class="ps-5">
+        <i class="bi bi-fire me-2"></i> Meet the talented cast of the event
       </h4>
 
-      <!-- Flexbox Container for Location & Map -->
-      <div class="d-flex align-items-start mt-2 mb-4">
+      <div class="ps-2">
 
-        <!-- Buttons: Hide Map & Share Location -->
-        <div class="mt-3">
-          <button class="btn btn-light text-danger me-2" (click)="toggleMap()">
-            <i class="bi" [ngClass]="isMapVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
-            {{ isMapVisible ? 'Hide Map' : 'Show Map' }}
+        <div class="d-flex justify-content-start align-items-center overflow-hidden pe-2 mt-2">
+
+          <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftCast}"
+            (click)="scrollLeftCast()" [disabled]="!canScrollLeftCast">
+            <i class="bi bi-chevron-left fs-4"></i>
           </button>
 
-          <!-- Share Location Button -->
-          <button class="btn bg-danger text-white" (click)="openShareModal()">
-            <i class="bi bi-share-fill"></i> Share Location
-          </button>
+          <div #castContainer class="d-flex gap-3 scroll-container py-2"
+            style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;">
 
-          <!-- Bootstrap Modal -->
-          <div class="modal fade" id="shareLocationModal" tabindex="-1" aria-labelledby="shareLocationModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="shareLocationModalLabel">Share Location</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>Copy the link below to share the location:</p>
-                  <input type="text" class="form-control" [value]="locationUrl" readonly>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn bg-danger text-white" (click)="copyToClipboard()">Copy Link</button>
-                  <button type="button" class="btn btn-light text-danger" data-bs-dismiss="modal">Close</button>
-                </div>
+            <div *ngFor="let castMember of castList" class="cast-card flex-shrink-0 text-center px-2"
+              style="min-width: 180px; border-radius: 10px; transition: transform 0.3s ease-in-out;">
+
+              <img [src]="castMember.image" class="card-img-top rounded-circle mt-3 mx-auto"
+                style="width: 130px; height: 130px; object-fit: cover;" alt="{{ castMember.name }}">
+
+              <div class="p-2">
+                <h5 class="fw-bold text-danger">{{ castMember.name }}</h5>
+                <p class="text-muted fs-6 mb-1 fst-italic">{{ castMember.role }}</p>
               </div>
             </div>
           </div>
 
+          <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightCast}"
+            (click)="scrollRightCast()" [disabled]="!canScrollRightCast">
+            <i class="bi bi-chevron-right fs-4"></i>
+          </button>
 
         </div>
+
+        <hr class="mt-4">
       </div>
-
-      <!-- Map Container (Next to Location) -->
-      <!-- <div class="ms-4" *ngIf="isMapVisible">
-        <app-leaflet-map [locationName]="item.fullLocation" [styleTxt]="{ 'height': '350px', width: '80%' }">
-        </app-leaflet-map>
-      </div> -->
-
-      <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
-    'height': '350px',
-    'width': '80%',
-    'display': 'block',
-    'margin': '0 auto'
-  }">
-      </app-leaflet-map>
-
-      <hr class="mt-4">
-    </div>
-  </section>
+    </section>
 
 
-  <section id="schedule" class="p-2">
-    <!-- Section Title with Icon -->
-    <h2 class="mb-3">
-      <i class="bi bi-calendar3 text-danger me-2"></i>
-      <span class="heading-line">Schedule</span>
-    </h2>
+    <section id="terms-conditions" class="p-2">
+      <!-- Section Title -->
+      <h2 class="mb-3">
+        <i class="bi bi-file-earmark-text-fill text-danger me-2"></i>
+        <span class="heading-line">Terms & Conditions</span>
+      </h2>
 
-    <div class="ps-5">
-      <!-- Subtitle Before Table -->
-      <h4 class="mt-3">
-        <i class="bi bi-hourglass-split me-2"></i> Check the event schedule below
+      <h4 class="ps-5">
+        <i class="bi bi-clipboard-check me-2"></i> Read these rules for a smooth experience
       </h4>
 
-      <!-- Schedule Table with Scroll -->
-      <div class="schedule-table text-center" [class.scrollable]="schedules.length > 4">
-        <!-- Table Header (Centered) -->
-        <div class="schedule-header p-2 d-flex justify-content-center gap-4">
-          <span><i class="bi bi-calendar-event me-2"></i> Day</span>
-          <span><i class="bi bi-calendar-date me-2"></i> Date</span>
-          <span><i class="bi bi-clock me-2"></i> Time</span>
-        </div>
 
-        <!-- Table Rows -->
-        <div *ngFor="let item of schedules" class="schedule-row p-2 d-flex justify-content-center gap-4">
-          <span>{{ item.day }}</span>
-          <span>{{ item.date | date:'dd-MM-yyyy' }}</span>
-          <span>{{ item.time }}</span>
+      <div class="ps-4 row justify-content-center ">
+
+        <div class="col-lg-12 ">
+          <div class="terms-list card border-0 shadow-sm hover-shadow-lg  transition-all pb-3">
+            <div class="card-body pb-1">
+              <ul class="list-unstyled m-0 row g-4">
+                <li class="col-md-6 d-flex">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-x-octagon-fill text-danger fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Non-Transferable Tickets</h5>
+                    <p class="text-muted mb-0 fst-italic">Tickets are non-refundable and non-transferable under any
+                      circumstances
+                    </p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex mb-1">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-person-fill-check text-primary fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Entry Policy</h5>
+                    <p class="text-muted mb-0 fst-italic">Strict one ticket per person policy with no re-entry after
+                      scanning</p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex mb-1">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-shield-fill-check text-success fs-2 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Security Screening</h5>
+                    <p class="text-muted mb-0 fst-italic">Mandatory security checks for all attendees</p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex mb-1">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-cup-straw text-warning fs-2 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Prohibited Items</h5>
+                    <p class="text-muted mb-0 fst-italic">No outside food, drinks, or restricted items allowed</p>
+                  </div>
+                </li>
+
+                <li class="col-md-6 d-flex mb-1">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-person-hearts text-info fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Child Policy</h5>
+                    <p class="text-muted mb-0 fst-italic">Children under 12 must be accompanied by an adult</p>
+                  </div>
+                </li>
+                <li class="col-md-6  d-flex mb-1">
+                  <div class="term-item pe-3">
+                    <i class="bi bi-exclamation-octagon-fill text-purple fs-3 me-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-dark mb-2">Right to Refuse Entry</h5>
+                    <p class="text-muted mb-0 fst-italic">Management reserves the right to refuse admission without
+                      reason</p>
+                  </div>
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+        </div>
+        <hr class="mt-4">
+      </div>
+
+    </section>
+
+
+    <section id="reviews" class="p-4">
+      <!-- Section Heading -->
+      <h2 class="mb-4">
+        <i class="bi bi-chat-dots-fill text-danger me-2"></i>
+        <span class="heading-line">Reviews</span>
+      </h2>
+
+      <h4 class="ps-5">
+        <i class="bi bi-chat-square-text me-2"></i> See what others are saying
+      </h4>
+
+      <!-- Review List Container -->
+      <div class="review-container py-1 px-5 rounded mt-3" style="width: 100%; max-height: 400px; overflow-y: auto;">
+
+        <!-- Review Cards (Vertical Layout) -->
+        <div class="row">
+          <div class="col-12 mb-3" *ngFor="let review of reviews">
+            <div class="card shadow border-0">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-person-circle text-danger fs-4 me-2"></i>
+                    <h5 class="m-0 fs-5">{{ review.user }}</h5>
+                  </div>
+                  <div class="m-0 text-justify fw-light fst-italic me-2 text-secondary text-danger">Shared on {{
+                    review.date }}
+                  </div>
+
+                </div>
+
+                <!-- Star Ratings -->
+                <div class="text-warning mb-2 fs-6">
+                  <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                    <i class="bi" [ngClass]="{
+                                        'bi-star-fill': i < Math.floor(review.rating),
+                                        'bi-star-half': i === Math.floor(review.rating) && review.rating % 1 !== 0,
+                                        'bi-star': i >= Math.ceil(review.rating)
+                                      }"></i>
+                  </ng-container>
+                </div>
+
+                <!-- <div class="lead text-justify fw-light fst-italic fs-6">{{ review.comment }}</div> -->
+                <div class="text-muted fst-italic">{{ review.comment }}</div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <hr class="mt-4">
-    </div>
-  </section>
+
+    </section>
 
 
-
-
-
-  <section id="tickets" style="min-height: 100vh;">
-    <h2>Tickets</h2>
-    <p>Tickets...</p>
-  </section>
-
-  <section id="cast" style="min-height: 100vh;">
-    <h2>Cast</h2>
-    <p>List of performers...</p>
-  </section>
-
-  <section id="terms-conditions" style="min-height: 100vh;">
-    <h2>Terms & Conditions</h2>
-    <p>Important details about the show...</p>
-  </section>
-
-  <section id="reviews" style="min-height: 100vh;">
-    <h2>Reviews</h2>
-    <p>Audience feedback...</p>
-  </section>
-
-
-
+  </div>
 
 
   <!-- --------------------------------------------------------------------------------------------------------------- -->
 
-  <section id="stop-scroll" class="mt-5">
+  <div id="stop-scroll" class="mt-5 px-5">
     <h2 class="fw-bold">
       <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
     </h2>
@@ -242,7 +577,7 @@
 
     <!-- Scroll Buttons -->
     <div class="scroll-container d-flex">
-      <button class="scroll-btn left" (click)="scrollLeft()">&#10094;</button>
+      <button class="scroll-btn left me-2" (click)="scrollLeft()">&#10094;</button>
 
       <!-- Scrollable Event List -->
       <div class="event-scroll-wrapper">
@@ -258,11 +593,11 @@
               </span>
 
               <div class="card-body text-center">
-                <h5 class="fw-bold">{{ event.title }}</h5>
+                <h4 class="fw-bold">{{ event.title }}</h4>
                 <div class="mb-1">{{ event.venue }}</div>
 
                 <!-- Star Ratings -->
-                <div class="text-danger mb-3 mt-1">
+                <div class="text-danger mb-3 mt-1 fs-5">
                   <ng-container *ngFor="let star of [].constructor(5); let i = index">
                     <i class="bi" [ngClass]="{
                                       'bi-star-fill': i < Math.floor(event.rating),
@@ -272,25 +607,28 @@
                   </ng-container>
                 </div>
 
-                <div class="btn btn-light w-100 fw-bold">
-                  <i class="bi bi-calendar"></i> {{ event.date }}
+                <div class="btn btn-light w-100 fw-bold mb-2">
+                  <i class="bi bi-calendar3 me-2"></i> {{ event.date }}
                 </div>
 
-                <div class="d-flex flex-wrap justify-content-center gap-2 mt-2">
-                  <button class="btn btn-light fav-btn px-4 py-2 d-flex align-items-center"
+
+                <div class="d-flex gap-2 justify-content-center mb-2">
+                  <button class="btn btn-light fav-btn d-flex align-items-center w-50 justify-content-center py-2 fs-6"
                     (click)="toggleFavorite(event)">
-                    <span class="text-danger"> Wishlist </span>
+                    <span class="text-danger">Add to Wishlist </span>
                     <i class="bi ms-2"
-                      [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+                      [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
                   </button>
 
-                  <a routerLink="/details/5" class="btn btn-light text-danger px-4 py-2">
-                    More info
+                  <a routerLink="/details/5"
+                    class="btn btn-light text-danger d-flex align-items-center w-50 justify-content-center fs-6">
+                    <i class="bi bi-info-circle me-2"></i> More Info
                   </a>
+
                 </div>
 
-                <a class="btn btn-danger w-100 mt-2">
-                  BOOK TICKETS <i class="bi bi-ticket"></i>
+                <a class="btn btn-danger w-100 mt-2 py-2">
+                  <i class="bi bi-ticket me-2"></i> BOOK TICKETS
                 </a>
               </div>
             </div>
@@ -299,6 +637,6 @@
         </div>
       </div>
 
-      <button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
+      <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
     </div>
-  </section>
+  </div>

@@ -95,7 +95,7 @@
 
         <div class="col-md-3">
 
-          <div id="imgCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="1200"
+          <!-- <div id="imgCarousel" class="carousel slide h-100 mt-5" data-bs-ride="carousel" data-bs-interval="1200"
             style="max-height: 600px">
             <div class="carousel-inner h-100">
               @for (image of images; track image) {
@@ -105,15 +105,36 @@
               }
             </div>
 
-            <!-- Navigation Arrows -->
             <button class="carousel-control-prev" type="button" data-bs-target="#imgCarousel" data-bs-slide="prev">
               <span class="carousel-control-prev-icon bg-danger rounded" aria-hidden="true"></span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#imgCarousel" data-bs-slide="next">
               <span class="carousel-control-next-icon bg-danger rounded" aria-hidden="true"></span>
             </button>
-          </div>
+          </div> -->
 
+
+          <!-- Image Carousel -->
+          <div id="imgCarousel" class="mt-5 carousel slide h-100" data-bs-ride="carousel" data-bs-interval="1200"
+            style="max-height: 600px;">
+            <div class="carousel-inner h-100">
+              @for (image of images; track image) {
+              <div class="carousel-item h-100" [class.active]="image === images[0]">
+                <img [src]="image" class="d-block w-100 h-100 rounded" [alt]="image" style="object-fit: cover;">
+              </div>
+              }
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="carousel-control-prev custom-carousel-btn" type="button" data-bs-target="#imgCarousel"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon custom-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next custom-carousel-btn" type="button" data-bs-target="#imgCarousel"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon custom-icon" aria-hidden="true"></span>
+            </button>
+          </div>
 
 
         </div>

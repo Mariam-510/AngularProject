@@ -132,26 +132,32 @@ export class ShowsComponent {
   }
 
   applyFilters(): void {
-    this.filteredEvents = this.events
-      .filter(event =>
-        event.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-      )
-      .filter(event => this.selectedCategory === '' || event.category === this.selectedCategory)
-      .sort((a, b) => {
-        if (this.sortBy.includes('Date') || this.sortBy === '') {
-          const dateA = this.parseCustomDate(a.date);
-          const dateB = this.parseCustomDate(b.date);
-          return this.sortBy === 'Date [Earliest]' ? dateA - dateB : dateB - dateA;
-        }
-        if (this.sortBy === '[A-Z]') return a.title.localeCompare(b.title);
-        if (this.sortBy === '[Z-A]') return b.title.localeCompare(a.title);
-        if (this.sortBy === 'Rating [Lowest]') return a.rating - b.rating;
-        if (this.sortBy === 'Rating [Highest]') return b.rating - a.rating;
-        if (this.sortBy === 'Price [Lowest]') return a.price - b.price;
-        if (this.sortBy === 'Price [Highest]') return b.price - a.price;
+    let filtered = this.events.filter(event =>
+      event.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
 
-        return 0;
-      });
+    if (this.selectedCategory) {
+      filtered = filtered.filter(event => event.category === this.selectedCategory);
+    }
+
+    filtered.sort((a, b) => {
+      if (this.sortBy.includes('Date') || this.sortBy === '') {
+        const dateA = this.parseCustomDate(a.date);
+        const dateB = this.parseCustomDate(b.date);
+        return this.sortBy === 'Date [Earliest]' ? dateA - dateB : dateB - dateA;
+      }
+      if (this.sortBy === '[A-Z]') return a.title.localeCompare(b.title);
+      if (this.sortBy === '[Z-A]') return b.title.localeCompare(a.title);
+      if (this.sortBy === 'Rating [Lowest]') return a.rating - b.rating;
+      if (this.sortBy === 'Rating [Highest]') return b.rating - a.rating;
+      if (this.sortBy === 'Price [Lowest]') return a.price - b.price;
+      if (this.sortBy === 'Price [Highest]') return b.price - a.price;
+
+      return 0;
+    });
+
+    this.filteredEvents = filtered;
+    this.currentPage = 1; // Reset to first page when filters change
   }
 
 
@@ -186,6 +192,28 @@ export class ShowsComponent {
 
   toggleFavorite(event: any) {
     event.isFavorite = !event.isFavorite;
+  }
+
+
+  currentPage = 1;
+  itemsPerPage = 4;
+
+  // Calculate the total number of pages
+  get totalPages() {
+    return Math.ceil(this.filteredEvents.length / this.itemsPerPage);
+  }
+
+  // Get paginated events
+  get paginatedEvents() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredEvents.slice(start, start + this.itemsPerPage);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+
   }
 
 }
