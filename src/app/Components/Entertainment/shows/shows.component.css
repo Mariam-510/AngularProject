@@ -21,7 +21,7 @@
   flex-direction: column;
 }
 
-
+/* ------------------------------------------------------------------------------------------ */
 
 .show-containerV {
   display: flex;
@@ -55,25 +55,13 @@
 }
 
 
-
+/* ------------------------------------------------------------------------------------------ */
 .custom-select {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-chevron-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> </svg>');
   background-repeat: no-repeat;
   background-size: 17px;
   font-size: 1rem;
 }
-
-
-/* .view-toggle button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  background: white;
-}
-
-.view-toggle button.active {
-  background: #eee;
-} */
-
 
 .view-toggle {
   display: flex;
@@ -96,3 +84,6 @@
   background-color: #dc3545;
   color: white;
 }
+
+
+/* ------------------------------------------------------------------------------------------ */

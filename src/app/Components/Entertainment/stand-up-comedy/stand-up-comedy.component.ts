@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ShowComponent } from "../show/show.component";
 
 @Component({
   selector: 'app-stand-up-comedy',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ShowComponent],
   templateUrl: './stand-up-comedy.component.html',
   styleUrl: './stand-up-comedy.component.css'
 })
@@ -29,10 +30,4 @@ export class StandUpComedyComponent {
       isFavorite: false
     }
   ];
-
-  Math = Math;
-
-  toggleFavorite(event: any) {
-    event.isFavorite = !event.isFavorite;
-  }
 }
