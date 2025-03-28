@@ -64,24 +64,50 @@ export class SHomePageComponent {
     {
       id:1,
       image: 'img/EPL4.jpg',
-      venue: 'Suez Canal Stadium, Ismailia',
-      date: 'Sat 22 Mar 2025',
+      venue: 'Khaled Bichara Stadium, Gouna',
+      date: 'Sun 23 Mar 2025',
       tournament: 'EPL Cup 2024/2025',
-      matchNumber: 17,
-      time: '09:30 PM',
+      matchNumber: 18,
+      time: '08:00 PM',
       group: 'Group Two (Stage)',
-      team1: 'Ceramica Cleopatra FC',
-      team2: 'Ghazl Elmahala FC',
-      team1Logo: 'img/Cleopatra.png',
-      team2Logo: 'img/mahalla.png',
+      team1: 'El Gouna SC',
+      team2: 'Smouha SC',
+      staduim:'img/s3.jpg',
+      team1Logo: 'img/ElGouna.png',
+      team2Logo: 'img/Smouha.png',
       isFavorite: false,
-      price: 500, // Add price
-    
+      price: 250, // Add price
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+     category: '⚽ Football'
     },
     {
       id:2,
+      image: 'img/EPL4.jpg',
+      venue: 'Suez Canal Stadium, Ismailia',
+      date: 'Sat 22 Mar 2025',
+      tournament: 'Championship League',
+      matchNumber: 17,
+      time: '09:30 PM',
+      group: 'Group Two (Stage)',
+      staduim:'img/s1.jpg',
+
+      team1: 'Al Ahly SC',
+      team2: 'Pyramids FC',
+      team1Logo: 'img/Al Ahly.svg',
+      team2Logo: 'img/Pyramids.png',
+
+      isFavorite: false,
+      price: 500, // Add price
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+     category: '⚽ Football'
+    },
+  
+    {
+      id:3,
       image: 'img/EPL3.jpg',
-      venue: 'Cairo International Stadium',
+      venue: 'Cairo International Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
       tournament: 'EPL Cup 2024/2025',
       matchNumber: 19,
@@ -89,41 +115,30 @@ export class SHomePageComponent {
       group: 'Group One (Stage)',
       team1: 'Zamalek SC',
       team2: 'Ismaily SC',
-      team1Logo: 'img/Zamalek.svg',
+      staduim:'img/cairo staduim.jpg',
+      team1Logo: 'img/zamalekv2.png',
       team2Logo: 'img/ismaily.png',
       isFavorite: true,
       price: 300, // Add price
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+     category: '⚽ Football'
     },
-    {
-      id:3,
-      image: 'img/EPL4.jpg',
-      venue: 'Ismailia Stadium, Ismailia',
-      date: 'Sun 23 Mar 2025',
-      tournament: 'EPL Cup 2024/2025',
-      matchNumber: 18,
-      time: '08:00 PM',
-      group: 'Group Two (Stage)',
-      team1: 'Al Ahly SC',
-      team2: 'Pyramids FC',
-      team1Logo: 'img/Al Ahly.svg',
-      team2Logo: 'img/Pyramids.png',
-      isFavorite: false,
-      price: 250, // Add price
-    },
+   
    
     {
       id:4,
       image: 'img/EPL4.jpg',
-      venue: 'Alexandria Stadium',
+      venue: 'Alexandria Stadium, Alexandria',
       date: 'Tue 25 Mar 2025',
       tournament: 'EPL Cup 2024/2025',
       matchNumber: 20,
       time: '06:45 PM',
       group: 'Group One (Stage)',
       team1: 'Smouha SC',
-      team2: 'Al Ittihad Alexandria',
-      team1Logo: 'img/smouha.png',
-      team2Logo: 'img/ittihad.png',
+      team2: 'Al Ittihad Alexandria SC',
+      team1Logo: 'img/Smouha.png',
+      team2Logo: 'img/AlIttihad.png',
       isFavorite: false,
       price: 500, // Add price
     },
@@ -152,16 +167,19 @@ export class SHomePageComponent {
       matchNumber: 19,
       time: '07:30 PM',
       group: 'Group One (Stage)',
-      team1: 'Zamalek SC',
-      team2: 'Ismaily SC',
-      team1Logo: 'img/Zamalek.svg',
-      team2Logo: 'img/ismaily.png',
+     
+
+      team2: 'ZED FC',
+      team1: 'ENPPI SC',
+      team1Logo: 'img/ENPPI.png',
+      team2Logo: 'img/ZED.png',
       isFavorite: false,
       price: 290, // Add price
       
     }
   ];
-  
+
+ 
   // Filter options
   venues = ['All Venues', ...new Set(this.matches.map(m => m.venue))];
   prices = ['All Prices', ...new Set(this.matches.map(m => m.price))];

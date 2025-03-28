@@ -1,23 +1,23 @@
 <div #heroSection class="position-relative d-flex justify-content-center ">
     <img src="img/s1.jpg" class="img-fluid w-100 banner-rounded " alt="Event Banner"
-        style="max-height: 550px; object-fit: cover;">
+        style="max-height: 620px; object-fit: cover;">
     <!-- ... other hero content ... -->
 
     <!-- Modified Event Card -->
 
     <div #eventCard
     class="position-absolute end-0 bg-white shadow rounded me-5 mt-5  smooth-card custom-card card border-0  "
-    style="max-width: 100%; width: 300px;">
+    style="max-width: 100%; width: 375px;">
 
         <div class="position-relative  ">
             <!-- <img src="img/EPL4.jpg" 
              class="card-img-top" 
              style="height: 200px; object-fit: cover;"
              alt="Ahmanson Theater"> -->
-             <div class="sticky-header">
-                <div class="bg-dark text-white  rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center event-title"
-                >
-             <h3 class="m-0"> & JULIET</h3>
+             <div >
+                <div class="bg-dark text-white  rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
+                style="height: 120px;">
+             <h3 class="m-0"> {{item.title}}</h3>
          </div>
          <div class="event-image">
             <img src="img/national.jpg" class=" event-image rounded-bottom" alt="Juliet Banner">
@@ -30,66 +30,63 @@
             <!-- Teams Playing -->
             <div class="card-header border-bottom-0 px-0 pt-0 match-vs text-center">
                 <div class="d-flex align-items-center justify-content-between">
-                    <img src="img/Zamalek.svg" class="team-logo ms-2" alt="Team A">
-                    <strong class="text-dark">Team A</strong>
-                    <span class="mx-2 fw-bold text-danger">VS</span>
-                    <strong class="text-dark">Team B</strong>
-                    <img src="img/ismaily.png" class="team-logo me-2" alt="Team B">
+                  <img [src]="teams[0].logo" alt="{{teams[0].name}} logo" class="team-logo me-2">
+
+                    <strong class="text-dark">{{teams[0].name}}</strong>
+                    <span class="mx-2 fw-bold text-danger fs-4">VS</span>
+                    <strong class="text-dark">{{teams[1].name}}</strong>
+                    <img [src]="teams[1].logo" class="team-logo me-2" alt="Team B">
                 </div>
             </div>
 
 
             <div class="bg-white border-bottom-0 my-3 ">
-                <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center ">Cairo International
-                    Stadium</h5>
+                <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center ">{{item.location}}</h5>
                 <small class="text-muted  d-flex justify-content-center ">
-                    <i class="bi bi-calendar-event me-1 text-danger  "></i> Mon 24 Mar 2025
+                    <i class="bi bi-calendar-event me-1 text-danger  "></i> {{item.date}}
                 </small>
 
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="badge bg-gray text-white px-3 py-2">Championship League</span>
-                <span class="text-muted small">Match No. 10</span>
-            </div>
+         
 
-            <div class="mb-3">
+            <div >
                 <div class="d-flex align-items-center mb-2">
                     <i class="bi bi-clock-history me-2 text-danger"></i>
                     <strong class="me-2">Time:</strong>
-                    <span class="text-dark">7:00 PM</span>
+                    <span class="text-dark">{{item.Kickoff}}</span>
                 </div>
                 <div class="d-flex align-items-center mb-2">
                     <i class="bi bi-trophy me-2 text-danger"></i>
                     <strong class="me-2">Group:</strong>
-                    <span class="text-dark">A</span>
+                    <span class="text-dark">{{item.Group}}</span>
                 </div>
                 <div class="d-flex align-items-center ">
                     <i class="bi bi-cash-stack me-2 text-danger"></i>
                     <strong class="me-2">Price:</strong>
-                    <span class="text-dark">$50</span>
+                    <span class="text-dark">{{ item.price | currency:'EGP' }}</span>
+                   
                 </div>
             </div>
-            <div class="d-flex gap-2 justify-content-center">
-                <button class="btn btn-sm btn-outline-danger d-flex align-items-center w-50 justify-content-center">
-                    Add to Wishlist <i class="bi bi-heart ms-1"></i>
+            <div class="mx-2  py-1 mt-1">
+              <div class="d-flex gap-2 justify-content-center mb-2 mt-2">
+                <button
+                  class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
+                  (click)="toggleFavorite(item)">
+                  <span class="text-danger">Add to Wishlist </span>
+                  <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
                 </button>
-                <button class="btn btn-sm btn-outline-danger d-flex align-items-center w-50 justify-content-center">
-                    Share this <i class="bi bi-share ms-1"></i>
+        
+                <button
+                  class="btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center fs-6 shadow"
+                  (click)="shareItem(item)">
+                  Share it <i class="bi bi-share-fill ms-2"></i>
                 </button>
+              </div>
+        
+              <a class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2"><i class="bi bi-ticket-perforated"></i> GET TICKET</a>
             </div>
-
-            <div class="mt-auto border-top pt-2">
-                <div class="d-flex gap-2">
-                    <!-- <button class="btn btn-outline-danger flex-grow-1 fw-semibold">
-              <i class="bi bi-info-circle"></i> Details
-            </button> -->
-
-                    <button class="btn btn-danger flex-grow-1 fw-semibold">
-                        <i class="bi bi-ticket-perforated"></i> Book Ticket
-                    </button>
-                </div>
-            </div>
+           
         </div>
     </div>
 
@@ -97,29 +94,46 @@
 
 
 
-<div class="px-4 py-2 ">
-    <div class="tab-links" #tabLinks>
-      <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active">
-        <i class="bi bi-info-circle-fill me-2"></i>Overview
+
+<div class="py-2">
+  <div class="tab-links px-5 py-4" #tabLinks>
+    <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active ms-2 me-3">
+      <i class="bi bi-info-circle-fill me-2 fs-6"></i> <span class="fs-5">Overview</span>
+    </a>
+
+  
+    <a href="#location" (click)="scrollToSection($event, 'location')" class="me-3">
+      <i class="bi bi-geo-alt-fill me-2 fs-6"></i>
+      <span class="fs-5">Location</span>
+    </a>
+  
+      <a href="#Date&Time" (click)="scrollToSection($event, 'Date&Time')"  class="me-3">
+        <i class="bi bi-calendar3 me-2 fs-6"></i>
+        <span class="fs-5"> Date & Time</span>
       </a>
   
-      <a href="#location" (click)="scrollToSection($event, 'location')">
-        <i class="bi bi-geo-alt-fill me-2"></i>Location
+      <a href="#tickets" (click)="scrollToSection($event, 'tickets')" class="me-3">
+        <i class="bi bi-tags-fill me-2 fs-6"></i>
+        <span class="fs-5">Tickets</span>
       </a>
+
+      <a href="#Teams" (click)="scrollToSection($event, 'Teams')" class="me-3">
+        <i class="bi bi-people-fill    me-2 fs-6"></i>
+        <span class="fs-5">Teams</span></a>
+
+
+        <a href="#terms-conditions" (click)="scrollToSection($event, 'terms-conditions')" class="me-3">
+          <i class="bi bi-file-earmark-text-fill me-2 fs-6"></i>
+          <span class="fs-5">Terms & Conditions</span>
+        </a>
+    
+        <a href="#reviews" (click)="scrollToSection($event, 'reviews')">
+          <i class="bi bi-chat-dots-fill me-2 fs-6"></i>
+          <span class="fs-5">Reviews</span>
+        </a>
+      </div>
   
-      <a href="#Date&Time" (click)="scrollToSection($event, 'Date&Time')">
-        <i class="bi bi-calendar3 me-2"></i>
-        Date & Time
-        
-      </a>
-  
-      <a href="#tickets" (click)="scrollToSection($event, 'tickets')">Tickets</a>
-      <a href="#Teams" (click)="scrollToSection($event, 'Teams')">Teams</a>
-      <a href="#terms-conditions" (click)="scrollToSection($event, 'terms-conditions')">Terms & Conditions</a>
-      <a href="#reviews" (click)="scrollToSection($event, 'reviews')">Reviews</a>
-    </div>
-  
-  
+    <div class="px-5">
     <section id="overview" class="mt-3 p-2">
       <!-- Section Title -->
       <h2 class="mb-3">
@@ -245,43 +259,74 @@
     </section>
   
     <section id="tickets" class="p-2">
-      <div class="container-fluid">
-        <h2 class="mb-4">
-          <i class="bi bi-ticket-detailed-fill text-danger me-2"></i>
-          <span class="heading-line">Tickets</span>
-        </h2>
-  
+      <!-- Section Heading -->
+      <h2 class="mb-4">
+        <i class="bi  bi-tags-fill text-danger me-2"></i>
+        <span class="heading-line">Tickets</span>
+      </h2>
+
+      <!-- Choose Your Ticket with Buttons on the Right -->
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <h4 class="ps-5">
+          <i class="bi bi-cart-check me-2"></i> Tickets Available – Grab Yours Today!
+          <span class="text-muted ms-2 fs-5 fw-light fst-italic">({{ tickets.length }} Types Available)</span>
+        </h4>
         <div>
-          <h4 class="mt-3 ps-4">
-            <i class="bi bi-cart-check-fill me-2"></i> Choose Your Ticket
-  
-            <button class="btn btn-danger me-2" (click)="scrollLeftTicket()">
-              <i class="bi bi-arrow-left-circle text-white fs-5"></i>
-            </button>
-  
-            <button class="btn btn-danger" (click)="scrollRightTicket()">
-              <i class="bi bi-arrow-right-circle text-white fs-5"></i>
-            </button>
-          </h4>
-  
-          <div class="d-flex justify-content-start align-items-center overflow-hidden pe-5">
-            <div #ticketContainer class="d-flex gap-3 scroll-container pb-2"
-              style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; padding-left: 1rem;">
-  
-              <div *ngFor="let ticket of tickets" class="card ticket-card border-0 shadow-sm flex-shrink-0">
-                <div class="card-body d-flex flex-column justify-content-between">
-                  <h5 class="fw-bold text-danger">{{ ticket.type }}</h5>
-                  <div class="text-muted mb-2">{{ ticket.description }}</div>
-                  <div class="mb-2 text-muted fw-bold">{{ ticket.price }} EGP</div>
-                  <!-- <button class="btn btn-danger w-100 mt-2">Buy Now</button> -->
-                </div>
+
+        </div>
+      </div>
+
+      <!-- Scrollable Ticket List -->
+      <div class="d-flex justify-content-start align-items-center overflow-hidden">
+
+        <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeft}"
+          (click)="scrollLeftTicket()" [disabled]="!canScrollLeft">
+          <i class="bi bi-chevron-left fs-4"></i>
+        </button>
+
+        <div #ticketContainer class="d-flex gap-3 scroll-container py-2 px-1"
+          style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;">
+
+          <div *ngFor="let ticket of tickets" class="card ticket-card border-0 shadow-sm flex-shrink-0 px-2"
+            style="min-width: 250px; border-radius: 10px;">
+
+            <div class="card-body d-flex flex-column justify-content-between p-3">
+              <!-- Ticket Type with Icon -->
+              <h5 class="fw-bold d-flex align-items-center text-danger">
+                <i class="bi bi-ticket-perforated-fill me-2 fs-4"></i> {{ ticket.type }}
+              </h5>
+
+
+              <!-- Description -->
+              <div class="text-muted mb-2 py-1 fst-italic">{{ ticket.description }}</div>
+
+              <!-- Price Badge -->
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <!-- Price Badge -->
+                <span class="badge fst-italic bg-secondary text-white py-2 px-2 fs-6 ticket-price opacity-75">
+                  {{ ticket.price }} EGP
+                </span>
+
+                <!-- Buy Now Button -->
+                <button class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
+                  Buy Now
+                </button>
               </div>
             </div>
           </div>
-  
-          <hr class="mt-4">
         </div>
+
+        <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollRight}"
+          (click)="scrollRightTicket()" [disabled]="!canScrollRight">
+          <i class="bi bi-chevron-right fs-4"></i>
+        </button>
+
       </div>
+
+
+
+
+      <hr class="mt-4">
     </section>
   
   
@@ -290,7 +335,7 @@
         <!-- Section Title -->
         <div class="container">
           <h2 class="mb-4 d-flex align-items-center ">
-            <i class="bi bi-people-fill text-danger display-6  me-3"></i>
+            <i class="bi bi-people-fill text-danger   me-2"></i>
             <span class="heading-line section-title">Teams</span>
           </h2>
       
@@ -360,7 +405,7 @@
       <section id="terms-conditions" class="p-3 ">
         <div class="container">
             <h2 class="mb-4 d-flex align-items-center ">
-            <i class="bi bi-file-earmark-check text-danger display-4 me-3"></i>
+            <i class="bi bi-file-earmark-check text-danger  me-2"></i>
             <span class="heading-line position-relative">
               Terms & Conditions
             </span>
@@ -448,15 +493,64 @@
       
     
   
-    <section id="reviews" style="min-height: 50vh;">
-      <h2>Reviews</h2>
-      <p>Audience feedback...</p>
-    </section>
+      <section id="reviews" class="p-4">
+        <!-- Section Heading -->
+        <h2 class="mb-4">
+          <i class="bi bi-chat-dots-fill text-danger me-2"></i>
+          <span class="heading-line">Reviews</span>
+        </h2>
   
+        <h4 class="ps-5">
+          <i class="bi bi-chat-square-text me-2"></i> See what others are saying
+        </h4>
   
+        <!-- Review List Container -->
+        <div class="review-container py-1 px-5 rounded mt-3" style="width: 100%; max-height: 400px; overflow-y: auto;">
+  
+          <!-- Review Cards (Vertical Layout) -->
+          <div class="row">
+            <div class="col-12 mb-3" *ngFor="let review of reviews">
+              <div class="card shadow border-0">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="d-flex align-items-center">
+                      <i class="bi bi-person-circle text-danger fs-4 me-2"></i>
+                      <h5 class="m-0 fs-5">{{ review.user }}</h5>
+                    </div>
+                    <div class="m-0 text-justify fw-light fst-italic me-2 text-secondary text-danger">Shared on {{
+                      review.date }}
+                    </div>
+  
+                  </div>
+  
+                  <!-- Star Ratings -->
+                  <div class="text-warning mb-2 fs-6">
+                    <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                      <i class="bi" [ngClass]="{
+                                          'bi-star-fill': i < Math.floor(review.rating),
+                                          'bi-star-half': i === Math.floor(review.rating) && review.rating % 1 !== 0,
+                                          'bi-star': i >= Math.ceil(review.rating)
+                                        }"></i>
+                    </ng-container>
+                  </div>
+  
+                  <!-- <div class="lead text-justify fw-light fst-italic fs-6">{{ review.comment }}</div> -->
+                  <div class="text-muted fst-italic">{{ review.comment }}</div>
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <hr class="mt-4">
+  
+      </section>
+  
+    </div>
     <!-- --------------------------------------------------------------------------------------------------------------- -->
   
-    <div id="stop-scroll" >
+    <div id="stop-scroll" class=" px-5">
       <h2 class="fw-bold">
         <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
       </h2>
@@ -471,10 +565,10 @@
         <div class="event-scroll-wrapper">
           <div class="row flex-nowrap" id="eventContainer">
             @for (match of matches; track match) {
-                <div class="col-md-4 event-card">
+                <div class="col-md-4 event-card"style="width: 440px;">
                     <div class="card shadow-sm position-relative">
            <!-- Match Cards Grid -->
-           <div class="card border-0 h-80">
+           <div class="card border-0 h-80 "  >
             <!-- Image Section -->
             <div class="position-relative">
             <img [src]="match.image" 
@@ -558,6 +652,7 @@
         <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
       </div>
     </div>
+</div>
 
 
 
