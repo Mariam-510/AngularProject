@@ -1,6 +1,6 @@
 
 .home-content {
-    background: url('/images/Home/Party2.jpg') no-repeat center center/cover;
+    background: url('/Images/Home/Party2.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,19 +9,19 @@
 
  .form-Content
  {
-    max-width: 480px; 
-    border-radius: 15px; 
+    max-width: 480px;
+    border-radius: 15px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     padding: 30px  30px;
     background-color: rgba(255, 255, 255, 0.814);
  }
- 
- 
+
+
  button
  {
-    color: white; 
+    color: white;
     font-weight: bold;
-    border-radius:6px; 
+    border-radius:6px;
     transition: all 0.3s ease-in-out;
     border: none;
     width:370px;
@@ -29,7 +29,7 @@
  }
  .red-icon {
     color: red !important;
-    
+
   }
 
   input{

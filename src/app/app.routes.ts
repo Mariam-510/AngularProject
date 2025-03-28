@@ -34,8 +34,7 @@ export const routes: Routes = [
   { path: 'sports/:id', component: SDetailsPageComponent, title: "Match Details" },
   {
     path: 'entertainment', component: EHomePageComponent, title: "Entertainment", children: [
-      { path: '', redirectTo: "all", pathMatch: 'full' },
-      { path: "all", component: AllComponent },
+      { path: "", component: AllComponent },
       { path: "concerts", component: ConcertsComponent },
       { path: "theater", component: TheaterComponent },
       { path: "dance", component: DanceComponent },
