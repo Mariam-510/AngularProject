@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
+import { RouterModule } from '@angular/router';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
 
@@ -19,7 +20,7 @@ export interface event {
 
 @Component({
   selector: 'app-edetails',
-  imports: [CommonModule, LeafletMapComponent],
+  imports: [CommonModule, LeafletMapComponent, RouterModule],
   templateUrl: './edetails.component.html',
   styleUrl: './edetails.component.css'
 })

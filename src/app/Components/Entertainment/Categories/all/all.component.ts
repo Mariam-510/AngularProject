@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ShowComponent } from "../show/show.component";
+import { ShowComponent } from '../show/show.component';
 
 @Component({
   selector: 'app-all',

@@ -34,14 +34,14 @@
             <i class="bi ms-2" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
           </button>
 
-          <a routerLink="/details/5"
+          <a routerLink="/shows/5"
             class="btn btn-light text-danger d-flex align-items-center w-50 justify-content-center fs-6">
             <i class="bi bi-info-circle me-2"></i> More Info
           </a>
 
         </div>
 
-        <a class="btn btn-danger w-100 mt-2 py-2">
+        <a routerLink="/bookingEvent" class="btn btn-danger w-100 mt-2 py-2">
           <i class="bi bi-ticket me-2"></i> BOOK TICKETS
         </a>
       </div>

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 declare var bootstrap: any; // Required for Bootstrap modal handling
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 
 interface Team {
   id: number;
@@ -14,32 +14,32 @@ interface Team {
 }
 @Component({
   selector: 'app-sdetails-page',
-  imports: [CommonModule,LeafletMapComponent,RouterLink],
+  imports: [CommonModule, LeafletMapComponent, RouterLink, RouterModule],
   templateUrl: './sdetails-page.component.html',
   styleUrl: './sdetails-page.component.css'
 })
-export class SDetailsPageComponent implements AfterViewInit,OnInit {
+export class SDetailsPageComponent implements AfterViewInit, OnInit {
   Math = Math;
   item =
-  {
-    image: 'img/1.jpg',
-    location: 'Ismailia Stadium, Ismailia',
-    fullLocation: 'Ismailia Stadium, Ismailia',
-    category: 'Matches',
-    Group:'A',
-    
-    title: 'Championship League',
-    date: 'Sunday, March 23, 2025',
-    Kickoff: '7:00 PM',
-    GatesOpen: '06:00 PM',
-    price: 500,
+    {
+      image: 'img/1.jpg',
+      location: 'Ismailia Stadium, Ismailia',
+      fullLocation: 'Ismailia Stadium, Ismailia',
+      category: 'Matches',
+      Group: 'A',
 
-    description: "Football isn’t just a sport—it’s an emotion that brings people together. The roar of the crowd, the passion of the players, and the thrill of every goal make live matches an unforgettable experience. Whether you're a die-hard supporter or a casual fan, witnessing this high-stakes clash in person will be an experience like no other.This game promises non-stop action as two of Egypt's top clubs battle it out for dominance. The energy in the stadium, the tactical duels, and the possibility of game-changing moments will keep fans on the edge of their seats. Don’t miss your chance to be part of this epic showdown!",
-    isFavorite: false,
-    word: "high",
-   
-  }
-  
+      title: 'Championship League',
+      date: 'Sunday, March 23, 2025',
+      Kickoff: '7:00 PM',
+      GatesOpen: '06:00 PM',
+      price: 500,
+
+      description: "Football isn’t just a sport—it’s an emotion that brings people together. The roar of the crowd, the passion of the players, and the thrill of every goal make live matches an unforgettable experience. Whether you're a die-hard supporter or a casual fan, witnessing this high-stakes clash in person will be an experience like no other.This game promises non-stop action as two of Egypt's top clubs battle it out for dominance. The energy in the stadium, the tactical duels, and the possibility of game-changing moments will keep fans on the edge of their seats. Don’t miss your chance to be part of this epic showdown!",
+      isFavorite: false,
+      word: "high",
+
+    }
+
   toggleFavorite(event: any) {
     event.isFavorite = !event.isFavorite;
   }
@@ -74,7 +74,7 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
   private initialCardTop = 0;
   private stickyThreshold = 0;
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef,private route: ActivatedRoute) { }
+  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute) { }
 
   ngAfterViewInit() {
     this.calculateInitialPosition();
@@ -184,12 +184,12 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
   }
 
   // -----------------------------------------------------------------------------------------------------
- 
+
   //Matches
   matches = [
 
     {
-      id:1,
+      id: 1,
       image: 'img/EPL3.jpg',
       venue: 'Cairo International Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
@@ -205,7 +205,7 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
       price: 300, // Add price
     },
     {
-      id:2,
+      id: 2,
       image: 'img/EPL4.jpg',
       venue: 'Ismailia Stadium, Ismailia',
       date: 'Sun 23 Mar 2025',
@@ -220,9 +220,9 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
       isFavorite: false,
       price: 250, // Add price
     },
-   
+
     {
-      id:3,
+      id: 3,
       image: 'img/EPL4.jpg',
       venue: 'Alexandria Stadium, Alexandria',
       date: 'Tue 25 Mar 2025',
@@ -232,14 +232,14 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
       group: 'Group One (Stage)',
       team1: 'Smouha SC',
       team2: 'Al Ittihad Alexandria',
-    
+
       team1Logo: 'img/Smouha.png',
       team2Logo: 'img/AlIttihad.png',
       isFavorite: false,
       price: 500, // Add price
     },
     {
-      id:4,
+      id: 4,
       image: 'img/EPL4.jpg',
       venue: 'Suez Canal Stadium, Ismailia',
       date: 'Sat 22 Mar 2025',
@@ -255,7 +255,7 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
       price: 100, // Add price
     },
     {
-      id:5,
+      id: 5,
       image: 'img/EPL3.jpg',
       venue: 'Cairo International Stadium',
       date: 'Mon 24 Mar 2025',
@@ -269,7 +269,7 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
       team2Logo: 'img/ismaily.png',
       isFavorite: false,
       price: 290, // Add price
-      
+
     }
   ];
 
