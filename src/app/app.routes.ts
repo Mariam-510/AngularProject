@@ -21,8 +21,8 @@ import { UserProfileComponent } from './Components/ProfilePages/user-profile/use
 import { LoginComponent } from './Components/Authantication/login/login.component';
 import { RegisterComponent } from './Components/Authantication/register/register.component';
 import { AllComponent } from './Components/Entertainment/Categories/all/all.component';
-import { ReviewsComponent } from './Components/reviews/reviews.component';
-import { FavouriteComponent } from './Components/favourite/favourite.component';
+import { ReviewsComponent } from './Components/ProfilePages/reviews/reviews.component';
+import { FavouriteComponent } from './Components/ProfilePages/favourite/favourite.component';
 import { AboutComponent } from './Components/about/about.component';
 import { BookingEventComponent } from './Components/Book/booking-event/booking-event.component';
 import { BookingMatchComponent } from './Components/Book/booking-match/booking-match.component';
