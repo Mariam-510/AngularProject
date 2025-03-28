@@ -1,377 +1,347 @@
-<div
-  class="booking-wrapper"
-  [class.football-booking]="isFootball"
-  [class.event-booking]="!isFootball"
->
-  <div class="container mt-4">
-    <div class="card p-4 shadow-lg">
-      <h4 class="text-center mb-4">
-        <i class="bi bi-ticket-perforated fs-3 me-2"></i>
+<div class="checkout-wrapper">
+  <div class="checkout-container">
+    <div class="checkout-header">
+      <h1 class="checkout-title">
+        🎫
         {{ isFootball ? "Purchase Match Tickets" : "Purchase Event Tickets" }}
-      </h4>
+      </h1>
+    </div>
 
-      <!-- Football Content -->
-      <ng-container *ngIf="isFootball">
-        <div class="d-flex justify-content-center align-items-center mb-5">
-          <div class="team-card text-center p-3">
-            <div class="logo-container mb-2">
-              <img [src]="teams.homeTeam.logo" class="team-logo" />
+    <div class="checkout-grid">
+      <!-- Left Column -->
+      <div class="checkout-column">
+        <!-- Event/FB Details Card -->
+        <div class="checkout-card event-card">
+          @if (isFootball) {
+          <ng-container>
+            <div class="teams-display">
+              <div class="team home-team">
+                <img [src]="teams.homeTeam.logo" class="team-logo" />
+                <div class="team-name">{{ teams.homeTeam.name }}</div>
+              </div>
+              <div class="vs-circle">VS</div>
+              <div class="team away-team">
+                <img [src]="teams.awayTeam.logo" class="team-logo" />
+                <div class="team-name">{{ teams.awayTeam.name }}</div>
+              </div>
             </div>
-            <p class="team-name mb-0 fw-bold">{{ teams.homeTeam.name }}</p>
-          </div>
 
-          <div class="vs-badge mx-4">VS</div>
-
-          <div class="team-card text-center p-3">
-            <div class="logo-container mb-2">
-              <img [src]="teams.awayTeam.logo" class="team-logo" />
-            </div>
-            <p class="team-name mb-0 fw-bold">{{ teams.awayTeam.name }}</p>
-          </div>
-        </div>
-
-        <div class="match-details text-center mb-5">
-          <div class="stadium-card p-3 mx-auto">
-            <img
-              [src]="matchDetails.stadium.image"
-              class="stadium-image mb-3"
-            />
-            <h5 class="stadium-name">
-              <img src="Images/stadiumLogo.png" width="30" class="me-2 mb-2" />
+            <div class="stadium-info">
+              <img src="Images/stadiumLogo.png" width="30" class="me-2 mb-1" />
               {{ matchDetails.stadium.name }}
-            </h5>
-            <div class="detail-grid">
-              <div class="detail-item">
-                <i class="bi bi-geo-alt"></i>
-                <span> {{ matchDetails.stadium.location }}</span>
-              </div>
-              <div class="detail-item">
-                <i class="bi bi-calendar2-event"></i>
-                <span> {{ matchDetails.date | date : "EEE d MMM" }}</span>
-              </div>
-              <div class="detail-item">
-                <i class="bi bi-clock"></i>
-                <span> {{ matchDetails.time }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-
-      <!-- Event Content -->
-      <ng-container *ngIf="!isFootball">
-        <div class="event-booking-wrapper">
-          <div class="event-header mb-5">
-            <div class="header-content">
-              <div class="poster-container">
-                <img
-                  [src]="eventDetails.image"
-                  alt="Event poster"
-                  class="event-poster"
-                />
-                <!-- <div class="event-type-badge">{{ eventType | titlecase }}</div> -->
-              </div>
-
-              <div class="header-details">
-                <h1 class="event-title">{{ eventDetails.title }}</h1>
-                <div class="venue-info">
-                  <div class="venue-item">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    <div>
-                      <h3>{{ eventDetails.venue.name }}</h3>
-                      <p>{{ eventDetails.venue.location }}</p>
-                    </div>
-                  </div>
-                  <div class="date-time">
-                    <div class="date-item">
-                      <i class="bi bi-calendar2-week"></i>
-                      <span>{{
-                        eventDetails.date | date : "EEE d MMM y"
-                      }}</span>
-                    </div>
-                    <div class="time-item">
-                      <i class="bi bi-clock"></i>
-                      <span>{{ eventDetails.time }}</span>
-                    </div>
-                  </div>
+              <div class="detail-grid mt-3">
+                <div class="detail-item">
+                  <i class="bi bi-geo-alt"></i>
+                  {{ matchDetails.stadium.location }}
+                </div>
+                <div class="detail-item">
+                  <i class="bi bi-calendar2-event"></i>
+                  {{ matchDetails.date | date : "EEE d MMM" }}
+                </div>
+                <div class="detail-item">
+                  <i class="bi bi-clock"></i> {{ matchDetails.time }}
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="venue-preview mb-5">
-            <!-- <h2 class="section-title">
-              <i class="bi bi-building"></i>
-              Venue Preview
-            </h2> -->
-            <img
-              [src]="eventDetails.venue.image"
-              alt="Venue preview"
-              class="venue-image"
-            />
-          </div>
-        </div>
-      </ng-container>
-
-      <!-- Ticket Selector -->
-      <div class="ticket-selector mb-4">
-        <h5 class="section-title mb-3">
-          <i class="bi bi-ticket-detailed me-2"></i>Select Tickets
-          <span class="badge bg-secondary ms-2">Max 4 tickets</span>
-        </h5>
-
-        <!-- Football Tickets -->
-        <div class="ticket-categories" *ngIf="isFootball">
-          <div class="ticket-card vip">
-            <div class="ticket-info">
-              <h6 class="ticket-category">VIP Experience</h6>
-              <p class="ticket-price mb-0">EGP {{ vipPrice }}</p>
-              <small class="text-white-50"
-                >Premium seats with VIP facilities</small
-              >
+          </ng-container>
+          } @else {
+          <ng-container>
+            <div class="event-header">
+              <img [src]="eventDetails.image" class="poster-image" />
+              <h1 class="event-title">{{ eventDetails.title }}</h1>
+              <div class="venue-info">
+                <i class="bi bi-geo-alt-fill"></i>
+                {{ eventDetails.venue.name }} •
+                {{ eventDetails.venue.location }}
+              </div>
+              <div class="date-time mt-3">
+                <div class="date-item">
+                  <i class="bi bi-calendar2-week"></i>
+                  {{ eventDetails.date | date : "EEE d MMM y" }}
+                </div>
+                <div class="time-item">
+                  <i class="bi bi-clock"></i> {{ eventDetails.time }}
+                </div>
+              </div>
             </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusVip()"
-                [disabled]="vipCounter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ vipCounter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusVip()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div class="ticket-card category-1">
-            <div class="ticket-info">
-              <h6 class="ticket-category">CAT 1</h6>
-              <p class="ticket-price mb-0">EGP {{ cat1Price }}</p>
-              <small class="text-white-50">Premium sideline seats</small>
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusCat1()"
-                [disabled]="cat1Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ cat1Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusCat1()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div class="ticket-card category-2">
-            <div class="ticket-info">
-              <h6 class="ticket-category">CAT 2</h6>
-              <p class="ticket-price mb-0">EGP {{ cat2Price }}</p>
-              <small class="text-white-50">Mid-field seats</small>
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusCat2()"
-                [disabled]="cat2Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ cat2Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusCat2()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div class="ticket-card category-3">
-            <div class="ticket-info">
-              <h6 class="ticket-category">CAT 3</h6>
-              <p class="ticket-price mb-0">EGP {{ cat3Price }}</p>
-              <small class="text-white-50">Standard seating</small>
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusCat3()"
-                [disabled]="cat3Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ cat3Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusCat3()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
+          </ng-container>
+          }
         </div>
 
-        <!-- Event Tickets -->
-        <div class="ticket-categories" *ngIf="!isFootball">
-          <div class="ticket-card level-1">
-            <div class="ticket-info">
-              <h6 class="ticket-category">Level 1</h6>
-              <p class="ticket-price mb-0">EGP {{ level1Price }}</p>
-              <small class="text-white-50"
-                >Front Orchestra / Closest to Stage</small
-              >
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusLevel1()"
-                [disabled]="level1Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ level1Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusLevel1()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div class="ticket-card level-2">
-            <div class="ticket-info">
-              <h6 class="ticket-category">Level 2</h6>
-              <p class="ticket-price mb-0">EGP {{ level2Price }}</p>
-              <small class="text-white-50">Orchestra / Good view</small>
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusLevel2()"
-                [disabled]="level2Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ level2Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusLevel2()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div class="ticket-card level-3">
-            <div class="ticket-info">
-              <h6 class="ticket-category">Level 3</h6>
-              <p class="ticket-price mb-0">EGP {{ level3Price }}</p>
-              <small class="text-white-50">Mid-level seating</small>
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusLevel3()"
-                [disabled]="level3Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ level3Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusLevel3()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div class="ticket-card level-4">
-            <div class="ticket-info">
-              <h6 class="ticket-category">Level 4</h6>
-              <p class="ticket-price mb-0">EGP {{ level4Price }}</p>
-              <small class="text-white-50">Balcony / Upper view</small>
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusLevel4()"
-                [disabled]="level4Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ level4Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusLevel4()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div class="ticket-card level-5">
-            <div class="ticket-info">
-              <h6 class="ticket-category">Level 5</h6>
-              <p class="ticket-price mb-0">EGP {{ level5Price }}</p>
-              <small class="text-white-50">Top balcony / Furthest</small>
-            </div>
-            <div class="ticket-controls">
-              <button
-                class="btn-minus"
-                (click)="minusLevel5()"
-                [disabled]="level5Counter() === 0"
-              >
-                -
-              </button>
-              <span class="mx-3">{{ level5Counter() }}</span>
-              <button
-                class="btn-plus"
-                (click)="plusLevel5()"
-                [disabled]="isTicketLimitReached()"
-              >
-                +
-              </button>
-            </div>
-          </div>
+        <!-- Venue Preview Card -->
+        <div class="checkout-card">
+          <h2 class="card-title mb-3">🏟️Venue Seating Map</h2>
+          <img
+            [src]="
+              isFootball ? matchDetails.stadium.image : eventDetails.venue.image
+            "
+            class="venue-image"
+          />
         </div>
       </div>
 
-      <!-- Checkout Section -->
-      <div class="total-section text-center mt-5">
-        <div class="total-card mx-auto p-3">
-          <h5 class="total-label">Total Amount</h5>
-          <h2 class="total-price fw-bold">EGP {{ totalPrice() }}</h2>
-          <button
-            class="btn btn-checkout"
-            (click)="proceedToCheckout()"
-            [disabled]="totalTickets() === 0"
-          >
-            <i class="bi bi-credit-card-2-front me-2"></i>
-            Proceed to Secure Checkout
-          </button>
-          <p class="text-muted mt-2 mb-0">
-            <i class="bi bi-shield-lock me-1"></i>100% Secure Payment
-          </p>
+      <!-- Right Column -->
+      <div class="checkout-column">
+        <!-- Ticket Selector Card -->
+        <div class="checkout-card">
+          <h2 class="card-title mb-4">
+            🎟️Select Tickets
+            <span class="badge bg-secondary">Max 4 tickets!</span>
+          </h2>
+
+          <div class="ticket-categories">
+            <!-- Football Tickets -->
+            @if (isFootball) {
+            <ng-container>
+              <div class="ticket-card vip">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">VIP Experience</h6>
+                  <p class="ticket-price mb-0">EGP {{ vipPrice }}</p>
+                  <small>Premium seats with VIP facilities</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusVip()"
+                    [disabled]="vipCounter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-2">{{ vipCounter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusVip()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="ticket-card category-1">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">CAT 1</h6>
+                  <p class="ticket-price mb-0">EGP {{ cat1Price }}</p>
+                  <small class="text-white-50">Premium sideline seats</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusCat1()"
+                    [disabled]="cat1Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-3">{{ cat1Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusCat1()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="ticket-card category-2">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">CAT 2</h6>
+                  <p class="ticket-price mb-0">EGP {{ cat2Price }}</p>
+                  <small class="text-white-50">Mid-field seats</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusCat2()"
+                    [disabled]="cat2Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-3">{{ cat2Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusCat2()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="ticket-card category-3">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">CAT 3</h6>
+                  <p class="ticket-price mb-0">EGP {{ cat3Price }}</p>
+                  <small class="text-white-50">Standard seating</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusCat3()"
+                    [disabled]="cat3Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-3">{{ cat3Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusCat3()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+            } @else {
+            <!-- Event Tickets -->
+            <ng-container>
+              <div class="ticket-card level-1">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">Level 1</h6>
+                  <p class="ticket-price mb-0">EGP {{ level1Price }}</p>
+                  <small>Closest to Stage</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusLevel1()"
+                    [disabled]="level1Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-2">{{ level1Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusLevel1()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="ticket-card level-2">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">Level 2</h6>
+                  <p class="ticket-price mb-0">EGP {{ level2Price }}</p>
+                  <small class="text-white-50">Good view</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusLevel2()"
+                    [disabled]="level2Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-3">{{ level2Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusLevel2()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="ticket-card level-3">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">Level 3</h6>
+                  <p class="ticket-price mb-0">EGP {{ level3Price }}</p>
+                  <small class="text-white-50">Mid-level seating</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusLevel3()"
+                    [disabled]="level3Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-3">{{ level3Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusLevel3()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="ticket-card level-4">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">Level 4</h6>
+                  <p class="ticket-price mb-0">EGP {{ level4Price }}</p>
+                  <small class="text-white-50">Balcony / Upper view</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusLevel4()"
+                    [disabled]="level4Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-3">{{ level4Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusLevel4()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="ticket-card level-5">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">Level 5</h6>
+                  <p class="ticket-price mb-0">EGP {{ level5Price }}</p>
+                  <small class="text-white-50">Top balcony / Furthest</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusLevel5()"
+                    [disabled]="level5Counter() === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-3">{{ level5Counter() }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusLevel5()"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+            }
+          </div>
+        </div>
+
+        <!-- Total Card -->
+        <div class="checkout-card total-card">
+          <h2 class="card-title mb-4">💳 Payment Summary</h2>
+          <div class="total-section">
+            <h3 class="total-label">Total Amount</h3>
+            <h2 class="total-price">EGP {{ totalPrice() }}</h2>
+            <button
+              class="btn btn-checkout"
+              (click)="proceedToCheckout()"
+              [disabled]="totalTickets() === 0"
+            >
+              Proceed to Secure Checkout
+            </button>
+            <p class="text-muted mt-3 mb-0">
+              <i class="bi bi-shield-lock me-1"></i>100% Secure Payment
+            </p>
+          </div>
         </div>
       </div>
     </div>

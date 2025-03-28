@@ -1,65 +1,108 @@
 <div class="booking-history-wrapper">
   <div class="booking-container">
-    <!-- Page Header Row -->
     <div class="page-header">
-      <!-- Title on the Left -->
       <div class="header-title">
         <i class="bi bi-ticket-perforated"></i>
         <span class="page-heading">My Event Bookings</span>
       </div>
 
-      <!-- Filter Buttons on the Right -->
+      <!-- Filter Dropdowns -->
       <div class="filter-buttons">
-        <!-- 'All' -->
-        <button
-          class="filter-button"
-          [ngClass]="{ active: activeFilter === 'All' }"
-          (click)="filterBookings('All')"
-        >
-          All
-        </button>
+        <!-- Event Type Dropdown -->
+        <div class="filter-group" [class.active]="eventTypeDropdownOpen">
+          <button class="dropdown-toggle" (click)="toggleEventTypeDropdown()">
+            <i class="bi bi-filter"></i>
+            <span class="selected-filter">
+              {{ activeEventType === "All" ? "All Events" : activeEventType }}
+            </span>
+            <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="filter-dropdown">
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeEventType === 'All' }"
+              (click)="filterByEventType('All')"
+            >
+              <i class="bi bi-star"></i>
+              <span class="status-indicator-all">All Events</span>
+            </button>
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeEventType === 'Football' }"
+              (click)="filterByEventType('Football')"
+            >
+              <i class="fa fa-soccer-ball-o"></i>
+              <span class="status-indicator football">Football</span>
+            </button>
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeEventType === 'Events' }"
+              (click)="filterByEventType('Events')"
+            >
+              <i class="bi bi-music-note"></i>
+              <span class="status-indicator events">Events</span>
+            </button>
+          </div>
+        </div>
 
-        <!-- 'Upcoming' -->
-        <button
-          class="filter-button"
-          [ngClass]="{ active: activeFilter === 'Upcoming' }"
-          (click)="filterBookings('Upcoming')"
-        >
-          Upcoming
-        </button>
-
-        <!-- 'Completed' -->
-        <button
-          class="filter-button"
-          [ngClass]="{ active: activeFilter === 'Completed' }"
-          (click)="filterBookings('Completed')"
-        >
-          Completed
-        </button>
-
-        <!-- 'Pending' (if you want to rename 'Confirmed') -->
-        <button
-          class="filter-button"
-          [ngClass]="{ active: activeFilter === 'Confirmed' }"
-          (click)="filterBookings('Confirmed')"
-        >
-          Pending
-        </button>
-
-        <!-- 'Cancelled' -->
-        <button
-          class="filter-button"
-          [ngClass]="{ active: activeFilter === 'Cancelled' }"
-          (click)="filterBookings('Cancelled')"
-        >
-          Cancelled
-        </button>
+        <!-- Status Dropdown -->
+        <div class="filter-group" [class.active]="statusDropdownOpen">
+          <button class="dropdown-toggle" (click)="toggleStatusDropdown()">
+            <i class="bi bi-funnel"></i>
+            <span class="selected-filter">
+              {{ activeFilter === "All" ? "All Statuses" : activeFilter }}
+            </span>
+            <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="filter-dropdown">
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeFilter === 'All' }"
+              (click)="filterBookings('All')"
+            >
+              <span class="status-indicator all"></span>
+              All
+            </button>
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeFilter === 'Confirmed' }"
+              (click)="filterBookings('Confirmed')"
+            >
+              <span class="status-indicator confirmed"></span>
+              Confirmed
+            </button>
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeFilter === 'Upcoming' }"
+              (click)="filterBookings('Upcoming')"
+            >
+              <span class="status-indicator upcoming"></span>
+              Upcoming
+            </button>
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeFilter === 'Completed' }"
+              (click)="filterBookings('Completed')"
+            >
+              <span class="status-indicator completed"></span>
+              Completed
+            </button>
+            <button
+              class="filter-button"
+              [ngClass]="{ active: activeFilter === 'Cancelled' }"
+              (click)="filterBookings('Cancelled')"
+            >
+              <span class="status-indicator cancelled"></span>
+              Cancelled
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Bookings Grid -->
     <div class="bookings-grid">
-      @for (booking of filteredBookings; track $index) {
+      @for (booking of paginatedBookings; track $index) {
       <!-- Booking Card -->
       <div class="booking-card" [ngClass]="booking.status">
         <!-- Event Header -->
@@ -76,10 +119,7 @@
         <div class="event-main">
           <!-- Football Match Layout -->
           @switch (booking.eventType) { @case ('Football Match') {
-          <div
-            class="match-details"
-            *ngIf="booking.eventType === 'Football Match'"
-          >
+          <div class="match-details">
             <div class="team home-team">
               <img [src]="booking.homeTeam?.logo" class="team-logo" />
               <div class="team-name">{{ booking.homeTeam?.name }}</div>
@@ -105,7 +145,6 @@
           </div>
           } @case ('Concert') {
           <!-- Concert Layout -->
-          @if (booking.eventType === 'Concert') {
           <div class="concert-details">
             <div class="artist-info">
               <img [src]="booking.artist?.image" class="artist-image" />
@@ -116,7 +155,7 @@
               {{ booking.tourName }}
             </div>
           </div>
-          } } }
+          } }
 
           <!-- Common Event Details -->
           <div class="event-meta">
@@ -169,4 +208,37 @@
       }
     </div>
   </div>
+
+  <!-- Pagination -->
+  @if (filteredBookings.length > itemsPerPage) {
+  <nav aria-label="Match pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage - 1)"
+          tabindex="0"
+        >
+          Previous
+        </a>
+      </li>
+      @for (page of pages; track page) {
+      <li class="page-item" [class.active]="page === currentPage">
+        <a class="page-link" (click)="onPageChange(page)" tabindex="0">
+          {{ page }}
+        </a>
+      </li>
+      }
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage + 1)"
+          tabindex="0"
+        >
+          Next
+        </a>
+      </li>
+    </ul>
+  </nav>
+  }
 </div>

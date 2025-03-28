@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 interface Booking {
   id: string;
-  eventType: 'Football Match' | 'Concert' | 'Comedy Show';
+  eventType: 'Football Match' | 'Concert' | 'Theater';
   status: 'Confirmed' | 'Cancelled' | 'Completed' | 'Upcoming';
   date: Date;
   venue: {
@@ -18,7 +18,6 @@ interface Booking {
     seatNumbers?: string[];
   }[];
   totalPrice: number;
-  // Football-specific
   homeTeam?: {
     name: string;
     logo: string;
@@ -29,7 +28,6 @@ interface Booking {
     logo: string;
     score?: number;
   };
-  // Concert-specific
   artist?: {
     name: string;
     image: string;
@@ -42,10 +40,11 @@ interface Booking {
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './booking-history.component.html',
-  styleUrl: './booking-history.component.css',
+  styleUrls: ['./booking-history.component.css'],
 })
 export class BookingHistoryComponent {
-  bookings: Booking[] = [
+  /** Bookings Data */
+  public bookings: Booking[] = [
     // Football Match
     {
       id: 'FBL-2305',
@@ -108,6 +107,7 @@ export class BookingHistoryComponent {
         score: 1,
       },
     },
+    // Cancelled Match
     {
       id: 'FBL-2305',
       eventType: 'Football Match',
@@ -128,6 +128,7 @@ export class BookingHistoryComponent {
         logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/180px-Tottenham_Hotspur.svg.png',
       },
     },
+    // Upcoming Concert
     {
       id: 'CON-4452',
       eventType: 'Concert',
@@ -145,6 +146,7 @@ export class BookingHistoryComponent {
       },
       tourName: 'Hamo Bika Concert',
     },
+    // Cancelled Concert
     {
       id: 'CON-4452',
       eventType: 'Concert',
@@ -162,6 +164,7 @@ export class BookingHistoryComponent {
       },
       tourName: 'Filo Concert',
     },
+    // Confirmed Match
     {
       id: 'FBL-2305',
       eventType: 'Football Match',
@@ -184,25 +187,129 @@ export class BookingHistoryComponent {
     },
   ];
 
-  filteredBookings: Booking[] = this.bookings;
-  activeFilter: string = 'All';
+  /** Filtered Bookings */
+  public filteredBookings: Booking[] = this.bookings;
 
-  filterBookings(status: string) {
+  /** Paginated Bookings */
+  public paginatedBookings: Booking[] = [];
+
+  /** Active Filters */
+  public activeFilter: string = 'All';
+  public activeEventType: 'All' | 'Football' | 'Events' = 'All';
+
+  /** Dropdown States */
+  public eventTypeDropdownOpen = false;
+  public statusDropdownOpen = false;
+
+  /** Pagination Properties */
+  public currentPage: number = 1;
+  public itemsPerPage: number = 3;
+  public totalPages: number = 1;
+  public pages: number[] = [];
+
+  constructor() {
+    this.applyFilters(); // Initialize with all bookings
+    this.updatePagination(); // Set up initial pagination
+  }
+
+  // ---------------------------
+  //    FILTER METHODS
+  // ---------------------------
+
+  /** Applies both filters (status + event type) */
+  private applyFilters(): void {
+    this.filteredBookings = this.bookings.filter((booking) => {
+      // Status filter
+      const statusMatch =
+        this.activeFilter === 'All' || booking.status === this.activeFilter;
+
+      // Event type filter
+      const typeMatch =
+        this.activeEventType === 'All' ||
+        (this.activeEventType === 'Football' &&
+          booking.eventType === 'Football Match') ||
+        (this.activeEventType === 'Events' &&
+          (booking.eventType === 'Concert' || booking.eventType === 'Theater'));
+
+      return statusMatch && typeMatch;
+    });
+
+    // Reset to first page when filters change
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  /** Filter by Event Type */
+  public filterByEventType(type: 'All' | 'Football' | 'Events'): void {
+    this.activeEventType = type;
+    this.applyFilters();
+    this.eventTypeDropdownOpen = false;
+  }
+
+  /** Filter by Status */
+  public filterBookings(status: string): void {
     this.activeFilter = status;
-    if (status === 'All') {
-      this.filteredBookings = this.bookings;
-    } else {
-      this.filteredBookings = this.bookings.filter(
-        (booking) => booking.status === status
-      );
+    this.applyFilters();
+    this.statusDropdownOpen = false;
+  }
+
+  // ---------------------------
+  //    PAGINATION METHODS
+  // ---------------------------
+
+  /** Updates pagination data */
+  private updatePagination(): void {
+    // Calculate total pages
+    this.totalPages = Math.ceil(this.filteredBookings.length / this.itemsPerPage);
+    
+    // Generate page numbers array
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    
+    // Update paginated bookings
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedBookings = this.filteredBookings.slice(startIndex, endIndex);
+  }
+
+  /** Handles page change */
+  public onPageChange(page: number): void {
+    if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
+      this.currentPage = page;
+      this.updatePagination();
     }
   }
 
-  viewTickets(booking: Booking) {
+  // ---------------------------
+  //    ACTION METHODS
+  // ---------------------------
+
+  /** View Tickets */
+  public viewTickets(booking: Booking): void {
     console.log('Viewing tickets for:', booking.id);
   }
 
-  cancelBooking(booking: Booking) {
+  /** Cancel Booking */
+  public cancelBooking(booking: Booking): void {
     console.log('Canceling booking:', booking.id);
+  }
+
+  // ---------------------------
+  //    DROPDOWN HANDLERS
+  // ---------------------------
+
+  /** Toggles Event Type dropdown */
+  public toggleEventTypeDropdown(): void {
+    this.eventTypeDropdownOpen = !this.eventTypeDropdownOpen;
+    if (this.statusDropdownOpen) {
+      this.statusDropdownOpen = false;
+    }
+  }
+
+  /** Toggles Status dropdown */
+  public toggleStatusDropdown(): void {
+    this.statusDropdownOpen = !this.statusDropdownOpen;
+    if (this.eventTypeDropdownOpen) {
+      this.eventTypeDropdownOpen = false;
+    }
   }
 }

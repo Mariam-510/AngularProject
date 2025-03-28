@@ -1,84 +1,65 @@
-/* booking-history.component.css */
-
-/* 1. Soft Pink Background for the Main Wrapper */
 .booking-history-wrapper {
-  /* background: #fff5f5; */
   min-height: 100vh;
   padding: 2rem 0;
   font-family: "Inter", sans-serif;
+  background: #fff;
 }
 
-/* Container that holds everything inside */
 .booking-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* 2. Page Header (Title + Filter Buttons in One Row) */
 .page-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  /* Title on left, filters on right */
-  background: #ffffff;
-  /* White bar behind the header row */
-  border-radius: 8px;
-  padding: 1rem 1.5rem;
+  background: #fff;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  gap: 1.5rem;
+  border-radius: 12px;
+  padding: 1.5rem;
 }
 
-/* Title on the Left */
 .header-title {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-/* The text "Booking Timeline" */
 .page-heading {
-  color: #dc2626;
+  color: #dc3545;
   font-weight: 700;
   font-size: 1.5rem;
   margin: 0;
 }
 
-/* 3. Filter Buttons Container (on the Right) */
 .filter-buttons {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
-/* Filter Button (Pill-Shaped) */
 .filter-button {
   background: #ffffff;
-  /* White background */
-  color: #dc2626;
-  /* Red text */
-  border: 1px solid #dc2626;
-  /* Red border */
+  color: #dc3545;
+  border: 1px solid #dc3545;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  /* Pill shape */
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
-.filter-button:hover {
-  background: #ffe5e7;
-  /* Slight pink hover effect */
-}
-
-/* Active State: Solid Red with White Text */
 .filter-button.active {
-  background: #dc2626;
+  background: #dc3545;
   color: #ffffff;
-  border-color: #dc2626;
+  border-color: #dc3545;
 }
 
-/* 4. Bookings Grid */
 .bookings-grid {
   display: grid;
   gap: 1.5rem;
@@ -86,7 +67,6 @@
   padding: 0 1rem;
 }
 
-/* 5. Booking Card: White, Rounded, Subtle Shadow */
 .booking-card {
   background: #ffffff;
   border-radius: 12px;
@@ -102,14 +82,12 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* 6. Event Header */
 .event-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: #dc2626;
-  /* Gray background for the header portion */
+  background: #dc3545;
   color: white;
 }
 
@@ -121,7 +99,6 @@
   font-weight: 500;
 }
 
-/* Booking Status color-coded backgrounds */
 .booking-status {
   padding: 0.4rem 1.2rem;
   border-radius: 20px;
@@ -158,7 +135,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Football Match Layout */
 .match-details {
   display: flex;
   justify-content: space-between;
@@ -170,7 +146,6 @@
   height: 200px;
 }
 
-/* Concert Layout */
 .concert-details {
   padding: 1.5rem !important;
   text-align: center;
@@ -189,7 +164,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1rem;
-  border: 3px solid #dc2626;
+  border: 3px solid #dc3545;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -208,7 +183,6 @@
   gap: 0.5rem;
 }
 
-/* 8. Common Event Details (Venue & Date) */
 .event-meta {
   padding: 1.5rem 1.5rem;
   display: grid;
@@ -248,7 +222,6 @@
   font-size: 0.9rem;
 }
 
-/* 9. Team Styles (Football) */
 .team {
   flex: 1;
   display: flex;
@@ -288,7 +261,7 @@
 .vs {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #dc2626;
+  color: #dc3545;
   line-height: 1;
 }
 
@@ -299,7 +272,6 @@
   line-height: 1;
 }
 
-/* 10. Ticket Summary */
 .ticket-summary {
   padding: 1.5rem;
   margin-top: auto;
@@ -335,7 +307,6 @@
   color: #64748b;
 }
 
-/* Ticket Actions (View & Cancel) */
 .ticket-actions {
   display: flex;
   gap: 1rem;
@@ -344,7 +315,7 @@
 }
 
 .view-tickets {
-  background: #dc2626;
+  background: #dc3545;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -353,7 +324,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease;
   flex-shrink: 0;
 }
 
@@ -374,11 +345,10 @@
 }
 
 .cancel-booking:hover {
-  border-color: #dc2626;
-  color: #dc2626;
+  border-color: #dc3545;
+  color: #dc3545;
 }
 
-/* 11. Booking Footer */
 .booking-footer {
   padding: 1rem 1.5rem;
   background: #f8fafc;
@@ -394,11 +364,10 @@
 
 .total-price {
   font-weight: 700;
-  color: #dc2626;
+  color: #dc3545;
   font-size: 1.1rem;
 }
 
-/* 12. Empty State */
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
@@ -407,7 +376,7 @@
 
 .empty-state i {
   font-size: 3rem;
-  color: #dc2626;
+  color: #dc3545;
   margin-bottom: 1rem;
 }
 
@@ -423,7 +392,7 @@
 }
 
 .browse-events {
-  background: #dc2626;
+  background: #dc3545;
   color: white;
   padding: 0.8rem 2rem;
   border: none;
@@ -437,10 +406,172 @@
   background: #b91c1c;
 }
 
-/* 13. Responsive Tweaks */
-@media (max-width: 768px) {
+.filter-group {
+  position: relative;
+  display: inline-block;
+}
 
-  /* Stack header elements vertically if there's not enough space */
+.filter-group.active .dropdown-toggle .bi-chevron-down {
+  transform: rotate(180deg);
+}
+
+.filter-group.active .dropdown-toggle {
+  background: #dc3545;
+  color: #fff;
+}
+
+.filter-group.active .filter-dropdown {
+  display: block;
+}
+
+.filter-group.active .dropdown-toggle {
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+}
+
+.dropdown-toggle {
+  background: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-toggle:hover {
+  background: #ffe5e7;
+}
+
+.dropdown-toggle .bi-chevron-down {
+  transition: transform 0.2s ease;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  min-width: 200px;
+  z-index: 100;
+  display: none;
+  transform-origin: top right;
+  animation: dropdownSlide 0.2s ease-out;
+}
+
+.filter-button {
+  width: 100%;
+  background: transparent;
+  color: #dc3545;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background: #cbd4dc75;
+}
+
+.filter-button.active {
+  background: #dc3545;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-indicator.upcoming {
+  background: #f59e0b;
+  margin-bottom: 0.1rem;
+}
+.status-indicator.completed {
+  background: #8b5cf6;
+  margin-bottom: 0.1rem;
+}
+.status-indicator.confirmed {
+  background: #10b981;
+  margin-bottom: 0.1rem;
+}
+.status-indicator.cancelled {
+  background: #991b1b;
+  margin-bottom: 0.1rem;
+}
+
+.status-indicator {
+  margin-bottom: 0.7rem;
+}
+
+.page-link:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.status-filter-group .bi-chevron-down {
+  display: none !important;
+}
+
+.page-link {
+  cursor: pointer;
+  color: #dc3545;
+  border: 1px solid #dee2e6;
+}
+
+.page-item.active .page-link {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.selected-filter {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+.filter-button.active::after {
+  font-family: "bootstrap-icons";
+  margin-left: auto;
+  color: #dc3545;
+  font-size: 0.9rem;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.status-indicator {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
   .page-header {
     flex-direction: column;
     align-items: flex-start;
@@ -475,6 +606,30 @@
   .cancel-booking {
     width: 100%;
     justify-content: center;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .filter-dropdown {
+    width: 100%;
+    right: auto;
+    left: 0;
+  }
+
+  .selected-filter {
+    max-width: 80px;
+  }
+
+  .filter-group.active .dropdown-toggle {
+    background: #dc3545;
+    color: white;
   }
 }
 

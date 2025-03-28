@@ -12,7 +12,7 @@ type EventType = 'football' | 'concert' | 'cinema' | 'theater';
 })
 export class BookingComponent {
 
-  @Input() eventType: EventType = 'concert';
+  @Input() eventType: EventType = 'football';
 
   // Football Data
   teams = {
@@ -36,10 +36,12 @@ export class BookingComponent {
     time: '09:30 PM'
   };
 
+  // image: 'https://africanmusiclibrary.org/_next/image?url=https%3A%2F%2Fd31btwpnsku5px.cloudfront.net%2Fbcd15d9541ae.jpg&w=3840&q=75',
+
   // Event Data
   eventDetails = {
     title: 'The Phantom of the Opera',
-    image: 'https://africanmusiclibrary.org/_next/image?url=https%3A%2F%2Fd31btwpnsku5px.cloudfront.net%2Fbcd15d9541ae.jpg&w=3840&q=75',
+    image: 'img/3.jpg',
     date: '2024-04-15T19:30:00',
     time: '07:30 PM',
     venue: {

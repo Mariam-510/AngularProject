@@ -50,52 +50,54 @@ interface BookingData {
 export class BookingDetailsComponent implements OnInit {
   @ViewChild('paypalButton', { static: true }) paypalElement!: ElementRef;
 
-  // bookingData: BookingData = {
-  //   eventType: 'football', // Change to 'concert'/'cinema'/'theater' for event version
-  //   homeTeam: {
-  //     name: 'Al Ahly FC',
-  //     logo: 'https://upload.wikimedia.org/wikipedia/ar/8/8c/Al_Ahly_SC_logo.png'
-  //   },
-  //   awayTeam: {
-  //     name: 'Enppi SC',
-  //     logo: 'https://upload.wikimedia.org/wikipedia/en/2/22/ENPPI_Club_Logo.png'
-  //   },
-  //   stadium: { name: 'Al Salam Stadium' },
-  //   date: new Date('2025-03-20'),
-  //   time: '21:30',
-  //   tickets: [
-  //     { category: 'VIP', quantity: 2, price: 1500 },
-  //     { category: 'CAT 1', quantity: 1, price: 800 }
-  //   ],
-  //   totalPrice: 3800,
-  //   buyer: {
-  //     name: 'John Doe',
-  //     email: 'john.doe@example.com',
-  //     phone: '+20 123 456 7890'
-  //   }
-  // };
-
   bookingData: BookingData = {
-    eventType: 'concert',
-    title: 'The Phantom of the Opera',
-    eventImage: 'https://africanmusiclibrary.org/_next/image?url=https%3A%2F%2Fd31btwpnsku5px.cloudfront.net%2Fbcd15d9541ae.jpg&w=3840&q=75',
-    venue: {
-    name: 'Cairo Opera House',
-    location: 'Zamalek, Cairo'
+    eventType: 'football', // Change to 'concert'/'cinema'/'theater' for event version
+    homeTeam: {
+      name: 'Al Ahly FC',
+      logo: 'https://upload.wikimedia.org/wikipedia/ar/8/8c/Al_Ahly_SC_logo.png'
     },
-    date: new Date('2024-04-15'),
-    time: '19:30',
+    awayTeam: {
+      name: 'Enppi SC',
+      logo: 'https://upload.wikimedia.org/wikipedia/en/2/22/ENPPI_Club_Logo.png'
+    },
+    stadium: { name: 'Al Salam Stadium' },
+    date: new Date('2025-03-20'),
+    time: '21:30',
     tickets: [
-    { category: 'Level 1', quantity: 2, price: 2000 },
-    { category: 'Level 3', quantity: 1, price: 1000 }
+      { category: 'VIP', quantity: 2, price: 1500 },
+      { category: 'CAT 1', quantity: 1, price: 800 }
     ],
-    totalPrice: 5000,
+    totalPrice: 3800,
     buyer: {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '+20 123 456 7890'
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+20 123 456 7890'
     }
-    };
+  };
+
+  // eventImage: 'https://africanmusiclibrary.org/_next/image?url=https%3A%2F%2Fd31btwpnsku5px.cloudfront.net%2Fbcd15d9541ae.jpg&w=3840&q=75',
+  
+  // bookingData: BookingData = {
+  //   eventType: 'concert',
+  //   title: 'The Phantom of the Opera',
+  //   eventImage: 'img/3.jpg',
+  //   venue: {
+  //   name: 'Cairo Opera House',
+  //   location: 'Zamalek, Cairo'
+  //   },
+  //   date: new Date('2024-04-15'),
+  //   time: '19:30',
+  //   tickets: [
+  //   { category: 'Level 1', quantity: 2, price: 2000 },
+  //   { category: 'Level 3', quantity: 1, price: 1000 }
+  //   ],
+  //   totalPrice: 5000,
+  //   buyer: {
+  //   name: 'John Doe',
+  //   email: 'john.doe@example.com',
+  //   phone: '+20 123 456 7890'
+  //   }
+  //   };
 
   ngOnInit() {
     this.loadPaypalScript().then(() => {

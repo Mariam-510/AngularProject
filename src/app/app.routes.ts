@@ -49,7 +49,7 @@ export const routes: Routes = [
   { path: 'about', component: BookingHistoryComponent, title: 'Booking history' },
 
   { path: 'book', component: BookingComponent, title: 'Book a match' },
-  { path: 'bookDetails', component: BookingDetailsComponent, title: 'Match booking details' },
+  { path: 'kkk', component: BookingDetailsComponent, title: 'Match booking details' },
   { path: 'bookingHistory', component: BookingHistoryComponent, title: 'BookingHistory' },
 
   { path: "**", component: NotfoundComponent }
