@@ -4,11 +4,7 @@
     <div class="logo">
       <a routerLink="/">ShowBooking</a>
     </div>
-    <button
-      class="hamburger"
-      [class.active]="menuActive"
-      (click)="toggleMenu()"
-    >
+    <button class="hamburger" [class.active]="menuActive" (click)="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
@@ -20,24 +16,18 @@
     <nav>
       <ul>
         <li>
-          <a routerLink="/shows" routerLinkActive="active"
-            ><i class="bi bi-music-note me-1"></i> Shows & Events</a
-          >
+          <a routerLink="/entertainment" routerLinkActive="active"><i class="bi bi-music-note me-1"></i> Shows &
+            Events</a>
         </li>
         <li>
-          <a routerLink="/matches" routerLinkActive="active"
-            ><i class="fa fa-soccer-ball-o me-1"></i> Football Matches</a
-          >
+          <a routerLink="/sports" routerLinkActive="active"><i class="fa fa-soccer-ball-o me-1"></i> Football
+            Matches</a>
         </li>
         <li>
-          <a routerLink="/about" routerLinkActive="active"
-            ><i class="fa fa-info-circle me-1"></i> About Us</a
-          >
+          <a routerLink="/about" routerLinkActive="active"><i class="fa fa-info-circle me-1"></i> About Us</a>
         </li>
         <li>
-          <a routerLink="/contact" routerLinkActive="active"
-            ><i class="fa fa-phone me-1"></i> Contact</a
-          >
+          <a routerLink="/contact" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Contact</a>
         </li>
       </ul>
     </nav>
@@ -55,12 +45,12 @@
       </div>
       <div class="user-dropdown">
         @if (userMenuActive) {
-        <button class="dropdown-item" (click)="login($event)">
+        <a routerLink="/login" class="dropdown-item" (click)="login($event)">
           <i class="fa fa-sign-in"></i> Login
-        </button>
-        <button class="dropdown-item" (click)="register($event)">
+        </a>
+        <a routerLink="/register" class="dropdown-item" (click)="register($event)">
           <i class="fa fa-user-plus"></i> Register
-        </button>
+        </a>
         }
       </div>
     </div>
