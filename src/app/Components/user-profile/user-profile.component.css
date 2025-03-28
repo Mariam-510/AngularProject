@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    background-color: #cccccc08;
+    justify-content: center;
+    overflow: hidden;
+}
+.Userimg
+{
+ 
+    border-radius: 50%;
+    
+}
+
+.Userimg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #cccccc76;
+    object-fit: cover;
+    margin-top: 40px;
+    margin-bottom:30px;
+}
+.image-container {
+    display: flex;
+   
+}
+.image-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.text-center {
+    margin-top: 80px;
+}
+
+.text-center button {
+    margin-top: 0;
+    height: 40px;
+    width: 100px;
+}
+
+.red-icon
+{
+    color: red !important;
+    font-size: 20px;
+}
+ .camera-icon {
+    position: absolute;
+    right: 930px;
+    top: 243px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+.camera-icon i {
+    font-size: 20px;
+ }
+ 
+ 
+ .form-container {
+    width: 60%;
+    height: 600px;
+    margin-left: 190px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 40px; 
+    padding-bottom: 270px; 
+    background-color: #fff;  
+    border-radius: 12px;  
+    box-shadow: 5px 4px 10px 4px rgba(0, 0, 0, 0.1); 
+    border: 2px solid rgba(249, 238, 238, 0.607);  
+    transition: all 0.3s ease-in-out;
+}
+
+h3 {
+    font-size: 28px;
+    color: red;
+  
+}
+
+.containerData
+{
+    margin-top: 99px;
+    margin-left: 30px;
+}
+#textcontner
+{
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(128, 128, 128, 0.73);
+}
+.input-field
+{
+    margin-left: 230px;
+    
+}
+
+
+input {
+    width: 70%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80px;;
+    margin-top: 20px;
+    margin-right: 100px;
+}
+
+
+.form-control {
+    width: 80%;   
+    max-width: 350px;  
+}
+
+.sidebar {
+    width: 200px;
+    background-color: rgb(205, 33, 33);
+    color: white;
+    padding: 20px 10px;
+    height: 100vh;
+    position: fixed;
+    margin-top: 80px;
+    left: 0;
+    top: 0;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar ul {
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar li {
+    margin: 20px 0;
+    text-align: left;
+}
+
+
+.sidebar i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+.sidebar a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px;
+    color: white;
+    transition: 0.3s;
+    position: relative;  
+}
+
+
+.sidebar a.active::after {
+    content: "";  
+    position: absolute;
+    right: 15px;  
+    top:10px;   
+    width: 5px;  
+    height: 30px; 
+    background-color: white;  
+    border-radius: 2px;
+}
