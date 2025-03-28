@@ -5,6 +5,7 @@
     will-change: transform;
     top: none !important;
     z-index: 1000;
+    
   }
   
   .fixed-event-card {
@@ -54,7 +55,10 @@
 
   
   
-  
+.tab-links {
+  width: 90%;
+}
+
   
   :root {
     --sticky-header-height: 0px; /* Default value */
@@ -132,22 +136,11 @@
     
    
     
-    .sticky {
-      position: fixed !important;
-      top: 0;
-      left: 0;
-      width: 56%;
-      background: white;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-    
-    * --------------------------------------------------------------------------------------------- */
     .tab-links {
-      width: 70% !important;
+      width: 100% !important;
       display: flex;
-      gap: 20px;
-      padding: 15px;
+      /* gap: 0px; */
+      /* padding: 15px; */
       border-bottom: 2px solid #ddd;
       background-color: white;
       position: relative;
@@ -159,7 +152,7 @@
       font-weight: bold;
       text-transform: uppercase;
       color: black;
-      padding: 8px 12px;
+      /* padding: 8px 12px; */
       font-size: medium;
       position: relative;
       transition: color 0.3s ease-in-out;
@@ -180,11 +173,11 @@
     .sticky {
       position: fixed !important;
       top: 0;
-      left: 30px;
-      width: 70%;
+      /* left: 30px; */
+      /* width: 100%; */
       background: white;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
+      z-index: 2000;
     }
     
     section {
@@ -207,7 +200,9 @@
       flex-wrap: nowrap;
       gap: 15px;
     }
-    
+    .event-scroll-wrapper::-webkit-scrollbar {
+      display: none;
+    }
     .event-card {
       width: 400px;
       height: 550px;
@@ -260,53 +255,7 @@
       /* Centers the table horizontally */
     }
     
-    /* Centered Header */
-    .schedule-header {
-      display: flex;
-      justify-content: space-around;
-      font-weight: bold;
-      background: #dc3545;
-      color: white;
-      border-radius: 5px 5px 0 0;
-      text-align: center;
-      padding: 10px;
-    }
-    
-    .schedule-row {
-      display: flex;
-      justify-content: space-around;
-      border-bottom: 1px solid #ddd;
-      padding: 10px;
-    }
-    
-    .schedule-row:last-child {
-      border-bottom: none;
-    }
-    
-    /* Align items in rows */
-    .schedule-header span,
-    .schedule-row span {
-      flex: 1;
-      text-align: center;
-      font-size: 1.05rem;
-    }
-    
-    .schedule-header span {
-      font-size: 1.1rem;
-    }
-    
-    /* Responsive Scrolling */
-    .scrollable {
-      overflow-y: auto;
-      max-height: 300px;
-    }
-    
-    /* Responsive Centering */
-    @media (max-width: 768px) {
-      .schedule-table {
-        width: 100%;
-      }
-    }
+   
     
     
     /* --------------------------------------------------------------------------------------------- */
@@ -320,15 +269,7 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
     
-    /* .scrollTicketBtn {
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    } */
+    
     .team-card {
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
@@ -444,3 +385,85 @@ transition: transform 0.3s ease;
         font-size: 2rem;
       }
     }
+    /* __________________________________________________________________________________ */
+    /* --------------------------------------------------------------------------------------------- */
+.ticket-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Price Badge Hover Effect */
+.ticket-price {
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.ticket-price:hover {
+  background-color: #b02a37;
+  /* Darker red */
+  transform: scale(1.1);
+  /* Slight zoom effect */
+}
+
+/* Buy Now Button Hover Effect */
+.ticket-buy-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.ticket-buy-btn:hover {
+  background-color: #dc3545;
+  /* Red background */
+  color: white;
+  transform: scale(1.05);
+  /* Slight enlargement */
+}
+
+.disabled-opacity {
+  opacity: 0.3 !important;
+  /* Ensures the opacity change applies */
+  pointer-events: auto !important;
+  /* Overrides Bootstrap's disabled behavior */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Hover effect for review cards */
+.review-container .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-container .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(126, 124, 124, 0.15) !important;
+}
+
+
+/* Review Container Scrollbar */
+.review-container {
+  scrollbar-width: thin;
+  /* scrollbar-color: #dc3545 #f1f1f1; */
+  /* Red scrollbar */
+}
+
+/* Webkit-based Browsers (Chrome, Edge, Safari) */
+.review-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.review-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.review-container::-webkit-scrollbar-thumb {
+  background: #dc3545;
+  /* Red color */
+  border-radius: 3px;
+}
+
+.review-container::-webkit-scrollbar-thumb:hover {
+  background: #b02a37;
+  /* Darker red on hover */
+}

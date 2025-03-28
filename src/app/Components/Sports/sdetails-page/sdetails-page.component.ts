@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 declare var bootstrap: any; // Required for Bootstrap modal handling
-import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 interface Team {
   id: number;
@@ -18,7 +18,7 @@ interface Team {
   templateUrl: './sdetails-page.component.html',
   styleUrl: './sdetails-page.component.css'
 })
-export class SDetailsPageComponent implements AfterViewInit {
+export class SDetailsPageComponent implements AfterViewInit,OnInit {
   Math = Math;
   item =
   {
@@ -26,24 +26,26 @@ export class SDetailsPageComponent implements AfterViewInit {
     location: 'Ismailia Stadium, Ismailia',
     fullLocation: 'Ismailia Stadium, Ismailia',
     category: 'Matches',
-    title: '& JULIET',
+    Group:'A',
+    
+    title: 'Championship League',
     date: 'Sunday, March 23, 2025',
     Kickoff: '7:00 PM',
     GatesOpen: '06:00 PM',
-    rating: 3.5,
-    price: 35,
+    price: 500,
 
     description: "Football isn’t just a sport—it’s an emotion that brings people together. The roar of the crowd, the passion of the players, and the thrill of every goal make live matches an unforgettable experience. Whether you're a die-hard supporter or a casual fan, witnessing this high-stakes clash in person will be an experience like no other.This game promises non-stop action as two of Egypt's top clubs battle it out for dominance. The energy in the stadium, the tactical duels, and the possibility of game-changing moments will keep fans on the edge of their seats. Don’t miss your chance to be part of this epic showdown!",
     isFavorite: false,
     word: "high",
-    reviews: 6
+   
   }
+  
   toggleFavorite(event: any) {
     event.isFavorite = !event.isFavorite;
   }
 
   shareItem(item: any): void {
-    const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.location} on ${item.date}. Price: $${item.price}`;
+    const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.location} on ${item.date}. Price: $${item.price} .Group: ${item.Group} .Kickoff: ${item.Kickoff} .GatesOpen: ${item.GatesOpen} .`;
     if (navigator.share) {
       navigator.share({
         title: item.title,
@@ -72,7 +74,7 @@ export class SDetailsPageComponent implements AfterViewInit {
   private initialCardTop = 0;
   private stickyThreshold = 0;
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef) { }
+  constructor(private renderer: Renderer2, private elRef: ElementRef,private route: ActivatedRoute) { }
 
   ngAfterViewInit() {
     this.calculateInitialPosition();
@@ -84,7 +86,7 @@ export class SDetailsPageComponent implements AfterViewInit {
       console.warn("tabLinks is not available in ngAfterViewInit");
       return;
     }
-
+    this.checkScroll();
   }
 
   private calculateInitialPosition() {
@@ -182,58 +184,14 @@ export class SDetailsPageComponent implements AfterViewInit {
   }
 
   // -----------------------------------------------------------------------------------------------------
-  // events
-  eventList = [
-    {
-      title: "PAUL SIMON",
-      venue: "Ahmanson Theater",
-      date: "July 7 - 2025",
-      rating: 5,
-      image: "img/4.jpg",
-      isFavorite: true
-
-    },
-    {
-      title: "Phantom Of The Opera",
-      venue: "Ahmanson Theater",
-      date: "July 7 - 2025",
-      rating: 3.5,
-      image: "img/10.jpg",
-      isFavorite: false
-    },
-    {
-      title: "Umphrey's McGee",
-      venue: "Ahmanson Theater",
-      date: "July 7 - 2025",
-      rating: 4,
-      image: "img/11.jpg",
-      isFavorite: true
-    },
-    {
-      title: "PAUL SIMON",
-      venue: "Ahmanson Theater",
-      date: "July 7 - 2025",
-      rating: 5,
-      image: "img/4.jpg",
-      isFavorite: true
-
-    },
-    {
-      title: "Umphrey's McGee",
-      venue: "Ahmanson Theater",
-      date: "July 7 - 2025",
-      rating: 4,
-      image: "img/11.jpg",
-      isFavorite: true
-    }
-  ];
+ 
   //Matches
   matches = [
 
     {
       id:1,
       image: 'img/EPL3.jpg',
-      venue: 'Cairo International Stadium',
+      venue: 'Cairo International Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
       tournament: 'EPL Cup 2024/2025',
       matchNumber: 19,
@@ -266,7 +224,7 @@ export class SDetailsPageComponent implements AfterViewInit {
     {
       id:3,
       image: 'img/EPL4.jpg',
-      venue: 'Alexandria Stadium',
+      venue: 'Alexandria Stadium, Alexandria',
       date: 'Tue 25 Mar 2025',
       tournament: 'EPL Cup 2024/2025',
       matchNumber: 20,
@@ -274,8 +232,9 @@ export class SDetailsPageComponent implements AfterViewInit {
       group: 'Group One (Stage)',
       team1: 'Smouha SC',
       team2: 'Al Ittihad Alexandria',
-      team1Logo: 'img/smouha.png',
-      team2Logo: 'img/ittihad.png',
+    
+      team1Logo: 'img/Smouha.png',
+      team2Logo: 'img/AlIttihad.png',
       isFavorite: false,
       price: 500, // Add price
     },
@@ -334,16 +293,27 @@ export class SDetailsPageComponent implements AfterViewInit {
     },
 
   ];
+  match: any;
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id')); // Get ID from route
+      this.match = this.matches.find(m => m.id === id); // Find match by ID
+    });
+  }
+
+
+
 
   // -----------------------------------------------------------------------------------------------------
   scrollLeft() {
     const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft -= 300; // Adjust scroll distance as needed
+    container.scrollLeft -= 450; // Adjust scroll distance as needed
   }
 
   scrollRight() {
     const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft += 300; // Adjust scroll distance as needed
+    container.scrollLeft += 450; // Adjust scroll distance as needed
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -378,26 +348,41 @@ export class SDetailsPageComponent implements AfterViewInit {
 
 
   // -----------------------------------------------------------------------------------------------------
-  @ViewChild('ticketContainer', { static: false }) ticketContainer!: ElementRef;
-
-  tickets = [
-    { type: 'Hospitality Package', price: 1500, description: 'VIP Seats, Catering & Exclusive Lounge' },
-    { type: 'VIP', price: 1000, description: 'Exclusive access with premium seating.' },
-    { type: 'Standard', price: 500, description: 'Standard seating with great view.' },
-    
-   
+  reviews = [
+    { user: 'Ahmed', rating: 3.5, comment: 'Amazing service! Highly recommended.', date: '2025-03-25' },
+    { user: 'Sara', rating: 4, comment: 'Great experience, but there’s room for improvement.', date: '2025-03-24' },
+    { user: 'Mariam', rating: 5, comment: 'Fantastic! Everything was perfect.', date: '2025-03-23' },
+    { user: 'Omar', rating: 3, comment: 'It was good, but not exceptional.', date: '2025-03-22' },
+    { user: 'Nour', rating: 4, comment: 'Really enjoyed it! Will come back again.', date: '2025-03-21' }
   ];
 
+  tickets = [
+    { type: 'Backstage Pass', price: 1500, description: 'Meet the performers & backstage access.' },
+    { type: 'VIP', price: 1000, description: 'Exclusive access with premium seating.' },
+    { type: 'Regular', price: 500, description: 'Standard seating with great view.' },
+    { type: 'Economy', price: 250, description: 'Budget-friendly seating option.' }
+  ];
+
+  @ViewChild('ticketContainer') ticketContainer!: ElementRef;
+
+  canScrollLeft = false;
+  canScrollRight = true; // Assume initial state
 
   scrollLeftTicket() {
     this.ticketContainer.nativeElement.scrollBy({ left: -250, behavior: 'smooth' });
+    setTimeout(() => this.checkScroll(), 300); // Allow time for scrolling
   }
 
   scrollRightTicket() {
     this.ticketContainer.nativeElement.scrollBy({ left: 250, behavior: 'smooth' });
+    setTimeout(() => this.checkScroll(), 300);
   }
 
-
+  checkScroll() {
+    const el = this.ticketContainer.nativeElement;
+    this.canScrollLeft = el.scrollLeft > 0;
+    this.canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 5;
+  }
 
 
 }
