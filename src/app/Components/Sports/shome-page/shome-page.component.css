@@ -133,12 +133,15 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
     padding: 0.5em 0.75em;
   }
   .team-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+    width: 40px !important;
+    min-height:40px  !important;
+    height: 40px !important;
+    object-fit: contain !important;
   }
   .card-header{
 background-color: #e1dedeaf;
+min-width: 20vw;
+
   }
   .custom-select {
     appearance: none; 
@@ -206,4 +209,22 @@ background-color: #e1dedeaf;
 /* Transition effect */
 .dropdown-item {
   transition: all 0.3s ease;
+}
+
+/* Ticket Button Hover */ 
+.ticket-btn:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+.fav-btn:hover,
+.more-info:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Badge Hover  */
+.badge-item:hover {
+  /* / background: #dc3545; / */
+  /* / color: white; / */
+  transform: scale(1.1);
 }
