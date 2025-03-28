@@ -1,90 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-
-
-</head>
-
-<body>
-    <div class="home-content">
-        <div class="form-container">
-            <form class="form-Content shadow-lg rounded p-4" [formGroup]="Loginform">
-                <h4 class="text-center mt-3 mb-4" style="color: red; font-weight: bold; font-family: sans-serif;">
-                    Login
-                  </h4>
-                <!-- Email Address -->
-                <div class="mb-2 ">
-                    <label class="form-label fw-semibold mb-2">Email</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light border-0">
-                            <i class="bi bi-envelope text-muted red-icon"></i>
-                        </span>
-                        <input type="email" class="form-control border-0 shadow-sm" placeholder="Enter your email"
-                            formControlName="email">
-                    </div>
-                    <div *ngIf="Loginform.get('email')?.hasError('required') && Loginform.get('email')?.touched"
-                        class="text-danger small ps-2">
-                        Email is required.
-                    </div>
-                    <div *ngIf="Loginform.get('email')?.hasError('pattern') && Loginform.get('email')?.touched"
-                        class="text-danger small ps-2">
-                        Enter a valid email.
-                    </div>
-                </div>
-
-                <!-- Password -->
-                <div class="mb-2 mt-3">
-                    <label class="form-label fw-semibold mb-2">Password</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light border-0">
-                            <i class="bi bi-key-fill text-muted red-icon"></i>
-                        </span>
-                        <input type="password" class="form-control border-0 shadow-sm" placeholder="Enter password"
-                            formControlName="pass">
-                    </div>
-                    <div *ngIf="Loginform.get('pass')?.hasError('required') && Loginform.get('pass')?.touched"
-                        class="text-danger small ps-2">
-                        Password is required.
-                    </div>
-                </div>
-
-                <!-- Login Button -->
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-danger mt-4 py-2"
-                        onmouseover="this.style.backgroundColor='#E16A54';"
-                        onmouseout="this.style.backgroundColor='#dc3545';">
-                        Login
-                    </button>
-                </div>
-
-                <!-- Google Login -->
-                <div class="d-flex align-items-center mt-4">
-                    <hr class="flex-grow-1">
-                    <span class="mx-2">OR Sign in with</span>
-                    <img src="images/Home/Google.png" alt="Google Login"
-                        class="ms-0 me-2" style="width: 32px; height: 32px; cursor: pointer;"
-                        (click)="googleLogin()">
-                    <hr class="flex-grow-1">
-                </div>
-
-                <!-- Login Link -->
-                <p class="text-center mt-4 mb-0">
-                    Don't have account?
-                    <a [routerLink]="['/Register']" class="text-decoration-none fw-bold text-danger">Sign Up here</a>
-                </p>
-
-            </form>
+<div class="home-content">
+  <div class="form-container">
+    <form class="form-Content shadow-lg rounded p-4" [formGroup]="Loginform">
+      <h4 class="text-center mt-3 mb-4" style="color: red; font-weight: bold; font-family: sans-serif;">
+        Login
+      </h4>
+      <!-- Email Address -->
+      <div class="mb-2 ">
+        <label class="form-label fw-semibold mb-2">Email</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-0">
+            <i class="bi bi-envelope text-muted red-icon"></i>
+          </span>
+          <input type="email" class="form-control border-0 shadow-sm" placeholder="Enter your email"
+            formControlName="email">
         </div>
-    </div>
+        <div *ngIf="Loginform.get('email')?.hasError('required') && Loginform.get('email')?.touched"
+          class="text-danger small ps-2">
+          Email is required.
+        </div>
+        <div *ngIf="Loginform.get('email')?.hasError('pattern') && Loginform.get('email')?.touched"
+          class="text-danger small ps-2">
+          Enter a valid email.
+        </div>
+      </div>
 
-</body>
+      <!-- Password -->
+      <div class="mb-2 mt-3">
+        <label class="form-label fw-semibold mb-2">Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-0">
+            <i class="bi bi-key-fill text-muted red-icon"></i>
+          </span>
+          <input type="password" class="form-control border-0 shadow-sm" placeholder="Enter password"
+            formControlName="pass">
+        </div>
+        <div *ngIf="Loginform.get('pass')?.hasError('required') && Loginform.get('pass')?.touched"
+          class="text-danger small ps-2">
+          Password is required.
+        </div>
+      </div>
 
+      <!-- Login Button -->
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-danger mt-4 py-2" onmouseover="this.style.backgroundColor='#E16A54';"
+          onmouseout="this.style.backgroundColor='#dc3545';">
+          Login
+        </button>
+      </div>
 
-</html>
+      <!-- Google Login -->
+      <div class="d-flex align-items-center mt-4">
+        <hr class="flex-grow-1">
+        <span class="mx-2">OR Sign in with</span>
+        <img src="images/Home/Google.png" alt="Google Login" class="ms-0 me-2"
+          style="width: 32px; height: 32px; cursor: pointer;" (click)="googleLogin()">
+        <hr class="flex-grow-1">
+      </div>
 
+      <!-- Login Link -->
+      <p class="text-center mt-4 mb-0">
+        Don't have account?
+        <a [routerLink]="['/Register']" class="text-decoration-none fw-bold text-danger">Sign Up here</a>
+      </p>
 
-
+    </form>
+  </div>
+</div>

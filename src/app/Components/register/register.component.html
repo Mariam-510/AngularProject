@@ -1,183 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-
-
-</head>
-
-<body>
-    <div class="home-content">
-        <div class="form-container">         
-        <form class=" form-Content shadow-lg rounded"
-          [formGroup]="registerForm">
-          <h4 class="text-center mt-1" style="color: red; font-weight: bold; font-family: sans-serif;">
-            Create Your Account
-          </h4>
-          <!-- Full Name -->
-          <div class="mb-2 mt-3">
-            <div class="row">
-              <!-- First Name -->
-              <div class="col-md-6">
-                <label class="form-label fw-semibold  mb-0">First Name</label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light border-0">
-                    <i class="bi bi-person text-muted red-icon"></i>
-                  </span>
-                  <input type="text" class="form-control border-0  shadow-sm" placeholder="First Name" formControlName="firstName">
-                </div>
-                <div *ngIf="registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched"
-                  class="text-danger small ps-2">
-                  First Name is required.
-                </div>
-                <div *ngIf="registerForm.get('firstName')?.hasError('minlength') && registerForm.get('firstName')?.touched"
-                class="text-danger small ps-2">
-                First Name at least 3 characters.
-              </div>
-              <div *ngIf="registerForm.get('firstName')?.hasError('pattern') && registerForm.get('firstName')?.touched"
+<div class="home-content">
+  <div class="form-container">
+    <form class=" form-Content shadow-lg rounded" [formGroup]="registerForm">
+      <h4 class="text-center mt-1" style="color: red; font-weight: bold; font-family: sans-serif;">
+        Create Your Account
+      </h4>
+      <!-- Full Name -->
+      <div class="mb-2 mt-3">
+        <div class="row">
+          <!-- First Name -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold  mb-0">First Name</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-0">
+                <i class="bi bi-person text-muted red-icon"></i>
+              </span>
+              <input type="text" class="form-control border-0  shadow-sm" placeholder="First Name"
+                formControlName="firstName">
+            </div>
+            <div *ngIf="registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched"
+              class="text-danger small ps-2">
+              First Name is required.
+            </div>
+            <div *ngIf="registerForm.get('firstName')?.hasError('minlength') && registerForm.get('firstName')?.touched"
+              class="text-danger small ps-2">
+              First Name at least 3 characters.
+            </div>
+            <div *ngIf="registerForm.get('firstName')?.hasError('pattern') && registerForm.get('firstName')?.touched"
               class="text-danger small ps-2">
               firstName Must be Character only.
             </div>
-              </div>
-          
-              <!-- Last Name -->
-              <div class="col-md-6">
-                <label class="form-label fw-semibold  mb-0">Last Name</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-light border-0">
-                    <i class="bi bi-person-fill text-muted red-icon"></i>
-                    </span>
-                <input type="text" class="form-control border-0 shadow-sm" placeholder="Last Name" formControlName="lastName">
-                </div>
-                <div *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched"
-                  class="text-danger small ps-2">
-                  Last Name is required.
-                </div>
-                <div *ngIf="registerForm.get('lastName')?.hasError('minlength') && registerForm.get('lastName')?.touched"
-                class="text-danger small ps-2">
-                LastName at least 3 characters.
-              </div>
-              
-                <div *ngIf="registerForm.get('lastName')?.hasError('pattern') && registerForm.get('lastName')?.touched"
-                class="text-danger small ps-2">
-                first Name Must be Character only.
-              </div>
-              </div>
-            </div>
           </div>
-          
 
-          <!-- Email Address -->
-          <div class="mb-2">
-            <label class="form-label fw-semibold  mb-0">Email</label>
+          <!-- Last Name -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold  mb-0">Last Name</label>
             <div class="input-group">
-              <span class="input-group-text bg-light border-0"><i class="bi bi-envelope text-muted red-icon"></i></span>
-              <input type="email" class="form-control border-0 shadow-sm" placeholder="Enter your email"
-                formControlName="email">
+              <span class="input-group-text bg-light border-0">
+                <i class="bi bi-person-fill text-muted red-icon"></i>
+              </span>
+              <input type="text" class="form-control border-0 shadow-sm" placeholder="Last Name"
+                formControlName="lastName">
+            </div>
+            <div *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched"
+              class="text-danger small ps-2">
+              Last Name is required.
+            </div>
+            <div *ngIf="registerForm.get('lastName')?.hasError('minlength') && registerForm.get('lastName')?.touched"
+              class="text-danger small ps-2">
+              LastName at least 3 characters.
             </div>
 
-            <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched"
+            <div *ngIf="registerForm.get('lastName')?.hasError('pattern') && registerForm.get('lastName')?.touched"
               class="text-danger small ps-2">
-              Email is required.
-            </div>
-            <div *ngIf="registerForm.get('email')?.hasError('pattern') && registerForm.get('email')?.touched"
-              class="text-danger small ps-2">
-              Enter a valid email.
+              first Name Must be Character only.
             </div>
           </div>
-          <div class="mb-2">
-            <label class="form-label fw-semibold  mb-0">Phone Number</label>
-            <div class="input-group">
-              <span class="input-group-text bg-light border-0"><i class="bi bi-telephone text-muted red-icon"></i></span>
-              <input type="text" class="form-control border-0 shadow-sm" placeholder="Enter your phone number" formControlName="phoneNum">
-            </div>
-                
-
-            <div *ngIf="registerForm.get('phoneNum')?.hasError('pattern') && registerForm.get('phoneNum')?.touched"
-              class="text-danger small ps-2">
-              Phone Number Must be 11 digit.
-            </div>
-          </div>
-
-          <!-- Password -->
-          <div class="mb-2">
-            <label class="form-label fw-semibold mb-0">Password</label>
-            <div class="input-group">
-              <span class="input-group-text bg-light border-0 "><i class="bi bi-key text-muted red-icon "></i></span>
-              <input type="password" class="form-control border-0 shadow-sm" placeholder="Enter password"
-                formControlName="password">
-            </div>
-
-            <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
-              class="text-danger small ps-2">
-              Password is required.
-            </div>
-            <div *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched"
-              class="text-danger small ps-2">
-              Password must be at least 6 characters.
-            </div>
-            <div *ngIf="registerForm.get('password')?.hasError('maxlength') && registerForm.get('password')?.touched"
-              class="text-danger small ps-2">
-              Password cannot exceed 10 characters.
-            </div>
-            <div *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')?.touched"
-              class="text-danger small ps-2">
-              Password must contain at least one uppercase letter, one lowercase letter, one number, and one special
-              character.
-            </div>
-          </div>
-
-
-          <!-- Confirm Password -->
-          <div class="mb-2">
-            <label class="form-label fw-semibold mb-0">Confirm Password</label>
-            <div class="input-group">
-              <span class="input-group-text bg-light border-0"><i class="bi bi-key-fill text-muted red-icon fs-5 "></i></span>
-              <input type="password" class="form-control border-0 shadow-sm" placeholder="Confirm password"
-                formControlName="confirmPassword">
-            </div>
-            <div
-              *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched"
-              class="text-danger small ps-2">
-              Confirm Password is required.
-            </div>
-            <div *ngIf="registerForm.get('password')?.touched && registerForm.get('confirmPassword')?.touched 
-            && registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value"
-           class="text-danger small ps-2"> confirm Passwords do not match.</div>
-
-          </div>
-
-
-
-          <div class="d-flex justify-content-center">
-            <button class="btn btn-danger mt-2 py-2"
-              (click)="register()"
-              onmouseover="this.style.backgroundColor='#E16A54';"
-              onmouseout="this.style.backgroundColor='#dc3545';">
-              Register
-            </button>
-          </div>
-          
-          <div class="d-flex align-items-center mt-2">
-            <hr class="flex-grow-1">
-            <span class="mx-2">OR Sign Up with</span>
-            <img src="images/Home/Google.png" alt="Google Login" 
-                class="ms-0 me-2" 
-                style="width: 32px; height: 32px; cursor: pointer;" 
-                (click)="googleLogin()">
-            <hr class="flex-grow-1">
         </div>
-          <p class="text-center mt-3 mb-0">
-            Already have an account?
-            <a [routerLink]="['/Login']" class="text-decoration-none fw-bold text-danger">Login here</a>
-          </p>
-
-        </form>
       </div>
-        </div>
- </body>
 
-</html>
+
+      <!-- Email Address -->
+      <div class="mb-2">
+        <label class="form-label fw-semibold  mb-0">Email</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-0"><i class="bi bi-envelope text-muted red-icon"></i></span>
+          <input type="email" class="form-control border-0 shadow-sm" placeholder="Enter your email"
+            formControlName="email">
+        </div>
+
+        <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched"
+          class="text-danger small ps-2">
+          Email is required.
+        </div>
+        <div *ngIf="registerForm.get('email')?.hasError('pattern') && registerForm.get('email')?.touched"
+          class="text-danger small ps-2">
+          Enter a valid email.
+        </div>
+      </div>
+      <div class="mb-2">
+        <label class="form-label fw-semibold  mb-0">Phone Number</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-0"><i class="bi bi-telephone text-muted red-icon"></i></span>
+          <input type="text" class="form-control border-0 shadow-sm" placeholder="Enter your phone number"
+            formControlName="phoneNum">
+        </div>
+
+
+        <div *ngIf="registerForm.get('phoneNum')?.hasError('pattern') && registerForm.get('phoneNum')?.touched"
+          class="text-danger small ps-2">
+          Phone Number Must be 11 digit.
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-2">
+        <label class="form-label fw-semibold mb-0">Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-0 "><i class="bi bi-key text-muted red-icon "></i></span>
+          <input type="password" class="form-control border-0 shadow-sm" placeholder="Enter password"
+            formControlName="password">
+        </div>
+
+        <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
+          class="text-danger small ps-2">
+          Password is required.
+        </div>
+        <div *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched"
+          class="text-danger small ps-2">
+          Password must be at least 6 characters.
+        </div>
+        <div *ngIf="registerForm.get('password')?.hasError('maxlength') && registerForm.get('password')?.touched"
+          class="text-danger small ps-2">
+          Password cannot exceed 10 characters.
+        </div>
+        <div *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')?.touched"
+          class="text-danger small ps-2">
+          Password must contain at least one uppercase letter, one lowercase letter, one number, and one special
+          character.
+        </div>
+      </div>
+
+
+      <!-- Confirm Password -->
+      <div class="mb-2">
+        <label class="form-label fw-semibold mb-0">Confirm Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-0"><i
+              class="bi bi-key-fill text-muted red-icon fs-5 "></i></span>
+          <input type="password" class="form-control border-0 shadow-sm" placeholder="Confirm password"
+            formControlName="confirmPassword">
+        </div>
+        <div
+          *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched"
+          class="text-danger small ps-2">
+          Confirm Password is required.
+        </div>
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('confirmPassword')?.touched
+            && registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value"
+          class="text-danger small ps-2"> confirm Passwords do not match.</div>
+
+      </div>
+
+
+
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-danger mt-2 py-2" (click)="register()"
+          onmouseover="this.style.backgroundColor='#E16A54';" onmouseout="this.style.backgroundColor='#dc3545';">
+          Register
+        </button>
+      </div>
+
+      <div class="d-flex align-items-center mt-2">
+        <hr class="flex-grow-1">
+        <span class="mx-2">OR Sign Up with</span>
+        <img src="images/Home/Google.png" alt="Google Login" class="ms-0 me-2"
+          style="width: 32px; height: 32px; cursor: pointer;" (click)="googleLogin()">
+        <hr class="flex-grow-1">
+      </div>
+      <p class="text-center mt-3 mb-0">
+        Already have an account?
+        <a [routerLink]="['/Login']" class="text-decoration-none fw-bold text-danger">Login here</a>
+      </p>
+
+    </form>
+  </div>
+</div>

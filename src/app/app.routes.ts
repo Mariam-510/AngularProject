@@ -17,23 +17,21 @@ import { BookingComponent } from './Components/booking/booking.component';
 import { BookingDetailsComponent } from './Components/booking-details/booking-details.component';
 import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
-import { LoginComponent } from './Components/login/login.component';
-import { RegisterComponent } from './Components/register/register.component';
-import { ReviewComponent } from './Components/review/review.component';
 import { HomeComponent } from './Components/home/home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { LoginComponent } from './Components/login/login.component';
+import { RegisterComponent } from './Components/register/register.component';
 
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'homePage', pathMatch: "full"},
-    {path: 'homePage', component: HomeComponent, title: "Home"},
-    {path: 'UserProfile', component: UserProfileComponent, title: "UserProfile"},
-    {path: 'Review', component: ReviewComponent, title: "Review"},
-    {path: 'Login', component: LoginComponent, title: "Login"},
-    {path: 'Register', component: RegisterComponent, title: "Register"},
+  { path: '', redirectTo: 'home', pathMatch: "full" },
+  { path: 'home', component: HomeComponent, title: "Home" },
+  { path: 'UserProfile', component: UserProfileComponent, title: "UserProfile" },
+  { path: 'login', component: LoginComponent, title: "Login" },
+  { path: 'register', component: RegisterComponent, title: "Register" },
 
-  { path: 'home', component: SHomePageComponent, title: "Home" },
-  { path: 'home/:id', component: SDetailsPageComponent, title: "Match Details" },
+  { path: 'sports', component: SHomePageComponent, title: "Home" },
+  { path: 'sports/:id', component: SDetailsPageComponent, title: "Match Details" },
   {
     path: 'entertainment', component: EHomePageComponent, title: "Entertainment", children: [
       { path: '', redirectTo: "all", pathMatch: 'full' },
