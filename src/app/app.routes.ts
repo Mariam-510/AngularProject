@@ -12,8 +12,6 @@ import { OtherComponent } from './Components/Entertainment/Categories/other/othe
 import { EdetailsComponent } from './Components/Entertainment/edetails/edetails.component';
 import { LeafletMapComponent } from './Components/leaflet-map/leaflet-map.component';
 import { BookingHistoryComponent } from './Components/ProfilePages/booking-history/booking-history.component';
-import { BookingComponent } from './Components/Book/booking/booking.component';
-import { BookingDetailsComponent } from './Components/Book/booking-details/booking-details.component';
 import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -66,11 +64,9 @@ export const routes: Routes = [
   { path: "shows/all", component: ShowsComponent, title: "Shows" },
   { path: "shows/:id", component: EdetailsComponent, title: "Details" },
 
-  { path: 'booking', component: BookingComponent, title: 'Book a match' },//deleted
   { path: 'bookingEvent', component: BookingEventComponent, title: 'Book Event' },
   { path: 'bookingMatch', component: BookingMatchComponent, title: 'Book Match' },
 
-  { path: 'bookingDetails', component: BookingDetailsComponent, title: 'Booking details' }, //deleted
   { path: 'bookingDetailsMatch', component: BookingDetailsMatchComponent, title: 'Match booking details' },
   { path: 'bookingDetailsEvent', component: BookingDetailsEventComponent, title: 'Event booking details' },
 
