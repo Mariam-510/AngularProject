@@ -27,6 +27,7 @@ export interface event {
 export class EdetailsComponent implements AfterViewInit {
   item =
     {
+      id: 1,
       image: 'img/1.jpg',
       location: 'Ahmanson Theater',
       fullLocation: 'Zamalek, Cairo',
@@ -194,6 +195,7 @@ export class EdetailsComponent implements AfterViewInit {
   // events
   eventList = [
     {
+      id: 1,
       title: "PAUL SIMON",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -203,6 +205,7 @@ export class EdetailsComponent implements AfterViewInit {
 
     },
     {
+      id: 2,
       title: "Phantom Of The Opera",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -211,6 +214,7 @@ export class EdetailsComponent implements AfterViewInit {
       isFavorite: false
     },
     {
+      id: 3,
       title: "Umphrey's McGee",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -219,6 +223,7 @@ export class EdetailsComponent implements AfterViewInit {
       isFavorite: true
     },
     {
+      id: 4,
       title: "PAUL SIMON",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -228,6 +233,7 @@ export class EdetailsComponent implements AfterViewInit {
 
     },
     {
+      id: 5,
       title: "Umphrey's McGee",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
