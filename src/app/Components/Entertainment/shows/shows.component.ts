@@ -220,7 +220,6 @@ export class ShowsComponent {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
-
   }
 
 }
