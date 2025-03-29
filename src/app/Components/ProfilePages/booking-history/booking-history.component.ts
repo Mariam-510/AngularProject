@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AddReviewComponent } from '../../Book/add-review/add-review.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface Booking {
   id: string;
@@ -207,7 +209,7 @@ export class BookingHistoryComponent {
   public totalPages: number = 1;
   public pages: number[] = [];
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
     this.applyFilters(); // Initialize with all bookings
     this.updatePagination(); // Set up initial pagination
   }
@@ -288,9 +290,12 @@ export class BookingHistoryComponent {
     console.log('Viewing tickets for:', booking.id);
   }
 
-  /** Cancel Booking */
-  public cancelBooking(booking: Booking): void {
-    console.log('Canceling booking:', booking.id);
+  confirmCancel(booking: any) {
+    const isConfirmed = window.confirm("Are you sure you want to cancel this booking?");
+    if (isConfirmed) {
+      booking.status = 'Cancelled';
+      this.applyFilters();
+    }
   }
 
   // ---------------------------
@@ -311,5 +316,12 @@ export class BookingHistoryComponent {
     if (this.eventTypeDropdownOpen) {
       this.eventTypeDropdownOpen = false;
     }
+  }
+
+  openReviewDialog(event: any): void {
+    this.dialog.open(AddReviewComponent, {
+      width: '400px',
+      data: { eventName: event.name }
+    });
   }
 }
