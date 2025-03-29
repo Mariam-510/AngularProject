@@ -1,1 +1,192 @@
-<p>booking-match works!</p>
+<div class="checkout-wrapper">
+  <div class="checkout-container">
+    <!-- Football Details Card -->
+    <div class="checkout-card transaction-overview bg-light shadow-sm">
+      <div class="event-highlight">
+        <div class="arena-info text-center fs-2">
+          <img src="Images/stadiumLogo.png" width="47" class="me-2 mb-2" />
+          {{ matchDetails.stadium.name }}
+        </div>
+
+        <div class="sport-matchup">
+          <div class="team-column">
+            <img
+              [src]="teams.homeTeam.logo"
+              class="team-identity shadow-lg bg-light"
+            />
+            <h3 class="team-designation">{{ teams.homeTeam.name }}</h3>
+          </div>
+
+          <div class="match-separator">
+            <div class="separator-line"></div>
+            <div class="vs-label fs-3">VS</div>
+            <div class="separator-line"></div>
+          </div>
+
+          <div class="team-column">
+            <img
+              [src]="teams.awayTeam.logo"
+              class="team-identity shadow-lg bg-light"
+            />
+            <h3 class="team-designation">{{ teams.awayTeam.name }}</h3>
+          </div>
+        </div>
+
+        <div class="detail-grid mt-4">
+          <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
+            <i class="bi bi-geo-alt text-danger"></i>
+            {{ matchDetails.stadium.location }}
+          </div>
+          <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
+            <i class="bi bi-calendar2-event text-danger"></i>
+            {{ matchDetails.date | date : "EEE d MMM" }}
+          </div>
+          <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
+            <i class="bi bi-clock text-danger"></i> {{ matchDetails.time }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkout-grid">
+      <!-- Left Column -->
+      <div class="checkout-column">
+        <div class="checkout-card">
+          <h2 class="card-title mb-3">🏟️Venue Seating Map</h2>
+          <img [src]="matchDetails.stadium.image" class="venue-image" />
+        </div>
+
+        <div class="checkout-card total-card">
+          <h2 class="card-title mb-4">💳 Payment Summary</h2>
+          <div class="total-section">
+            <h3 class="total-label">Total Amount</h3>
+            <h2 class="total-price">EGP {{ totalPrice() }}</h2>
+            <button
+              class="btn btn-checkout"
+              (click)="proceedToCheckout()"
+              [disabled]="totalTickets() === 0"
+            >
+              Proceed to Secure Checkout
+            </button>
+            <p class="text-muted mt-3 mb-0">
+              <i class="bi bi-shield-lock me-1"></i>100% Secure Payment
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="checkout-column">
+        <!-- Ticket Selector Card -->
+        <div class="checkout-card">
+          <h2 class="card-title mb-4">
+            🎟️Select Tickets
+            <span class="badge bg-secondary">Max 4 tickets!</span>
+          </h2>
+
+          <div class="ticket-categories">
+            <div class="ticket-card vip">
+              <div class="ticket-info">
+                <h6 class="ticket-category">VIP Experience</h6>
+                <p class="ticket-price mb-0">EGP {{ vipPrice }}</p>
+                <small>Premium seats with VIP facilities</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusVip()"
+                  [disabled]="vipCounter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-2">{{ vipCounter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusVip()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="ticket-card category-1">
+              <div class="ticket-info">
+                <h6 class="ticket-category">CAT 1</h6>
+                <p class="ticket-price mb-0">EGP {{ cat1Price }}</p>
+                <small class="text-white-50">Premium sideline seats</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusCat1()"
+                  [disabled]="cat1Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-3">{{ cat1Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusCat1()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="ticket-card category-2">
+              <div class="ticket-info">
+                <h6 class="ticket-category">CAT 2</h6>
+                <p class="ticket-price mb-0">EGP {{ cat2Price }}</p>
+                <small class="text-white-50">Mid-field seats</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusCat2()"
+                  [disabled]="cat2Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-3">{{ cat2Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusCat2()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="ticket-card category-3">
+              <div class="ticket-info">
+                <h6 class="ticket-category">CAT 3</h6>
+                <p class="ticket-price mb-0">EGP {{ cat3Price }}</p>
+                <small class="text-white-50">Standard seating</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusCat3()"
+                  [disabled]="cat3Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-3">{{ cat3Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusCat3()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

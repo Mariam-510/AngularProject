@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SharedService } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  constructor(
+    private _shared: SharedService,
+    private router: Router
+  ) {}
 
   Loginform = new FormGroup(
     {
@@ -23,21 +29,42 @@ export class LoginComponent {
   );
 
 
+  // Add this helper method to show validation errors
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+
   login() {
     if (this.Loginform.invalid) {
+      this.markFormGroupTouched(this.Loginform);
       alert("Please fill in all required fields correctly.");
       return;
     }
 
-    let userObj = {
-      email: this.Loginform.value.email,
-      pass: this.Loginform.value.pass,
+    // let userObj = {
+    //   email: this.Loginform.value.email,
+    //   pass: this.Loginform.value.pass,
 
-    };
+    // };
 
-    console.log("User Registered:", userObj);
+    // console.log("User Registered:", userObj);
 
-    this.Loginform.reset();
+    // this.Loginform.reset();
+
+    const email = this.Loginform.value.email!;
+    const password = this.Loginform.value.pass!;
+
+    if (this._shared.login(email, password)) {
+      this.router.navigate(['/']);
+      console.log('Logged in as:', this._shared.currentUser?.name);
+    } else {
+      alert('Invalid credentials\nUse:\nEmail: john@test.com\nPassword: Test@123');
+    }
   }
   googleLogin() {
     const clientId = '329985024640-j1e42v80vulq0c0pqom75puhm75c4f4i.apps.googleusercontent.com';
