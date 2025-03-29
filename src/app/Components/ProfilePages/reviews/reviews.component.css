@@ -37,7 +37,7 @@
 }
 
 .nav-link:hover {
-  border-bottom: 2px solid currentColor;
+  border-bottom: 2px solid #dc3545;
 }
 
 .nav-link.active {

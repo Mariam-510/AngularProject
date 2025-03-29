@@ -235,7 +235,7 @@ export class FavouriteComponent {
   }
 
   // --------------------------------------------------------------------------------------------------------------------
-  itemsPerPage = 4;
+  itemsPerPage = 3;
 
   currentPageEvent = 1;
   // Calculate the total number of pages

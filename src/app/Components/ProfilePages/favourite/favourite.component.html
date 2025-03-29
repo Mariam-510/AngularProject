@@ -112,9 +112,9 @@
 <div *ngIf="selectedCategory === 'matches'">
   <div *ngFor="let match of paginatedMatches" class="show-container row px-4 py-3 border-bottom rounded bg-white mx-2">
 
-    <div class="d-flex align-items-stretch mx-auto bg-white rounded-3 p-1">
-      <!-- Left Section: Match Details (25% Width) -->
-      <div class="d-flex justify-content-center align-items-center w-25 h-100 p-3 mt-5">
+    <div class="d-flex flex-column flex-xl-row align-items-stretch mx-auto bg-white rounded-3 p-1">
+      <!-- Left Section: Match Details (Full Width on Small/Large, 25% on Extra-Large) -->
+      <div class="d-flex justify-content-center align-items-center col-12 col-xl-3 h-100 p-3 mt-3">
         <div class="d-flex align-items-center justify-content-between w-100 mt-2">
           <div class="d-flex flex-column align-items-center">
             <img [src]="match.team1Logo" class="img-fluid rounded-4" alt="{{ match.team1 }}" style="max-width: 50px;">
@@ -128,8 +128,8 @@
         </div>
       </div>
 
-      <!-- Right Section: Event Details & Actions (75% Width) -->
-      <div class="col d-flex flex-column ms-md-4 bg-light pt-2 rounded-3 w-75 h-100 p-3">
+      <!-- Right Section: Event Details & Actions (Full Width on Small/Large, 75% on Extra-Large) -->
+      <div class="col-12 col-xl-9 d-flex flex-column ms-md-4 bg-light pt-2 rounded-3 h-100 p-3">
         <!-- Title & Favorite -->
         <div class="d-flex justify-content-between align-items-start ms-2">
           <h2 class="flex-grow-1">🏟️ {{ match.venue }}</h2>
@@ -140,7 +140,7 @@
         </div>
 
         <!-- Category Badges -->
-        <div class="d-flex gap-2 align-items-center  ms-2">
+        <div class="d-flex gap-2 align-items-center ms-2">
           <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3">{{ match.category }}</span>
           <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3">{{ match.adv }}</span>
           <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3">{{ match.word }}</span>
@@ -182,7 +182,6 @@
         </div>
       </div>
     </div>
-
 
   </div>
 
