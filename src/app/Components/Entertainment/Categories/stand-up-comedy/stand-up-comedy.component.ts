@@ -13,6 +13,7 @@ export class StandUpComedyComponent {
   // events
   eventList = [
     {
+      id: 1,
       title: "PAUL SIMON",
       venue: "Ahmanson Theater",
       date: "July 7",
@@ -22,6 +23,7 @@ export class StandUpComedyComponent {
 
     },
     {
+      id: 2,
       title: "Phantom Of The Opera",
       venue: "Ahmanson Theater",
       date: "July 7",

@@ -88,7 +88,7 @@
               <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
             </button>
 
-            <a routerLink="/shows/5"
+            <a [routerLink]="['/shows', item.id]"
               class="more-info btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center fs-6 shadow-sm">
               More Info <i class="bi bi-info-circle ms-2"></i>
             </a>

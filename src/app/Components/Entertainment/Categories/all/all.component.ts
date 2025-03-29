@@ -13,6 +13,7 @@ export class AllComponent {
   // events
   eventList = [
     {
+      id: 1,
       title: "PAUL SIMON",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -22,6 +23,7 @@ export class AllComponent {
 
     },
     {
+      id: 2,
       title: "Phantom Of The Opera",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -30,6 +32,7 @@ export class AllComponent {
       isFavorite: false
     },
     {
+      id: 3,
       title: "Umphrey's McGee",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -38,6 +41,7 @@ export class AllComponent {
       isFavorite: true
     },
     {
+      id: 4,
       title: "Phantom Of The Operaaaaa",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -46,6 +50,7 @@ export class AllComponent {
       isFavorite: false
     },
     {
+      id: 5,
       title: "Umphrey's McGeeeee",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",

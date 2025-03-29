@@ -1,1 +1,132 @@
-<p>reviews works!</p>
+<!-- <div class="container mt-4">
+  <div>
+    <h2 class="fw-bold"><span style="font-size: 0.9em;">❤️</span> Reviews</h2>
+    <nav aria-label="breadcrumb mb-0">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item mb-0">
+          <p class="text-muted mb-0">User</p>
+        </li>
+        <li class="breadcrumb-item active fw-semibold text-danger" aria-current="page">Reviews</li>
+      </ol>
+    </nav>
+  </div>
+
+  <ul class="nav nav-pills my-3">
+    <li class="nav-item"><a class="nav-link active" href="#">All Reviews</a></li>
+    <li class="nav-item"><a class="nav-link" href="#">Shows</a></li>
+    <li class="nav-item"><a class="nav-link" href="#">Sports</a></li>
+  </ul>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let review of reviews">
+    <div class="card p-3">
+      <h5><strong>{{ review.title }}</strong></h5>
+      <p class="text-muted">{{ review.date }}</p>
+      <div class="text-danger mb-3 mt-1 fs-5">
+        <ng-container *ngFor="let star of [].constructor(5); let i = index">
+          <i class="bi" [ngClass]="{
+                                                              'bi-star-fill': i < Math.floor(review.rating),
+                                                              'bi-star-half': i === Math.floor(review.rating) && review.rating % 1 !== 0,
+                                                              'bi-star': i >= Math.ceil(review.rating)
+                                                            }"></i>
+        </ng-container>
+      </div>
+      <p><strong>Location:</strong> {{ review.location }}</p>
+
+      <p>{{ review.comment }}</p>
+    </div>
+  </div>
+</div>
+</div> -->
+
+
+<div class=" mt-5 ms-5 me-5">
+  <div>
+    <h2 class="fw-bold"><span style="font-size: 0.9em;">❤️</span> Reviews</h2>
+    <nav aria-label="breadcrumb mb-0">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item mb-0">
+          <p class="text-muted mb-0">User</p>
+        </li>
+        <li class="breadcrumb-item active fw-semibold text-danger" aria-current="page">Reviews</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Filter Buttons -->
+  <div class="d-flex justify-content-start border-bottom pb-2 my-3 gap-2">
+    <button class="nav-link px-3 py-2"
+      [ngClass]="{ 'bg-danger text-white rounded': selectedCategory === 'All', 'text-dark': selectedCategory !== 'All' }"
+      (click)="filterReviews('All')">
+      All Reviews
+    </button>
+
+    <button class="nav-link px-3 py-2"
+      [ngClass]="{ 'bg-danger text-white rounded': selectedCategory === 'Shows', 'text-dark': selectedCategory !== 'Shows' }"
+      (click)="filterReviews('Shows')">
+      Shows
+    </button>
+
+    <button class="nav-link px-3 py-2"
+      [ngClass]="{ 'bg-danger text-white rounded': selectedCategory === 'Sports', 'text-dark': selectedCategory !== 'Sports' }"
+      (click)="filterReviews('Sports')">
+      Sports
+    </button>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 mb-4">
+    <div class="col d-flex" *ngFor="let review of filteredReviews">
+      <div class="card p-4 border-0 shadow rounded-4 position-relative bg-white d-flex flex-column w-100 h-100">
+
+        <!-- Title with Emoji -->
+        <h5 class="fw-bold text-dark text-break">
+          <span *ngIf="review.category === 'Shows'">🎟️</span>
+          <span *ngIf="review.category === 'Sports'">⚽</span>
+          {{ review.title }}
+        </h5>
+
+        <!-- Date & Stars -->
+        <div class="d-flex align-items-center justify-content-between ms-2 mb-2">
+          <div class="text-danger fs-5">
+            <ng-container *ngFor="let star of [].constructor(5); let i = index">
+              <i class="bi" [ngClass]="{
+                            'bi-star-fill': i < Math.floor(review.rating),
+                            'bi-star-half': i === Math.floor(review.rating) && review.rating % 1 !== 0,
+                            'bi-star': i >= Math.ceil(review.rating)
+                          }"></i>
+            </ng-container>
+          </div>
+          <div class="text-muted fst-italic small">{{ review.date }}</div>
+        </div>
+
+        <!-- Location & Category Badges with Emojis -->
+        <div class="d-flex flex-wrap gap-2 align-items-center mt-2">
+          <!-- Location -->
+          <span
+            class="badge bg-white text-danger shadow-sm fs-6 p-2 d-inline-flex align-items-center rounded-3 text-wrap d-block d-md-inline">
+            <span *ngIf="review.category === 'Shows'" class="me-1">📍</span>
+            <span *ngIf="review.category === 'Sports'" class="me-1">🏟️</span>
+            {{ review.location }}
+          </span>
+
+          <!-- Category -->
+          <span
+            class="badge bg-white text-danger shadow-sm fs-6 p-2 d-inline-flex align-items-center rounded-3 text-wrap d-block d-md-inline">
+            <span *ngIf="review.category === 'Shows'" class="me-1">🎭</span>
+            <span *ngIf="review.category === 'Sports'" class="me-1">🏆</span>
+            {{ review.category }}
+          </span>
+
+        </div>
+
+        <!-- Review Comment -->
+        <p class="mt-3 ms-2 text-muted fst-italic flex-grow-1 text-break">{{ review.comment }}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>

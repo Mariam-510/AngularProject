@@ -1,7 +1,7 @@
 .booking-history-wrapper {
   min-height: 100vh;
   padding: 2rem 0;
-  font-family: "Inter", sans-serif;
+  /* font-family: "Inter", sans-serif; */
   background: #fff;
 }
 
@@ -18,7 +18,7 @@
   justify-content: space-between;
   background: #fff;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
   gap: 1.5rem;
   border-radius: 12px;
   padding: 1.5rem;
@@ -506,14 +506,17 @@
   background: #f59e0b;
   margin-bottom: 0.1rem;
 }
+
 .status-indicator.completed {
   background: #8b5cf6;
   margin-bottom: 0.1rem;
 }
+
 .status-indicator.confirmed {
   background: #10b981;
   margin-bottom: 0.1rem;
 }
+
 .status-indicator.cancelled {
   background: #991b1b;
   margin-bottom: 0.1rem;

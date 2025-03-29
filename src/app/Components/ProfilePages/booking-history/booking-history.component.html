@@ -1,10 +1,21 @@
 <div class="booking-history-wrapper">
+
   <div class="booking-container">
     <div class="page-header">
-      <div class="header-title">
-        <i class="bi bi-ticket-perforated"></i>
-        <span class="page-heading">My Event Bookings</span>
+
+      <div>
+        <h2 class="fw-bold"><span style="font-size: 0.9em;">📅</span> Booking History</h2>
+
+        <nav aria-label="breadcrumb mb-0">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item mb-0">
+              <p class="text-muted mb-0">User</p>
+            </li>
+            <li class="breadcrumb-item active fw-semibold text-danger" aria-current="page">Booking History</li>
+          </ol>
+        </nav>
       </div>
+
 
       <!-- Filter Dropdowns -->
       <div class="filter-buttons">
@@ -18,27 +29,18 @@
             <i class="bi bi-chevron-down"></i>
           </button>
           <div class="filter-dropdown">
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeEventType === 'All' }"
-              (click)="filterByEventType('All')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeEventType === 'All' }"
+              (click)="filterByEventType('All')">
               <i class="bi bi-star"></i>
               <span class="status-indicator-all">All Events</span>
             </button>
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeEventType === 'Football' }"
-              (click)="filterByEventType('Football')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeEventType === 'Football' }"
+              (click)="filterByEventType('Football')">
               <i class="fa fa-soccer-ball-o"></i>
               <span class="status-indicator football">Football</span>
             </button>
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeEventType === 'Events' }"
-              (click)="filterByEventType('Events')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeEventType === 'Events' }"
+              (click)="filterByEventType('Events')">
               <i class="bi bi-music-note"></i>
               <span class="status-indicator events">Events</span>
             </button>
@@ -55,43 +57,28 @@
             <i class="bi bi-chevron-down"></i>
           </button>
           <div class="filter-dropdown">
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeFilter === 'All' }"
-              (click)="filterBookings('All')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeFilter === 'All' }"
+              (click)="filterBookings('All')">
               <span class="status-indicator all"></span>
               All
             </button>
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeFilter === 'Confirmed' }"
-              (click)="filterBookings('Confirmed')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeFilter === 'Confirmed' }"
+              (click)="filterBookings('Confirmed')">
               <span class="status-indicator confirmed"></span>
               Confirmed
             </button>
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeFilter === 'Upcoming' }"
-              (click)="filterBookings('Upcoming')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeFilter === 'Upcoming' }"
+              (click)="filterBookings('Upcoming')">
               <span class="status-indicator upcoming"></span>
               Upcoming
             </button>
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeFilter === 'Completed' }"
-              (click)="filterBookings('Completed')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeFilter === 'Completed' }"
+              (click)="filterBookings('Completed')">
               <span class="status-indicator completed"></span>
               Completed
             </button>
-            <button
-              class="filter-button"
-              [ngClass]="{ active: activeFilter === 'Cancelled' }"
-              (click)="filterBookings('Cancelled')"
-            >
+            <button class="filter-button" [ngClass]="{ active: activeFilter === 'Cancelled' }"
+              (click)="filterBookings('Cancelled')">
               <span class="status-indicator cancelled"></span>
               Cancelled
             </button>
@@ -214,11 +201,7 @@
   <nav aria-label="Match pagination" class="mt-4">
     <ul class="pagination justify-content-center">
       <li class="page-item" [class.disabled]="currentPage === 1">
-        <a
-          class="page-link"
-          (click)="onPageChange(currentPage - 1)"
-          tabindex="0"
-        >
+        <a class="page-link" (click)="onPageChange(currentPage - 1)" tabindex="0">
           Previous
         </a>
       </li>
@@ -230,11 +213,7 @@
       </li>
       }
       <li class="page-item" [class.disabled]="currentPage === totalPages">
-        <a
-          class="page-link"
-          (click)="onPageChange(currentPage + 1)"
-          tabindex="0"
-        >
+        <a class="page-link" (click)="onPageChange(currentPage + 1)" tabindex="0">
           Next
         </a>
       </li>

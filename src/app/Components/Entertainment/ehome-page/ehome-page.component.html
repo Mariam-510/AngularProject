@@ -33,12 +33,13 @@
             <ul class="list-unstyled">
 
               <li *ngFor="let category of categories">
-                <a routerLink="{{ category.link }}" routerLinkActive="active-category"
+                <a [routerLink]="category.link ? category.link : '/shows'" routerLinkActive="active-category"
+                  [routerLinkActiveOptions]="{ exact: true }"
                   class="text-danger text-decoration-none d-block py-2 border-bottom px-3" style="font-size: 17px;">
                   {{ category.name }}
-                  <!-- <strong>{{ category.name }}</strong> -->
                 </a>
               </li>
+
 
             </ul>
           </aside>
@@ -82,7 +83,7 @@
                     [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
                 </button>
 
-                <a routerLink="/shows/5" class="btn badge bg-danger p-2 fs-6">Read more</a>
+                <a [routerLink]="['/shows', event.id]" class="btn badge bg-danger p-2 fs-6">Read more</a>
               </div>
 
 
@@ -94,25 +95,6 @@
 
 
         <div class="col-md-3">
-
-          <!-- <div id="imgCarousel" class="carousel slide h-100 mt-5" data-bs-ride="carousel" data-bs-interval="1200"
-            style="max-height: 600px">
-            <div class="carousel-inner h-100">
-              @for (image of images; track image) {
-              <div class="carousel-item h-100" [class.active]="image === images[0]">
-                <img [src]="image" class="d-block w-100 h-100 rounded" [alt]="image" style="object-fit: cover;">
-              </div>
-              }
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#imgCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon bg-danger rounded" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#imgCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon bg-danger rounded" aria-hidden="true"></span>
-            </button>
-          </div> -->
-
 
           <!-- Image Carousel -->
           <div id="imgCarousel" class="mt-5 carousel slide h-100" data-bs-ride="carousel" data-bs-interval="1200"

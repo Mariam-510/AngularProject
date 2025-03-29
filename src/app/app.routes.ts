@@ -11,15 +11,15 @@ import { StandUpComedyComponent } from './Components/Entertainment/Categories/st
 import { OtherComponent } from './Components/Entertainment/Categories/other/other.component';
 import { EdetailsComponent } from './Components/Entertainment/edetails/edetails.component';
 import { LeafletMapComponent } from './Components/leaflet-map/leaflet-map.component';
-import { BookingHistoryComponent } from './Components/Book/booking-history/booking-history.component';
+import { BookingHistoryComponent } from './Components/ProfilePages/booking-history/booking-history.component';
 import { BookingComponent } from './Components/Book/booking/booking.component';
 import { BookingDetailsComponent } from './Components/Book/booking-details/booking-details.component';
 import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
 import { HomeComponent } from './Components/home/home.component';
 import { UserProfileComponent } from './Components/ProfilePages/user-profile/user-profile.component';
-import { LoginComponent } from './Components/Authantication/login/login.component';
-import { RegisterComponent } from './Components/Authantication/register/register.component';
+import { LoginComponent } from './Components/Authentication/login/login.component';
+import { RegisterComponent } from './Components/Authentication/register/register.component';
 import { AllComponent } from './Components/Entertainment/Categories/all/all.component';
 import { ReviewsComponent } from './Components/ProfilePages/reviews/reviews.component';
 import { FavouriteComponent } from './Components/ProfilePages/favourite/favourite.component';
@@ -28,6 +28,8 @@ import { BookingEventComponent } from './Components/Book/booking-event/booking-e
 import { BookingMatchComponent } from './Components/Book/booking-match/booking-match.component';
 import { BookingDetailsEventComponent } from './Components/Book/booking-details-event/booking-details-event.component';
 import { BookingDetailsMatchComponent } from './Components/Book/booking-details-match/booking-details-match.component';
+import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
+import { UserComponent } from './Components/ProfilePages/user/user.component';
 
 
 export const routes: Routes = [
@@ -37,15 +39,22 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, title: "Login" },
   { path: 'register', component: RegisterComponent, title: "Register" },
 
-  { path: 'UserProfile', component: UserProfileComponent, title: "Profile" },
-  { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
-  { path: 'Favourite', component: FavouriteComponent, title: "Favourites" },
+  { path: 'userP', component: UserProfileComponent, title: "Profile" },
 
+  {
+    path: 'profile', component: ProfileComponent, title: "Profile", children: [
+      { path: '', redirectTo: 'user', pathMatch: "full" },
+      { path: "user", component: UserComponent, title: "User" },
+      { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
+      { path: 'favourites', component: FavouriteComponent, title: "Favourites" },
+      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' }
+    ]
+  },
 
   { path: 'sports', component: SHomePageComponent, title: "Home" },
   { path: 'sports/:id', component: SDetailsPageComponent, title: "Match Details" },
   {
-    path: 'entertainment', component: EHomePageComponent, title: "Entertainment", children: [
+    path: 'shows', component: EHomePageComponent, title: "Entertainment", children: [
       { path: "", component: AllComponent },
       { path: "concerts", component: ConcertsComponent },
       { path: "theater", component: TheaterComponent },
@@ -54,7 +63,7 @@ export const routes: Routes = [
       { path: "other", component: OtherComponent },
     ]
   },
-  { path: "shows", component: ShowsComponent, title: "Shows" },
+  { path: "shows/all", component: ShowsComponent, title: "Shows" },
   { path: "shows/:id", component: EdetailsComponent, title: "Details" },
 
   { path: 'booking', component: BookingComponent, title: 'Book a match' },//deleted
@@ -65,7 +74,7 @@ export const routes: Routes = [
   { path: 'bookingDetailsMatch', component: BookingDetailsMatchComponent, title: 'Match booking details' },
   { path: 'bookingDetailsEvent', component: BookingDetailsEventComponent, title: 'Event booking details' },
 
-  { path: 'bookingHistory', component: BookingHistoryComponent, title: 'BookingHistory' },
+  // { path: 'bookingHistory', component: BookingHistoryComponent, title: 'BookingHistory' },
 
   { path: "t", component: TesttComponent, title: "t" },
   { path: "l", component: LeafletMapComponent, title: "l" },

@@ -34,7 +34,7 @@
             <i class="bi ms-2" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
           </button>
 
-          <a routerLink="/shows/5"
+          <a [routerLink]="['/shows', event.id]"
             class="btn btn-light text-danger d-flex align-items-center w-50 justify-content-center fs-6">
             <i class="bi bi-info-circle me-2"></i> More Info
           </a>
@@ -80,7 +80,7 @@
 </nav>
 
 <div class="text-center mt-4">
-  <a routerLink="/shows" class="btn btn-light text-danger shadow-sm px-3 py-1 border border-light-2">
+  <a routerLink="/shows/all" class="btn btn-light text-danger shadow-sm px-3 py-1 border border-light-2">
     View all shows
   </a>
 </div>
