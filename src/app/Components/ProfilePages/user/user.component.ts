@@ -1,19 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators,ReactiveFormsModule } from '@angular/forms';
-import { RouterModule ,Router} from '@angular/router';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
-  imports: [ReactiveFormsModule,RouterModule,CommonModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  userImage: string = 'Images/Home/user.jpeg';  
+  userImage: string = 'Images/Home/user.jpeg';
 
-  constructor(private router:Router)
-  {
+  constructor(private router: Router) {
 
   }
   MyForm = new FormGroup(
@@ -21,7 +20,7 @@ export class UserComponent {
       firstName: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
-        Validators.pattern(/^[A-Za-z]+$/)  
+        Validators.pattern(/^[A-Za-z]+$/)
       ]),
       lastName: new FormControl("", [
         Validators.required,
@@ -30,7 +29,7 @@ export class UserComponent {
       ]),
       email: new FormControl("", [
         Validators.required,
-        Validators.pattern(/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/)
+        Validators.pattern(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/)
       ]),
       phoneNum: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{11}$')]),
       password: new FormControl("", [
@@ -38,7 +37,7 @@ export class UserComponent {
         Validators.minLength(6),
         Validators.maxLength(10),
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!#%*?&])[A-Za-z\d@#$!%*?&]{6,10}$/)
-  
+
       ]),
       confirmPassword: new FormControl("", [
         Validators.required
@@ -50,12 +49,12 @@ export class UserComponent {
       firstName: 'Shahd',
       lastName: 'Abdalla',
       email: 'Shahd@gmail.com',
-      password: 'Ma123456@', 
-      confirmPassword:'Ma12345@',
+      password: 'Ma123456@',
+      confirmPassword: 'Ma12345@',
       phoneNum: '01144756069'
     });
   }
- 
+
   uploadImage() {
     const input = document.createElement('input');
     input.type = 'file';
@@ -74,7 +73,7 @@ export class UserComponent {
 
     input.click();
   }
- 
+
 
   register() {
     if (this.MyForm.invalid) {
