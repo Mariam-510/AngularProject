@@ -79,12 +79,12 @@ export class HeaderComponent implements OnInit {
     // Clear search on mobile view
     if (this.isMobile) this.searchQuery = '';
   }
-  
+
   logout(event: MouseEvent) {
     event.stopPropagation();
     this._shared.logout();
     this.userMenuActive = false;
     this.menuActive = false;
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 }

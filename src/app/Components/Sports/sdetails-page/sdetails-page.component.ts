@@ -120,7 +120,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
           this.renderer.removeClass(card, 'fixed-event-card');
 
           // this.renderer.setStyle(card, 'position', 'absolute');
-          this.renderer.setStyle(card, 'top', `${stopPoint - 350}px`);
+          this.renderer.setStyle(card, 'top', `${stopPoint - 500}px`);
         }
         else {
           this.renderer.addClass(card, 'fixed-event-card');
@@ -132,7 +132,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
         tabBar.classList.remove('sticky'); // Remove when reaching stop section
       }
 
-      if (!scrollingDown && scrollPosition < stopPoint - 300) {
+      if (!scrollingDown && scrollPosition < stopPoint - 350) {
         this.renderer.addClass(card, 'fixed-event-card');
       }
 

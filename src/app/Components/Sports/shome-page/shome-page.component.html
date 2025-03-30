@@ -1,4 +1,4 @@
-<div id="heroCarousel" class="carousel slide mt-2 carousel-rounded" data-bs-ride="carousel" data-bs-interval="1500"
+<div id="heroCarousel" class="carousel slide mt-2 carousel-rounded" data-bs-ride="carousel" data-bs-interval="15000"
   appSwipe>
   <div class="carousel-indicators">
     <button *ngFor="let match of matches.slice(0, 3); let i = index" type="button" data-bs-target="#heroCarousel"
@@ -12,10 +12,20 @@
 
       <img src="{{match.staduim}}" class="d-block w-100" alt="{{ match.tournament }}"
         style="max-height: 620px; object-fit: cover;">
-      <div class="text-overlay mb-5 ms-5">
+
+      <!-- <div class="text-overlay mb-5 ms-5">
         <h1 class="fw-bold text-uppercase text-white fs-1 fs-lg-2 fs-md-3 fs-sm-4 lh-1 mt-2">🏟️ {{ match.venue }}</h1>
-        <!-- <p class="fw-bold text-white fs-5 fs-lg-4 fs-md-5 lh-1 "> </p> -->
+      </div> -->
+      <div class="text-overlay mb-5 ms-5">
+        <div class="fw-bold text-uppercase text-white mt-2 responsive-text text-wrap">
+          🏟️ {{ match.venue }}
+        </div>
       </div>
+
+
+
+
+
 
       <!-- Event Card -->
       <div class="position-absolute top-50 end-0 translate-middle-y bg-white shadow rounded me-5"

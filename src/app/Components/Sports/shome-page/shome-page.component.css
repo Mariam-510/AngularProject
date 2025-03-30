@@ -1,189 +1,216 @@
 .carousel-rounded {
-    position: relative;
-    overflow: hidden;
-    border-bottom-left-radius: 50% 50px;
-    border-bottom-right-radius: 50% 50px;
+  position: relative;
+  overflow: hidden;
+  border-bottom-left-radius: 50% 50px;
+  border-bottom-right-radius: 50% 50px;
 }
 
 .text-overlay {
-    position: absolute;
-    bottom: 5%;
-    left: 5%;
-    background: rgba(40, 37, 37, 0.5);
-    padding: 0rem 1rem;
-    border-radius: 5px;
-    max-width: 80%;
+  position: absolute;
+  bottom: 5%;
+  left: 1%;
+  background: rgba(40, 37, 37, 0.5);
+  padding: 0rem 1rem;
+  border-radius: 5px;
+  max-width: 80%;
 }
 
 .carousel-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    min-height: 500px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  min-height: 500px;
 }
 
 .event-card {
-    width: 320px;
-    right: 2rem;
-    top: 50%;
-    /* transform: translateY(-50%); */
+  width: 320px;
+  right: 2rem;
+  top: 50%;
+  /* transform: translateY(-50%); */
 }
 
 @media (max-width: 768px) {
-    .carousel-rounded {
-        border-bottom-left-radius: 30% 30px;
-        border-bottom-right-radius: 30% 30px;
-    }
-    
-    .event-card {
-        width: 90%;
-        right: 50%;
-        top: auto;
-        bottom: 1rem;
-        transform: translateX(50%);
-    }
-    
-    .text-overlay {
-        bottom: 120px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        text-align: center;
-    }
-    
-    
+  .carousel-rounded {
+    border-bottom-left-radius: 30% 30px;
+    border-bottom-right-radius: 30% 30px;
+  }
+
+  .event-card {
+    width: 90%;
+    right: 50%;
+    top: auto;
+    bottom: 1rem;
+    transform: translateX(50%);
+  }
+
+  .text-overlay {
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+  }
+
+
 }
+
 .rounded-bottom {
-    clip-path: ellipse(90% 100% at center top);
+  clip-path: ellipse(90% 100% at center top);
 }
- /* Custom badge colors */
- .bg-purple { background-color: #6f42c1; }
- .bg-gold { background-color: #ffd700; color: #000; }
- .bg-danger { background-color: #dc3545; }
- .bg-gray { background-color: #3b3838; }
- .bg-lightgray { background-color: #e1dedeaf; }
- .category-card {
-    height: 200px;
-    transition: transform 0.3s ease;
-    border: none;
+
+/* Custom badge colors */
+.bg-purple {
+  background-color: #6f42c1;
+}
+
+.bg-gold {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.bg-danger {
+  background-color: #dc3545;
+}
+
+.bg-gray {
+  background-color: #3b3838;
+}
+
+.bg-lightgray {
+  background-color: #e1dedeaf;
+}
+
+.category-card {
+  height: 200px;
+  transition: transform 0.3s ease;
+  border: none;
 }
 
 .category-card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .category-bg {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
-    transition: filter 0.3s ease;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: filter 0.3s ease;
 }
 
 .category-card:hover .category-bg {
-    filter: brightness(0.5);
+  filter: brightness(0.5);
 }
 
 .category-content {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 }
 
 .category-content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
+
 .custom-button {
-background-color: transparent; /* Fully transparent */
-color: black; /* Text color */
-border: none; /* No border */
-transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: transparent;
+  /* Fully transparent */
+  color: black;
+  /* Text color */
+  border: none;
+  /* No border */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 /* matches.component.css */
 .card {
-    transition: transform 0.2s;
-    border-radius: 0.75rem;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  }
-  
-  .page-link {
-    cursor: pointer;
-    color: #dc3545;
-    border: 1px solid #dee2e6;
-  }
-  
-  .page-item.active .page-link {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: white;
-  }
-  
-  .card-img-top {
-    border-radius: 0.75rem 0.75rem 0 0;
-  }
-  
-  .badge {
-    font-size: 0.9rem;
-    padding: 0.5em 0.75em;
-  }
-  .team-logo {
-    width: 40px !important;
-    min-height:40px  !important;
-    height: 40px !important;
-    object-fit: contain !important;
-  }
-  .card-header{
-background-color: #e1dedeaf;
-min-width: 20vw;
+  transition: transform 0.2s;
+  border-radius: 0.75rem;
+}
 
-  }
-  .custom-select {
-    appearance: none; 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: white;
-    color: black;
-    border: 1px solid #ccc;
-    padding: 5px;
-    cursor: pointer;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-link {
+  cursor: pointer;
+  color: #dc3545;
+  border: 1px solid #dee2e6;
+}
+
+.page-item.active .page-link {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.card-img-top {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.5em 0.75em;
+}
+
+.team-logo {
+  width: 40px !important;
+  min-height: 40px !important;
+  height: 40px !important;
+  object-fit: contain !important;
+}
+
+.card-header {
+  background-color: #e1dedeaf;
+  min-width: 20vw;
+
+}
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .custom-select:focus {
-    outline: none;
-    border-color: #ff5733;
-    box-shadow: 0 0 5px #ff5733;
+  outline: none;
+  border-color: #ff5733;
+  box-shadow: 0 0 5px #ff5733;
 }
 
 
-  /* Reset button styling */
-  .reset-btn {
-    background-color: #dc3545;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease-in-out;
-  }
+/* Reset button styling */
+.reset-btn {
+  background-color: #dc3545;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease-in-out;
+}
 
-  .reset-btn:hover {
-    background-color: #c82333;
-  }
+.reset-btn:hover {
+  background-color: #c82333;
+}
 
-  .reset-btn i {
-    font-size: 30px;
-    color: white;
-  }
+.reset-btn i {
+  font-size: 30px;
+  color: white;
+}
 
 #venueFilter option:hover {
-  background-color: #010a12 !important;  /* Blue color - change to your preference */
+  background-color: #010a12 !important;
+  /* Blue color - change to your preference */
   color: white !important;
   cursor: pointer;
 }
@@ -200,6 +227,7 @@ min-width: 20vw;
   border-color: #c82333;
   box-shadow: none;
 }
+
 /* Custom hover effect for dropdown items */
 .dropdown-item:hover {
   background-color: #db8282 !important;
@@ -211,11 +239,12 @@ min-width: 20vw;
   transition: all 0.3s ease;
 }
 
-/* Ticket Button Hover */ 
+/* Ticket Button Hover */
 .ticket-btn:hover {
   transform: scale(1.05);
   transition: all 0.3s ease-in-out;
 }
+
 .fav-btn:hover,
 .more-info:hover {
   transform: scale(1.05);
@@ -227,4 +256,21 @@ min-width: 20vw;
   /* / background: #dc3545; / */
   /* / color: white; / */
   transform: scale(1.1);
+}
+
+
+/* ------------------------------------------------------------------------------------- */
+
+.responsive-text {
+  font-size: 2vw;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+@media (max-width: 992px) {
+  .responsive-text {
+    display: none;
+  }
 }
