@@ -121,7 +121,7 @@ export class ReviewsComponent {
   }
 
   // Get paginated events
-  get paginatedEvents() {
+  get paginatedReviews() {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     return this.filteredReviews.slice(start, start + this.itemsPerPage);
   }

@@ -45,11 +45,11 @@
 
 
   <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3 g-3 mb-4">
-    <div class="col d-flex" *ngFor="let review of paginatedEvents">
+    <div class="col d-flex" *ngFor="let review of paginatedReviews">
       <div class="card p-4 border-0 shadow rounded-4 position-relative bg-white d-flex flex-column w-100 h-100">
 
         <!-- Title with Emoji -->
-        <h5 class="fw-bold text-dark text-break">
+        <h5 class="text-dark text-break fs-4">
           <span *ngIf="review.category === 'Shows'">🎟️</span>
           <span *ngIf="review.category === 'Sports'">⚽</span>
           {{ review.title }}
@@ -91,12 +91,13 @@
         </div>
 
         <!-- Review Comment -->
-        <p class="mt-3 ms-2 text-muted fst-italic flex-grow-1 text-break">{{ review.comment }}</p>
+        <p class="mt-3 ms-2 text-muted flex-grow-1 text-break">{{ review.comment }}</p>
       </div>
     </div>
   </div>
 
-
+  @if(paginatedReviews.length>0)
+  {
   <!-- Pagination Controls -->
   <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center mt-4">
@@ -125,6 +126,15 @@
       </li>
     </ul>
   </nav>
+  }
+
+  @else
+  {
+  <div class="text-center text-danger my-5 py-5">
+    <i class="bi bi-exclamation-circle fs-1"></i>
+    <p class="mt-2 fw-bold">No reviews found</p>
+  </div>
+  }
 
 
 </div>
