@@ -1,24 +1,30 @@
-/* Footer Container */
 .footer-container {
   background: #2a2a2a;
   color: #ffffff;
-  padding: 2rem 2rem 0;
+  padding: 1rem 1rem auto;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
   margin-top: auto;
 }
 
 .footer-content {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 2rem;
+  margin-bottom: -2.5rem;
+  padding: 0 1rem;
+}
+
+.footer-section:first-child {
+  width: 25%;
+  margin-right: auto;
+  padding-left: 0;
 }
 
 .footer-section {
   padding: 1rem;
-  flex: 1;
-  width: 25%;
+  width: 23%;
+  text-align: left;
 }
 
 .footer-logo a {
@@ -46,14 +52,15 @@
 }
 
 .footer-description {
-  margin: 1rem 0;
+  margin: 1rem auto;
   line-height: 1.6;
   color: #cccccc;
 }
 
 .footer-section h4 {
   color: #dc3545;
-  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   font-size: 1.2rem;
 }
 
@@ -64,7 +71,7 @@
 }
 
 .footer-section nav ul li {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .footer-section nav ul li a {
@@ -106,30 +113,58 @@
 
 .copyright {
   text-align: center;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   border-top: 1px solid #444444;
   margin-top: 2rem;
   color: #cccccc;
 }
 
 /* Responsive Styles */
-@media (max-width: 992px) {
-  .footer-content {
-    flex-wrap: wrap;
+@media (max-width: 1024px) {
+  .footer-section:first-child {
+    flex: 1 1 100%;
+    margin-bottom: 1.5rem;
+    padding-right: 0;
   }
 
   .footer-section {
-    width: 50%;
+    flex: 1 1 45%;
+    margin-bottom: 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
+    gap: 1.5rem;
   }
 
   .footer-section {
     width: 100%;
     text-align: center;
+    padding: 0;
+  }
+
+  .footer-description {
+    margin: 1rem auto;
+    max-width: 100%;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .contact-info p {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-section nav ul li a {
+    justify-content: center;
+  }
+
+  .footer-logo a {
+    font-size: 1.5rem;
   }
 }
