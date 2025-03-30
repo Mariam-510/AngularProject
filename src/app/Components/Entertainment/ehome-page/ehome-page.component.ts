@@ -15,6 +15,7 @@ export class EHomePageComponent {
 
   events = [
     {
+      id:1,
       title: "March Shows",
       date: "February 26th, 2025",
       description: "Immerse yourself in live entertainment with these top shows. Immerse yourself in live entertainment with these top shows.Experience the vibrant streets of 1950s New York like never before.",
@@ -22,6 +23,7 @@ export class EHomePageComponent {
       isFavorite: false
     },
     {
+      id:2,
       title: "Why You Should Catch the Queen of Comedy",
       date: "February 20th, 2025",
       description: "Nikki called it 'Ozempic's biggest night,' here's why. Immerse yourself in live entertainment with these top shows. Experience the vibrant streets of 1950s New York like never before.",
@@ -29,6 +31,7 @@ export class EHomePageComponent {
       isFavorite: true
     },
     {
+      id:3,
       title: "West Side Story",
       date: "February 19th, 2025",
       description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
@@ -50,7 +53,7 @@ export class EHomePageComponent {
 
 
   categories = [
-    { name: 'All', link: 'all' },
+    { name: 'All', link: '' },
     { name: 'Concerts', link: 'concerts' },
     { name: 'Theater', link: 'theater' },
     { name: 'Dance', link: 'dance' },

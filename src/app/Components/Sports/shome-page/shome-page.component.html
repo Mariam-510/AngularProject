@@ -1,39 +1,37 @@
-<<<<<<< Updated upstream
-<div id="heroCarousel" class="carousel slide mt-2 carousel-rounded" data-bs-ride="carousel" data-bs-interval="1500" appSwipe>
-=======
 <div id="heroCarousel" class="carousel slide  carousel-rounded" data-bs-ride="carousel" data-bs-interval="1500"
   appSwipe>
->>>>>>> Stashed changes
   <div class="carousel-indicators">
-    <button *ngFor="let match of matches.slice(0, 3); let i = index" 
-            type="button" 
-            data-bs-target="#heroCarousel" 
-            [attr.data-bs-slide-to]="i" 
-            [class.active]="i === 0">
+    <button *ngFor="let match of matches.slice(0, 3); let i = index" type="button" data-bs-target="#heroCarousel"
+      [attr.data-bs-slide-to]="i" [class.active]="i === 0">
     </button>
   </div>
 
   <div class="carousel-inner">
-    <div *ngFor="let match of matches.slice(0, 3); let i = index" 
-    class="carousel-item position-relative" 
-    [class.active]="i === 0">
+    <div *ngFor="let match of matches.slice(0, 3); let i = index" class="carousel-item position-relative"
+      [class.active]="i === 0">
 
-      <img src="{{match.staduim}}" class="d-block w-100" alt="{{ match.tournament }}" style="max-height: 620px; object-fit: cover;">
+      <img src="{{match.staduim}}" class="d-block w-100" alt="{{ match.tournament }}"
+        style="max-height: 620px; object-fit: cover;">
       <div class="text-overlay mb-5 ms-5">
         <h1 class="fw-bold text-uppercase text-white fs-1 fs-lg-2 fs-md-3 fs-sm-4 lh-1 mt-2">🏟️ {{ match.venue }}</h1>
         <!-- <p class="fw-bold text-white fs-5 fs-lg-4 fs-md-5 lh-1 "> </p> -->
       </div>
 
       <!-- Event Card -->
-      <div class="position-absolute top-50 end-0 translate-middle-y bg-white shadow rounded me-5" style="width: 410px; max-width: 100%;">
-        <div class="bg-dark text-white p-3 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
+      <div class="position-absolute top-50 end-0 translate-middle-y bg-white shadow rounded me-5"
+        style="width: 410px; max-width: 100%;">
+        <div
+          class="bg-dark text-white p-3 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
           style="height: 120px;">
           <h3 class="m-0">{{ match.tournament }}</h3>
         </div>
         <div class="d-flex gap-2 align-items-center mt-3 ms-3">
-          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ match.category }}</span>
-          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ match.adv }}</span>
-          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ match.word }}</span>
+          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
+            match.category }}</span>
+          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ match.adv
+            }}</span>
+          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
+            match.word }}</span>
         </div>
         <div class="card-body d-flex flex-column ps-2 pe-2 py-3">
           <div class="card-header border-bottom-0 pt-0 match-vs text-center py-2">
@@ -65,17 +63,23 @@
           </div>
           <div class="mx-2 py-1">
             <div class="d-flex gap-2 justify-content-center mb-2">
-              <button class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
+              <button
+                class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
                 (click)="toggleFavorite(match)">
                 <span class="text-danger">Add to Wishlist</span>
-                <i class="bi ms-2" [ngClass]="match.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
+                <i class="bi ms-2"
+                  [ngClass]="match.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
               </button>
-              <button class="btn btn-light badge more-info align-items-center w-50 justify-content-center py-3 fs-6 shadow" [routerLink]="['/home', match.id]">
+              <button
+                class="btn btn-light badge more-info align-items-center w-50 justify-content-center py-3 fs-6 shadow"
+                [routerLink]="['/sports', match.id]">
                 <i class="bi bi-info-circle text-danger"></i>
                 <span class="text-danger ps-1 "> Details</span>
               </button>
             </div>
-            <a class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2 ticket-btn"><i class="bi bi-ticket-perforated "></i> GET TICKET</a>
+            <a routerLink="/bookingMatch" class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2 ticket-btn"><i
+                class="bi bi-ticket-perforated "></i> GET
+              TICKET</a>
           </div>
         </div>
       </div>
@@ -256,12 +260,12 @@
 
           <div class="mt-auto border-top pt-3">
             <div class="d-flex gap-2">
-              <button class="btn btn-outline-danger flex-grow-1 fw-semibold" [routerLink]="['/home', match.id]">
+              <button class="btn btn-outline-danger flex-grow-1 fw-semibold" [routerLink]="['/sports', match.id]">
                 <i class="bi bi-info-circle"></i> Details
               </button>
-              <button class="btn btn-danger flex-grow-1 fw-semibold">
+              <a routerLink="/bookingMatch" class="btn btn-danger flex-grow-1 fw-semibold">
                 <i class="bi bi-ticket-perforated"></i> Book Ticket
-              </button>
+              </a>
             </div>
           </div>
         </div>

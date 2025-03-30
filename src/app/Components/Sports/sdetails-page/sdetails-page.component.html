@@ -1,105 +1,12 @@
 <div #heroSection class="position-relative d-flex justify-content-center ">
-<<<<<<< Updated upstream
-    <img src="img/s1.jpg" class="img-fluid w-100 banner-rounded " alt="Event Banner"
-        style="max-height: 620px; object-fit: cover;">
-    <!-- ... other hero content ... -->
-=======
   <img src="img/s1.jpg" class="img-fluid w-100 banner-rounded " alt="Event Banner"
     style="max-height: 620px; object-fit: cover;">
     <div class="text-overlay mb-5 ms-5 ">
       <h1 class="fw-bold text-uppercase text-white fs-1 fs-lg-2 fs-md-3 fs-sm-4 lh-1  " >🏟️ {{ item.location }}</h1>
     </div>
->>>>>>> Stashed changes
 
-    <!-- Modified Event Card -->
+  <!-- Modified Event Card -->
 
-<<<<<<< Updated upstream
-    <div #eventCard
-    class="position-absolute end-0 bg-white shadow rounded me-5 mt-5  smooth-card custom-card card border-0  "
-    style="max-width: 100%; width: 375px;">
-
-        <div class="position-relative  ">
-            <!-- <img src="img/EPL4.jpg" 
-             class="card-img-top" 
-             style="height: 200px; object-fit: cover;"
-             alt="Ahmanson Theater"> -->
-             <div >
-                <div class="bg-dark text-white  rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
-                style="height: 120px;">
-             <h3 class="m-0"> {{item.title}}</h3>
-         </div>
-         <div class="event-image">
-            <img src="img/national.jpg" class=" event-image rounded-bottom" alt="Juliet Banner">
-        </div>
-             </div>
-        
-        </div>
-
-        <div class="card-body d-flex flex-column">
-            <!-- Teams Playing -->
-            <div class="card-header border-bottom-0 px-0 pt-0 match-vs text-center">
-                <div class="d-flex align-items-center justify-content-between">
-                  <img [src]="teams[0].logo" alt="{{teams[0].name}} logo" class="team-logo me-2">
-
-                    <strong class="text-dark">{{teams[0].name}}</strong>
-                    <span class="mx-2 fw-bold text-danger fs-4">VS</span>
-                    <strong class="text-dark">{{teams[1].name}}</strong>
-                    <img [src]="teams[1].logo" class="team-logo me-2" alt="Team B">
-                </div>
-            </div>
-
-
-            <div class="bg-white border-bottom-0 my-3 ">
-                <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center ">{{item.location}}</h5>
-                <small class="text-muted  d-flex justify-content-center ">
-                    <i class="bi bi-calendar-event me-1 text-danger  "></i> {{item.date}}
-                </small>
-
-            </div>
-
-         
-
-            <div >
-                <div class="d-flex align-items-center mb-2">
-                    <i class="bi bi-clock-history me-2 text-danger"></i>
-                    <strong class="me-2">Time:</strong>
-                    <span class="text-dark">{{item.Kickoff}}</span>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="bi bi-trophy me-2 text-danger"></i>
-                    <strong class="me-2">Group:</strong>
-                    <span class="text-dark">{{item.Group}}</span>
-                </div>
-                <div class="d-flex align-items-center ">
-                    <i class="bi bi-cash-stack me-2 text-danger"></i>
-                    <strong class="me-2">Price:</strong>
-                    <span class="text-dark">{{ item.price | currency:'EGP' }}</span>
-                   
-                </div>
-            </div>
-            <div class="mx-2  py-1 mt-1">
-              <div class="d-flex gap-2 justify-content-center mb-2 mt-2">
-                <button
-                  class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
-                  (click)="toggleFavorite(item)">
-                  <span class="text-danger">Add to Wishlist </span>
-                  <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
-                </button>
-        
-                <button
-                  class="btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center fs-6 shadow"
-                  (click)="shareItem(item)">
-                  Share it <i class="bi bi-share-fill ms-2"></i>
-                </button>
-              </div>
-        
-              <a class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2"><i class="bi bi-ticket-perforated"></i> GET TICKET</a>
-            </div>
-           
-        </div>
-    </div>
-
-=======
   <div #eventCard
     class="position-absolute end-0 bg-white shadow rounded me-5 mt-4  smooth-card custom-card card border-0  "
     style="max-width: 100%; width: 375px;">
@@ -191,7 +98,6 @@
     </div>
   </div>
 
->>>>>>> Stashed changes
 </div>
 
 
@@ -203,97 +109,97 @@
       <i class="bi bi-info-circle-fill me-2 fs-6"></i> <span class="fs-5">Overview</span>
     </a>
 
-  
+
     <a href="#location" (click)="scrollToSection($event, 'location')" class="me-3">
       <i class="bi bi-geo-alt-fill me-2 fs-6"></i>
       <span class="fs-5">Location</span>
     </a>
-  
-      <a href="#Date&Time" (click)="scrollToSection($event, 'Date&Time')"  class="me-3">
-        <i class="bi bi-calendar3 me-2 fs-6"></i>
-        <span class="fs-5"> Date & Time</span>
-      </a>
-  
-      <a href="#tickets" (click)="scrollToSection($event, 'tickets')" class="me-3">
-        <i class="bi bi-tags-fill me-2 fs-6"></i>
-        <span class="fs-5">Tickets</span>
-      </a>
 
-      <a href="#Teams" (click)="scrollToSection($event, 'Teams')" class="me-3">
-        <i class="bi bi-people-fill    me-2 fs-6"></i>
-        <span class="fs-5">Teams</span></a>
+    <a href="#Date&Time" (click)="scrollToSection($event, 'Date&Time')" class="me-3">
+      <i class="bi bi-calendar3 me-2 fs-6"></i>
+      <span class="fs-5"> Date & Time</span>
+    </a>
+
+    <a href="#tickets" (click)="scrollToSection($event, 'tickets')" class="me-3">
+      <i class="bi bi-tags-fill me-2 fs-6"></i>
+      <span class="fs-5">Tickets</span>
+    </a>
+
+    <a href="#Teams" (click)="scrollToSection($event, 'Teams')" class="me-3">
+      <i class="bi bi-people-fill    me-2 fs-6"></i>
+      <span class="fs-5">Teams</span></a>
 
 
-        <a href="#terms-conditions" (click)="scrollToSection($event, 'terms-conditions')" class="me-3">
-          <i class="bi bi-file-earmark-text-fill me-2 fs-6"></i>
-          <span class="fs-5">Terms & Conditions</span>
-        </a>
-    
-        <a href="#reviews" (click)="scrollToSection($event, 'reviews')">
-          <i class="bi bi-chat-dots-fill me-2 fs-6"></i>
-          <span class="fs-5">Reviews</span>
-        </a>
-      </div>
-  
-    <div class="px-5">
+    <a href="#terms-conditions" (click)="scrollToSection($event, 'terms-conditions')" class="me-3">
+      <i class="bi bi-file-earmark-text-fill me-2 fs-6"></i>
+      <span class="fs-5">Terms & Conditions</span>
+    </a>
+
+    <a href="#reviews" (click)="scrollToSection($event, 'reviews')">
+      <i class="bi bi-chat-dots-fill me-2 fs-6"></i>
+      <span class="fs-5">Reviews</span>
+    </a>
+  </div>
+
+  <div class="px-5">
     <section id="overview" class="mt-3 p-2">
       <!-- Section Title -->
       <h2 class="mb-3">
         <i class="bi bi-info-circle-fill text-danger me-2"></i>
         <span class="heading-line">Overview</span>
       </h2>
-  
+
       <div class="ps-5">
         <!-- Subtitle Before Description -->
         <h4>
           <i class="bi bi-lightbulb-fill me-2"></i> Get to know more about this event
         </h4>
-  
+
         <!-- Description -->
         <p class="lead ms-3 text-justify fw-light fst-italic">
           {{ showMore ? item.description : (item.description | slice:0:200) + '...' }}
         </p>
-  
+
         <!-- Show More / Show Less Button -->
         <button class="btn btn-light text-danger me-2" (click)="showMore = !showMore">
           <i class="bi" [ngClass]="showMore ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
           {{ showMore ? 'Show Less' : 'Show More' }}
         </button>
-  
-  
+
+
         <hr class="mt-4">
       </div>
     </section>
-  
-  
+
+
     <section id="location" class="p-2">
       <!-- Section Title -->
       <h2 class="mb-3">
         <i class="bi bi-geo-alt-fill text-danger me-2"></i>
         <span class="heading-line">Location</span>
       </h2>
-  
+
       <div class="ps-5">
         <!-- Subtitle Before Description -->
         <h4>
           <i class="bi bi-map me-2"></i> Check out the Stadium on the map
         </h4>
-  
+
         <!-- Flexbox Container for Location & Map -->
         <div class="d-flex align-items-start mt-2 mb-4">
-  
+
           <!-- Buttons: Hide Map & Share Location -->
           <div class="mt-3">
             <button class="btn btn-light text-danger me-2" (click)="toggleMap()">
               <i class="bi" [ngClass]="isMapVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
               {{ isMapVisible ? 'Hide Map' : 'Show Map' }}
             </button>
-  
+
             <!-- Share Location Button -->
             <button class="btn bg-danger text-white" (click)="openShareModal()">
               <i class="bi bi-share-fill"></i> Share Location
             </button>
-  
+
             <!-- Bootstrap Modal -->
             <div class="modal fade" id="shareLocationModal" tabindex="-1" aria-labelledby="shareLocationModalLabel"
               aria-hidden="true">
@@ -314,43 +220,38 @@
                 </div>
               </div>
             </div>
-  
-  
+
+
           </div>
         </div>
-  
+
         <!-- Map Container (Next to Location) -->
         <!-- <div class="ms-4" *ngIf="isMapVisible">
           <app-leaflet-map [locationName]="item.fullLocation" [styleTxt]="{ 'height': '350px', width: '80%' }">
           </app-leaflet-map>
         </div> -->
-<<<<<<< Updated upstream
-  
-        <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
-=======
 
         <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.location" [styleTxt]="{
->>>>>>> Stashed changes
       'height': '350px',
       'width': '90%',
       'display': 'block',
     }">
           <!-- 'margin': '0 auto' -->
         </app-leaflet-map>
-  
+
         <hr class="mt-4">
       </div>
     </section>
-  
-  
+
+
     <section id="Date&Time" class="p-2">
       <!-- Section Title with Icon -->
       <h2 class="mb-3">
         <i class="bi bi-calendar3 text-danger me-2"></i>
         <span class="heading-line">Date & Time</span>
       </h2>
-  
-      <div >
+
+      <div>
         <!-- Subtitle Before Table -->
         <h4 class="mt-3 ps-5">
           <i class="bi bi-hourglass-split me-2 pb-2"></i> Check the Match Date & Time below
@@ -358,13 +259,13 @@
             <p><strong>📅 Date:</strong> {{item. date}}</p>
             <p><strong>🕗 Kickoff:</strong> {{item.Kickoff}}</p>
             <p><strong>🚪 Gates Open:</strong> {{item.GatesOpen}}</p>
-        </div>
+          </div>
         </h4>
 
         <hr class="mt-4">
       </div>
     </section>
-  
+
     <section id="tickets" class="p-2">
       <!-- Section Heading -->
       <h2 class="mb-4">
@@ -415,9 +316,9 @@
                 </span>
 
                 <!-- Buy Now Button -->
-                <button class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
+                <a routerLink="/bookingMatch" class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
                   Buy Now
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -435,212 +336,210 @@
 
       <hr class="mt-4">
     </section>
-  
-  
-  
+
+
+
     <section id="Teams" class="p-3">
-        <!-- Section Title -->
-        <div class="container">
-          <h2 class="mb-4 d-flex align-items-center ">
-            <i class="bi bi-people-fill text-danger   me-2"></i>
-            <span class="heading-line section-title">Teams</span>
-          </h2>
-      
-          <div class="row g-4">
-            <!-- Team Card Template -->
-            <div *ngFor="let team of teams" class="col-6 ">
-              <div class="team-card card h-100 border-0 shadow-hover transition-all">
-                <div class="card-header p-0 overflow-hidden">
-                  <img [src]="team.logo" alt="{{team.name}} logo" class="main-logo img-fluid bg-light p-4 w-100">
-                </div>
-                
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center justify-content-center pb-2">
-                    <h3 class="mb-0 me-2 text-gradient-primary ">{{team.name}}</h3>
-                    <i class="bi bi-patch-check-fill text-primary fs-5"></i>
-                  </div>
-                  
-                  <p class="text-muted text-center ">{{team.description}}</p>
-                  
-                  <div class="team-details">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="fw-bold text-danger ">
-                            <i class="bi bi-person-bounding-box "></i>
-                            Coach : 
-                            <span class="text-muted ">{{team.coach}}</span>
-                        </h5>
-                       
-                       
-                        
-                        <!-- <button class="btn btn-danger w-100 mt-2">Buy Now</button> -->
-                      </div>
+      <!-- Section Title -->
+      <div class="container">
+        <h2 class="mb-4 d-flex align-items-center ">
+          <i class="bi bi-people-fill text-danger   me-2"></i>
+          <span class="heading-line section-title">Teams</span>
+        </h2>
 
-
-                     
-                        <h5 class="ps-2">
-                            <i class="bi bi-star-fill text-warning "></i> 
-                            <span class="  text-danger fw-bold   mb-2 ">
-                            Star Players
-                        </span>
-                        </h5>
-                        
-                     
-                      <div class=" d-flex flex-wrap gap-2 ms-2 mb-3 justify-content-center">
-                        <span *ngFor="let player of team.keyPlayers.split(',')" 
-                               class="badge bg-gradient-secondary bg-opacity-10 text-dark">
-                          {{player.trim()}}
-                        </span>
-                      </div>
-      
-                  
-                  </div>
-                </div>
-      
-               
+        <div class="row g-4">
+          <!-- Team Card Template -->
+          <div *ngFor="let team of teams" class="col-6 ">
+            <div class="team-card card h-100 border-0 shadow-hover transition-all">
+              <div class="card-header p-0 overflow-hidden">
+                <img [src]="team.logo" alt="{{team.name}} logo" class="main-logo img-fluid bg-light p-4 w-100">
               </div>
-            </div>
-            <hr class="mt-4">
-          </div>
-      
-         
-        </div>
-      </section>
-      
-    
-      
-  
-      <section id="terms-conditions" class="p-3 ">
-        <div class="container">
-            <h2 class="mb-4 d-flex align-items-center ">
-            <i class="bi bi-file-earmark-check text-danger  me-2"></i>
-            <span class="heading-line position-relative">
-              Terms & Conditions
-            </span>
-          </h2>
-      
-          <div class="row justify-content-center ">
-            <div class="col-lg-12 ">
-              <div class="terms-list card border-0 shadow-sm hover-shadow-lg  transition-all pb-5">
-                <div class="card-body pb-2">
-                  <ul class="list-unstyled m-0 row g-4">
-                    <li class="col-md-6 d-flex">
-                      <div class="term-item pe-3">
-                        <i class="bi bi-x-octagon-fill text-danger fs-4 me-3"></i>
-                      </div>
-                      <div>
-                        <h5 class="text-dark mb-2">Non-Transferable Tickets</h5>
-                        <p class="text-muted mb-0">Tickets are non-refundable and non-transferable under any circumstances</p>
-                      </div>
-                    </li>
-      
-                    <li class="col-md-6 d-flex">
-                      <div class="term-item pe-3">
-                        <i class="bi bi-person-fill-check text-primary fs-4 me-3"></i>
-                      </div>
-                      <div>
-                        <h5 class="text-dark mb-2">Entry Policy</h5>
-                        <p class="text-muted mb-0">Strict one ticket per person policy with no re-entry after scanning</p>
-                      </div>
-                    </li>
-      
-                    <li class="col-md-6 d-flex">
-                      <div class="term-item pe-3">
-                        <i class="bi bi-shield-fill-check text-success fs-4 me-3"></i>
-                      </div>
-                      <div>
-                        <h5 class="text-dark mb-2">Security Screening</h5>
-                        <p class="text-muted mb-0">Mandatory security checks for all attendees</p>
-                      </div>
-                    </li>
-      
-                    <li class="col-md-6 d-flex">
-                      <div class="term-item pe-3">
-                        <i class="bi bi-cup-straw text-warning fs-4 me-3"></i>
-                      </div>
-                      <div>
-                        <h5 class="text-dark mb-2">Prohibited Items</h5>
-                        <p class="text-muted mb-0">No outside food, drinks, or restricted items allowed</p>
-                      </div>
-                    </li>
-      
-                    <li class="col-md-6 d-flex">
-                      <div class="term-item pe-3">
-                        <i class="bi bi-person-hearts text-info fs-4 me-3"></i>
-                      </div>
-                      <div>
-                        <h5 class="text-dark mb-2">Child Policy</h5>
-                        <p class="text-muted mb-0">Children under 12 must be accompanied by an adult</p>
-                      </div>
-                    </li>
-                    <li class="col-md-6  d-flex">
-                        <div class="term-item pe-3">
-                          <i class="bi bi-exclamation-octagon-fill text-purple fs-4 me-3"></i>
-                        </div>
-                        <div>
-                          <h5 class="text-dark mb-2">Right to Refuse Entry</h5>
-                          <p class="text-muted mb-0">Management reserves the right to refuse admission without reason</p>
-                        </div>
-                      </li>
-                    </ul>
-                  
+
+              <div class="card-body p-2">
+                <div class="d-flex align-items-center justify-content-center pb-2">
+                  <h3 class="mb-0 me-2 text-gradient-primary ">{{team.name}}</h3>
+                  <i class="bi bi-patch-check-fill text-primary fs-5"></i>
                 </div>
-                
-                <!-- <div class="card-footer bg-transparent border-0 text-center py-4">
+
+                <p class="text-muted text-center ">{{team.description}}</p>
+
+                <div class="team-details">
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="fw-bold text-danger ">
+                      <i class="bi bi-person-bounding-box "></i>
+                      Coach :
+                      <span class="text-muted ">{{team.coach}}</span>
+                    </h5>
+
+
+
+                    <!-- <button class="btn btn-danger w-100 mt-2">Buy Now</button> -->
+                  </div>
+
+
+
+                  <h5 class="ps-2">
+                    <i class="bi bi-star-fill text-warning "></i>
+                    <span class="  text-danger fw-bold   mb-2 ">
+                      Star Players
+                    </span>
+                  </h5>
+
+
+                  <div class=" d-flex flex-wrap gap-2 ms-2 mb-3 justify-content-center">
+                    <span *ngFor="let player of team.keyPlayers.split(',')"
+                      class="badge bg-gradient-secondary bg-opacity-10 text-dark">
+                      {{player.trim()}}
+                    </span>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <hr class="mt-4">
+        </div>
+
+
+      </div>
+    </section>
+
+
+
+
+    <section id="terms-conditions" class="p-3 ">
+      <div class="container">
+        <h2 class="mb-4 d-flex align-items-center ">
+          <i class="bi bi-file-earmark-check text-danger  me-2"></i>
+          <span class="heading-line position-relative">
+            Terms & Conditions
+          </span>
+        </h2>
+
+        <div class="row justify-content-center ">
+          <div class="col-lg-12 ">
+            <div class="terms-list card border-0 shadow-sm hover-shadow-lg  transition-all pb-5">
+              <div class="card-body pb-2">
+                <ul class="list-unstyled m-0 row g-4">
+                  <li class="col-md-6 d-flex">
+                    <div class="term-item pe-3">
+                      <i class="bi bi-x-octagon-fill text-danger fs-4 me-3"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-dark mb-2">Non-Transferable Tickets</h5>
+                      <p class="text-muted mb-0">Tickets are non-refundable and non-transferable under any circumstances
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="col-md-6 d-flex">
+                    <div class="term-item pe-3">
+                      <i class="bi bi-person-fill-check text-primary fs-4 me-3"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-dark mb-2">Entry Policy</h5>
+                      <p class="text-muted mb-0">Strict one ticket per person policy with no re-entry after scanning</p>
+                    </div>
+                  </li>
+
+                  <li class="col-md-6 d-flex">
+                    <div class="term-item pe-3">
+                      <i class="bi bi-shield-fill-check text-success fs-4 me-3"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-dark mb-2">Security Screening</h5>
+                      <p class="text-muted mb-0">Mandatory security checks for all attendees</p>
+                    </div>
+                  </li>
+
+                  <li class="col-md-6 d-flex">
+                    <div class="term-item pe-3">
+                      <i class="bi bi-cup-straw text-warning fs-4 me-3"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-dark mb-2">Prohibited Items</h5>
+                      <p class="text-muted mb-0">No outside food, drinks, or restricted items allowed</p>
+                    </div>
+                  </li>
+
+                  <li class="col-md-6 d-flex">
+                    <div class="term-item pe-3">
+                      <i class="bi bi-person-hearts text-info fs-4 me-3"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-dark mb-2">Child Policy</h5>
+                      <p class="text-muted mb-0">Children under 12 must be accompanied by an adult</p>
+                    </div>
+                  </li>
+                  <li class="col-md-6  d-flex">
+                    <div class="term-item pe-3">
+                      <i class="bi bi-exclamation-octagon-fill text-purple fs-4 me-3"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-dark mb-2">Right to Refuse Entry</h5>
+                      <p class="text-muted mb-0">Management reserves the right to refuse admission without reason</p>
+                    </div>
+                  </li>
+                </ul>
+
+              </div>
+
+              <!-- <div class="card-footer bg-transparent border-0 text-center py-4">
                   <a href="#" class="btn btn-lg btn-gradient-primary px-5 rounded-pill">
-                    <i class="bi bi-file-pdf me-2"></i> 
+                    <i class="bi bi-file-pdf me-2"></i>
                     Download Full Terms
                   </a>
                 </div> -->
-              </div>
             </div>
-            <hr class="mt-4">
           </div>
+          <hr class="mt-4">
         </div>
-      </section>
-      
-    
-  
-      <section id="reviews" class="p-4">
-        <!-- Section Heading -->
-        <h2 class="mb-4">
-          <i class="bi bi-chat-dots-fill text-danger me-2"></i>
-          <span class="heading-line">Reviews</span>
-        </h2>
-  
-        <h4 class="ps-5">
-          <i class="bi bi-chat-square-text me-2"></i> See what others are saying
-        </h4>
-  
-        <!-- Review List Container -->
-        <div class="review-container py-1 px-5 rounded mt-3" style="width: 100%; max-height: 400px; overflow-y: auto;">
-  
-          <!-- Review Cards (Vertical Layout) -->
-          <div class="row">
-            <div class="col-12 mb-3" *ngFor="let review of reviews">
-              <div class="card shadow border-0">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div class="d-flex align-items-center">
-                      <i class="bi bi-person-circle text-danger fs-4 me-2"></i>
-                      <h5 class="m-0 fs-5">{{ review.user }}</h5>
-                    </div>
-                    <div class="m-0 text-justify fw-light fst-italic me-2 text-secondary text-danger">Shared on {{
-                      review.date }}
-                    </div>
-  
+      </div>
+    </section>
+
+
+
+    <section id="reviews" class="p-4">
+      <!-- Section Heading -->
+      <h2 class="mb-4">
+        <i class="bi bi-chat-dots-fill text-danger me-2"></i>
+        <span class="heading-line">Reviews</span>
+      </h2>
+
+      <h4 class="ps-5">
+        <i class="bi bi-chat-square-text me-2"></i> See what others are saying
+      </h4>
+
+      <!-- Review List Container -->
+      <div class="review-container py-1 px-5 rounded mt-3" style="width: 100%; max-height: 400px; overflow-y: auto;">
+
+        <!-- Review Cards (Vertical Layout) -->
+        <div class="row">
+          <div class="col-12 mb-3" *ngFor="let review of reviews">
+            <div class="card shadow border-0">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-person-circle text-danger fs-4 me-2"></i>
+                    <h5 class="m-0 fs-5">{{ review.user }}</h5>
                   </div>
-  
-                  <!-- Star Ratings -->
-                  <div class="text-warning mb-2 fs-6">
-                    <ng-container *ngFor="let star of [].constructor(5); let i = index">
-                      <i class="bi" [ngClass]="{
+                  <div class="m-0 text-justify fw-light fst-italic me-2 text-secondary text-danger">Shared on {{
+                    review.date }}
+                  </div>
+
+                </div>
+
+                <!-- Star Ratings -->
+                <div class="text-warning mb-2 fs-6">
+                  <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                    <i class="bi" [ngClass]="{
                                           'bi-star-fill': i < Math.floor(review.rating),
                                           'bi-star-half': i === Math.floor(review.rating) && review.rating % 1 !== 0,
                                           'bi-star': i >= Math.ceil(review.rating)
                                         }"></i>
-<<<<<<< Updated upstream
-                    </ng-container>
-=======
                   </ng-container>
                 </div>
 
@@ -752,131 +651,17 @@
                         <i class="bi bi-ticket-perforated"></i> Book Ticket
                       </a>
                     </div>
->>>>>>> Stashed changes
                   </div>
-  
-                  <!-- <div class="lead text-justify fw-light fst-italic fs-6">{{ review.comment }}</div> -->
-                  <div class="text-muted fst-italic">{{ review.comment }}</div>
-  
                 </div>
               </div>
             </div>
           </div>
+
+          }
         </div>
-  
-        <hr class="mt-4">
-  
-      </section>
-  
-    </div>
-    <!-- --------------------------------------------------------------------------------------------------------------- -->
-  
-    <div id="stop-scroll" class=" px-5">
-      <h2 class="fw-bold">
-        <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
-      </h2>
-  
-      <hr>
-  
-      <!-- Scroll Buttons -->
-      <div class="scroll-container d-flex">
-        <button class="scroll-btn left me-2" (click)="scrollLeft()">&#10094;</button>
-  
-        <!-- Scrollable Event List -->
-        <div class="event-scroll-wrapper">
-          <div class="row flex-nowrap" id="eventContainer">
-            @for (match of matches; track match) {
-                <div class="col-md-4 event-card"style="width: 440px;">
-                    <div class="card shadow-sm position-relative">
-           <!-- Match Cards Grid -->
-           <div class="card border-0 h-80 "  >
-            <!-- Image Section -->
-            <div class="position-relative">
-            <img [src]="match.image" 
-                 class="card-img-top" 
-                 style="height: 180px; object-fit: cover;"
-                 [alt]="match.venue">
-            
-            <!-- Favorite Heart Icon (Top Right of Image) -->
-            <button class="btn position-absolute top-0 end-0 m-2 p-0 border-0 bg-transparent" (click)="toggleFavorite(match)">
-              <i [ngClass]="match.isFavorite ? 'bi bi-heart-fill text-danger' : 'bi bi-heart text-white'" class="fs-4"></i>
-            </button>
-            </div>
-            
-            <div class="card-body d-flex flex-column">
-            <!-- Teams Playing -->
-            <div class="card-header border-bottom-0 px-0 pt-0 match-vs text-center">
-              <div class="d-flex align-items-center justify-content-between">
-                <img [src]="match.team1Logo" class="team-logo ms-2" alt="{{match.team1}}">
-                <strong class="text-dark">{{match.team1}}</strong>
-                <span class="mx-2 fw-bold text-danger">VS</span>
-                <strong class="text-dark">{{match.team2}}</strong>
-                <img [src]="match.team2Logo" class="team-logo me-2" alt="{{match.team2}}">
-              </div>
-            </div>
-            
-            <div class="bg-white border-bottom-0 my-3 text-center">
-              <h5 class="card-title mb-1 fw-bold text-dark ">{{match.venue}}</h5>
-              <small class="text-muted">
-                <i class="bi bi-calendar-event me-1 text-danger"></i> {{match.date}}
-              </small>
-            
-            </div>
-            
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <span class="badge bg-gray text-white px-3 py-2">{{match.tournament}}</span>
-              <span class="text-muted small">Match No. {{match.matchNumber}}</span>
-            </div>
-            
-            
-            <div class="mb-3">
-              <div class="d-flex align-items-center mb-2">
-                <i class="bi bi-clock-history me-2 text-danger"></i>
-                <strong class="me-2">Time:</strong>
-                <span class="text-dark">{{match.time}}</span>
-              </div>
-              <div class="d-flex align-items-center mb-2">
-                <i class="bi bi-trophy me-2 text-danger"></i>
-                <strong class="me-2">Group:</strong>
-                <span class="text-dark">{{match.group}}</span>
-                
-              </div>
-              <div class="d-flex align-items-center ">
-               
-                  <i class="bi bi-cash-stack me-2 text-danger"></i>
-                  <strong class="me-2">Price:</strong>
-                <span class="text-dark"> ${{ match.price }}</span>
-                  
-              </div>
-            </div>
-            
-            
-            <div class="mt-auto border-top pt-3">
-              <div class="d-flex gap-2">
-                <button class="btn btn-outline-danger flex-grow-1 fw-semibold"[routerLink]="['/home', match.id]">
-                  <i class="bi bi-info-circle"></i> Details
-                </button>
-                <button class="btn btn-danger flex-grow-1 fw-semibold">
-                  <i class="bi bi-ticket-perforated"></i> Book Ticket
-                </button>
-              </div>
-            </div>
-            </div>
-            </div>
-                    </div>
-                </div>
-                
-            }
-          </div>
-        </div>
-  
-        <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
       </div>
+
+      <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
     </div>
+  </div>
 </div>
-
-
-
-
-
-

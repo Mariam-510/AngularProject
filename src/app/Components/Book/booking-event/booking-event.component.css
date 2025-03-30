@@ -1,0 +1,330 @@
+/* Shared Styles */
+.checkout-wrapper {
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: "Inter", system-ui;
+  background: #f8f9fa;
+}
+
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.checkout-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+}
+
+.checkout-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.checkout-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.checkout-card:hover {
+  transform: translateY(-3px);
+}
+
+.ticket-categories {
+  display: grid;
+  gap: 1rem;
+}
+
+.ticket-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-radius: 12px;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.ticket-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.btn-plus,
+.btn-minus {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+/* Total Section Styles */
+.total-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.total-section {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.total-price {
+  color: #28a745;
+  margin: 1.5rem 0;
+  font-size: 2rem;
+}
+
+.btn-checkout {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .ticket-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Event Specific Styles */
+.poster-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.event-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.venue-info {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.date-time {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.date-item,
+.time-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Event Ticket Colors */
+.level-1 {
+  background: linear-gradient(135deg, #ec9cc4 0%, #d774a1 100%);
+}
+.level-2 {
+  background: linear-gradient(135deg, #da8bff 0%, #b971db 100%);
+}
+.level-3 {
+  background: linear-gradient(135deg, #93d88e 0%, #70b86b 100%);
+}
+.level-4 {
+  background: linear-gradient(135deg, #f9bb72 0%, #ec9c41 100%);
+}
+.level-5 {
+  background: linear-gradient(135deg, #4fb3bf 0%, #33949f 100%);
+}
+
+.venue-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Full-width event card */
+.full-width {
+  width: 100%;
+  margin: 20px 0;
+  grid-column: 1 / -1;
+}
+
+/* Adjust grid layout */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Existing styles (keep these) */
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.checkout-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-overview {
+  margin: 20px 0;
+  grid-column: 1 / -1;
+  transition: transform 0.2s ease;
+}
+
+.transaction-overview:hover {
+  transform: translateY(-3px);
+}
+
+.cultural-presentation {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.event-visual {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.event-essentials {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  color: white;
+}
+
+.event-headline {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+}
+
+.venue-meta,
+.temporal-info {
+  margin: 0.5rem 0;
+}
+
+.location-icon {
+  margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .event-visual {
+    height: 200px;
+  }
+
+  .event-essentials {
+    padding: 1.5rem;
+  }
+
+  .event-headline {
+    font-size: 1.5rem;
+  }
+
+  .venue-meta,
+  .temporal-info {
+    font-size: 1rem;
+  }
+
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-container {
+    padding: 0 1rem;
+  }
+
+  .checkout-card {
+    padding: 1.5rem;
+  }
+
+  .checkout-title {
+    font-size: 1.8rem;
+  }
+
+  .event-title {
+    font-size: 1.5rem;
+  }
+
+  .venue-image {
+    height: 200px;
+  }
+
+  .event-visual {
+    height: 180px;
+  }
+
+  .event-essentials {
+    padding: 1rem;
+  }
+
+  .event-headline {
+    font-size: 1.25rem;
+  }
+}

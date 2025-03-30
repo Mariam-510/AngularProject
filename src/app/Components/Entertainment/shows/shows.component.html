@@ -110,10 +110,12 @@
 
             <!-- Action Buttons -->
             <div class="d-flex mt-3 w-100">
-              <a routerLink="/details/5" class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
+              <a [routerLink]="['/shows', event.id]"
+                class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
                 <i class="bi bi-info-circle me-2"></i> More Info
               </a>
-              <a class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
+              <a routerLink="/bookingEvent"
+                class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
                 <i class="bi bi-ticket me-2"></i> BOOK TICKETS
               </a>
             </div>
@@ -127,91 +129,67 @@
     <!-- List View -->
     <div *ngSwitchCase="false">
 
-      <div *ngFor="let event of paginatedEvents">
-        <div class="show-container d-flex align-items-start py-2 px-3 border-bottom rounded bg-white mx-2 my-2">
-          <!-- Event Image -->
-          <img [src]="event.image" class="imgH img-fluid me-4" alt="Event Image"
+      <div *ngFor="let event of paginatedEvents"
+        class="show-container row py-2 px-3 border-bottom rounded bg-white mx-2 my-2">
+        <!-- Event Image - Full width on small screens -->
+        <div class="col-12 col-md-auto text-center">
+          <img [src]="event.image" class="imgH img-fluid" alt="Event Image"
             style="max-width: 400px; max-height: 200px;">
+        </div>
 
-          <div class="d-flex w-100">
-            <!-- Left Section (60%): Title & Description -->
-            <!-- <div class="content-text w-60 pe-3  position-relative">
-              <h2>{{ event.title }}</h2>
-
-              <button class="btn fav-btn d-flex align-items-center position-absolute fs-5"
-                (click)="toggleFavorite(event)" style="top: 12px; right: 5px;">
+        <!-- Event Details -->
+        <div class="col d-flex">
+          <!-- Left Section (60%): Title & Description -->
+          <div class="content-text w-60 pe-3 position-relative">
+            <div class="d-flex justify-content-between align-items-start">
+              <h2 class="flex-grow-1">{{ event.title }}</h2>
+              <!-- Favorite Button -->
+              <button class="btn fav-btn d-flex align-items-center fs-5 ms-auto" (click)="toggleFavorite(event)">
                 <i class="bi" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
               </button>
+            </div>
+            <!-- Rating -->
+            <div class="text-danger mb-2 fs-5">
+              <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                <i class="bi" [ngClass]="{
+                  'bi-star-fill': i < Math.floor(event.rating),
+                  'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
+                  'bi-star': i >= Math.ceil(event.rating)
+                }"></i>
+              </ng-container>
+            </div>
+            <!-- Description -->
+            <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
+          </div>
 
-              <div class="text-danger mb-2 fs-5">
-                <ng-container *ngFor="let star of [].constructor(5); let i = index">
-                  <i class="bi" [ngClass]="{
-                        'bi-star-fill': i < Math.floor(event.rating),
-                        'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
-                        'bi-star': i >= Math.ceil(event.rating)
-                      }"></i>
-                </ng-container>
-              </div>
-              <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
-            </div> -->
-
-            <div class="content-text w-60 pe-3  position-relative">
-              <div class="d-flex justify-content-between align-items-start">
-                <h2 class="flex-grow-1">{{ event.title }}</h2>
-
-                <!-- Favorite Button -->
-                <button class="btn fav-btn d-flex align-items-center fs-5 ms-auto" (click)="toggleFavorite(event)">
-                  <i class="bi" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
-                </button>
-              </div>
-
-              <div class="text-danger mb-2 fs-5">
-                <ng-container *ngFor="let star of [].constructor(5); let i = index">
-                  <i class="bi" [ngClass]="{
-          'bi-star-fill': i < Math.floor(event.rating),
-          'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
-          'bi-star': i >= Math.ceil(event.rating)
-        }"></i>
-                </ng-container>
-              </div>
-
-              <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
-
+          <!-- Right Section (40%): Event Info & Action Buttons -->
+          <div class="event-info-actions w-40 ps-5 d-flex flex-column">
+            <!-- Event Info Box -->
+            <div class="info-box px-4 rounded bg-light text-dark">
+              <h6 class="border-bottom py-2 mt-2 d-flex align-items-center">
+                <i class="bi bi-calendar3 fs-5 me-2"></i>
+                <strong>{{ event.date }}</strong>
+              </h6>
+              <h6 class="border-bottom py-2 d-flex align-items-center">
+                <i class="bi bi-geo-alt-fill fs-5 me-2"></i>
+                <span>{{ event.location }}</span>
+              </h6>
+              <h6 class="py-2 d-flex align-items-center">
+                <i class="bi bi-cash-stack fs-5 me-2"></i>
+                <span>Prices from <strong>${{ event.price }}</strong></span>
+              </h6>
             </div>
 
-            <!-- Right Section (40%): Event Info & Action Buttons -->
-            <div class="event-info-actions w-40 ps-5 d-flex flex-column">
-              <!-- Event Info Box -->
-              <div class="info-box px-4 rounded bg-light text-dark">
-
-                <h6 class="border-bottom py-2 mt-2 d-flex align-items-center">
-                  <i class="bi bi-calendar3 fs-5 me-2"></i>
-                  <strong>{{ event.date }}</strong>
-                </h6>
-
-                <h6 class="border-bottom py-2 d-flex align-items-center">
-                  <i class="bi bi-geo-alt-fill fs-5 me-2"></i>
-                  <span>{{ event.location }}</span>
-                </h6>
-
-                <h6 class="py-2 d-flex align-items-center">
-                  <i class="bi bi-cash-stack fs-5 me-2"></i>
-                  <span>Prices from <strong>${{ event.price }}</strong></span>
-                </h6>
-
-
-              </div>
-
-              <!-- Action Buttons -->
-              <div class="d-flex mt-2">
-                <a routerLink="/details/5" class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
-                  <i class="bi bi-info-circle me-2"></i> More Info
-                </a>
-                <a
-                  class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
-                  <i class="bi bi-ticket me-2"></i> BOOK TICKETS
-                </a>
-              </div>
+            <!-- Action Buttons -->
+            <div class="d-flex mt-2">
+              <a [routerLink]="['/shows', event.id]"
+                class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
+                <i class="bi bi-info-circle me-2"></i> More Info
+              </a>
+              <a routerLink="/bookingEvent"
+                class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
+                <i class="bi bi-ticket me-2"></i> BOOK TICKETS
+              </a>
             </div>
           </div>
         </div>
@@ -219,7 +197,8 @@
 
     </div>
 
-
+    @if(paginatedEvents.length>0)
+    {
     <!-- Pagination Controls -->
     <nav aria-label="Page navigation">
       <ul class="pagination justify-content-center mt-4">
@@ -248,6 +227,14 @@
         </li>
       </ul>
     </nav>
+    }
+    @else
+    {
+    <div class="text-center text-danger my-5 py-5">
+      <i class="bi bi-exclamation-circle fs-1"></i>
+      <p class="mt-2 fw-bold">No matching shows found</p>
+    </div>
+    }
 
   </div>
 </div>

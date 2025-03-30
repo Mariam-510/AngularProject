@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
+import { RouterModule } from '@angular/router';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
 
@@ -19,13 +20,14 @@ export interface event {
 
 @Component({
   selector: 'app-edetails',
-  imports: [CommonModule, LeafletMapComponent],
+  imports: [CommonModule, LeafletMapComponent, RouterModule],
   templateUrl: './edetails.component.html',
   styleUrl: './edetails.component.css'
 })
 export class EdetailsComponent implements AfterViewInit {
   item =
     {
+      id: 1,
       image: 'img/1.jpg',
       location: 'Ahmanson Theater',
       fullLocation: 'Zamalek, Cairo',
@@ -193,6 +195,7 @@ export class EdetailsComponent implements AfterViewInit {
   // events
   eventList = [
     {
+      id: 1,
       title: "PAUL SIMON",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -202,6 +205,7 @@ export class EdetailsComponent implements AfterViewInit {
 
     },
     {
+      id: 2,
       title: "Phantom Of The Opera",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -210,6 +214,7 @@ export class EdetailsComponent implements AfterViewInit {
       isFavorite: false
     },
     {
+      id: 3,
       title: "Umphrey's McGee",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -218,6 +223,7 @@ export class EdetailsComponent implements AfterViewInit {
       isFavorite: true
     },
     {
+      id: 4,
       title: "PAUL SIMON",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",
@@ -227,6 +233,7 @@ export class EdetailsComponent implements AfterViewInit {
 
     },
     {
+      id: 5,
       title: "Umphrey's McGee",
       venue: "Ahmanson Theater",
       date: "July 7 - 2025",

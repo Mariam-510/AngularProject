@@ -84,7 +84,8 @@
         </button>
       </div>
 
-      <a class="ticket-btn btn btn-danger w-100 mt-2 py-2 fs-5 mb-2"><i class="bi bi-ticket-perforated"></i> GET
+      <a routerLink="/bookingEvent" class="ticket-btn btn btn-danger w-100 mt-2 py-2 fs-5 mb-2"><i
+          class="bi bi-ticket-perforated"></i> GET
         TICKET</a>
     </div>
   </div>
@@ -93,7 +94,7 @@
 
 
 
-<div>
+<div class="py-2">
   <div class="tab-links px-5 py-4" #tabLinks>
     <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active ms-2 me-3">
       <i class="bi bi-info-circle-fill me-2 fs-6"></i> <span class="fs-5">Overview</span>
@@ -346,9 +347,9 @@
                 </span>
 
                 <!-- Buy Now Button -->
-                <button class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
+                <a routerLink="/bookingEvent" class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
                   Buy Now
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -569,6 +570,8 @@
   <!-- --------------------------------------------------------------------------------------------------------------- -->
 
   <div id="stop-scroll" class="mt-5 px-5">
+    @if(eventList.length>0)
+    {
     <h2 class="fw-bold">
       <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
     </h2>
@@ -600,10 +603,10 @@
                 <div class="text-danger mb-3 mt-1 fs-5">
                   <ng-container *ngFor="let star of [].constructor(5); let i = index">
                     <i class="bi" [ngClass]="{
-                                      'bi-star-fill': i < Math.floor(event.rating),
-                                      'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
-                                      'bi-star': i >= Math.ceil(event.rating)
-                                    }"></i>
+                                          'bi-star-fill': i < Math.floor(event.rating),
+                                          'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
+                                          'bi-star': i >= Math.ceil(event.rating)
+                                        }"></i>
                   </ng-container>
                 </div>
 
@@ -620,14 +623,14 @@
                       [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
                   </button>
 
-                  <a routerLink="/details/5"
+                  <a [routerLink]="['/shows', event.id]"
                     class="btn btn-light text-danger d-flex align-items-center w-50 justify-content-center fs-6">
                     <i class="bi bi-info-circle me-2"></i> More Info
                   </a>
 
                 </div>
 
-                <a class="btn btn-danger w-100 mt-2 py-2">
+                <a routerLink="/bookingEvent" class="btn btn-danger w-100 mt-2 py-2">
                   <i class="bi bi-ticket me-2"></i> BOOK TICKETS
                 </a>
               </div>
@@ -639,4 +642,6 @@
 
       <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
     </div>
+    }
+
   </div>

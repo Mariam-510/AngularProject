@@ -1,0 +1,192 @@
+<div class="checkout-wrapper">
+  <div class="checkout-container">
+    <!-- Event Details Card -->
+    <div class="transaction-overview">
+      <div class="event-highlight">
+        <div class="cultural-presentation">
+          <img [src]="eventDetails.image" class="event-visual" />
+          <div class="event-essentials">
+            <h2 class="event-headline fs-2">{{ eventDetails.title }}</h2>
+            <div class="venue-meta fs-4">
+              <span class="location-icon">📍</span>
+              {{ eventDetails.venue.name }} • {{ eventDetails.venue.location }}
+            </div>
+            <div class="temporal-info fs-4">
+              <div class="event-timing">
+                🕒 {{ eventDetails.date | date }} •
+                {{ eventDetails.time }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkout-grid">
+      <!-- Left Column-->
+      <div class="checkout-column">
+        <div class="checkout-card">
+          <h2 class="card-title mb-3">🏟️Venue Seating Map</h2>
+          <img [src]="eventDetails.venue.image" class="venue-image" />
+        </div>
+
+        <!-- Total Card -->
+        <div class="checkout-card total-card">
+          <h2 class="card-title mb-4">💳 Payment Summary</h2>
+          <div class="total-section">
+            <h3 class="total-label">Total Amount</h3>
+            <h2 class="total-price">EGP {{ totalPrice() }}</h2>
+            <button
+              class="btn btn-checkout"
+              (click)="proceedToCheckout()"
+              [disabled]="totalTickets() === 0"
+            >
+              Proceed to Secure Checkout
+            </button>
+            <p class="text-muted mt-3 mb-0">
+              <i class="bi bi-shield-lock me-1"></i>100% Secure Payment
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="checkout-column">
+        <!-- Ticket Selector Card -->
+        <div class="checkout-card">
+          <h2 class="card-title mb-4">
+            🎟️Select Tickets
+            <span class="badge bg-secondary">Max 4 tickets!</span>
+          </h2>
+
+          <div class="ticket-categories">
+            <div class="ticket-card level-1">
+              <div class="ticket-info">
+                <h6 class="ticket-category">Level 1</h6>
+                <p class="ticket-price mb-0">EGP {{ level1Price }}</p>
+                <small>Closest to Stage</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusLevel1()"
+                  [disabled]="level1Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-2">{{ level1Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusLevel1()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="ticket-card level-2">
+              <div class="ticket-info">
+                <h6 class="ticket-category">Level 2</h6>
+                <p class="ticket-price mb-0">EGP {{ level2Price }}</p>
+                <small class="text-white-50">Good view</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusLevel2()"
+                  [disabled]="level2Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-3">{{ level2Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusLevel2()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="ticket-card level-3">
+              <div class="ticket-info">
+                <h6 class="ticket-category">Level 3</h6>
+                <p class="ticket-price mb-0">EGP {{ level3Price }}</p>
+                <small class="text-white-50">Mid-level seating</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusLevel3()"
+                  [disabled]="level3Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-3">{{ level3Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusLevel3()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="ticket-card level-4">
+              <div class="ticket-info">
+                <h6 class="ticket-category">Level 4</h6>
+                <p class="ticket-price mb-0">EGP {{ level4Price }}</p>
+                <small class="text-white-50">Balcony / Upper view</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusLevel4()"
+                  [disabled]="level4Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-3">{{ level4Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusLevel4()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="ticket-card level-5">
+              <div class="ticket-info">
+                <h6 class="ticket-category">Level 5</h6>
+                <p class="ticket-price mb-0">EGP {{ level5Price }}</p>
+                <small class="text-white-50">Top balcony / Furthest</small>
+              </div>
+              <div class="ticket-controls">
+                <button
+                  class="btn-minus"
+                  (click)="minusLevel5()"
+                  [disabled]="level5Counter() === 0"
+                >
+                  -
+                </button>
+                <span class="mx-3">{{ level5Counter() }}</span>
+                <button
+                  class="btn-plus"
+                  (click)="plusLevel5()"
+                  [disabled]="isTicketLimitReached()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

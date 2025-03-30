@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+.home-content {
+  background: url('/Images/Home/Party2.jpg') no-repeat center center/cover;
+  height: 665px;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 30px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+
+}
+
+.card {
+  width: 180px;
+  height: 200px;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+
+  text-decoration: none;
+}
+
+
+#Sport {
+  background: rgba(149, 137, 228, 0.31);
+
+}
+
+#Sport img {
+  width: 80px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+#Entertainement {
+  background: rgba(255, 255, 75, 0.263);
+
+}
+
+#Entertainement img {
+  width: 120px;
+  margin-top: 20px;
+  margin-left: 20px;
+  height: 120px;
+}
+
+.card:hover {
+
+  transform: scale(1.09);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card h3 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 0.9em;
+}

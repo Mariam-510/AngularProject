@@ -4,25 +4,17 @@ import { NotfoundComponent } from './Components/notfound/notfound.component';
 import { TesttComponent } from './Components/testt/testt.component';
 import { EHomePageComponent } from './Components/Entertainment/ehome-page/ehome-page.component';
 import { ShowsComponent } from './Components/Entertainment/shows/shows.component';
-import { AllComponent } from './Components/Entertainment/all/all.component';
-import { ConcertsComponent } from './Components/Entertainment/concerts/concerts.component';
-import { TheaterComponent } from './Components/Entertainment/theater/theater.component';
-import { DanceComponent } from './Components/Entertainment/dance/dance.component';
-import { StandUpComedyComponent } from './Components/Entertainment/stand-up-comedy/stand-up-comedy.component';
-import { OtherComponent } from './Components/Entertainment/other/other.component';
+import { ConcertsComponent } from './Components/Entertainment/Categories/concerts/concerts.component';
+import { TheaterComponent } from './Components/Entertainment/Categories/theater/theater.component';
+import { DanceComponent } from './Components/Entertainment/Categories/dance/dance.component';
+import { StandUpComedyComponent } from './Components/Entertainment/Categories/stand-up-comedy/stand-up-comedy.component';
+import { OtherComponent } from './Components/Entertainment/Categories/other/other.component';
 import { EdetailsComponent } from './Components/Entertainment/edetails/edetails.component';
 import { LeafletMapComponent } from './Components/leaflet-map/leaflet-map.component';
-import { BookingHistoryComponent } from './Components/booking-history/booking-history.component';
-import { BookingComponent } from './Components/booking/booking.component';
-import { BookingDetailsComponent } from './Components/booking-details/booking-details.component';
+import { BookingHistoryComponent } from './Components/ProfilePages/booking-history/booking-history.component';
 import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
-<<<<<<< Updated upstream
 
-export const routes: Routes = [
-  { path: 'home', component: SHomePageComponent, title: "Home" },
-  { path: 'home/:id', component: SDetailsPageComponent, title: "Match Details" },
-=======
 import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/Authantication/login/login.component';
 import { RegisterComponent } from './Components/Authantication/register/register.component';
@@ -37,14 +29,18 @@ import { BookingDetailsMatchComponent } from './Components/Book/booking-details-
 import { UserProfileComponent } from './Components/ProfilePages/user-profile/user-profile.component';
 import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.component';
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
+import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
+import { UserComponent } from './Components/ProfilePages/user/user.component';
 
 
 export const routes: Routes = [
+
   { path: '', redirectTo: 'home', pathMatch: "full" },
   { path: 'home', component: HomeComponent, title: "Home" },
   { path: 'about', component: AboutComponent, title: 'About' },
   { path: 'login', component: LoginComponent, title: "Login" },
   { path: 'register', component: RegisterComponent, title: "Register" },
+
 
   // { path: 'profile', component: UserProfileComponent, title: "Profile" },
   { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
@@ -56,15 +52,26 @@ export const routes: Routes = [
       { path: '', redirectTo: 'admin-home', pathMatch: 'full' },
       {path:'admin-home',component:AdminHomeComponent}]
      
+
+  { path: 'userP', component: UserProfileComponent, title: "Profile" },
+
+  {
+    path: 'profile', component: ProfileComponent, title: "Profile", children: [
+      { path: '', redirectTo: 'user', pathMatch: "full" },
+      { path: "user", component: UserComponent, title: "User" },
+      { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
+      { path: 'favourites', component: FavouriteComponent, title: "Favourites" },
+      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' }
+    ]
+
   },
 
   { path: 'sports', component: SHomePageComponent, title: "Home" },
   { path: 'sports/:id', component: SDetailsPageComponent, title: "Match Details" },
->>>>>>> Stashed changes
+
   {
-    path: 'entertainment', component: EHomePageComponent, title: "Entertainment", children: [
-      { path: '', redirectTo: "all", pathMatch: 'full' },
-      { path: "all", component: AllComponent },
+    path: 'shows', component: EHomePageComponent, title: "Entertainment", children: [
+      { path: "", component: AllComponent },
       { path: "concerts", component: ConcertsComponent },
       { path: "theater", component: TheaterComponent },
       { path: "dance", component: DanceComponent },
@@ -72,22 +79,26 @@ export const routes: Routes = [
       { path: "other", component: OtherComponent },
     ]
   },
-  { path: "shows", component: ShowsComponent, title: "Shows" },
-  { path: "details/:id", component: EdetailsComponent, title: "Details" },
+
+
+  { path: "shows/all", component: ShowsComponent, title: "Shows" },
+  { path: "shows/:id", component: EdetailsComponent, title: "Details" },
+
+  { path: 'bookingEvent', component: BookingEventComponent, title: 'Book Event' },
+  { path: 'bookingMatch', component: BookingMatchComponent, title: 'Book Match' },
+
+
+  { path: 'bookingDetailsMatch', component: BookingDetailsMatchComponent, title: 'Match booking details' },
+  { path: 'bookingDetailsEvent', component: BookingDetailsEventComponent, title: 'Event booking details' },
+
+  // { path: 'bookingHistory', component: BookingHistoryComponent, title: 'BookingHistory' },
+
   { path: "t", component: TesttComponent, title: "t" },
   { path: "l", component: LeafletMapComponent, title: "l" },
-<<<<<<< Updated upstream
-  { path: 'about', component: BookingHistoryComponent, title: 'Booking history' },
 
-  { path: 'book', component: BookingComponent, title: 'Book a match' },
-  { path: 'bookDetails', component: BookingDetailsComponent, title: 'Match booking details' },
-  { path: 'bookingHistory', component: BookingHistoryComponent, title: 'BookingHistory' },
-
-  { path: "**", component: NotfoundComponent }
-=======
   { path: "**", component: NotfoundComponent },
   
->>>>>>> Stashed changes
+
 ]
 
 

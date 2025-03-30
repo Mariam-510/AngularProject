@@ -21,22 +21,22 @@
       <ul>
         <li>
           <a routerLink="/shows" routerLinkActive="active"
-            ><i class="bi bi-music-note"></i> Shows & Events</a
+            ><i class="bi bi-music-note me-1"></i> Shows & Events</a
           >
         </li>
         <li>
-          <a routerLink="/matches" routerLinkActive="active"
-            ><i class="fa fa-soccer-ball-o"></i> Football Matches</a
+          <a routerLink="/sports" routerLinkActive="active"
+            ><i class="fa fa-soccer-ball-o me-1"></i> Football Matches</a
           >
         </li>
         <li>
           <a routerLink="/about" routerLinkActive="active"
-            ><i class="fa fa-info-circle"></i> About Us</a
+            ><i class="fa fa-info-circle me-1"></i> About Us</a
           >
         </li>
         <li>
           <a routerLink="/contact" routerLinkActive="active"
-            ><i class="fa fa-phone"></i> Contact</a
+            ><i class="fa fa-phone me-1"></i> Contact</a
           >
         </li>
       </ul>
@@ -50,17 +50,49 @@
       <button (click)="onSearch()"><i class="fa fa-search"></i></button>
     </div>
     <div class="user-menu-container" (click)="toggleUserMenu()">
+      @if (currentUser) {
+      <span class="user-greeting me-2">Hello, {{ currentUser.name }}</span>
+      }
       <div class="user-avatar">
-        <i class="fa fa-user"></i>
+        @if (currentUser) {
+        <img [src]="currentUser.avatar" alt="User" class="user-avatar" />
+        } @else {
+        <i class="fa fa-user fs-4"></i>
+        }
       </div>
-      <div class="user-dropdown">
-        @if (userMenuActive) {
-        <button class="dropdown-item" (click)="login($event)">
-          <i class="fa fa-sign-in"></i> Login
-        </button>
-        <button class="dropdown-item" (click)="register($event)">
-          <i class="fa fa-user-plus"></i> Register
-        </button>
+      <div class="user-dropdown" [class.active]="userMenuActive">
+        @if (currentUser) {
+        <!-- Logged In State -->
+        <div class="user-info">
+          <div>
+            <p class="user-name">{{ currentUser.name }}</p>
+            <p class="user-email">{{ currentUser.email }}</p>
+          </div>
+        </div>
+        <a routerLink="/profile/user" class="dropdown-item">
+          <i class="fa fa-user-circle me-1"></i> Profile
+        </a>
+        <a routerLink="/favourites" class="dropdown-item">
+          <i class="fa fa-heart me-1"></i> Favorites
+        </a>
+        <a routerLink="/bookingHistory" class="dropdown-item">
+          <i class="fa fa-history me-1"></i> Booking History
+        </a>
+        <a routerLink="/reviews" class="dropdown-item">
+          <i class="fa fa-star me-1"></i> Reviews
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout($event)">
+          <i class="fa fa-sign-out me-1"></i> Logout
+        </a>
+        } @else {
+        <!-- Logged Out State -->
+        <a routerLink="/login" class="dropdown-item">
+          <i class="fa fa-sign-in me-1"></i> Login
+        </a>
+        <a routerLink="/register" class="dropdown-item">
+          <i class="fa fa-user-plus me-1"></i> Register
+        </a>
         }
       </div>
     </div>

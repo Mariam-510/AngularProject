@@ -14,6 +14,7 @@ export class ESliderComponent {
   //Slider
   carouselItems = [
     {
+      id: 1,
       image: 'img/1.jpg',
       location: 'Ahmanson Theater',
       category: 'Theater',
@@ -29,6 +30,7 @@ export class ESliderComponent {
       subQoute: "Book now and be part of something extraordinary."
     },
     {
+      id: 2,
       image: 'img/2.jpg',
       location: 'Ahmanson Theater',
       category: 'Dance',
@@ -44,6 +46,7 @@ export class ESliderComponent {
       subQoute: "Join us for an unforgettable journey."
     },
     {
+      id: 3,
       image: 'img/3.jpg',
       location: 'Ahmanson Theater',
       category: 'Concerts',

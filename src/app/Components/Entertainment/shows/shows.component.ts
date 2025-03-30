@@ -5,6 +5,7 @@ import { ESliderComponent } from "../eslider/eslider.component";
 import { RouterModule } from '@angular/router';
 
 interface Event {
+  id: number;
   title: string;
   image: string;
   rating: number;
@@ -33,6 +34,7 @@ export class ShowsComponent {
 
   events: Event[] = [
     {
+      id: 1,
       title: 'HARRY POTTER AND THE CURSED CHILD',
       image: 'img/13.jpg',
       rating: 4.5,
@@ -44,6 +46,7 @@ export class ShowsComponent {
       category: 'Concerts'
     },
     {
+      id: 2,
       title: 'RAIN - A TRIBUTE TO THE BEATLES',
       image: 'img/14.jpg',
       rating: 4,
@@ -55,6 +58,7 @@ export class ShowsComponent {
       category: 'Theater'
     },
     {
+      id: 3,
       title: 'Life of Pi',
       image: 'img/12.jpg',
       rating: 3.5,
@@ -66,6 +70,7 @@ export class ShowsComponent {
       category: 'Dance'
     },
     {
+      id: 4,
       title: 'The Addams Family',
       image: 'img/18.jpg',
       rating: 3,
@@ -76,9 +81,8 @@ export class ShowsComponent {
       isFavorite: false,
       category: 'Dance'
     },
-
-
     {
+      id: 5,
       title: 'HARRY POTTER AND THE CURSED CHILD',
       image: 'img/13.jpg',
       rating: 4.5,
@@ -90,6 +94,7 @@ export class ShowsComponent {
       category: 'Stand-Up Comedy'
     },
     {
+      id: 6,
       title: 'RAIN - A TRIBUTE TO THE BEATLES',
       image: 'img/14.jpg',
       rating: 4,
@@ -101,6 +106,7 @@ export class ShowsComponent {
       category: 'Other'
     },
     {
+      id: 7,
       title: 'Life of Pi',
       image: 'img/12.jpg',
       rating: 3.5,
@@ -112,6 +118,7 @@ export class ShowsComponent {
       category: 'Other'
     },
     {
+      id: 8,
       title: 'The Addams Family',
       image: 'img/18.jpg',
       rating: 3,
@@ -213,7 +220,6 @@ export class ShowsComponent {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
-
   }
 
 }
