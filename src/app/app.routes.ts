@@ -26,7 +26,6 @@ import { BookingEventComponent } from './Components/Book/booking-event/booking-e
 import { BookingMatchComponent } from './Components/Book/booking-match/booking-match.component';
 import { BookingDetailsEventComponent } from './Components/Book/booking-details-event/booking-details-event.component';
 import { BookingDetailsMatchComponent } from './Components/Book/booking-details-match/booking-details-match.component';
-import { UserProfileComponent } from './Components/ProfilePages/user-profile/user-profile.component';
 import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.component';
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
@@ -43,13 +42,12 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent, title: "Register" },
 
 
-  {path:'Dashboard',component:ADashboardComponent,title:"Dashboard",
+  {
+    path: 'admin', component: ADashboardComponent, title: "Admin",
     children: [
-      { path: '', redirectTo: 'admin-home', pathMatch: 'full' },
-      {path:'admin-home',component:AdminHomeComponent}]
-     
-
-  { path: 'userP', component: UserProfileComponent, title: "Profile" },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" }]
+  },
 
   {
     path: 'profile', component: ProfileComponent, title: "Profile", children: [
@@ -98,7 +96,7 @@ export const routes: Routes = [
   { path: "l", component: LeafletMapComponent, title: "l" },
 
   { path: "**", component: NotfoundComponent },
-  
+
 
 ]
 
