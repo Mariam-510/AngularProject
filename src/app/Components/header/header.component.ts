@@ -13,74 +13,72 @@ import { SharedService } from '../../Services/shared.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _shared:SharedService, private router: Router) {}
+  constructor(private _shared: SharedService, private router: Router) {}
 
+  // Component State
   currentUser: any;
+  searchQuery: string = '';
+  menuActive: boolean = false;
+  userMenuActive: boolean = false;
+  isMobile: boolean = false;
 
   ngOnInit(): void {
     this.checkMobileView();
     this.currentUser = this._shared.currentUser;
     this._shared.currentUser$.subscribe(user => {
       this.currentUser = user;
-      console.log('User state changed:', user); // Debug log
     });
   }
 
-  searchQuery: string = '';
-  menuActive: boolean = false;
-  userMenuActive: boolean = false;
-  isMobile: boolean = false;
-
-  // Detect window resize
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.checkMobileView();
-    this.handleResponsiveMenu();
-  }
-
-  private checkMobileView() {
+  // Handle window resize
+  @HostListener('window:resize')
+  checkMobileView() {
     this.isMobile = window.innerWidth <= 768;
-  }
-
-  private handleResponsiveMenu() {
-    if (!this.isMobile && this.menuActive) {
-      this.menuActive = false;
+    if (!this.isMobile) {
+      this.menuActive = false; // Auto-close hamburger menu on desktop
     }
   }
 
-  toggleMenu(): void {
+  // Toggle hamburger menu
+  toggleMenu(event: MouseEvent): void {
+    event.stopPropagation();
     this.menuActive = !this.menuActive;
-    // Close user menu when opening main menu
-    if (this.menuActive) this.userMenuActive = false;
+    if (this.menuActive) {
+      this.userMenuActive = false;
+    }
   }
 
-  toggleUserMenu(): void {
+  // Toggle user menu
+  toggleUserMenu(event: MouseEvent): void {
+    event.stopPropagation();
     this.userMenuActive = !this.userMenuActive;
-    // Close main menu when opening user menu
-    if (this.userMenuActive) this.menuActive = false;
+    if (this.userMenuActive) {
+      this.menuActive = false;
+    }
   }
 
   // Close menus when clicking outside
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    if (!(event.target as Element).closest('.header-middle') && this.menuActive) {
-      this.menuActive = false;
+    const target = event.target as HTMLElement;
+    
+    // Check if we clicked outside both menus
+    if (target.closest('.header-middle') || target.closest('.hamburger')) {
+      return;
     }
-    if (!(event.target as Element).closest('.user-menu-container') && this.userMenuActive) {
-      this.userMenuActive = false;
-    }
+    
+    this.menuActive = false;
+    this.userMenuActive = false;
   }
 
   onSearch(): void {
     if (this.searchQuery.trim()) {
-      console.log('Searching for:', this.searchQuery.trim());
-      // Add your search implementation here
+      // Search implementation
     }
-    // Clear search on mobile view
     if (this.isMobile) this.searchQuery = '';
   }
-
-  logout(event: MouseEvent) {
+  
+  logout(event: MouseEvent): void {
     event.stopPropagation();
     this._shared.logout();
     this.userMenuActive = false;
