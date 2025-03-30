@@ -126,3 +126,34 @@
   transform: scale(1.1);
   color: gold;
 } */
+
+
+/* ------------------------------------------------------------------- */
+
+.responsive-title {
+  font-size: 2.1vw;
+  /* Larger size for h1 */
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.responsive-subtitle {
+  font-size: 1.1vw;
+  /* Adjusted size for subtitle */
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+@media (max-width: 992px) {
+
+  .responsive-text,
+  .responsive-title,
+  .responsive-subtitle {
+    display: none;
+    /* Hide on medium and smaller screens */
+  }
+}

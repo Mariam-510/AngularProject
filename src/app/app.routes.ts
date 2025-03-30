@@ -16,8 +16,8 @@ import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetail
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
 
 import { HomeComponent } from './Components/home/home.component';
-import { LoginComponent } from './Components/Authantication/login/login.component';
-import { RegisterComponent } from './Components/Authantication/register/register.component';
+import { LoginComponent } from './Components/Authentication/login/login.component';
+import { RegisterComponent } from './Components/Authentication/register/register.component';
 import { AllComponent } from './Components/Entertainment/Categories/all/all.component';
 import { ReviewsComponent } from './Components/ProfilePages/reviews/reviews.component';
 import { FavouriteComponent } from './Components/ProfilePages/favourite/favourite.component';
@@ -31,6 +31,7 @@ import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.co
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
 import { UserComponent } from './Components/ProfilePages/user/user.component';
+import { TestV2Component } from './Components/test-v2/test-v2.component';
 
 
 export const routes: Routes = [
@@ -42,11 +43,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent, title: "Register" },
 
 
-  // { path: 'profile', component: UserProfileComponent, title: "Profile" },
-  { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
-  { path: 'userprofile', component: UserProfileComponent, title: "Reviews" },
-
-  { path: 'Favourite', component: FavouriteComponent, title: "Favourites" },
   {path:'Dashboard',component:ADashboardComponent,title:"Dashboard",
     children: [
       { path: '', redirectTo: 'admin-home', pathMatch: 'full' },
@@ -66,11 +62,11 @@ export const routes: Routes = [
 
   },
 
-  { path: 'sports', component: SHomePageComponent, title: "Home" },
+  { path: 'sports', component: SHomePageComponent, title: "Sports" },
   { path: 'sports/:id', component: SDetailsPageComponent, title: "Match Details" },
 
   {
-    path: 'shows', component: EHomePageComponent, title: "Entertainment", children: [
+    path: 'shows', component: EHomePageComponent, title: "Shows", children: [
       { path: "", component: AllComponent },
       { path: "concerts", component: ConcertsComponent },
       { path: "theater", component: TheaterComponent },
@@ -82,18 +78,23 @@ export const routes: Routes = [
 
 
   { path: "shows/all", component: ShowsComponent, title: "Shows" },
-  { path: "shows/:id", component: EdetailsComponent, title: "Details" },
+  { path: "shows/:id", component: EdetailsComponent, title: "Show Details" },
 
   { path: 'bookingEvent', component: BookingEventComponent, title: 'Book Event' },
   { path: 'bookingMatch', component: BookingMatchComponent, title: 'Book Match' },
 
-
-  { path: 'bookingDetailsMatch', component: BookingDetailsMatchComponent, title: 'Match booking details' },
-  { path: 'bookingDetailsEvent', component: BookingDetailsEventComponent, title: 'Event booking details' },
-
-  // { path: 'bookingHistory', component: BookingHistoryComponent, title: 'BookingHistory' },
+  { path: 'bookingDetailsMatch', component: BookingDetailsMatchComponent, title: 'Match Booking Details' },
+  { path: 'bookingDetailsEvent', component: BookingDetailsEventComponent, title: 'Show Booking Details' },
 
   { path: "t", component: TesttComponent, title: "t" },
+
+  {
+    path: "t2", component: TestV2Component, title: "t2",
+    children: [
+      { path: "t", component: TesttComponent },
+    ]
+  },
+
   { path: "l", component: LeafletMapComponent, title: "l" },
 
   { path: "**", component: NotfoundComponent },
