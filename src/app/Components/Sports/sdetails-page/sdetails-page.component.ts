@@ -21,6 +21,7 @@ interface Team {
 export class SDetailsPageComponent implements AfterViewInit,OnInit {
   Math = Math;
   item =
+<<<<<<< Updated upstream
   {
     image: 'img/1.jpg',
     location: 'Ismailia Stadium, Ismailia',
@@ -33,6 +34,27 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
     Kickoff: '7:00 PM',
     GatesOpen: '06:00 PM',
     price: 500,
+=======
+    {
+      image: 'img/1.jpg',
+      location: 'Cairo International Stadium, Cairo',
+      Group: 'Group Two (Stage)',
+
+      title: 'Championship League',
+      date: 'Sunday, March 23, 2025',
+      Kickoff: '7:00 PM',
+      GatesOpen: '06:00 PM',
+      price: 500,
+
+      description: "Football isn’t just a sport—it’s an emotion that brings people together. The roar of the crowd, the passion of the players, and the thrill of every goal make live matches an unforgettable experience. Whether you're a die-hard supporter or a casual fan, witnessing this high-stakes clash in person will be an experience like no other.This game promises non-stop action as two of Egypt's top clubs battle it out for dominance. The energy in the stadium, the tactical duels, and the possibility of game-changing moments will keep fans on the edge of their seats. Don’t miss your chance to be part of this epic showdown!",
+      isFavorite: false,
+     
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+      category: '⚽ Football'
+
+    }
+>>>>>>> Stashed changes
 
     description: "Football isn’t just a sport—it’s an emotion that brings people together. The roar of the crowd, the passion of the players, and the thrill of every goal make live matches an unforgettable experience. Whether you're a die-hard supporter or a casual fan, witnessing this high-stakes clash in person will be an experience like no other.This game promises non-stop action as two of Egypt's top clubs battle it out for dominance. The energy in the stadium, the tactical duels, and the possibility of game-changing moments will keep fans on the edge of their seats. Don’t miss your chance to be part of this epic showdown!",
     isFavorite: false,
@@ -187,36 +209,117 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
  
   //Matches
   matches = [
-
     {
+<<<<<<< Updated upstream
       id:1,
       image: 'img/EPL3.jpg',
+=======
+      id: 1,
+      image: 'img/cairo staduim.jpg',
+>>>>>>> Stashed changes
       venue: 'Cairo International Stadium, Cairo',
+      date: 'Fri 28 Mar 2025',
+      tournament: 'World Cup Qualifiers 2025',
+      staduim:'img/cairo staduim.jpg',
+      matchNumber: 5,
+      time: '08:30 PM',
+      group: 'African Qualifiers Group B',
+      team1: 'Egypt',
+      team2: 'Algeria',
+      team1Logo: 'img/egypt.svg',
+      team2Logo: 'img/algeria.svg',
+      isFavorite: true,
+      price: 1100,
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+      category: '⚽ Football'
+    },
+    
+    {
+      id:2,
+      image: 'img/s1.jpg',
+      venue: 'Petro Sport Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
-      tournament: 'EPL Cup 2024/2025',
+      tournament: 'Egypt Cup 2025',
       matchNumber: 19,
       time: '07:30 PM',
-      group: 'Group One (Stage)',
-      team1: 'Zamalek SC',
-      team2: 'Ismaily SC',
-      team1Logo: 'img/Zamalek.svg',
-      team2Logo: 'img/ismaily.png',
-      isFavorite: true,
-      price: 300, // Add price
+      group: 'Quarter Finals',
+     
+      staduim:'img/s1.jpg',
+      team2: 'ZED FC',
+      team1: 'ENPPI SC',
+      team1Logo: 'img/ENPPI.png',
+      team2Logo: 'img/ZED.png',
+      isFavorite: false,
+      price: 290, // Add price
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+     category: '⚽ Football',
     },
     {
+<<<<<<< Updated upstream
       id:2,
       image: 'img/EPL4.jpg',
       venue: 'Ismailia Stadium, Ismailia',
+=======
+      id:3,
+      image: 'img/s3.jpg',
+      venue: 'Khaled Bichara Stadium, Gouna',
+>>>>>>> Stashed changes
       date: 'Sun 23 Mar 2025',
-      tournament: 'EPL Cup 2024/2025',
+      tournament: 'EPL 2024/2025',
       matchNumber: 18,
       time: '08:00 PM',
       group: 'Group Two (Stage)',
+      team1: 'El Gouna SC',
+      team2: 'Smouha SC',
+      staduim:'img/s3.jpg',
+      team1Logo: 'img/ElGouna.png',
+      team2Logo: 'img/Smouha.png',
+      isFavorite: false,
+      price: 250, // Add price
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+     category: '⚽ Football'
+    },
+    {
+      id:4,
+      image: 'img/m3.jpg',
+      venue: 'Alexandria Stadium, Alexandria',
+      date: 'Tue 25 Mar 2025',
+      tournament: 'Derby Match',
+      matchNumber: 20,
+      time: '06:45 PM',
+      group: 'Quarter Finals',
+      team1: 'Al Ittihad Alexandria SC',
+      team2: 'Smouha SC',
+      team1Logo: 'img/AlIttihad.png',
+      team2Logo: 'img/Smouha.png',
+      isFavorite: false,
+      price: 500, // Add price
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+     category: '⚽ Football',
+     staduim:'img/m3.jpg',
+
+    },
+
+
+    {
+      id:4,
+      image: 'img/cairo3.jpg',
+      venue: 'Cairo International Stadium, Cairo', // Corrected venue
+      date: 'Sat 22 Mar 2025',
+      tournament: 'Championship League',
+      matchNumber: 17,
+      time: '09:30 PM',
+      group: 'Group Two (Stage)',
+
       team1: 'Al Ahly SC',
       team2: 'Pyramids FC',
       team1Logo: 'img/Al Ahly.svg',
       team2Logo: 'img/Pyramids.png',
+<<<<<<< Updated upstream
       isFavorite: false,
       price: 250, // Add price
     },
@@ -258,18 +361,113 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
       id:5,
       image: 'img/EPL3.jpg',
       venue: 'Cairo International Stadium',
+=======
+      
+      isFavorite: false,
+      price: 500, // Add price
+     
+    },
+    {
+      id: 5,
+      image: 'img/m4.jpg',
+      venue: 'Borg El Arab Stadium, Alexandria',
+      date: 'Tue 15 Apr 2025',
+      tournament: 'World Cup Qualifiers 2025',
+      matchNumber: 7,
+      time: '09:00 PM',
+      group: 'African Qualifiers Group B',
+      team1: 'Egypt',
+      team2: 'Nigeria',
+      team1Logo: 'img/egypt.svg',
+      team2Logo: 'img/nigeria.svg',
+      isFavorite: true,
+      price: 1200,
+      word: "🔥 high",
+      adv: "🌍 Must-win Match!",
+      category: '🌎 World Cup Qualifiers'
+    },
+   
+    
+  
+   
+    {
+      id:7,
+      image: 'img/cairo.jpg',
+      venue: 'Cairo International Stadium, Cairo',
+>>>>>>> Stashed changes
       date: 'Mon 24 Mar 2025',
-      tournament: 'EPL Cup 2024/2025',
+      tournament: 'EPL 2024/2025',
       matchNumber: 19,
       time: '07:30 PM',
       group: 'Group One (Stage)',
       team1: 'Zamalek SC',
       team2: 'Ismaily SC',
-      team1Logo: 'img/Zamalek.svg',
+      staduim:'img/cairo staduim.jpg',
+      team1Logo: 'img/zamalekv2.png',
       team2Logo: 'img/ismaily.png',
+      isFavorite: true,
+      price: 300, // Add price
+      word: "🔥 high",
+      adv:"⏳ Limited Seats",
+     category: '⚽ Football'
+    },
+    
+   
+ 
+    {
+      id:8,
+      image: 'img/m2.jpg',
+      venue: 'Suez Canal Stadium, Ismailia',
+      date: 'Sat 22 Mar 2025',
+      tournament: 'EPL 2024/2025',
+      matchNumber: 17,
+      time: '09:30 PM',
+      group: 'Group Two (Stage)',
+      team1: 'Ismaily SC',
+      team2: 'Ghazl Elmahala FC',
+      team1Logo: 'img/ismaily.png',
+      team2Logo: 'img/mahalla.png',
       isFavorite: false,
+<<<<<<< Updated upstream
       price: 290, // Add price
       
+=======
+      price: 300, // Add price
+    },
+    {
+      id: 9,
+      image: 'img/m1.jpg',
+      venue: 'Suez Canal Stadium, Ismailia',
+      date: 'Sat 22 Mar 2025',
+      tournament: 'EPL 2024/2025',
+      matchNumber: 17,
+      time: '09:30 PM',
+      group: 'Group Two (Stage)',
+      team1: 'Ceramica Cleopatra FC',
+      team2: 'Zamalek SC',
+      team1Logo: 'img/Cleopatra.png',
+      team2Logo: 'img/zamalekv2.png',
+      isFavorite: false,
+      price: 100,
+      category: '⚽ Egyptian Premier League'
+    },
+    {
+      id: 10,
+      image: 'img/cairo4.jpg',
+      venue: 'Cairo International Stadium, Cairo',
+      date: 'Fri 1 Apr 2025',
+      tournament: 'Derby Match',
+      matchNumber: 22,
+      time: '09:00 PM',
+      group: 'Main Stage',
+      team1: 'Al Ahly SC',
+      team2: 'Zamalek SC',
+      team1Logo: 'img/Al Ahly.svg',
+      team2Logo: 'img/zamalekv2.png',
+      isFavorite: true,
+      price: 900,
+     
+>>>>>>> Stashed changes
     }
   ];
 
@@ -326,7 +524,7 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
   locationUrl: string = '';
 
   openShareModal() {
-    this.locationUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.item.fullLocation)}`;
+    this.locationUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.item.location)}`;
 
     // Open Bootstrap Modal
     const modalElement = document.getElementById('shareLocationModal');
@@ -357,10 +555,11 @@ export class SDetailsPageComponent implements AfterViewInit,OnInit {
   ];
 
   tickets = [
-    { type: 'Backstage Pass', price: 1500, description: 'Meet the performers & backstage access.' },
-    { type: 'VIP', price: 1000, description: 'Exclusive access with premium seating.' },
-    { type: 'Regular', price: 500, description: 'Standard seating with great view.' },
-    { type: 'Economy', price: 250, description: 'Budget-friendly seating option.' }
+    { type: 'VIP', price: 400, description: 'Premium seats with VIP facilities' },
+    { type: 'CAT 1', price: 300, description: 'Premium sideline seats' },
+
+    { type: 'CAT 2', price: 200, description: 'Mid-field seats' },
+    { type: 'CAT 3', price: 150, description: 'Mid-field seats' }
   ];
 
   @ViewChild('ticketContainer') ticketContainer!: ElementRef;
