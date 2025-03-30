@@ -23,6 +23,15 @@
           <span class="d-md-inline d-none" *ngIf="!isCollapsed">Your Favorites</span>
         </a>
       </li>
+      
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
+          routerLink="bookingHistory" routerLinkActive="active">
+          <i class="fa fa-history me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Booking History</span>
+        </a>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="reviews"
           routerLinkActive="active">
@@ -31,13 +40,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
-          routerLink="bookingHistory" routerLinkActive="active">
-          <i class="fa fa-history me-2 text-danger"></i>
-          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Booking History</span>
-        </a>
-      </li>
+      
 
       <li class="nav-item">
         <button class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5"
