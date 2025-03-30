@@ -1,31 +1,37 @@
 <div #heroSection class="position-relative d-flex justify-content-center ">
   <img src="img/s1.jpg" class="img-fluid w-100 banner-rounded " alt="Event Banner"
     style="max-height: 620px; object-fit: cover;">
-  <!-- ... other hero content ... -->
+    <div class="text-overlay mb-5 ms-5 ">
+      <h1 class="fw-bold text-uppercase text-white fs-1 fs-lg-2 fs-md-3 fs-sm-4 lh-1  " >🏟️ {{ item.location }}</h1>
+    </div>
 
   <!-- Modified Event Card -->
 
   <div #eventCard
-    class="position-absolute end-0 bg-white shadow rounded me-5 mt-5  smooth-card custom-card card border-0  "
+    class="position-absolute end-0 bg-white shadow rounded me-5 mt-4  smooth-card custom-card card border-0  "
     style="max-width: 100%; width: 375px;">
 
-    <div class="position-relative  ">
-      <!-- <img src="img/EPL4.jpg"
-             class="card-img-top"
-             style="height: 200px; object-fit: cover;"
-             alt="Ahmanson Theater"> -->
-      <div>
+    
+     
         <div
           class="bg-dark text-white  rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
           style="height: 120px;">
           <h3 class="m-0"> {{item.title}}</h3>
         </div>
+        <div class="d-flex gap-2 align-items-center mt-3 ms-3">
+          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
+            item.category }}</span>
+          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ item.adv
+            }}</span>
+          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
+            item.word }}</span>
+        </div>
         <div class="event-image">
           <img src="img/national.jpg" class=" event-image rounded-bottom" alt="Juliet Banner">
         </div>
-      </div>
+      
 
-    </div>
+   
 
     <div class="card-body d-flex flex-column">
       <!-- Teams Playing -->
@@ -42,7 +48,7 @@
 
 
       <div class="bg-white border-bottom-0 my-3 ">
-        <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center ">{{item.location}}</h5>
+        <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center  ">{{item.location}}</h5>
         <small class="text-muted  d-flex justify-content-center ">
           <i class="bi bi-calendar-event me-1 text-danger  "></i> {{item.date}}
         </small>
@@ -51,7 +57,7 @@
 
 
 
-      <div>
+      <div class="mb-1 px-2">
         <div class="d-flex align-items-center mb-2">
           <i class="bi bi-clock-history me-2 text-danger"></i>
           <strong class="me-2">Time:</strong>
@@ -65,12 +71,12 @@
         <div class="d-flex align-items-center ">
           <i class="bi bi-cash-stack me-2 text-danger"></i>
           <strong class="me-2">Price:</strong>
-          <span class="text-dark">{{ item.price | currency:'EGP' }}</span>
+          <span class="text-dark">{{ item.price | currency:'EGP ' }}</span>
 
         </div>
       </div>
       <div class="mx-2  py-1 mt-1">
-        <div class="d-flex gap-2 justify-content-center mb-2 mt-2">
+        <div class="d-flex gap-2 justify-content-center mb-2">
           <button
             class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
             (click)="toggleFavorite(item)">
@@ -79,13 +85,13 @@
           </button>
 
           <button
-            class="btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center fs-6 shadow"
+            class="btn btn-light more-info text-danger badge d-flex align-items-center w-50 justify-content-center fs-6 shadow"
             (click)="shareItem(item)">
             Share it <i class="bi bi-share-fill ms-2"></i>
           </button>
         </div>
 
-        <a routerLink="/bookingMatch" class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2"><i
+        <a routerLink="/bookingMatch" class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2 ticket-buy-btn"><i
             class="bi bi-ticket-perforated"></i> GET TICKET</a>
       </div>
 
@@ -225,7 +231,7 @@
           </app-leaflet-map>
         </div> -->
 
-        <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
+        <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.location" [styleTxt]="{
       'height': '350px',
       'width': '90%',
       'display': 'block',
@@ -572,7 +578,7 @@
       <div class="event-scroll-wrapper">
         <div class="row flex-nowrap" id="eventContainer">
           @for (match of matches; track match) {
-          <div class="col-md-4 event-card" style="width: 440px;">
+          <div class="col-md-4 event-card" style="width: 470px;">
             <div class="card shadow-sm position-relative">
               <!-- Match Cards Grid -->
               <div class="card border-0 h-80 ">
@@ -589,14 +595,14 @@
                   </button>
                 </div>
 
-                <div class="card-body d-flex flex-column">
+                <div class="card-body d-flex flex-column pe-2">
                   <!-- Teams Playing -->
                   <div class="card-header border-bottom-0 px-0 pt-0 match-vs text-center">
                     <div class="d-flex align-items-center justify-content-between">
                       <img [src]="match.team1Logo" class="team-logo ms-2" alt="{{match.team1}}">
-                      <strong class="text-dark">{{match.team1}}</strong>
+                      <strong class="text-dark "> {{match.team1}}</strong>
                       <span class="mx-2 fw-bold text-danger">VS</span>
-                      <strong class="text-dark">{{match.team2}}</strong>
+                      <strong class="text-dark "> {{match.team2}}</strong>
                       <img [src]="match.team2Logo" class="team-logo me-2" alt="{{match.team2}}">
                     </div>
                   </div>
@@ -631,7 +637,9 @@
 
                       <i class="bi bi-cash-stack me-2 text-danger"></i>
                       <strong class="me-2">Price:</strong>
-                      <span class="text-dark"> ${{ match.price }}</span>
+                      <!-- <span class="text-dark"> ${{ match.price }}</span> -->
+                      <span class="text-dark">{{ match.price | currency:'EGP ' }}</span>
+
 
                     </div>
                   </div>

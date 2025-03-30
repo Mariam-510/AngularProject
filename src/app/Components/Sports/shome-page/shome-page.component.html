@@ -1,4 +1,5 @@
-<div id="heroCarousel" class="carousel slide mt-2 carousel-rounded" data-bs-ride="carousel" data-bs-interval="15000"
+
+<div id="heroCarousel" class="carousel slide  carousel-rounded" data-bs-ride="carousel" data-bs-interval="1500"
   appSwipe>
   <div class="carousel-indicators">
     <button *ngFor="let match of matches.slice(0, 3); let i = index" type="button" data-bs-target="#heroCarousel"
@@ -111,9 +112,7 @@
       style="display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; padding: 10px;">
 
       <div *ngFor="let category of categories" class="col-md-4 col-6">
-
-        <a href="#" class="text-decoration-none">
-
+        <a href="javascript:void(0)" class="text-decoration-none" (click)="filterByCategory(category)">
           <div class="category-card position-relative overflow-hidden rounded-3">
             <img [src]="category.image" class="category-bg" [alt]="category.title">
             <div class="category-content position-absolute p-3 text-white">
@@ -121,10 +120,10 @@
               <small class="d-block">{{ category.subtitle }}</small>
               <span class="badge mt-2" [ngClass]="category.badgeClass">{{ category.badgeText }}</span>
             </div>
-
           </div>
         </a>
       </div>
+      
     </div>
 
     <!-- Scroll Right Button -->
@@ -141,8 +140,8 @@
 
       <!-- Custom dropdown using Bootstrap -->
       <div class="dropdown">
-        <button class="btn bg-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-          {{ selectedVenue || 'All Venues' }}
+        <button class="btn btn-outline-danger filter-dropdown border-danger" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+          {{ selectedVenue || 'All Venues' }} <i class="bi bi-chevron-down ps-1"></i>
         </button>
         <div class="dropdown-menu">
           <a *ngFor="let venue of venues" class="dropdown-item" href="javascript:void(0)"
@@ -156,8 +155,8 @@
     <div class="col-md-4">
 
       <div class="dropdown">
-        <button class="btn bg-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-          {{ selectedPrice || 'All Prices' }}
+        <button class="btn btn-outline-danger  filter-dropdown border-danger " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+          {{ selectedPrice || 'All Prices' }}<i class="bi bi-chevron-down ps-1"></i>
         </button>
         <div class="dropdown-menu">
           <a *ngFor="let price of prices" class="dropdown-item" href="javascript:void(0)"
@@ -174,8 +173,8 @@
       <div class="dropdown">
 
 
-        <button class="btn bg-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-          {{ selectedDate || 'All Dates' }}
+        <button class="btn btn-outline-danger border-danger filter-dropdown border-danger" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+          {{ selectedDate || 'All Dates' }}<i class="bi bi-chevron-down ps-1"></i>
         </button>
         <div class="dropdown-menu">
           <a *ngFor="let date of dates" class="dropdown-item" href="javascript:void(0)"
@@ -262,7 +261,9 @@
 
               <i class="bi bi-cash-stack me-2 text-danger"></i>
               <strong class="me-2">Price:</strong>
-              <span class="text-dark"> ${{ match.price }}</span>
+              
+              <span class="text-dark">{{ match.price | currency:'EGP ' }}</span>
+
 
             </div>
           </div>

@@ -461,3 +461,39 @@ transition: transform 0.3s ease;
   background: #b02a37;
   /* Darker red on hover */
 }
+
+.text-overlay {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  background: rgba(40, 37, 37, 0.5);
+  padding: 0rem 1rem;
+  border-radius: 5px;
+  max-width: 80%;
+}
+/* /* Badge Hover / */
+.badge-item:hover {
+  /* / background: #dc3545; /
+  / color: white; / */
+  transform: scale(1.1);
+}
+
+/* / Button Hover Effects / */
+.fav-btn:hover,
+.more-info:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+/* / Ticket Button Hover */ */
+.ticket-buy-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.ticket-buy-btn:hover {
+  background-color: #dc3545;
+  /* Red background */
+  color: white;
+  transform: scale(1.05);
+  /* Slight enlargement */
+}
