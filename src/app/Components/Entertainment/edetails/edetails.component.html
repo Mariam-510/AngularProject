@@ -1,10 +1,10 @@
 <div #heroSection class="position-relative d-flex justify-content-center ">
   <img src="img/1.jpg" class="img-fluid w-100 banner-rounded " alt="Event Banner"
-    style="max-height: 600px; object-fit: cover;">
+    style="max-height: 620px; object-fit: cover;">
 
   <div class="text-overlay mb-5 ms-5">
-    <h1 class="fw-bold text-uppercase text-white fs-1">Experience the Best Moments!</h1>
-    <p class="fw-bold text-white fs-5">Unforgettable events, unforgettable memories.</p>
+    <h1 class="fw-bold text-uppercase text-white responsive-title">{{ item.qoute }}</h1>
+    <p class="fw-bold text-white responsive-subtitle">{{ item.subQoute }}</p>
   </div>
 
 
@@ -94,7 +94,7 @@
 
 
 
-<div>
+<div class="py-2">
   <div class="tab-links px-5 py-4" #tabLinks>
     <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active ms-2 me-3">
       <i class="bi bi-info-circle-fill me-2 fs-6"></i> <span class="fs-5">Overview</span>
@@ -420,12 +420,12 @@
     <section id="terms-conditions" class="p-2">
       <!-- Section Title -->
       <h2 class="mb-3">
-        <i class="bi bi-file-earmark-text-fill text-danger me-2"></i>
+        <i class="bi bi-file-earmark-check-fill text-danger  me-2"></i>
         <span class="heading-line">Terms & Conditions</span>
       </h2>
 
       <h4 class="ps-5">
-        <i class="bi bi-clipboard-check me-2"></i> Read these rules for a smooth experience
+        <i class="bi bi-file-earmark-text me-2"></i> Read these rules for a smooth experience
       </h4>
 
 
@@ -570,6 +570,8 @@
   <!-- --------------------------------------------------------------------------------------------------------------- -->
 
   <div id="stop-scroll" class="mt-5 px-5">
+    @if(eventList.length>0)
+    {
     <h2 class="fw-bold">
       <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
     </h2>
@@ -601,10 +603,10 @@
                 <div class="text-danger mb-3 mt-1 fs-5">
                   <ng-container *ngFor="let star of [].constructor(5); let i = index">
                     <i class="bi" [ngClass]="{
-                                      'bi-star-fill': i < Math.floor(event.rating),
-                                      'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
-                                      'bi-star': i >= Math.ceil(event.rating)
-                                    }"></i>
+                                          'bi-star-fill': i < Math.floor(event.rating),
+                                          'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
+                                          'bi-star': i >= Math.ceil(event.rating)
+                                        }"></i>
                   </ng-container>
                 </div>
 
@@ -640,4 +642,6 @@
 
       <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
     </div>
+    }
+
   </div>

@@ -51,6 +51,8 @@
 </div>
 
 <!-- Pagination Controls -->
+@if(paginatedEvents.length>0)
+{
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center mt-4">
     <!-- Previous Button -->
@@ -84,3 +86,11 @@
     View all shows
   </a>
 </div>
+}
+@else
+{
+<div class="text-center text-danger my-5 py-5">
+  <i class="bi bi-exclamation-circle fs-1"></i>
+  <p class="mt-2 fw-bold">No matching shows found</p>
+</div>
+}

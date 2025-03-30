@@ -187,7 +187,8 @@
 
 </div>
 
-
+@if(paginatedEvents.length>0 && selectedCategory === 'events')
+{
 <!-- Pagination for Events -->
 <nav aria-label="Events Page navigation" *ngIf="selectedCategory === 'events'">
   <ul class="pagination justify-content-center mt-4">
@@ -216,32 +217,48 @@
     </li>
   </ul>
 </nav>
+}
+@else if(paginatedEvents.length<=0 && selectedCategory==='events' ) { <div class="text-center text-danger my-5 py-5">
+  <i class="bi bi-exclamation-circle fs-1"></i>
+  <p class="mt-2 fw-bold">No favourites found</p>
+  </div>
+  }
 
-<!-- Pagination for Matches -->
-<nav aria-label="Matches Page navigation" *ngIf="selectedCategory === 'matches'">
-  <ul class="pagination justify-content-center mt-4">
-    <!-- Previous Button -->
-    <li class="page-item" [class.disabled]="currentPageMatch === 1">
-      <a class="page-link text-danger" (click)="changePageMatch(currentPageMatch - 1)" aria-label="Previous">
-        Previous
-      </a>
-    </li>
+  @if(paginatedMatches.length>0 && selectedCategory === 'matches')
+  {
+  <!-- Pagination for Matches -->
+  <nav aria-label="Matches Page navigation" *ngIf="selectedCategory === 'matches'">
+    <ul class="pagination justify-content-center mt-4">
+      <!-- Previous Button -->
+      <li class="page-item" [class.disabled]="currentPageMatch === 1">
+        <a class="page-link text-danger" (click)="changePageMatch(currentPageMatch - 1)" aria-label="Previous">
+          Previous
+        </a>
+      </li>
 
-    <!-- Page Numbers -->
-    <li class="page-item" *ngFor="let page of [].constructor(totalPagesMatch); let i = index"
-      [class.active]="currentPageMatch === i + 1">
-      <a class="page-link"
-        [ngClass]="{ 'text-white bg-danger border-danger': currentPageMatch === i + 1, 'text-danger': currentPageMatch !== i + 1 }"
-        (click)="changePageMatch(i + 1)">
-        {{ i + 1 }}
-      </a>
-    </li>
+      <!-- Page Numbers -->
+      <li class="page-item" *ngFor="let page of [].constructor(totalPagesMatch); let i = index"
+        [class.active]="currentPageMatch === i + 1">
+        <a class="page-link"
+          [ngClass]="{ 'text-white bg-danger border-danger': currentPageMatch === i + 1, 'text-danger': currentPageMatch !== i + 1 }"
+          (click)="changePageMatch(i + 1)">
+          {{ i + 1 }}
+        </a>
+      </li>
 
-    <!-- Next Button -->
-    <li class="page-item" [class.disabled]="currentPageMatch === totalPagesMatch">
-      <a class="page-link text-danger" (click)="changePageMatch(currentPageMatch + 1)" aria-label="Next">
-        Next
-      </a>
-    </li>
-  </ul>
-</nav>
+      <!-- Next Button -->
+      <li class="page-item" [class.disabled]="currentPageMatch === totalPagesMatch">
+        <a class="page-link text-danger" (click)="changePageMatch(currentPageMatch + 1)" aria-label="Next">
+          Next
+        </a>
+      </li>
+    </ul>
+  </nav>
+  }
+
+  @else if(paginatedMatches.length<=0 && selectedCategory==='matches' ) { <div
+    class="text-center text-danger my-5 py-5">
+    <i class="bi bi-exclamation-circle fs-1"></i>
+    <p class="mt-2 fw-bold">No favourites found</p>
+    </div>
+    }

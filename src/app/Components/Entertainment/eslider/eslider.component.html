@@ -12,17 +12,24 @@
       <img [src]="item.image" class="d-block w-100" alt="{{ item.title }}"
         style="max-height: 600px; object-fit: cover;">
 
-      <div class="text-overlay mb-5 ms-5">
+      <!-- <div class="text-overlay mb-5 ms-5">
         <h1 class="fw-bold text-uppercase text-white fs-1">{{item.qoute}}</h1>
         <p class="fw-bold text-white fs-5">{{item.subQoute}}</p>
+      </div> -->
+      <!--
+      <div class="text-overlay mb-5 ms-5 d-none d-lg-block">
+        <h1 class="fw-bold text-uppercase text-white fs-3 fs-lg-1 fs-xl-1">{{item.qoute}}</h1>
+        <p class="fw-bold text-white fs-6 fs-lg-5 fs-xl-3">{{item.subQoute}}</p>
+      </div> -->
+
+      <div class="text-overlay mb-5 ms-5">
+        <h1 class="fw-bold text-uppercase text-white responsive-title">{{ item.qoute }}</h1>
+        <p class="fw-bold text-white responsive-subtitle">{{ item.subQoute }}</p>
       </div>
 
 
       <!-- Event Card -->
       <div class="position-absolute top-50 end-0 translate-middle-y bg-white shadow rounded me-5" style="width: 375px;">
-        <!-- <div
-        class="position-absolute end-0 translate-middle-y bg-white shadow rounded me-5 mt-4 smooth-card custom-card card border-0"
-        style="width: 375px; top: 260px;"> -->
 
         <div
           class="bg-dark text-white p-5 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"

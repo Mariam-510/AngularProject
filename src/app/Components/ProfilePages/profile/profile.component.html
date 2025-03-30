@@ -40,11 +40,12 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5" routerLink="delete-account"
-          routerLinkActive="active">
+        <button class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5"
+          (click)="confirmDeleteAccount($event)">
           <i class="bi bi-trash me-2 text-danger"></i>
           <span class="d-md-inline d-none" *ngIf="!isCollapsed">Delete Account</span>
-        </a>
+        </button>
+
       </li>
     </ul>
   </div>
@@ -53,7 +54,7 @@
   <!-- <main class="content-area flex-grow-1 bg-white shadow-sm px-4 rounded border">
     <router-outlet></router-outlet>
   </main> -->
-  
+
   <!-- Content Area -->
   <main class="content-area flex-grow-1 bg-white shadow-sm px-4 rounded border d-flex flex-column"
     style="min-height: 5vh; height: auto;">

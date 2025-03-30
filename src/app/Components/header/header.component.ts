@@ -83,6 +83,6 @@ export class HeaderComponent implements OnInit {
     this._shared.logout();
     this.userMenuActive = false;
     this.menuActive = false;
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 }
