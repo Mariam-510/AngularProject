@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-event',
@@ -9,6 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './booking-event.component.css'
 })
 export class BookingEventComponent {
+
+  constructor(private router: Router) {}
 
   // Event Data
   eventDetails = {
@@ -131,6 +134,7 @@ export class BookingEventComponent {
 
   proceedToCheckout() {
     console.log('Proceeding to checkout...');
+    this.router.navigate(['/bookingDetailsEvent']);
   }
 
 }

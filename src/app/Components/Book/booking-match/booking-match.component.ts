@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-match',
@@ -9,6 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './booking-match.component.css'
 })
 export class BookingMatchComponent {
+
+  constructor(private router: Router) {}
 
   // Football Data
   teams = {
@@ -123,6 +126,7 @@ export class BookingMatchComponent {
 
   proceedToCheckout() {
     console.log('Proceeding to checkout...');
+    this.router.navigate(['/bookingDetailsMatch']);
   }
 
 }

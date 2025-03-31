@@ -16,6 +16,8 @@ export interface event {
   isFavorite: boolean;
   word: string;
   reviews: number;
+  qoute: string;
+  subQoute: string;
 }
 
 @Component({
@@ -39,7 +41,9 @@ export class EdetailsComponent implements AfterViewInit {
       description: "It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.",
       isFavorite: false,
       word: "Popular",
-      reviews: 6
+      reviews: 6,
+      qoute: "Experience the Best Moments!",
+      subQoute: "Unforgettable events, unforgettable memories."
     }
   Math = Math;
 
@@ -124,11 +128,11 @@ export class EdetailsComponent implements AfterViewInit {
       const stopPoint = this.stopSection.offsetTop - 200;
 
       if (scrollingDown) {
-        if (scrollPosition >= stopPoint - 500) {
+        if (scrollPosition >= stopPoint - 350) {
           this.renderer.removeClass(card, 'fixed-event-card');
 
           // this.renderer.setStyle(card, 'position', 'absolute');
-          this.renderer.setStyle(card, 'top', `${stopPoint - 350}px`);
+          this.renderer.setStyle(card, 'top', `${stopPoint - 500}px`);
         }
         else {
           this.renderer.addClass(card, 'fixed-event-card');
@@ -140,7 +144,7 @@ export class EdetailsComponent implements AfterViewInit {
         tabBar.classList.remove('sticky'); // Remove when reaching stop section
       }
 
-      if (!scrollingDown && scrollPosition < stopPoint - 300) {
+      if (!scrollingDown && scrollPosition < stopPoint - 350) {
         this.renderer.addClass(card, 'fixed-event-card');
       }
 

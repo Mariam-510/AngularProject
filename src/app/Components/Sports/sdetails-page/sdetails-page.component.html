@@ -1,9 +1,16 @@
 <div #heroSection class="position-relative d-flex justify-content-center ">
   <img src="img/s1.jpg" class="img-fluid w-100 banner-rounded " alt="Event Banner"
     style="max-height: 620px; object-fit: cover;">
-    <div class="text-overlay mb-5 ms-5 ">
+
+  <!-- <div class="text-overlay mb-5 ms-5 ">
       <h1 class="fw-bold text-uppercase text-white fs-1 fs-lg-2 fs-md-3 fs-sm-4 lh-1  " >🏟️ {{ item.location }}</h1>
+    </div> -->
+
+  <div class="text-overlay mb-5 ms-5">
+    <div class="fw-bold text-uppercase text-white mt-2 responsive-text text-wrap">
+      🏟️ {{ item.location }}
     </div>
+  </div>
 
   <!-- Modified Event Card -->
 
@@ -11,27 +18,27 @@
     class="position-absolute end-0 bg-white shadow rounded me-5 mt-4  smooth-card custom-card card border-0  "
     style="max-width: 100%; width: 375px;">
 
-    
-     
-        <div
-          class="bg-dark text-white  rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
-          style="height: 120px;">
-          <h3 class="m-0"> {{item.title}}</h3>
-        </div>
-        <div class="d-flex gap-2 align-items-center mt-3 ms-3">
-          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
-            item.category }}</span>
-          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ item.adv
-            }}</span>
-          <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
-            item.word }}</span>
-        </div>
-        <div class="event-image">
-          <img src="img/national.jpg" class=" event-image rounded-bottom" alt="Juliet Banner">
-        </div>
-      
 
-   
+
+    <div
+      class="bg-dark text-white  rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
+      style="height: 120px;">
+      <h3 class="m-0"> {{item.title}}</h3>
+    </div>
+    <div class="d-flex gap-2 align-items-center mt-3 ms-3">
+      <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
+        item.category }}</span>
+      <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ item.adv
+        }}</span>
+      <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
+        item.word }}</span>
+    </div>
+    <div class="event-image">
+      <img src="img/national.jpg" class=" event-image rounded-bottom" alt="Juliet Banner">
+    </div>
+
+
+
 
     <div class="card-body d-flex flex-column">
       <!-- Teams Playing -->
@@ -152,7 +159,7 @@
       <div class="ps-5">
         <!-- Subtitle Before Description -->
         <h4>
-          <i class="bi bi-lightbulb-fill me-2"></i> Get to know more about this event
+          <i class="bi bi-lightbulb me-2"></i> Get to know more about this event
         </h4>
 
         <!-- Description -->
@@ -413,11 +420,15 @@
     <section id="terms-conditions" class="p-3 ">
       <div class="container">
         <h2 class="mb-4 d-flex align-items-center ">
-          <i class="bi bi-file-earmark-check text-danger  me-2"></i>
+          <i class="bi bi-file-earmark-check-fill text-danger  me-2"></i>
           <span class="heading-line position-relative">
             Terms & Conditions
           </span>
         </h2>
+
+        <h4 class="ps-5">
+          <i class="bi bi-file-earmark-text me-2"></i> Read these rules for a smooth experience
+        </h4>
 
         <div class="row justify-content-center ">
           <div class="col-lg-12 ">
@@ -559,7 +570,7 @@
   </div>
   <!-- --------------------------------------------------------------------------------------------------------------- -->
 
-  <div id="stop-scroll" class=" px-5 mt-5">
+  <div id="stop-scroll" class="mt-5 px-5">
     <h2 class="fw-bold">
       <i class="bi bi-stars text-danger"></i> YOU MIGHT ALSO LIKE
     </h2>

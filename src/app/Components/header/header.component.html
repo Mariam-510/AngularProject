@@ -7,7 +7,7 @@
     <button
       class="hamburger"
       [class.active]="menuActive"
-      (click)="toggleMenu()"
+      (click)="toggleMenu($event)"
     >
       <span></span>
       <span></span>
@@ -49,7 +49,7 @@
       <input type="text" [(ngModel)]="searchQuery" placeholder="Search..." />
       <button (click)="onSearch()"><i class="fa fa-search"></i></button>
     </div>
-    <div class="user-menu-container" (click)="toggleUserMenu()">
+    <div class="user-menu-container" (click)="toggleUserMenu($event)">
       @if (currentUser) {
       <span class="user-greeting me-2">Hello, {{ currentUser.name }}</span>
       }
@@ -72,13 +72,13 @@
         <a routerLink="/profile/user" class="dropdown-item">
           <i class="fa fa-user-circle me-1"></i> Profile
         </a>
-        <a routerLink="/favourites" class="dropdown-item">
+        <a routerLink="/profile/favourites" class="dropdown-item">
           <i class="fa fa-heart me-1"></i> Favorites
         </a>
-        <a routerLink="/bookingHistory" class="dropdown-item">
+        <a routerLink="/profile/bookingHistory" class="dropdown-item">
           <i class="fa fa-history me-1"></i> Booking History
         </a>
-        <a routerLink="/reviews" class="dropdown-item">
+        <a routerLink="/profile/reviews" class="dropdown-item">
           <i class="fa fa-star me-1"></i> Reviews
         </a>
         <div class="dropdown-divider"></div>

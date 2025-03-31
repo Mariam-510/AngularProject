@@ -220,9 +220,11 @@
       @if (filteredBookings.length === 0) {
       <div class="empty-state">
         <i class="bi bi-calendar-x"></i>
-        <h3>No Upcoming Events</h3>
+        <h3>No Bookings!</h3>
         <p>Your booked matches and shows will appear here</p>
-        <button class="browse-events">Browse Upcoming Events</button>
+        <button routerLink="/" class="browse-events">
+          Browse Matches/Events
+        </button>
       </div>
       }
     </div>

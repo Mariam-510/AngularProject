@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddReviewComponent } from '../../Book/add-review/add-review.component';
 import { MatDialog } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 
 interface Booking {
   id: string;
@@ -40,7 +41,7 @@ interface Booking {
 @Component({
   selector: 'app-booking-history',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './booking-history.component.html',
   styleUrls: ['./booking-history.component.css'],
 })
