@@ -35,6 +35,7 @@ import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedu
 import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
+import { CreateEventComponent } from './Components/Admin/create-event/create-event.component';
 
 
 
@@ -51,10 +52,11 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" },
-      { path: 'addSchedule', component: AddScheduleComponent, title: "Add Schedule" },
-      { path: 'addTicket', component: AddTicketComponent, title: "Add Ticket" },
-      { path: 'addPerformer', component: AddPerformerComponent, title: "Add Performer" },
-      { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" }
+      { path: 'addSchedule', component: AddScheduleComponent, title: "Add New Schedule" },
+      { path: 'addTicket', component: AddTicketComponent, title: "Add New Ticket" },
+      { path: 'addPerformer', component: AddPerformerComponent, title: "Add New Performer" },
+      { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" },
+      { path: 'addEvent', component: CreateEventComponent, title: "Add New Event" }
     ]
   },
 
