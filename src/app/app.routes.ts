@@ -31,10 +31,15 @@ import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.co
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
 import { UserComponent } from './Components/ProfilePages/user/user.component';
+<<<<<<< Updated upstream
+=======
+import { TestV2Component } from './Components/test-v2/test-v2.component';
+import { TesthomeComponent } from './testhome/testhome.component';
+>>>>>>> Stashed changes
 
 
 export const routes: Routes = [
-
+{path:'myhome', component:TesthomeComponent},
   { path: '', redirectTo: 'home', pathMatch: "full" },
   { path: 'home', component: HomeComponent, title: "Home" },
   { path: 'about', component: AboutComponent, title: 'About' },
