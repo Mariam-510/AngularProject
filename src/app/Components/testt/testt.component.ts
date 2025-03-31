@@ -12,24 +12,24 @@ import { RouterModule } from '@angular/router';
 })
 export class TesttComponent {
   scheduleForm: FormGroup;
+  daysOfWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   constructor(private fb: FormBuilder) {
     this.scheduleForm = this.fb.group({
-      schedules: this.fb.array([])
+      schedules: this.fb.array([this.createSchedule()])  // Start with one empty row
     });
-
-    this.initializeSchedules();
   }
 
   get scheduleControls() {
     return this.scheduleForm.get('schedules') as FormArray;
   }
 
-  createSchedule(date = '', day = '', time = ''): FormGroup {
+  createSchedule(): FormGroup {
     return this.fb.group({
-      date: [date, Validators.required],
-      day: [day, Validators.required],
-      time: [time, Validators.required]
+      date: ['', Validators.required],
+      day: ['', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required]
     });
   }
 
@@ -39,16 +39,6 @@ export class TesttComponent {
 
   removeSchedule(index: number) {
     this.scheduleControls.removeAt(index);
-  }
-
-  initializeSchedules() {
-    const defaultSchedules = [
-      { date: '2025-03-25', day: 'Monday', time: '10:00 AM - 12:00 PM' }
-    ];
-
-    defaultSchedules.forEach(schedule => {
-      this.scheduleControls.push(this.createSchedule(schedule.date, schedule.day, schedule.time));
-    });
   }
 
   submitForm() {

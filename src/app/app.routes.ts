@@ -14,7 +14,6 @@ import { LeafletMapComponent } from './Components/leaflet-map/leaflet-map.compon
 import { BookingHistoryComponent } from './Components/ProfilePages/booking-history/booking-history.component';
 import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
-
 import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/Authentication/login/login.component';
 import { RegisterComponent } from './Components/Authentication/register/register.component';
@@ -32,6 +31,9 @@ import { ProfileComponent } from './Components/ProfilePages/profile/profile.comp
 import { UserComponent } from './Components/ProfilePages/user/user.component';
 
 import { TestV2Component } from './Components/test-v2/test-v2.component';
+import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedule.component';
+import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
+import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
 import { CreateEventComponent } from './Components/Admin/create-event/create-event.component';
 
@@ -50,15 +52,11 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" },
-<<<<<<< Updated upstream
-      { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" }
-=======
       { path: 'addSchedule', component: AddScheduleComponent, title: "Add New Schedule" },
       { path: 'addTicket', component: AddTicketComponent, title: "Add New Ticket" },
       { path: 'addPerformer', component: AddPerformerComponent, title: "Add New Performer" },
       { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" },
       { path: 'addEvent', component: CreateEventComponent, title: "Add New Event" }
->>>>>>> Stashed changes
     ]
   },
 
@@ -102,6 +100,7 @@ export const routes: Routes = [
   {
     path: "t2", component: TestV2Component, title: "t2",
     children: [
+      { path: '', redirectTo: 't', pathMatch: "full" },
       { path: "t", component: TesttComponent },
     ]
   },

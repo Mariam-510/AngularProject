@@ -1,18 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { SharedService } from '../../../Services/shared.service';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
 
-export interface event {
+export interface show {
+  id: number;
   title: string;
-  image: string;
+  category: string;
+  imageSmall: string;
+  imageLarge: string;
   rating: number;
   description: string;
   date: string;
   location: string;
-  price: string;
+  fullLocation: string;
+  price: number;
   isFavorite: boolean;
   word: string;
   reviews: number;
@@ -26,25 +31,41 @@ export interface event {
   templateUrl: './edetails.component.html',
   styleUrl: './edetails.component.css'
 })
-export class EdetailsComponent implements AfterViewInit {
-  item =
+export class EdetailsComponent implements AfterViewInit, OnInit {
+
+  constructor(private sharedService: SharedService, private route: ActivatedRoute, private renderer: Renderer2, private elRef: ElementRef) { }
+
+  item: show =
     {
-      id: 1,
-      image: 'img/1.jpg',
-      location: 'Ahmanson Theater',
-      fullLocation: 'Zamalek, Cairo',
+      id: 7,
+      title: 'Harry Potter and the Cursed Child',
       category: 'Theater',
-      title: '& JULIET',
-      date: 'August 13 - September 7',
-      rating: 3.5,
-      price: 35,
-      description: "It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.",
-      isFavorite: false,
-      word: "Popular",
-      reviews: 6,
-      qoute: "Experience the Best Moments!",
-      subQoute: "Unforgettable events, unforgettable memories."
+      imageSmall: 'img/Shows/t1.jpg',
+      imageLarge: 'img/Shows/t11.jpg',
+      rating: 4.5,
+      description: `Wands at the ready! The theatrical heavyweight, Harry Potter and the Cursed Child is coming to you on tour!`,
+      date: 'Jun 22 - 2025',
+      location: 'Hollywood Bowl',
+      fullLocation: 'Maadi, Cairo',
+      price: 50,
+      isFavorite: true,
+      word: 'Stunning!',
+      reviews: 15,
+      qoute: "Your Next Adventure Awaits!",
+      subQoute: "Book now and be part of something extraordinary."
+    };
+
+
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id')); // Get ID from URL
+    console.log(id);
+
+    const foundItem = this.sharedService.shows.find((s: show) => s.id === id);
+    if (foundItem) {
+      this.item = foundItem;
     }
+  }
+
   Math = Math;
 
   toggleFavorite(event: any) {
@@ -80,8 +101,6 @@ export class EdetailsComponent implements AfterViewInit {
   currentActiveSection: string = 'overview'; // Default active section
   private initialCardTop = 0;
   private stickyThreshold = 0;
-
-  constructor(private renderer: Renderer2, private elRef: ElementRef) { }
 
   ngAfterViewInit() {
     this.calculateInitialPosition();
