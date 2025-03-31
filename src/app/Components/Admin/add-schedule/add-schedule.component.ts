@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-testt',
-  standalone: true,  // Ensure standalone component if used that way
+  selector: 'app-add-schedule',
   imports: [CommonModule, RouterModule, ReactiveFormsModule],  // ✅ Import ReactiveFormsModule
-  templateUrl: './testt.component.html',
-  styleUrl: './testt.component.css'
+  templateUrl: './add-schedule.component.html',
+  styleUrl: './add-schedule.component.css'
 })
-export class TesttComponent {
+export class AddScheduleComponent {
   scheduleForm: FormGroup;
   daysOfWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -45,8 +44,13 @@ export class TesttComponent {
     if (this.scheduleForm.valid) {
       console.log('Schedules:', this.scheduleForm.value.schedules);
       alert('Schedules saved successfully!');
+
+      // Reset the form and reinitialize with one empty schedule
+      this.scheduleForm.reset();
+      this.scheduleForm.setControl('schedules', this.fb.array([this.createSchedule()]));
     } else {
       alert('Please fill all required fields.');
     }
   }
+
 }

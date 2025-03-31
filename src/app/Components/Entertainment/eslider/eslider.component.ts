@@ -1,8 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SharedService } from '../../../Services/shared.service';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
+
+export interface show {
+  id: number;
+  title: string;
+  category: string;
+  imageSmall: string;
+  imageLarge: string;
+  rating: number;
+  description: string;
+  date: string;
+  location: string;
+  fullLocation: string;
+  price: number;
+  isFavorite: boolean;
+  word: string;
+  reviews: number;
+  qoute: string;
+  subQoute: string;
+}
 
 @Component({
   selector: 'app-eslider',
@@ -10,58 +30,16 @@ declare var bootstrap: any; // Required for Bootstrap modal handling
   templateUrl: './eslider.component.html',
   styleUrl: './eslider.component.css'
 })
-export class ESliderComponent {
-  //Slider
-  carouselItems = [
-    {
-      id: 1,
-      image: 'img/1.jpg',
-      location: 'Ahmanson Theater',
-      category: 'Theater',
-      title: '& JULIET',
-      date: 'August 13 - September 7',
-      rating: 4.5,
-      description: "It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.",
-      isFavorite: false,
-      word: "Trending",
-      reviews: 6,
-      price: 40,
-      qoute: "Your Next Adventure Awaits!",
-      subQoute: "Book now and be part of something extraordinary."
-    },
-    {
-      id: 2,
-      image: 'img/2.jpg',
-      location: 'Ahmanson Theater',
-      category: 'Dance',
-      title: '& JULIET',
-      date: 'August 13 - September 7',
-      rating: 3.5,
-      description: "It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.",
-      isFavorite: false,
-      word: "Must-See",
-      reviews: 6,
-      price: 50,
-      qoute: "Unmissable Experience!",
-      subQoute: "Join us for an unforgettable journey."
-    },
-    {
-      id: 3,
-      image: 'img/3.jpg',
-      location: 'Ahmanson Theater',
-      category: 'Concerts',
-      title: '& JULIET',
-      date: 'August 13 - September 7',
-      rating: 4,
-      description: "It's not going to win Nobel prizes or Pulitzers, but it will keep you entertained for two and a half hours.",
-      isFavorite: false,
-      word: "Top Pick",
-      reviews: 6,
-      price: 35,
-      qoute: "Experience the Magic Live!",
-      subQoute: "Don't miss out—secure your tickets today!"
-    }
-  ];
+export class ESliderComponent implements OnInit {
+  carouselItems: show[] = [];
+  constructor(private sharedService: SharedService) { }
+
+  ngOnInit(): void {
+    this.carouselItems = this.sharedService.shows
+      .sort((a: show, b: show) => b.rating - a.rating) // Sort by rating (descending)
+      .slice(0, 3); // Take only the top 3 highest-rated
+  }
+
 
 
   Math = Math;

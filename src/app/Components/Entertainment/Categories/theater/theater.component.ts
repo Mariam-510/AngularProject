@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../../../../Services/shared.service';
+import { ShowComponent } from "../show/show.component";
 
 @Component({
   selector: 'app-theater',
-  imports: [],
+  imports: [ShowComponent],
   templateUrl: './theater.component.html',
   styleUrl: './theater.component.css'
 })
-export class TheaterComponent {
+export class TheaterComponent implements OnInit {
+  shows: any;
 
+  constructor(private sharedService: SharedService) { }
+
+  ngOnInit(): void {
+    this.shows = this.sharedService.shows.filter((show: any) => show.category === 'Theater');
+  }
 }
