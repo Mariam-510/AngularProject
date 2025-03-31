@@ -33,12 +33,10 @@ import { UserComponent } from './Components/ProfilePages/user/user.component';
 
 import { TestV2Component } from './Components/test-v2/test-v2.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
-import { TesthomeComponent } from './testhome/testhome.component';
 
 
 
 export const routes: Routes = [
-{path:'myhome', component:TesthomeComponent},
   { path: '', redirectTo: 'home', pathMatch: "full" },
   { path: 'home', component: HomeComponent, title: "Home" },
   { path: 'about', component: AboutComponent, title: 'About' },
