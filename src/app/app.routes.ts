@@ -32,6 +32,7 @@ import { ProfileComponent } from './Components/ProfilePages/profile/profile.comp
 import { UserComponent } from './Components/ProfilePages/user/user.component';
 
 import { TestV2Component } from './Components/test-v2/test-v2.component';
+import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
 import { TesthomeComponent } from './testhome/testhome.component';
 
 
@@ -49,7 +50,9 @@ export const routes: Routes = [
     path: 'admin', component: ADashboardComponent, title: "Admin",
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" }]
+      { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" },
+      { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" }
+    ]
   },
 
   {
