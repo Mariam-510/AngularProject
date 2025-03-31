@@ -43,6 +43,7 @@
   background: rgba(220, 53, 69, 0.1);
   color: #dc3545;
   box-shadow: 0px 2px 5px rgba(220, 53, 69, 0.2);
+  width: 100%;
 }
 
 .nav-link.active {

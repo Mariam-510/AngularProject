@@ -9,7 +9,7 @@
   <div class="carousel-inner">
     <div *ngFor="let item of carouselItems; let first = first" class="carousel-item position-relative"
       [class.active]="first">
-      <img [src]="item.image" class="d-block w-100" alt="{{ item.title }}"
+      <img [src]="item.imageLarge" class="d-block w-100" alt="{{ item.title }}"
         style="max-height: 600px; object-fit: cover;">
 
       <!-- <div class="text-overlay mb-5 ms-5">

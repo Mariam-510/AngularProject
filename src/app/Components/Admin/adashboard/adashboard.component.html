@@ -1,71 +1,72 @@
-<div
-  class="dashboard-container d-flex flex-md-row flex-column min-vh-100 p-3 bg-light gap-3"
->
+<div class="dashboard-container d-flex flex-md-row flex-column min-vh-100 p-3 bg-light gap-3">
   <!-- Sidebar -->
-  <div
-    class="sidebar bg-white shadow-sm p-3 position-relative rounded border"
-    [class.collapsed]="isCollapsed"
-    style="max-height: 400px"
-  >
+  <div class="sidebar bg-white shadow-sm p-3 position-relative rounded border" [class.collapsed]="isCollapsed">
     <div class="sidebar-header d-flex align-items-center">
-      <button
-        class="btn btn-outline-danger fs-4 border-0 menu-btn"
-        (click)="toggleSidebar()"
-      >
+      <button class="btn btn-outline-danger fs-4 border-0 menu-btn" (click)="toggleSidebar()">
         <i class="bi bi-list"></i>
       </button>
     </div>
 
     <ul class="nav flex-column mt-3">
       <li class="nav-item">
-        <a
-          class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
-          routerLink="dashboard"
-          routerLinkActive="active"
-        >
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="dashboard"
+          routerLinkActive="active">
           <i class="bi bi-speedometer2 me-2 text-danger"></i>
           <span class="d-md-inline d-none" *ngIf="!isCollapsed">Dashboard</span>
         </a>
       </li>
+
       <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="addShow"
+          routerLinkActive="active">
+          <i class="bi bi-tv me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Show</span>
+        </a>
+      </li>
+      
+            <li class="nav-item">
         <a
           class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
           routerLink="addMatch"
           routerLinkActive="active"
         >
-          <i class="fa fa-soccer-ball-o me-2 text-danger"></i>
+          <i class="bi bi-trophy me-2 text-danger"></i>
           <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Match</span>
         </a>
       </li>
+
+
       <li class="nav-item">
-        <a
-          class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
-          routerLink="reviews"
-          routerLinkActive="active"
-        >
-          <i class="bi bi-star me-2 text-danger"></i>
-          <span class="d-md-inline d-none" *ngIf="!isCollapsed"
-            >Your Reviews</span
-          >
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
+          routerLink="addSchedule" routerLinkActive="active">
+          <i class="bi bi-clock me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Schedule</span>
         </a>
       </li>
+
       <li class="nav-item">
-        <a
-          class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5"
-          routerLink="delete-account"
-          routerLinkActive="active"
-        >
-          <i class="bi bi-trash me-2 text-danger"></i>
-          <span class="d-md-inline d-none" *ngIf="!isCollapsed"
-            >Delete Account</span
-          >
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="addTicket"
+          routerLinkActive="active">
+          <i class="bi bi-ticket me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Ticket</span>
         </a>
       </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
+          routerLink="addPerformer" routerLinkActive="active">
+          <i class="bi bi-people me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Performer</span>
+        </a>
+      </li>
+      
     </ul>
   </div>
 
   <!-- Content Area -->
-  <main class="content-area flex-grow-1 bg-white shadow-sm px-2 rounded border">
+  <main class="content-area flex-grow-1 bg-white shadow-sm px-2  rounded border">
     <router-outlet></router-outlet>
+
   </main>
 </div>

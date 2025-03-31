@@ -1,5 +1,5 @@
-<div class="container mt-4">
-  <h3 class="text-center text-primary">Schedule Input Form</h3>
+<div class="container mt-4 bg-light shadow p-3 rounded" style="max-width: 800px;">
+  <h3 class="text-center text-danger mb-4">Schedule Form</h3>
 
   <form [formGroup]="scheduleForm">
     <div formArrayName="schedules">
@@ -12,16 +12,24 @@
 
         <div class="col-md-3">
           <label class="form-label">Day</label>
-          <input type="text" class="form-control" formControlName="day">
+          <select class="form-control" formControlName="day">
+            <option value="" disabled selected>Select Day</option>
+            <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+          </select>
         </div>
 
-        <div class="col-md-4">
-          <label class="form-label">Time</label>
-          <input type="text" class="form-control" formControlName="time">
+        <div class="col-md-2">
+          <label class="form-label">Start Time</label>
+          <input type="time" class="form-control" formControlName="startTime">
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">End Time</label>
+          <input type="time" class="form-control" formControlName="endTime">
         </div>
 
         <div class="col-md-2 d-flex align-items-end">
-          <button type="button" class="btn btn-danger" (click)="removeSchedule(i)">
+          <button type="button" class="btn btn-danger" (click)="removeSchedule(i)" *ngIf="scheduleControls.length > 1">
             <i class="bi bi-trash"></i>
           </button>
         </div>
@@ -33,7 +41,7 @@
       <i class="bi bi-plus-circle"></i> Add Schedule
     </button>
 
-    <button type="submit" class="btn btn-primary mt-3 ms-2" (click)="submitForm()">
+    <button type="submit" class="btn btn-danger mt-3 ms-2" (click)="submitForm()">
       <i class="bi bi-save"></i> Save Schedules
     </button>
   </form>
