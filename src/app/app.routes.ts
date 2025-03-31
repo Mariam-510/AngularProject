@@ -29,14 +29,16 @@ import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.co
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
 import { UserComponent } from './Components/ProfilePages/user/user.component';
+
 import { TestV2Component } from './Components/test-v2/test-v2.component';
 import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedule.component';
 import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
+import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
+
 
 
 export const routes: Routes = [
-
   { path: '', redirectTo: 'home', pathMatch: "full" },
   { path: 'home', component: HomeComponent, title: "Home" },
   { path: 'about', component: AboutComponent, title: 'About' },
@@ -52,6 +54,7 @@ export const routes: Routes = [
       { path: 'addSchedule', component: AddScheduleComponent, title: "Add Schedule" },
       { path: 'addTicket', component: AddTicketComponent, title: "Add Ticket" },
       { path: 'addPerformer', component: AddPerformerComponent, title: "Add Performer" },
+      { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" }
     ]
   },
 
