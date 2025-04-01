@@ -263,3 +263,34 @@
   </nav>
   }
 </div>
+<!-- QR Code Modal -->
+<div *ngIf="modalVisible" class="modal-overlay" (click)="closeModalOnOutsideClick($event)">
+  <div class="modal-content container p-4 shadow-lg rounded" (click)="$event.stopPropagation()">
+    <h3 class="text-center mb-4">Your Ticket for <span class="text-danger">{{ eventDetails?.eventType }}</span></h3>
+    
+    <!-- Event Info and QR Code -->
+    <div class="d-flex justify-content-between align-items-center">
+      <!-- Additional Event Info -->
+      <div class="event-info mb-4 flex-fill">
+        <p><strong class="text-danger">Event:</strong> {{ eventDetails?.eventType }}</p>
+        <p><strong class="text-danger">Date:</strong> {{ eventDetails?.date | date: 'fullDate' }}</p>
+        <p><strong class="text-danger">Time:</strong> {{ eventDetails?.date | date: 'shortTime' }}</p>
+        <p><strong class="text-danger">Venue:</strong> {{ eventDetails?.venue.name }}, {{ eventDetails?.venue.city }}</p>
+        <p><strong class="text-danger">Tickets:</strong> {{ eventDetails?.tickets.length }} tickets</p>
+        <p><strong class="text-danger">Category:</strong> {{ eventDetails?.tickets[0]?.category }}</p>
+      </div>
+
+      <!-- QR Code -->
+      <div class="text-center mb-4">
+        <qrcode [qrdata]="qrData" [width]="200" errorCorrectionLevel="M"></qrcode>
+      </div>
+    </div>
+
+    <!-- Close Button -->
+    <div class="text-center">
+      <button class="btn btn-danger btn-lg" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+
