@@ -66,6 +66,12 @@
         </div>
       </div>
 
+      @if (invalidCredentials){
+        <div class="text-danger fw-bold small ps-2">
+          Invalid Email/Password!
+        </div>
+      }   
+
       <!-- Login Button -->
       <div class="d-flex justify-content-center">
         <button
