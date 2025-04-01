@@ -19,6 +19,19 @@ export interface show {
   subQoute: string;
 }
 
+export interface ShowTicket {
+  type: string;
+  price: number;
+  description: string;
+}
+
+export interface Schedule {
+  date: string;
+  day: string;
+  time: string
+}
+
+//---------------------------------------------------------------------------------------------------
 export interface match {
   id: number;
   image: string;
@@ -86,14 +99,14 @@ export interface team {
   keyPlayers: string;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
   //---------------------------------------------------------------------------------------------------------
-  //ENTERTAINMENT HOME
-
+  //Shows
   shows: show[] =
     [
       //Dance
@@ -104,16 +117,16 @@ export class SharedService {
         imageSmall: 'img/Shows/d1.jpg',
         imageLarge: 'img/Shows/d11.jpg',
         rating: 3.5,
-        description: `A ball of an evening is making its way to California this summer as the Los Angeles Ballet stages its performance of everyone's favorite fairytale, Cinderella. With choreography provided by the inspirational Edwaard Liang and a score by Sergei Prokofiev, prepare to be transported to a land of princes and paupers, fairies and evil stepmothers, all with twists and turns you've never seen. But don't leave it too late to get your tickets, you know what happens when the clock strikes midnight! After the death of her beloved father, the kind and gentle Cinderella is kept as a downtrodden servant by her wicked stepmother and stepsisters. A Prince arrives with the aim of finding his Princess. Cinderella's family seek to keep her away from the ball, but will true love prevail?`,
+        description: `A mesmerizing performance blending ballet and storytelling, Cinderella brings the classic fairytale to life with stunning choreography and enchanting music.`,
         date: 'Jun 12 - 2025',
-        location: 'Dolby Theatre',
-        fullLocation: 'Maadi, Cairo',
-        price: 50,
+        location: 'Cairo Opera House',
+        fullLocation: 'Cairo, Egypt',
+        price: 500,
         isFavorite: false,
-        word: 'Stunning!',
+        word: 'Enchanting!',
         reviews: 6,
-        qoute: "Experience the Best Moments!",
-        subQoute: "Unforgettable events, unforgettable memories."
+        qoute: "Step into a world of wonder!",
+        subQoute: "Experience a fairytale on stage."
       },
       {
         id: 2,
@@ -121,17 +134,17 @@ export class SharedService {
         category: 'Dance',
         imageSmall: 'img/Shows/d2.jpg',
         imageLarge: 'img/Shows/d22.jpg',
-        rating: 4,
-        description: `A ball of an evening is making its way to California this summer as the Los Angeles Ballet stages its performance of everyone's favorite fairytale, Cinderella. With choreography provided by the inspirational Edwaard Liang and a score by Sergei Prokofiev, prepare to be transported to a land of princes and paupers, fairies and evil stepmothers, all with twists and turns you've never seen. But don't leave it too late to get your tickets, you know what happens when the clock strikes midnight! After the death of her beloved father, the kind and gentle Cinderella is kept as a downtrodden servant by her wicked stepmother and stepsisters. A Prince arrives with the aim of finding his Princess. Cinderella's family seek to keep her away from the ball, but will true love prevail?`,
+        rating: 3,
+        description: `A breathtaking fusion of contemporary and African-American dance, this performance captivates with its raw emotion and powerful storytelling.`,
         date: 'Apr 2 - 2025',
-        location: 'Dorothy Chandler Pavilion',
-        fullLocation: 'Maadi, Cairo',
-        price: 70,
+        location: 'Cairo International Conference Center',
+        fullLocation: 'Cairo, Egypt',
+        price: 700,
         isFavorite: true,
-        word: 'Stunning!',
+        word: 'Spectacular!',
         reviews: 0,
-        qoute: "Your Next Adventure Awaits!",
-        subQoute: "Book now and be part of something extraordinary."
+        qoute: "Dance like never before!",
+        subQoute: "Feel the rhythm, embrace the movement."
       },
       //Concerts
       {
@@ -141,16 +154,16 @@ export class SharedService {
         imageSmall: 'img/Shows/c1.jpg',
         imageLarge: 'img/Shows/c11.jpg',
         rating: 4,
-        description: `Together longer than The Beatles themselves, RAIN has mastered every song, gesture and nuance of the legendary group, delivering a totally live, note-for-note performance that's as infectious as it is transporting. From the early hits to later classics that The Beatles never got the chance to play live - including the most complex and challenging songs - this adoring tribute will take you back to a time when all you needed was love, peace and a little help from your friends!`,
-        date: 'Apr 29 - 2025',
-        location: 'The Wiltern',
-        fullLocation: 'Maadi, Cairo',
-        price: 60,
+        description: `Relive the magic of The Beatles with this incredible tribute, featuring iconic hits and an unforgettable live experience.`,
+        date: 'Oct 4 - 2025',
+        location: 'The American University in Cairo (AUC)', // this location is found
+        fullLocation: 'New Cairo, Egypt',
+        price: 600,
         isFavorite: false,
-        word: 'Stunning!',
+        word: 'Legendary!',
         reviews: 7,
-        qoute: "Unmissable Experience!",
-        subQoute: "Join us for an unforgettable journey."
+        qoute: "A night of nostalgia!",
+        subQoute: "Sing along to the greatest hits."
       },
       {
         id: 4,
@@ -158,17 +171,17 @@ export class SharedService {
         category: 'Concerts',
         imageSmall: 'img/Shows/c2.jpg',
         imageLarge: 'img/Shows/c22.jpg',
-        rating: 4.5,
-        description: `What a year it's been for Dua Lipa! Headlining the Glastonbury Pyramid Stage, releasing a string of hot new hits, and dropping an album that'll Blow Your Mind (Mwah)! After taking the world by storm with her quintessential lockdown album, Future Nostalgia (2020), which earned her two record-breaking worldwide Top 5 hits ("Don't Start Now," "Levitating"), the Princess of pop-disco is getting all Physical on stage with The Radical Optimism World Tour, performing the hits alongside tracks from her breezy and confident, chart-topping third album, Radical Optimism. Dua Lipa knows that one song is all it takes to make a crowd go wild! First gaining attention on YouTube at just 14 for her standout covers of P!nk and Nelly Furtado, Dua Lipa quickly rose to become the dark pop sensation she is today. Edgy and heartfelt, with a honeyed voice that injects sassy style into both ballads and EDM-infused bops, she's strong, honest, and super cool. Responsible for some of the biggest modern pop floor-fillersBe the One, New Rules, One Kiss, Houdini, and so many more Dua is unstoppable!`,
-        date: 'Oct 4 - 2025',
-        location: 'Kia Forum',
-        fullLocation: 'Maadi, Cairo',
-        price: 85,
+        rating: 3.5,
+        description: `Pop sensation Dua Lipa takes the stage for an electrifying night of chart-topping hits and high-energy performances.`,
+        date: 'Apr 29 - 2025',
+        location: 'The American University in Cairo (AUC)', // this location is found
+        fullLocation: 'New Cairo, Egypt',
+        price: 850,
         isFavorite: true,
-        word: 'Stunning!',
+        word: 'Unmissable!',
         reviews: 10,
-        qoute: "Experience the Magic Live!",
-        subQoute: "Don't miss out—secure your tickets today!"
+        qoute: "Feel the energy!",
+        subQoute: "Dance the night away."
       },
       {
         id: 5,
@@ -176,17 +189,17 @@ export class SharedService {
         category: 'Concerts',
         imageSmall: 'img/Shows/c3.jpg',
         imageLarge: 'img/Shows/c33.jpg',
-        rating: 4,
-        description: `After an extended break from the spotlight, pop megastar Katy Perry returns with her highly anticipated seventh album, 143. The accompanying Lifetimes Tour is set to take the world by storm, hitting North America in the peak summer of 2025. This marks Katy's first tour in seven years, get ready KatyCats, your queen is ready to give your dance party you'll never forget! The concerts will feature a state-of-the art stage, specifically designed by Katy to get closer to you, her fans, than ever before, providing audiences with a truly magical experience from every angle in the arena. If you caught her now legendary Superbowl performance, you'll know that Katy's shows are really something to behold, so expect spectacular stage effects and enough costume changes to make even Lady Gaga jealous! `,
+        rating: 3,
+        description: `A dazzling spectacle of music and performance, Katy Perry’s show is filled with hits, stunning visuals, and endless energy.`,
         date: 'Jul 13 - 2025',
-        location: 'Honda Center Anaheim',
-        fullLocation: 'Maadi, Cairo',
-        price: 80,
+        location: 'El Gouna Conference & Culture Center',
+        fullLocation: 'El Gouna, Egypt',
+        price: 800,
         isFavorite: true,
-        word: 'Stunning!',
+        word: 'Electrifying!',
         reviews: 8,
-        qoute: "Experience the Best Moments!",
-        subQoute: "Unforgettable events, unforgettable memories."
+        qoute: "A pop spectacle!",
+        subQoute: "Sing, dance, and celebrate music."
       },
       //Stand-Up Comedy
       {
@@ -196,16 +209,16 @@ export class SharedService {
         imageSmall: 'img/Shows/s1.jpg',
         imageLarge: 'img/Shows/s11.jpg',
         rating: 3.5,
-        description: `Golden Globe Award winner Ricky Gervais returns to the stage in 2025 with his newest tour, Mortality! As one of the most recognizable comics on the planet, Gervais is known for his controversial yet hilarious style, unafraid to question every aspect of life in ways that resonate deeply with audiences. Get ready for his trademark sarcasm and sharp satire, this show is not for the faint-hearted. Having enjoyed a renaissance with his globally acclaimed Netflix series, After Life, at the beginning of 2019, Gervais is riding another peak of his already illustrious career. A big hit in Britain as well as the USA, The Office genius is rarely seen on TV let alone live on stage, don't miss your chance to be in the room where it happens when Ricky hits your town! `,
+        description: `A night of sharp wit and fearless comedy, Ricky Gervais delivers his signature humor with bold and hilarious takes on life.`,
         date: 'May 31 - 2025',
-        location: 'Hollywood Bowl',
-        fullLocation: 'Maadi, Cairo',
-        price: 30,
+        location: 'Bibliotheca Alexandrina',
+        fullLocation: 'Alexandria, Egypt',
+        price: 300,
         isFavorite: false,
-        word: 'Stunning!',
+        word: 'Hilarious!',
         reviews: 8,
-        qoute: "Unmissable Experience!",
-        subQoute: "Join us for an unforgettable journey."
+        qoute: "Laughter guaranteed!",
+        subQoute: "The best medicine is comedy."
       },
       //Theater
       {
@@ -214,17 +227,17 @@ export class SharedService {
         category: 'Theater',
         imageSmall: 'img/Shows/t1.jpg',
         imageLarge: 'img/Shows/t11.jpg',
-        rating: 4.5,
-        description: `Wands at the ready! The theatrical heavyweight, Harry Potter and the Cursed Child is coming to you on tour! Following record-breaking and multi-award-winning runs in London's West End and on Broadway, countrywide audiences can now experience the magic of the astounding production when it apparates to your city from 2025 onwards. A continuation of The Boy Who Lived's story, 'Cursed Child catches up with Harry and co. as grown-ups, where the challenges of adulthood, jobs, and kids prove far scarier than anything Voldemort could have cooked up! Leaving critics impressed and fans bowled over, the show expertly recaptures the magic of the books, while crafting a totally unique world of its own. The story is brought to life with an intelligent script, wondrous costumes and a whole Defence Against the Dark Arts class worth of great theatrical special effects. The wish of every Potter fan to find out what happens after the final line of The Deathly Hallows is truly granted!`,
+        rating: 4,
+        description: `Step into the magical world of Harry Potter with this spectacular theatrical experience, full of wonder and adventure.`,
         date: 'Jun 22 - 2025',
-        location: 'Hollywood Bowl',
-        fullLocation: 'Maadi, Cairo',
-        price: 50,
+        location: 'Cairo Opera House',
+        fullLocation: 'Cairo, Egypt',
+        price: 500,
         isFavorite: true,
-        word: 'Stunning!',
+        word: 'Magical!',
         reviews: 15,
-        qoute: "Your Next Adventure Awaits!",
-        subQoute: "Book now and be part of something extraordinary."
+        qoute: "An enchanting journey!",
+        subQoute: "Experience the magic live."
       },
       {
         id: 8,
@@ -233,16 +246,16 @@ export class SharedService {
         imageSmall: 'img/Shows/t2.jpg',
         imageLarge: 'img/Shows/t22.jpg',
         rating: 3,
-        description: `Last year, the Broadway production of Stereophonic captivated both audiences and critics, winning an impressive five Tony Awards: Best New Play, Best Featured Actor, Best Direction of a Play, Best Sound Design, and Best Scenic Design. Stereophonic is a powerhouse show that excels in every aspect. It's not just the story that's been making waves; the production has also enchanted countless hearts with its original songs, written by former Arcade Fire star Will Butler. This is a must-see show for both music and drama enthusiasts.`,
-        date: 'Dec 9 - 2025',
-        location: 'Pantages Theater Hollywood',
-        fullLocation: 'Maadi, Cairo',
-        price: 30,
+        description: `A gripping drama that takes audiences behind the scenes of a band on the edge of fame, blending music and storytelling seamlessly.`,
+        date: 'May 6 - 2025',
+        location: 'Cairo International Conference Center',
+        fullLocation: 'Cairo, Egypt',
+        price: 300,
         isFavorite: true,
-        word: 'Stunning!',
+        word: 'Captivating!',
         reviews: 3,
-        qoute: "Experience the Magic Live!",
-        subQoute: "Don't miss out—secure your tickets today!"
+        qoute: "Music meets drama!",
+        subQoute: "A story that resonates."
       },
       {
         id: 9,
@@ -251,18 +264,302 @@ export class SharedService {
         imageSmall: 'img/Shows/t3.jpg',
         imageLarge: 'img/Shows/t33.jpg',
         rating: 4.5,
-        description: `As transformative as it is captivating, Martel's Life of Pi is a magical masterpiece that introduces us to Pi, a 16-year-old boy adrift in a lifeboat with four fellow survivors - a hyena, a zebra, an orangutan, and a terrifying Bengal Tiger. As they navigate the unpredictable waters of the Pacific Ocean, Pi's boundless imagination soon becomes his greatest asset.`,
-        date: 'May 6 - 2025',
-        location: 'Ahmanson Theater',
-        fullLocation: 'Maadi, Cairo',
-        price: 45,
+        description: `An extraordinary theatrical adaptation of the beloved novel, bringing to life a tale of survival, imagination, and adventure.`,
+        date: 'Dec 9 - 2025',
+        location: 'El Gouna Conference & Culture Center',
+        fullLocation: 'El Gouna, Egypt',
+        price: 450,
         isFavorite: true,
-        word: 'Stunning!',
+        word: 'Mesmerizing!',
         reviews: 10,
-        qoute: "Unmissable Experience!",
-        subQoute: "Join us for an unforgettable journey."
-      },
+        qoute: "A journey of survival!",
+        subQoute: "Be part of the adventure."
+      }
     ];
+
+
+  //---------------------------------------------------------------------------------------------------------
+  // Define ShowTicket array using the interface
+  generateTicketsFromPrice(startingPrice: number): ShowTicket[] {
+    // Create an array of ticket types
+    const ticketTypes = ['Economy', 'Regular', 'VIP', 'Backstage Pass'];
+
+    // Create a new array of tickets based on the starting price, increasing by 50 for each ticket
+    const tickets = ticketTypes.map((type, index) => ({
+      type,
+      price: startingPrice + (index * 50), // Increase by 50 for each subsequent ticket
+      description: `Description for ${type} at price $${startingPrice + (index * 50)}.`
+    }));
+
+    // Sort tickets by price in descending order (high to low)
+    return tickets.sort((a, b) => b.price - a.price);
+  }
+
+
+  //---------------------------------------------------------------------------------------------------------
+  // Function to convert showDate (e.g., "Jun 12 - 2025") into a Date object
+  private parseShowDate(showDate: string): Date {
+    const [month, day, year] = showDate.replace(' - ', ' ').split(' ');
+    return new Date(`${month} ${day}, ${year}`);
+  }
+
+  // Function to generate a schedule for 5 days after the given show date
+  generateSchedule(showDate: string): { date: string; day: string; time: string }[] {
+    const schedule: Schedule[] = [];
+    const baseDate = this.parseShowDate(showDate);
+
+    for (let i = 1; i <= 6; i++) {
+      const newDate = new Date(baseDate);
+      newDate.setDate(baseDate.getDate() + i);
+
+      // Generate a random start time between 5:00 PM and 9:00 PM
+      const startHour = Math.floor(Math.random() * 5) + 17; // 17 to 21 (5 PM to 9 PM)
+      const startMinute = Math.floor(Math.random() * 60);
+
+      // Set start time
+      const startTime = new Date(newDate);
+      startTime.setHours(startHour, startMinute, 0);
+
+      // Set end time (2 hours after start time)
+      const endTime = new Date(startTime);
+      endTime.setHours(startTime.getHours() + 2);
+
+      // Format the output
+      schedule.push({
+        date: newDate.toISOString().split('T')[0], // Format YYYY-MM-DD
+        day: newDate.toLocaleDateString('en-US', { weekday: 'long' }), // Get day name
+        time: `${startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })} - ${endTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}`
+      });
+    }
+
+    return schedule;
+  }
+
+  //---------------------------------------------------------------------------------------------------------
+  // Function to generate a review date incrementing by 1 day after each review
+  generateReviewDate(showDate: string): string {
+    // Parse the show date to a Date object using the given format (e.g., "Jun 22 - 2025")
+    const dateParts = showDate.split(' - ');
+    const [monthStr, day] = dateParts[0].split(' ');
+    const year = dateParts[1];
+
+    // Map month name to a month index
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthIndex = monthNames.indexOf(monthStr);
+
+    const showDateObj = new Date(Number(year), monthIndex, Number(day)); // Set the date using the parsed values
+    showDateObj.setDate(showDateObj.getDate() + 1); // Increment the day by 1 for each subsequent review
+
+    // Format the new date back to "Jun 23 - 2025"
+    const newMonth = monthNames[showDateObj.getMonth()];
+    const newDay = String(showDateObj.getDate()).padStart(2, '0');
+    const newYear = showDateObj.getFullYear();
+
+    return `${newMonth} ${newDay} - ${newYear}`;
+  }
+
+  // Function to generate random reviews based on a show date
+  generateReviewsForShow(showDate: string, numberOfReviews: number): any[] {
+    const reviews: any[] = [];
+    const comments = [
+      'Amazing service! Highly recommended.',
+      'Great experience, but there’s room for improvement.',
+      'Fantastic! Everything was perfect.',
+      'It was good, but not exceptional.',
+      'Really enjoyed it! Will come back again.',
+      'Not as expected, but decent.',
+      'A wonderful experience, would definitely come again!'
+    ];
+
+    // English names list
+    const englishNames = ['Ahmed', 'Sara', 'Mariam', 'Omar', 'Nour', 'Ali', 'Fatima', 'Khaled', 'Jamila', 'Mohamed'];
+
+    // Generate reviews with random ratings and comments
+    for (let i = 0; i < numberOfReviews; i++) {
+      const rating = (Math.random() * 2 + 3).toFixed(1); // Random rating between 3.0 and 5.0
+      const comment = comments[Math.floor(Math.random() * comments.length)]; // Random comment
+      const reviewDate = this.generateReviewDate(showDate); // Generate review date incrementally
+
+      // Choose a random English name from the list
+      const userName = englishNames[Math.floor(Math.random() * englishNames.length)];
+
+      reviews.push({
+        user: userName,
+        rating: parseFloat(rating),
+        comment: comment,
+        date: reviewDate
+      });
+
+      // Update the showDate for the next review to be the next day
+      showDate = reviewDate;
+    }
+
+    return reviews;
+  }
+
+  //---------------------------------------------------------------------------------------------------------
+
+  cast = [
+    // Dance - Cinderella (showId: 1)
+    {
+      showId: 1,
+      cast: [
+        {
+          name: 'Sophia Lee',
+          role: 'Cinderella',
+          image: 'https://image-service.usw2.wp-prod-us.cultureamp-cdn.com/lmSSHC6nC6IcQLD4RGigdC3KoBQ=/500x500/cultureampcom/production/b94/a47/9ea/b94a479eaece4ef09bda0e39/Sophia-Lee.jpeg'
+        },
+        {
+          name: 'Mark Jones',
+          role: 'Prince Charming',
+          image: 'https://source.unsplash.com/300x400/?prince,costume,man'
+        },
+        {
+          name: 'Olivia Watson',
+          role: 'Fairy Godmother',
+          image: 'https://media.licdn.com/dms/image/v2/D5603AQGRkHgI98wrFg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1698712378207?e=2147483647&v=beta&t=dYxTlLNmXutmHL1ZdQFyLSofv_4HaWz_EbQA10msTiE'
+        }
+      ]
+    },
+    // Dance - Alvin Ailey (showId: 2)
+    {
+      showId: 2,
+      cast: [
+        {
+          name: 'Samuel Thompson',
+          role: 'Lead Dancer',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkY6Yz1bndVqOI2-0i3vfm2rUei584Hm8kTw&s'
+        },
+        {
+          name: 'Tina Garcia',
+          role: 'Choreographer',
+          image: 'https://www.gmlaw.com/wp-content/uploads/2016/09/Tina-Garcia-Landing.jpeg'
+        }
+      ]
+    },
+    // Concerts - Beatles Tribute (showId: 3)
+    {
+      showId: 3,
+      cast: [
+        {
+          name: 'John Carter',
+          role: 'John Lennon Tribute',
+          image: 'https://source.unsplash.com/300x400/?beatles,singer,man'
+        },
+        {
+          name: 'Paul Adams',
+          role: 'Paul McCartney Tribute',
+          image: 'https://source.unsplash.com/300x400/?bassist,man,musician'
+        },
+        {
+          name: 'George Smith',
+          role: 'George Harrison Tribute',
+          image: 'https://source.unsplash.com/300x400/?guitarist,man,musician'
+        },
+        {
+          name: 'Ringo Bell',
+          role: 'Ringo Starr Tribute',
+          image: 'https://source.unsplash.com/300x400/?drummer,man,musician'
+        }
+      ]
+    },
+    // Concerts - Dua Lipa (showId: 4)
+    {
+      showId: 4,
+      cast: [
+        {
+          name: 'Dua Lipa',
+          role: 'Dua Lipa',
+          image: 'https://source.unsplash.com/300x400/?female,singer,popstar'
+        },
+        {
+          name: 'Tommy Perez',
+          role: 'Backup Dancer',
+          image: 'https://source.unsplash.com/300x400/?dancer,man,performance'
+        }
+      ]
+    },
+    // Concerts - Katy Perry (showId: 5)
+    {
+      showId: 5,
+      cast: [
+        {
+          name: 'Katy Perry',
+          role: 'Katy Perry',
+          image: 'https://source.unsplash.com/300x400/?female,singer,colorful'
+        },
+        {
+          name: 'David Green',
+          role: 'Lead Guitarist',
+          image: 'https://source.unsplash.com/300x400/?guitarist,rock,man'
+        }
+      ]
+    },
+    // Comedy - Ricky Gervais (showId: 6)
+    {
+      showId: 6,
+      cast: [
+        {
+          name: 'Ricky Gervais',
+          role: 'Comedian',
+          image: 'https://source.unsplash.com/300x400/?comedian,man,microphone'
+        }
+      ]
+    },
+    // Theater - Harry Potter (showId: 7)
+    {
+      showId: 7,
+      cast: [
+        {
+          name: 'Emma Stone',
+          role: 'Hermione Granger',
+          image: 'https://source.unsplash.com/300x400/?actress,book,glasses'
+        },
+        {
+          name: 'Daniel Radcliffe',
+          role: 'Harry Potter',
+          image: 'https://source.unsplash.com/300x400/?actor,glasses,scar'
+        },
+        {
+          name: 'Rupert Grint',
+          role: 'Ron Weasley',
+          image: 'https://source.unsplash.com/300x400/?actor,redhair,young'
+        }
+      ]
+    },
+    // Theater - Stereophonic (showId: 8)
+    {
+      showId: 8,
+      cast: [
+        {
+          name: 'Chris Martin',
+          role: 'Lead Actor',
+          image: 'https://source.unsplash.com/300x400/?actor,man,stage'
+        },
+        {
+          name: 'Rachel Adams',
+          role: 'Supporting Actor',
+          image: 'https://source.unsplash.com/300x400/?actress,women,theater'
+        }
+      ]
+    },
+    // Theater - Life of Pi (showId: 9)
+    {
+      showId: 9,
+      cast: [
+        {
+          name: 'Dev Patel',
+          role: 'Pi Patel',
+          image: 'https://source.unsplash.com/300x400/?indian,actor,boat'
+        },
+        {
+          name: 'Irrfan Khan',
+          role: 'Richard Parker',
+          image: 'https://source.unsplash.com/300x400/?tiger,animal,orange'
+        }
+      ]
+    }
+  ];
 
   //---------------------------------------------------------------------------------------------------------
   //MATCHES
@@ -290,7 +587,7 @@ export class SharedService {
     },
 
     {
-      id:2,
+      id: 2,
       image: 'img/s1.jpg',
       venue: 'Petro Sport Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
@@ -298,7 +595,7 @@ export class SharedService {
       matchNumber: 19,
       time: '07:30 PM',
       group: 'Quarter Finals',
-      staduim:'img/s1.jpg',
+      staduim: 'img/s1.jpg',
       team2: 'ZED FC',
       team1: 'ENPPI SC',
       team1Logo: 'img/ENPPI.png',
@@ -306,12 +603,12 @@ export class SharedService {
       isFavorite: false,
       price: 290, // Add price
       word: "🔥 high",
-      adv:"⏳ Limited Seats",
+      adv: "⏳ Limited Seats",
       category: '⚽ Football',
     },
 
     {
-      id:3,
+      id: 3,
       image: 'img/s3.jpg',
       venue: 'Khaled Bichara Stadium, Gouna',
       date: 'Sun 23 Mar 2025',
@@ -321,18 +618,18 @@ export class SharedService {
       group: 'Group Two (Stage)',
       team1: 'El Gouna SC',
       team2: 'Smouha SC',
-      staduim:'img/s3.jpg',
+      staduim: 'img/s3.jpg',
       team1Logo: 'img/ElGouna.png',
       team2Logo: 'img/Smouha.png',
       isFavorite: false,
       price: 250, // Add price
       word: "🔥 high",
-      adv:"⏳ Limited Seats",
+      adv: "⏳ Limited Seats",
       category: '⚽ Football'
     },
 
     {
-      id:4,
+      id: 4,
       image: 'img/m3.jpg',
       venue: 'Alexandria Stadium, Alexandria',
       date: 'Tue 25 Mar 2025',
@@ -347,9 +644,9 @@ export class SharedService {
       isFavorite: false,
       price: 500, // Add price
       word: "🔥 high",
-      adv:"⏳ Limited Seats",
+      adv: "⏳ Limited Seats",
       category: '⚽ Football',
-      staduim:'img/m3.jpg',
+      staduim: 'img/m3.jpg',
     },
 
     {
@@ -391,7 +688,7 @@ export class SharedService {
     },
 
     {
-      id:7,
+      id: 7,
       image: 'img/cairo.jpg',
       venue: 'Cairo International Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
@@ -401,18 +698,18 @@ export class SharedService {
       group: 'Group One (Stage)',
       team1: 'Zamalek SC',
       team2: 'Ismaily SC',
-      staduim:'img/cairo staduim.jpg',
+      staduim: 'img/cairo staduim.jpg',
       team1Logo: 'img/zamalekv2.png',
       team2Logo: 'img/ismaily.png',
       isFavorite: true,
       price: 300, // Add price
       word: "🔥 high",
-      adv:"⏳ Limited Seats",
+      adv: "⏳ Limited Seats",
       category: '⚽ Football'
     },
 
     {
-      id:8,
+      id: 8,
       image: 'img/m2.jpg',
       venue: 'Suez Canal Stadium, Ismailia',
       date: 'Sat 22 Mar 2025',
@@ -507,7 +804,7 @@ export class SharedService {
       badgeClass: 'bg-danger'
     },
   ];
-  
+
   // Filter options (sHome Page)
   venues = ['All Venues', ...new Set(this.matches.map(m => m.venue))];
 
@@ -814,11 +1111,11 @@ export class SharedService {
   ];
 
   //---------------------------------------------------------------------------------------------------------
-  
-  
+
+
 
   //---------------------------------------------------------------------------------------------------------
 
-  
+
 
 }

@@ -29,13 +29,17 @@ import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.co
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
 import { UserComponent } from './Components/ProfilePages/user/user.component';
-
 import { TestV2Component } from './Components/test-v2/test-v2.component';
 import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedule.component';
 import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
+import { ContactComponent } from './Components/contact/contact.component';
+import { TestqrComponent } from './Components/ProfilePages/testqr/testqr.component';
 import { CreateEventComponent } from './Components/Admin/create-event/create-event.component';
+import { GetAllMatchesComponent } from './Components/Admin/get-all-matches/get-all-matches.component';
+import { GetAllEventsComponent } from './Components/Admin/get-all-events/get-all-events.component';
+
 
 
 
@@ -45,18 +49,21 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent, title: 'About' },
   { path: 'login', component: LoginComponent, title: "Login" },
   { path: 'register', component: RegisterComponent, title: "Register" },
+  {path:'contact',component:ContactComponent, title:"Contact Us"},
 
 
   {
-    path: 'admin', component: ADashboardComponent, title: "Admin",
+    path: 'admin', component: AdminHomeComponent, title: "Admin",
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" },
+      { path: 'dashboard', component: ADashboardComponent, title: "Dashboard" },
       { path: 'addSchedule', component: AddScheduleComponent, title: "Add New Schedule" },
       { path: 'addTicket', component: AddTicketComponent, title: "Add New Ticket" },
       { path: 'addPerformer', component: AddPerformerComponent, title: "Add New Performer" },
       { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" },
-      { path: 'addEvent', component: CreateEventComponent, title: "Add New Event" }
+      { path: 'addShow', component: CreateEventComponent, title: "Add New Event" },
+      { path: 'getallshows', component: GetAllEventsComponent, title: "Get All Shows" },
+      { path: 'getallmatches', component: GetAllMatchesComponent, title: "Get All Matches" },
     ]
   },
 
@@ -66,9 +73,9 @@ export const routes: Routes = [
       { path: "user", component: UserComponent, title: "User" },
       { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
       { path: 'favourites', component: FavouriteComponent, title: "Favourites" },
-      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' }
+      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' },
+      {path:'test',component:TestqrComponent,title:'testtt'}
     ]
-
   },
 
   { path: 'sports', component: SHomePageComponent, title: "Sports" },
@@ -97,13 +104,9 @@ export const routes: Routes = [
 
   { path: "t", component: TesttComponent, title: "t" },
 
-  {
-    path: "t2", component: TestV2Component, title: "t2",
-    children: [
-      { path: '', redirectTo: 't', pathMatch: "full" },
-      { path: "t", component: TesttComponent },
-    ]
-  },
+  { path: "t2", component: TestV2Component, title: "t2" },
+
+  { path: "t", component: TesttComponent, title: "t" },
 
   { path: "l", component: LeafletMapComponent, title: "l" },
 

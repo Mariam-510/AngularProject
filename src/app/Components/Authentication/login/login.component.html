@@ -1,10 +1,9 @@
 <div class="home-content">
-  <div class="form-container">
+  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+  <div class="position-relative form-container">
     <form class="form-Content shadow-lg rounded p-4" [formGroup]="Loginform">
-      <h4
-        class="text-center mt-3 mb-4"
-        style="color: red; font-weight: bold; font-family: sans-serif"
-      >
+      <h4 class="text-center mt-3 mb-4" style="color: red; font-weight: bold; font-family: sans-serif">
         Login
       </h4>
       <!-- Email Address -->
@@ -14,29 +13,19 @@
           <span class="input-group-text bg-light border-0">
             <i class="bi bi-envelope text-muted red-icon"></i>
           </span>
-          <input
-            type="email"
-            class="form-control border-0 shadow-sm"
-            placeholder="Enter your email"
-            formControlName="email"
-          />
+          <input type="email" class="form-control border-0 shadow-sm" placeholder="Enter your email"
+            formControlName="email" />
         </div>
-        <div
-          *ngIf="
+        <div *ngIf="
             Loginform.get('email')?.hasError('required') &&
             Loginform.get('email')?.touched
-          "
-          class="text-danger small ps-2"
-        >
+          " class="text-danger small ps-2">
           Email is required.
         </div>
-        <div
-          *ngIf="
+        <div *ngIf="
             Loginform.get('email')?.hasError('pattern') &&
             Loginform.get('email')?.touched
-          "
-          class="text-danger small ps-2"
-        >
+          " class="text-danger small ps-2">
           Enter a valid email.
         </div>
       </div>
@@ -48,20 +37,13 @@
           <span class="input-group-text bg-light border-0">
             <i class="bi bi-key-fill text-muted red-icon"></i>
           </span>
-          <input
-            type="password"
-            class="form-control border-0 shadow-sm"
-            placeholder="Enter password"
-            formControlName="pass"
-          />
+          <input type="password" class="form-control border-0 shadow-sm" placeholder="Enter password"
+            formControlName="pass" />
         </div>
-        <div
-          *ngIf="
+        <div *ngIf="
             Loginform.get('pass')?.hasError('required') &&
             Loginform.get('pass')?.touched
-          "
-          class="text-danger small ps-2"
-        >
+          " class="text-danger small ps-2">
           Password is required.
         </div>
       </div>
@@ -74,13 +56,8 @@
 
       <!-- Login Button -->
       <div class="d-flex justify-content-center">
-        <button
-          type="submit"
-          class="btn btn-danger mt-4 py-2"
-          onmouseover="this.style.backgroundColor='#E16A54';"
-          onmouseout="this.style.backgroundColor='#dc3545';"
-          (click)="login()"
-        >
+        <button type="submit" class="btn btn-danger mt-4 py-2" onmouseover="this.style.backgroundColor='#E16A54';"
+          onmouseout="this.style.backgroundColor='#dc3545';" (click)="login()">
           Login
         </button>
       </div>
@@ -89,24 +66,15 @@
       <div class="d-flex align-items-center mt-4">
         <hr class="flex-grow-1" />
         <span class="mx-2">OR Sign in with</span>
-        <img
-          src="Images/Home/Google.png"
-          alt="Google Login"
-          class="ms-0 me-2"
-          style="width: 32px; height: 32px; cursor: pointer"
-          (click)="googleLogin()"
-        />
+        <img src="Images/Home/Google.png" alt="Google Login" class="ms-0 me-2"
+          style="width: 32px; height: 32px; cursor: pointer" (click)="googleLogin()" />
         <hr class="flex-grow-1" />
       </div>
 
       <!-- Login Link -->
       <p class="text-center mt-4 mb-0">
         Don't have account?
-        <a
-          routerLink="/register"
-          class="text-decoration-none fw-bold text-danger"
-          >Sign Up here</a
-        >
+        <a routerLink="/register" class="text-decoration-none fw-bold text-danger">Sign Up here</a>
       </p>
     </form>
   </div>

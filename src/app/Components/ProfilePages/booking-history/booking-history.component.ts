@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AddReviewComponent } from '../../Book/add-review/add-review.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { QRCodeComponent } from 'angularx-qrcode'; // Import QR Code Module
 
 interface Booking {
   id: string;
@@ -41,11 +42,14 @@ interface Booking {
 @Component({
   selector: 'app-booking-history',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule,QRCodeComponent],
   templateUrl: './booking-history.component.html',
   styleUrls: ['./booking-history.component.css'],
 })
 export class BookingHistoryComponent {
+  
+  modalVisible: boolean = false;
+  qrData: string = 'https://yourwebsite.com/ticket/123'; // Example ticket data
   /** Bookings Data */
   public bookings: Booking[] = [
     // Football Match
@@ -286,9 +290,26 @@ export class BookingHistoryComponent {
   //    ACTION METHODS
   // ---------------------------
 
+
+  eventDetails: any = null; // Store event details
   /** View Tickets */
   public viewTickets(booking: Booking): void {
     console.log('Viewing tickets for:', booking.id);
+    // Assuming booking.id is the unique identifier
+
+    this.eventDetails = booking; // Store the booking details to display in modal
+    this.qrData = `https://yourwebsite.com/ticket/${booking.id}`;
+    this.modalVisible = true;
+  }
+ closeModal() {
+    this.modalVisible = false;
+    this.eventDetails = null; // Clear event details when closing
+
+  }
+  closeModalOnOutsideClick(event: MouseEvent) {
+    if ((event.target as HTMLElement).classList.contains('modal-overlay')) {
+      this.closeModal();
+    }
   }
 
   confirmCancel(booking: any) {

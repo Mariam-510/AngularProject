@@ -1,52 +1,49 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { PaypalService } from '../../Services/paypal.service';
 
 @Component({
   selector: 'app-testt',
-  standalone: true,  // Ensure standalone component if used that way
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],  // ✅ Import ReactiveFormsModule
   templateUrl: './testt.component.html',
-  styleUrl: './testt.component.css'
+  styleUrls: ['./testt.component.css']
 })
-export class TesttComponent {
-  scheduleForm: FormGroup;
-  daysOfWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+export class TesttComponent implements OnInit {
+  // @Input() totalPrice!: number;
+  // @Input() clientId!: string;
 
-  constructor(private fb: FormBuilder) {
-    this.scheduleForm = this.fb.group({
-      schedules: this.fb.array([this.createSchedule()])  // Start with one empty row
-    });
-  }
+  totalPrice: number = 50;
+  clientId: string = 'AUaqQlDvhtB5aBRbNeCeNJc0od9OmcgBfiPF2nY89pq9w43wHZ7dilU3eMsFp2oQfN1-BzqDVxK-ASix'
 
-  get scheduleControls() {
-    return this.scheduleForm.get('schedules') as FormArray;
-  }
+  constructor(private payPalService: PaypalService) { }
 
-  createSchedule(): FormGroup {
-    return this.fb.group({
-      date: ['', Validators.required],
-      day: ['', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required]
-    });
-  }
+  async ngOnInit() {
+    try {
+      const paypal = await this.payPalService.loadPayPal(this.clientId);
 
-  addSchedule() {
-    this.scheduleControls.push(this.createSchedule());
-  }
+      if (!paypal || !paypal.Buttons) {
+        console.error('PayPal SDK failed to load');
+        return;
+      }
 
-  removeSchedule(index: number) {
-    this.scheduleControls.removeAt(index);
-  }
+      paypal.Buttons({
+        createOrder: (data: any, actions: any) => {
+          return actions.order.create({
+            purchase_units: [{ amount: { value: this.totalPrice.toFixed(2) } }]
+          });
+        },
+        onApprove: async (data: any, actions: any) => {
+          const order = await actions.order.capture();
+          console.log('Payment captured:', order);
+          // window.location.href = `/success?orderId=${data.orderID}`;
+          window.location.href = `/profile/bookingHistory`;
+        },
+        onError: (err: any) => {
+          console.error('PayPal Error:', err);
+          alert('Payment failed. Please try again.');
+        }
+      }).render('#paypal-button-container');
 
-  submitForm() {
-    if (this.scheduleForm.valid) {
-      console.log('Schedules:', this.scheduleForm.value.schedules);
-      alert('Schedules saved successfully!');
-    } else {
-      alert('Please fill all required fields.');
+    } catch (error) {
+      console.error('Error initializing PayPal:', error);
     }
   }
 }

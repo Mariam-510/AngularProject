@@ -1,0 +1,200 @@
+<section class="about-us-section vh-75 d-flex align-items-center justify-content-center position-relative text-white">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+    <div class="content position-relative text-center animate__animated animate__fadeInDown">
+        <h1 class="display-1 fw-bold mb-4 text-uppercase text-shadow">Contact Us</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center bg-transparent">
+                <li class="breadcrumb-item"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Contact</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<!-- contact-us.component.html -->
+<div class="container py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-5 mb-4 pe-5">
+        <h1 class="mb-4 fw-bold">Get <span class="text-danger"> In Touch</span> </h1>
+        <p class="lead">
+          Would you like to find out how to get to us or you have a question you need to ask? 
+          Call us or e-mail us, here are all the contact information you need to know
+        </p>
+        <div class="border-0 mb-5 pt-3">
+            <div class="contact-card bg-light-subtle  shadow">
+                <div class="mb-3 d-flex align-items-center">
+                    <div class="icon-wrapper me-2">
+                        <i class="bi bi-envelope-fill text-danger fs-5"></i>
+                    </div>
+                    <span class="contact-text  fs-5 ">support&#64;showbooking.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-0  mb-5 ">
+            <div class="contact-card  bg-light-subtle shadow">
+                <div class="mb-3 d-flex align-items-center">
+                    <div class="icon-wrapper me-2">
+                        <i class="bi bi-telephone-fill text-danger fs-5"></i>
+                    </div>
+                    <span class="contact-text  fs-5">Tel: +1234567890</span>
+                </div>
+            </div>
+        </div>
+        <div class="border-0  mb-5 ">
+        <div class="contact-card bg-light-subtle shadow  text-center">
+          <div class="d-flex justify-content-evenly w-100 h-100 my-2">
+              <!-- Facebook -->
+              <div class="icon-wrapper">
+                  <a href="https://www.facebook.com" target="_blank" class="bi bi-facebook fs-3 text-danger"></a>
+              </div>
+      
+              <!-- Twitter -->
+              <div class="icon-wrapper">
+                  <a href="https://www.twitter.com" target="_blank" class="bi bi-twitter fs-3 text-danger"></a>
+              </div>
+      
+              <!-- Instagram -->
+              <div class="icon-wrapper">
+                  <a href="https://www.instagram.com" target="_blank" class="bi bi-instagram fs-3 text-danger"></a>
+              </div>
+
+              <div class="icon-wrapper">
+                <a href="https://www.linkedin.com" target="_blank" class="bi bi-linkedin fs-3 text-danger"></a>
+            </div>
+          </div>
+      </div>
+    </div>
+      
+      
+        
+        
+        
+          
+       
+      </div>
+  
+      <div class="col-md-6">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter your name">
+                <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched" class="text-danger ps-2">
+                    Name is required
+                </div>
+            </div>
+    
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
+                <div *ngIf="contactForm.get('email')?.errors && contactForm.get('email')?.touched" class="text-danger ps-2">
+                    <div *ngIf="contactForm.get('email')?.hasError('required')">Email is required</div>
+                    <div *ngIf="contactForm.get('email')?.hasError('email')">Invalid email format</div>
+                </div>
+            </div>
+    
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" formControlName="phone" placeholder="Enter your phone number">
+                <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched" class="text-danger ps-2">
+                    Phone number is required
+                </div>
+            </div>
+    
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" formControlName="subject" placeholder="Enter the subject">
+                <div *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched" class="text-danger ps-2">
+                    Subject is required
+                </div>
+            </div>
+    
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="4" formControlName="message" placeholder="Enter your message"></textarea>
+                <div *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="text-danger ps-2">
+                    Message is required
+                </div>
+            </div>
+    
+            <button type="submit" class="btn btn-danger w-100 important" [disabled]="!contactForm.valid">
+                Confirm
+            </button>
+        </form>
+    </div>
+    
+    
+    </div>
+  </div>
+
+    
+  
+  <section class="container py-5 d-flex justify-content-center">
+    <div class="row w-100">
+        <!-- Left Side - Title -->
+        <div class="col-md-5 d-flex ps-5">
+            <h1 class="fw-bold">
+                <div class="text-nowrap">Frequently asked</div>
+                <span class="text-danger">questions</span>
+            </h1>
+        </div>
+        
+        <!-- Right Side - FAQ Accordion -->
+        <div class="col-md-7">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item shadow mb-4 rounded-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        How do I book tickets for an event?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        Browse events, select your preferred date and seating, then proceed to checkout.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item shadow mb-4 rounded-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        Can I cancel or reschedule my booking?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        Cancellation policies vary; check the event page for details.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item shadow mb-4 rounded-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        Do I need to print my tickets?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        You can show your ticket digitally or print it for entry.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item shadow mb-4 rounded-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                        What if I have special seating requests or need accommodations?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        Contact customer service for special requests before booking.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+</section>
+  
+ 
+  
+  
