@@ -359,17 +359,18 @@
           <div class="col-6">
             <div class="team-card card h-100 border-0 shadow-hover transition-all">
               <div class="card-header p-0 overflow-hidden">
-                <img [src]="homeTeam.logo" [alt]="homeTeam.name + ' logo'" class="main-logo img-fluid bg-light p-4 w-100">
+                <img [src]="homeTeam.logo" [alt]="homeTeam.name + ' logo'"
+                  class="main-logo img-fluid bg-light p-4 w-100">
               </div>
-        
+
               <div class="card-body p-2">
                 <div class="d-flex align-items-center justify-content-center pb-2">
                   <h3 class="mb-0 me-2 text-gradient-primary">{{homeTeam.name}}</h3>
                   <i class="bi bi-patch-check-fill text-primary fs-5"></i>
                 </div>
-        
+
                 <p class="text-muted text-center">{{homeTeam.description}}</p>
-        
+
                 <div class="team-details">
                   <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="fw-bold text-danger">
@@ -377,17 +378,17 @@
                       Coach:
                       <span class="text-muted">{{homeTeam.coach}}</span>
                     </h5>
-        
+
                     <h5 class="ps-2">
                       <i class="bi bi-star-fill text-warning"></i>
                       <span class="text-danger fw-bold mb-2">
                         Star Players
                       </span>
                     </h5>
-        
+
                     <div class="d-flex flex-wrap gap-2 ms-2 mb-3 justify-content-center">
-                      <span *ngFor="let player of homeTeam.keyPlayers.split(',')" 
-                            class="badge bg-gradient-secondary bg-opacity-10 text-dark">
+                      <span *ngFor="let player of homeTeam.keyPlayers.split(',')"
+                        class="badge bg-gradient-secondary bg-opacity-10 text-dark">
                         {{player.trim()}}
                       </span>
                     </div>
@@ -396,22 +397,23 @@
               </div>
             </div>
           </div>
-        
+
           <!-- Away Team Card -->
           <div class="col-6">
             <div class="team-card card h-100 border-0 shadow-hover transition-all">
               <div class="card-header p-0 overflow-hidden">
-                <img [src]="awayTeam.logo" [alt]="awayTeam.name + ' logo'" class="main-logo img-fluid bg-light p-4 w-100">
+                <img [src]="awayTeam.logo" [alt]="awayTeam.name + ' logo'"
+                  class="main-logo img-fluid bg-light p-4 w-100">
               </div>
-        
+
               <div class="card-body p-2">
                 <div class="d-flex align-items-center justify-content-center pb-2">
                   <h3 class="mb-0 me-2 text-gradient-primary">{{awayTeam.name}}</h3>
                   <i class="bi bi-patch-check-fill text-primary fs-5"></i>
                 </div>
-        
+
                 <p class="text-muted text-center">{{awayTeam.description}}</p>
-        
+
                 <div class="team-details">
                   <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="fw-bold text-danger">
@@ -419,17 +421,17 @@
                       Coach:
                       <span class="text-muted">{{awayTeam.coach}}</span>
                     </h5>
-        
+
                     <h5 class="ps-2">
                       <i class="bi bi-star-fill text-warning"></i>
                       <span class="text-danger fw-bold mb-2">
                         Star Players
                       </span>
                     </h5>
-        
+
                     <div class="d-flex flex-wrap gap-2 ms-2 mb-3 justify-content-center">
-                      <span *ngFor="let player of awayTeam.keyPlayers.split(',')" 
-                            class="badge bg-gradient-secondary bg-opacity-10 text-dark">
+                      <span *ngFor="let player of awayTeam.keyPlayers.split(',')"
+                        class="badge bg-gradient-secondary bg-opacity-10 text-dark">
                         {{player.trim()}}
                       </span>
                     </div>

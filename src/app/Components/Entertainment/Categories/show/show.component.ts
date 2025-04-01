@@ -47,13 +47,18 @@ export class ShowComponent implements OnInit {
     return new Date(year, month, day).getTime(); // Return timestamp for sorting
   }
 
+  // ngOnInit(): void {
+  //   this.shows.sort((a: show, b: show) => {
+  //     const dateA = this.parseCustomDate(a.date);
+  //     const dateB = this.parseCustomDate(b.date);
+  //     return dateA - dateB;
+  //   });
+  // }
+
   ngOnInit(): void {
-    this.shows.sort((a: show, b: show) => {
-      const dateA = this.parseCustomDate(a.date);
-      const dateB = this.parseCustomDate(b.date);
-      return dateA - dateB;
-    });
+    this.shows.sort((a: show, b: show) => a.title.localeCompare(b.title));
   }
+
 
   Math = Math;
 
