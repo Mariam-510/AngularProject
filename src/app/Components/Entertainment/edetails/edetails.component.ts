@@ -131,11 +131,12 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
       return;
     }
 
-    this.checkScroll();
+    this.checkScrollTicket();
 
     this.checkScrollSchedule();
 
-    this.updateScrollButtons();
+    // this.updateScrollButtons();
+    this.checkScroll();
 
     this.updateScrollButtonState();
 
@@ -300,15 +301,15 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
   scrollLeftTicket() {
     this.ticketContainer.nativeElement.scrollBy({ left: -250, behavior: 'smooth' });
-    setTimeout(() => this.checkScroll(), 300); // Allow time for scrolling
+    setTimeout(() => this.checkScrollTicket(), 300); // Allow time for scrolling
   }
 
   scrollRightTicket() {
     this.ticketContainer.nativeElement.scrollBy({ left: 250, behavior: 'smooth' });
-    setTimeout(() => this.checkScroll(), 300);
+    setTimeout(() => this.checkScrollTicket(), 300);
   }
 
-  checkScroll() {
+  checkScrollTicket() {
     const el = this.ticketContainer.nativeElement;
     this.canScrollLeft = el.scrollLeft > 0;
     this.canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 5;
@@ -393,26 +394,42 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
   canScrollRightCast: boolean = true;
 
 
+  // scrollLeftCast() {
+  //   if (this.castContainer) {
+  //     this.castContainer.nativeElement.scrollBy({ left: -250, behavior: 'smooth' });
+  //     setTimeout(() => this.updateScrollButtons(), 300); // Delay to update buttons after scroll
+  //   }
+  // }
+
+  // scrollRightCast() {
+  //   if (this.castContainer) {
+  //     this.castContainer.nativeElement.scrollBy({ left: 250, behavior: 'smooth' });
+  //     setTimeout(() => this.updateScrollButtons(), 300); // Delay to update buttons after scroll
+  //   }
+  // }
+
+  // updateScrollButtons() {
+  //   if (this.castContainer) {
+  //     const container = this.castContainer.nativeElement;
+  //     this.canScrollLeftCast = container.scrollLeft > 0;
+  //     this.canScrollRightCast = container.scrollLeft + container.clientWidth < container.scrollWidth;
+  //   }
+  // }
+
+  checkScroll() {
+    const container = this.castContainer.nativeElement;
+    this.canScrollLeftCast = container.scrollLeft > 0;
+    this.canScrollRightCast = container.scrollLeft < container.scrollWidth - container.clientWidth;
+  }
+
   scrollLeftCast() {
-    if (this.castContainer) {
-      this.castContainer.nativeElement.scrollBy({ left: -250, behavior: 'smooth' });
-      setTimeout(() => this.updateScrollButtons(), 300); // Delay to update buttons after scroll
-    }
+    this.castContainer.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });
+    setTimeout(() => this.checkScroll(), 300);
   }
 
   scrollRightCast() {
-    if (this.castContainer) {
-      this.castContainer.nativeElement.scrollBy({ left: 250, behavior: 'smooth' });
-      setTimeout(() => this.updateScrollButtons(), 300); // Delay to update buttons after scroll
-    }
-  }
-
-  updateScrollButtons() {
-    if (this.castContainer) {
-      const container = this.castContainer.nativeElement;
-      this.canScrollLeftCast = container.scrollLeft > 0;
-      this.canScrollRightCast = container.scrollLeft + container.clientWidth < container.scrollWidth;
-    }
+    this.castContainer.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
+    setTimeout(() => this.checkScroll(), 300);
   }
 
   // -----------------------------------------------------------------------------------------------------
