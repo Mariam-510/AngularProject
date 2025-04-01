@@ -1,0 +1,62 @@
+ <div class="container mt-4 ps-5 pt-5">
+    <div class="mb-3">
+      <h2 class="fw-bold">⚽ Get All Matches</h2>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <p class="text-muted">Home</p>
+          </li>
+          <li class="breadcrumb-item active fw-semibold text-danger" aria-current="page">Get All Matches</li>
+        </ol>
+      </nav>
+    </div> 
+</div>
+  
+    <div *ngFor="let match of matches" class="show-container row  border-bottom rounded bg-white  py-5 mx-5 ps-5">
+      <!-- Event Image -->
+      <div class="d-flex align-items-center col-12 col-xl-3 h-100">
+        <div class="d-flex align-items-center justify-content-start w-100 mt-2 gap-1 mb-3 mb-xl-0 ms-2">
+          <div class="d-flex flex-column align-items-center">
+            <img [src]="match.team1Logo" class="img-fluid rounded-4 me-4" alt="{{ match.team1 }}" style="max-width: 50px;">
+            <h6 class="mt-1 mb-1 fw-bold text-center me-4">{{ match.team1 }}</h6>
+          </div>
+          <div class="fw-bold text-danger fs-4">VS</div>
+          <div class="d-flex flex-column align-items-center">
+            <img [src]="match.team2Logo" class="img-fluid rounded-4 ms-4" alt="{{ match.team2 }}" style="max-width: 50px;">
+            <h6 class="mt-1 mb-1 fw-bold  ms-4 text-center">{{ match.team2 }}</h6>
+          </div>
+        </div>
+      </div>
+       
+
+  
+      <!-- Event Details and Buttons Container -->
+      <div class="col d-flex justify-content-between align-items-center ms-xl-4 ps-xl-5">
+        <!-- Event Details -->
+        <div class="d-flex flex-column">
+          <h1 class="fs-2 ">{{ match.tournament }}</h1>
+          <div class="content-text">
+            <div class="text-danger mb-2 d-flex align-items-center" style="font-size: 18px;">
+              <i class="bi bi-geo-alt-fill me-2"></i>
+              <span>{{ match.venue }}</span>
+            </div>
+            <div class="text-secondary mb-2 d-flex align-items-center" style="font-size: 14px;">
+                <i class="bi bi-calendar me-2"></i>
+                <span>{{ match.date }}</span>
+              </div>
+              <div class="text-secondary mb-2 d-flex align-items-center" style="font-size: 14px;">
+                <i class="bi bi-clock me-2"></i>
+                <span>{{ match.time }}</span>
+              </div>
+          </div>
+        </div>
+  
+        <!-- Buttons (Aligned Right) -->
+        <div class="event-info-actions ps-5 d-flex flex-column align-items-end mt-5">
+          <a [routerLink]="['/admin/addTicket']" class="btn btn-danger text-white  border border-1 rounded mb-3 me-5" style="width: 180px;">
+            <i class="bi bi-ticket me-2"></i> Add Ticket
+          </a>
+        </div>
+      </div>
+    </div>
+   

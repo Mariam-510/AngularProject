@@ -36,6 +36,8 @@ import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.com
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
 import { CreateEventComponent } from './Components/Admin/create-event/create-event.component';
+import { GetAllComponent } from './Components/Admin/get-all/get-all.component';
+import { GetAllMatchesComponent } from './Components/Admin/get-all-matches/get-all-matches.component';
 
 
 
@@ -56,7 +58,11 @@ export const routes: Routes = [
       { path: 'addTicket', component: AddTicketComponent, title: "Add New Ticket" },
       { path: 'addPerformer', component: AddPerformerComponent, title: "Add New Performer" },
       { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" },
-      { path: 'addEvent', component: CreateEventComponent, title: "Add New Event" }
+      { path: 'addEvent', component: CreateEventComponent, title: "Add New Event" },
+      { path: 'getallEvent', component: GetAllComponent, title: "Get All event" },
+      { path: 'getallmatches', component: GetAllMatchesComponent, title: "Get All Matches" },
+
+
     ]
   },
 
