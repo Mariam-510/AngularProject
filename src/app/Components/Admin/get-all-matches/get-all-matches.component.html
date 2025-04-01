@@ -1,6 +1,6 @@
  <div class="container mt-4 ps-5 pt-5">
     <div class="mb-3">
-      <h2 class="fw-bold">⚽ Get All Matches</h2>
+      <h2 class="fw-bold">🏆 Get All Matches</h2>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -9,9 +9,9 @@
           <li class="breadcrumb-item active fw-semibold text-danger" aria-current="page">Get All Matches</li>
         </ol>
       </nav>
-    </div> 
+    </div>
 </div>
-  
+
     <div *ngFor="let match of matches" class="show-container row  border-bottom rounded bg-white  py-5 mx-5 ps-5">
       <!-- Event Image -->
       <div class="d-flex align-items-center col-12 col-xl-3 h-100">
@@ -27,9 +27,9 @@
           </div>
         </div>
       </div>
-       
 
-  
+
+
       <!-- Event Details and Buttons Container -->
       <div class="col d-flex justify-content-between align-items-center ms-xl-4 ps-xl-5">
         <!-- Event Details -->
@@ -50,7 +50,7 @@
               </div>
           </div>
         </div>
-  
+
         <!-- Buttons (Aligned Right) -->
         <div class="event-info-actions ps-5 d-flex flex-column align-items-end mt-5">
           <a [routerLink]="['/admin/addTicket']" class="btn btn-danger text-white  border border-1 rounded mb-3 me-5" style="width: 180px;">
@@ -59,4 +59,3 @@
         </div>
       </div>
     </div>
-   
