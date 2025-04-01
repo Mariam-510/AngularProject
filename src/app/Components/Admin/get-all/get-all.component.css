@@ -1,8 +1,0 @@
-a {
-    transition: all 0.4s ease-in-out;
-  }
-  
-  a:hover {
-    transform: scale(1.06);
-   
-  }

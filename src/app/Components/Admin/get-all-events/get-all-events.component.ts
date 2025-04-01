@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { SharedService } from '../../../Services/shared.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 export interface show {
   id: number;
@@ -24,21 +24,19 @@ export interface show {
 }
 
 @Component({
-  selector: 'app-get-all',
-  imports: [CommonModule,FormsModule,RouterModule],
-  templateUrl: './get-all.component.html',
-  styleUrl: './get-all.component.css'
+  selector: 'app-get-all-events',
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './get-all-events.component.html',
+  styleUrl: './get-all-events.component.css'
 })
-export class GetAllComponent {
- events: show[] = [];
- Math= Math;
- 
-   constructor(private sharedService: SharedService) { }
- 
-   ngOnInit(): void {
-     this.events = this.sharedService.shows;
-   }
+export class GetAllEventsComponent {
+  events: show[] = [];
+  Math = Math;
 
- 
- 
+  constructor(private sharedService: SharedService) { }
+
+  ngOnInit(): void {
+    this.events = this.sharedService.shows;
+  }
+
 }

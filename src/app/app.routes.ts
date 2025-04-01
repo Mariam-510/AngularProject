@@ -29,15 +29,14 @@ import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.co
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
 import { UserComponent } from './Components/ProfilePages/user/user.component';
-
 import { TestV2Component } from './Components/test-v2/test-v2.component';
 import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedule.component';
 import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
 import { CreateEventComponent } from './Components/Admin/create-event/create-event.component';
-import { GetAllComponent } from './Components/Admin/get-all/get-all.component';
 import { GetAllMatchesComponent } from './Components/Admin/get-all-matches/get-all-matches.component';
+import { GetAllEventsComponent } from './Components/Admin/get-all-events/get-all-events.component';
 
 
 
@@ -50,19 +49,17 @@ export const routes: Routes = [
 
 
   {
-    path: 'admin', component: ADashboardComponent, title: "Admin",
+    path: 'admin', component: AdminHomeComponent, title: "Admin",
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" },
+      { path: 'dashboard', component: ADashboardComponent, title: "Dashboard" },
       { path: 'addSchedule', component: AddScheduleComponent, title: "Add New Schedule" },
       { path: 'addTicket', component: AddTicketComponent, title: "Add New Ticket" },
       { path: 'addPerformer', component: AddPerformerComponent, title: "Add New Performer" },
       { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" },
-      { path: 'addEvent', component: CreateEventComponent, title: "Add New Event" },
-      { path: 'getallEvent', component: GetAllComponent, title: "Get All event" },
+      { path: 'addShow', component: CreateEventComponent, title: "Add New Event" },
+      { path: 'getallshows', component: GetAllEventsComponent, title: "Get All Shows" },
       { path: 'getallmatches', component: GetAllMatchesComponent, title: "Get All Matches" },
-
-
     ]
   },
 
@@ -74,7 +71,6 @@ export const routes: Routes = [
       { path: 'favourites', component: FavouriteComponent, title: "Favourites" },
       { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' }
     ]
-
   },
 
   { path: 'sports', component: SHomePageComponent, title: "Sports" },

@@ -1,48 +1,57 @@
-<div class="container mt-4 bg-light shadow p-3 rounded" style="max-width: 800px;">
-  <h3 class="text-center text-danger mb-4">Schedule Form</h3>
-
-  <form [formGroup]="scheduleForm">
-    <div formArrayName="schedules">
-      <div *ngFor="let schedule of scheduleControls.controls; let i = index" [formGroupName]="i" class="row mb-3">
-
-        <div class="col-md-3">
-          <label class="form-label">Date</label>
-          <input type="date" class="form-control" formControlName="date">
-        </div>
-
-        <div class="col-md-3">
-          <label class="form-label">Day</label>
-          <select class="form-control" formControlName="day">
-            <option value="" disabled selected>Select Day</option>
-            <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
-          </select>
-        </div>
-
-        <div class="col-md-2">
-          <label class="form-label">Start Time</label>
-          <input type="time" class="form-control" formControlName="startTime">
-        </div>
-
-        <div class="col-md-2">
-          <label class="form-label">End Time</label>
-          <input type="time" class="form-control" formControlName="endTime">
-        </div>
-
-        <div class="col-md-2 d-flex align-items-end">
-          <button type="button" class="btn btn-danger" (click)="removeSchedule(i)" *ngIf="scheduleControls.length > 1">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-
-      </div>
+<div class="dashboard-container d-flex flex-md-row flex-column min-vh-100 p-3 bg-light gap-3">
+  <!-- Sidebar -->
+  <div class="sidebar bg-white shadow-sm p-3 position-relative rounded border" [class.collapsed]="isCollapsed">
+    <div class="sidebar-header d-flex align-items-center">
+      <button class="btn btn-outline-danger fs-4 border-0 menu-btn" (click)="toggleSidebar()">
+        <i class="bi bi-list"></i>
+      </button>
     </div>
 
-    <button type="button" class="btn btn-success mt-3" (click)="addSchedule()">
-      <i class="bi bi-plus-circle"></i> Add Schedule
-    </button>
+    <ul class="nav flex-column mt-3">
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="dashboard"
+          routerLinkActive="active">
+          <i class="bi bi-speedometer2 me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Dashboard</span>
+        </a>
+      </li>
 
-    <button type="submit" class="btn btn-danger mt-3 ms-2" (click)="submitForm()">
-      <i class="bi bi-save"></i> Save Schedules
-    </button>
-  </form>
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="addEvent"
+          routerLinkActive="active">
+          <i class="bi bi-tv me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Show</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="addMatch"
+          routerLinkActive="active">
+          <i class="bi bi-trophy me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Match</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
+          routerLink="getallshows" routerLinkActive="active">
+          <i class="bi bi-collection me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Get All Shows</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
+          routerLink="getallmatches" routerLinkActive="active">
+          <i class="bi bi-collection me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed"> Get All Matches</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Content Area -->
+  <main class="content-area flex-grow-1 bg-white shadow-sm px-2  rounded border">
+    <router-outlet></router-outlet>
+
+  </main>
 </div>
