@@ -104,13 +104,9 @@ export const routes: Routes = [
 
   { path: "t", component: TesttComponent, title: "t" },
 
-  {
-    path: "t2", component: TestV2Component, title: "t2",
-    children: [
-      { path: '', redirectTo: 't', pathMatch: "full" },
-      { path: "t", component: TesttComponent },
-    ]
-  },
+  { path: "t2", component: TestV2Component, title: "t2" },
+
+  { path: "t", component: TesttComponent, title: "t" },
 
   { path: "l", component: LeafletMapComponent, title: "l" },
 
