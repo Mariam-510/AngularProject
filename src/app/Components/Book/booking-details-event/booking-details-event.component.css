@@ -7,6 +7,7 @@
   padding: 2rem 10rem 2rem 14rem;
   min-height: 100vh;
   font-family: "Inter", system-ui;
+  margin: 0 auto;
 }
 
 .checkout-main {
@@ -171,11 +172,31 @@
   font-size: 1.75rem;
 }
 
+.checkout-main {
+  display: contents;
+  /* Allows children to participate in parent grid */
+}
+
 .transaction-overview {
-  margin: 20px 0;
+  /* margin: 20px 0; */
+  grid-row: 1;
   grid-column: 1 / -1;
   transition: transform 0.2s ease;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
+}
+
+.attendee-profile {
+  grid-column: 1;
+  grid-row: 2;
+  /* width: 70%; */
+  /* margin-left: 2rem; */
+}
+
+.transaction-sidebar {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  /* Aligns sidebar to the top */
 }
 
 /* Modified responsive styles for medium screens */
@@ -189,6 +210,7 @@
   .checkout-layout {
     grid-template-columns: 1fr;
     padding: 2rem;
+    gap: 1.5rem;
   }
 
   .event-visual {
@@ -249,9 +271,9 @@
 /* Existing min-width: 992px media query - keep this at bottom to maintain cascade */
 @media (min-width: 992px) {
   .checkout-layout {
-    grid-template-columns: 1.5fr 1fr; /* Better proportion for medium screens */
+    grid-template-columns: 1.5fr 1fr;
     gap: 2rem;
-    padding: 2rem 8rem; /* Reduced side padding */
+    padding: 2rem 8rem;
   }
 
   .event-essentials {
