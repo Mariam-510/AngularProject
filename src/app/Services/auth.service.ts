@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   private readonly router = inject(Router);
-  
+
   // Unified user state (using both Signal and Observable)
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser = signal<any>(null);
@@ -25,7 +25,7 @@ export class AuthService {
     authMethod: 'mock',
     role: 'user'
   };
-  
+
   private mockAdmin = {
     firstName: 'Admin',
     lastName: '1',
@@ -39,7 +39,7 @@ export class AuthService {
 
   constructor() {
     this.loadInitialUser();
-    
+
     // Check for Google OAuth redirect on initialization
     if (window.location.hash.includes('access_token')) {
       this.handleGoogleRedirect();
@@ -101,7 +101,7 @@ export class AuthService {
     const redirectUri = 'http://localhost:4200/home';
     const scope = 'email profile openid';
     const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
-    
+
     window.location.href = authUrl;
   }
 
@@ -111,17 +111,17 @@ export class AuthService {
       const fragment = window.location.hash.substring(1);
       const params = new URLSearchParams(fragment);
       const accessToken = params.get('access_token');
-      
+
       if (!accessToken) {
         throw new Error('No access token found');
       }
 
       const userInfo = await this.getGoogleUserInfo(accessToken);
       const formattedUser = this.formatGoogleUser(userInfo);
-      
+
       this.setUser(formattedUser);
       localStorage.setItem('googleUser', JSON.stringify(formattedUser));
-      
+
       // Clear the URL fragment and navigate
       this.router.navigate(['/'], { replaceUrl: true });
     } catch (error) {
@@ -136,11 +136,11 @@ export class AuthService {
         Authorization: `Bearer ${accessToken}`
       }
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to fetch user info');
     }
-    
+
     return await response.json();
   }
 
@@ -150,7 +150,7 @@ export class AuthService {
       // For direct OAuth, we can't programmatically sign out of Google,
       // but we can clear our local state
       localStorage.removeItem('googleUser');
-      
+
       // Optional: Redirect to Google logout page
       // window.location.href = 'https://accounts.google.com/Logout';
     }
@@ -168,7 +168,7 @@ export class AuthService {
   }
 
   private generateNonce(): string {
-    return Math.random().toString(36).substring(2, 15) + 
-           Math.random().toString(36).substring(2, 15);
+    return Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
   }
 }

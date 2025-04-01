@@ -48,7 +48,7 @@
 
       <h6 class="border-bottom py-2 d-flex align-items-center">
         <i class="bi bi-cash-stack fs-5 me-2"></i>
-        <span>Prices from <strong>${{ item.price }}</strong></span>
+        <span>Prices from <strong>{{ item.price }} EGP</strong></span>
       </h6>
 
 
@@ -217,14 +217,14 @@
         </div>
 
 
-        <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.fullLocation" [styleTxt]="{
-                'height': '350px',
-                'width': '95%',
-                'display': 'block',
-                'margin-left': '15px'
-              }">
-          <!-- 'margin': '0 auto' -->
+        <app-leaflet-map *ngIf="isMapVisible" [locationName]="item.location + ', ' + item.fullLocation" [styleTxt]="{
+        'height': '350px',
+        'width': '95%',
+        'display': 'block',
+        'margin-left': '15px'
+      }">
         </app-leaflet-map>
+
 
         <hr class="mt-4">
       </div>
@@ -243,18 +243,6 @@
       <h4 class="ps-5">
         <i class="bi bi-hourglass-split me-2"></i> Check the event schedule below
       </h4>
-      <!--
-          <button class="btn bg-secondary text-white me-2 opacity-100"
-            [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftSchedule}" (click)="scrollLeftSchedule()"
-            [disabled]="!canScrollLeft">
-            <i class="bi bi-chevron-left fs-6"></i>
-          </button>
-
-          <button class="btn bg-secondary text-white opacity-100"
-            [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightSchedule}" (click)="scrollRightSchedule()"
-            [disabled]="!canScrollRight">
-            <i class="bi bi-chevron-right fs-6"></i>
-          </button> -->
 
       <div class="d-flex align-items-center">
         <!-- Left Scroll Button -->
@@ -580,7 +568,8 @@
 
     <!-- Scroll Buttons -->
     <div class="scroll-container d-flex">
-      <button class="scroll-btn left me-2" (click)="scrollLeft()">&#10094;</button>
+      <button class="scroll-btn left me-2" (click)="scrollLeft()" [disabled]="isLeftDisabled">&#10094;</button>
+
 
       <!-- Scrollable Event List -->
       <div class="event-scroll-wrapper">
@@ -588,7 +577,7 @@
           @for (event of eventList; track event) {
           <div class="col-md-4 event-card">
             <div class="card shadow-sm position-relative">
-              <img [src]="event.image" class="card-img-top rounded-top" [alt]="event.title">
+              <img [src]="event.imageSmall" class="card-img-top rounded-top" [alt]="event.title">
 
               <!-- Rating Badge -->
               <span class="position-absolute bg-white text-dark px-3 py-1 rounded fw-bold m-2">
@@ -597,7 +586,7 @@
 
               <div class="card-body text-center">
                 <h4 class="fw-bold">{{ event.title }}</h4>
-                <div class="mb-1">{{ event.venue }}</div>
+                <div class="mb-1">{{ event.location }}</div>
 
                 <!-- Star Ratings -->
                 <div class="text-danger mb-3 mt-1 fs-5">
@@ -640,7 +629,7 @@
         </div>
       </div>
 
-      <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
+      <button class="scroll-btn right ms-2" (click)="scrollRight()" [disabled]="isRightDisabled">&#10095;</button>
     </div>
     }
 
