@@ -48,15 +48,17 @@
         </a>
       </div>
     </div>
-
-    <div class="mt-4">
-      <!-- <span class="me-2">Already have an account?</span> -->
-      <a routerLink="/login"  class="text-white fw-bold text-decoration-none me-3 fs-4 ps-5 ms-1">Sign in</a>
-      <span class="text-white text-decoration-none me-4 fs-2  ">or</span>
-      <a routerLink="/register" class="btn btn-danger rounded-0 py-2 fw-bold mb-1 ">
-        <i class="bi bi-person-plus-fill me-2 "></i> Register Now!
-    </a>
-          
-    </div>
+    @if (!currentUser) {
+      <div class="mt-4">
+        <!-- <span class="me-2">Already have an account?</span> -->
+        <a routerLink="/login"  class="text-white fw-bold text-decoration-none me-3 fs-4 ps-5 ms-1">Sign in</a>
+        <span class="text-white text-decoration-none me-4 fs-2  ">or</span>
+        <a routerLink="/register" class="btn btn-danger rounded-0 py-2 fw-bold mb-1 ">
+          <i class="bi bi-person-plus-fill me-2 "></i> Register Now!
+      </a>
+            
+      </div>
+    }
+    
   </div>
 </div>

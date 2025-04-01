@@ -41,10 +41,10 @@
               <input type="text" class="form-control border-0 shadow-sm" placeholder="Last Name"
                 formControlName="lastName">
             </div>
-            <div *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched"
+            <!-- <div *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched"
               class="text-danger small ps-2">
               Last Name is required.
-            </div>
+            </div> -->
             <div *ngIf="registerForm.get('lastName')?.hasError('minlength') && registerForm.get('lastName')?.touched"
               class="text-danger small ps-2">
               LastName at least 3 characters.

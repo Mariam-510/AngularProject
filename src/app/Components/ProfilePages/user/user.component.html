@@ -15,13 +15,13 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="image-wrapper " style="margin-left: -20px;">
-                        <img [src]="userImage" alt="User Avatar" class="rounded-circle user-img">
+                        <img [src]="currentUser.avatar" alt="User Avatar" class="rounded-circle user-img">
                         <div class="camera-icon" (click)="uploadImage()">
                             <i class="bi bi-camera-fill"></i>
                         </div>
                     </div>
                     <div class="ms-4">
-                        <h5 class="mb-0 fs-3 mb-3">Shahd Abdalla</h5>
+                        <h5 class="mb-0 fs-3 mb-3">{{ currentUser.firstName + ' ' + (currentUser.lastName? currentUser.lastName : "") }}</h5>
                         <p class="ms-2 text-muted small mb-0 fst-italic" style="color: gainsboro">Joined Date: 15 Dec, 2022</p>
                     </div>
                 </div>
@@ -66,10 +66,10 @@
                             <input type="text" class="form-control border-0 shadow-sm" placeholder="Last Name"
                                 formControlName="lastName">
                         </div>
-                        <div *ngIf="MyForm.get('lastName')?.hasError('required') && MyForm.get('lastName')?.touched"
+                        <!-- <div *ngIf="MyForm.get('lastName')?.hasError('required') && MyForm.get('lastName')?.touched"
                             class="text-danger small ps-2">
                             Last Name is required.
-                        </div>
+                        </div> -->
                         <div *ngIf="MyForm.get('lastName')?.hasError('minlength') && MyForm.get('lastName')?.touched"
                             class="text-danger small ps-2">
                             LastName at least 3 characters.
