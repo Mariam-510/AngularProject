@@ -2,7 +2,7 @@
 <div class="row" id="eventContainer">
   <div class="col-md-4 event-card" *ngFor="let event of paginatedEvents">
     <div class="card shadow-sm position-relative">
-      <img [src]="event.image" class="card-img-top rounded-top" [alt]="event.title">
+      <img [src]="event.imageSmall" class="card-img-top rounded-top" [alt]="event.title">
 
       <span class="position-absolute bg-white text-dark px-3 py-1 rounded fw-bold m-2">
         {{ event.rating }} ★
@@ -10,7 +10,7 @@
 
       <div class="card-body text-center">
         <h4 class="fw-bold">{{ event.title }}</h4>
-        <div class="mb-1">{{ event.venue }}</div>
+        <div class="mb-1">{{ event.location }}</div>
 
         <div class="text-danger mb-3 mt-1 fs-5">
           <ng-container *ngFor="let star of [].constructor(5); let i = index">

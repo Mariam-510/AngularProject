@@ -1,237 +1,59 @@
-<div class="container mt-4 p-5">
-    <div class="mb-3">
-        <h2 class="fw-bold ">Dashboard</h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <p class="text-muted">Home</p>
-                </li>
-                <li class="breadcrumb-item active fw-semibold text-danger" aria-current="page">Dashboard</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="row g-3">
-        <!-- Main Dashboard Cards -->
-        <div class="col-12">
-    <div class="row g-3">
-        <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card shadow-sm p-3">
-                <div class="d-flex align-items-center">
-                    <div class="me-3 text-primary fs-2">
-                        <i class="bi bi-tags-fill"></i>
-                    </div>
-                    <div>
-                        <h6 class="text-muted">Tickets Sold Today</h6>
-                        <h4>90</h4>
-                        <span class="text-success">8% increase</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card shadow-sm p-3">
-                <div class="d-flex align-items-center">
-                    <div class="me-3 text-success fs-2">
-                        <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div>
-                        <h6 class="text-muted">Revenue | This Month</h6>
-                        <h4>$45,000</h4>
-                        <span class="text-success">5% increase</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card shadow-sm p-3">
-                <div class="d-flex align-items-center">
-                    <div class="me-3 text-warning fs-2">
-                        <i class="bi bi-people"></i>
-                    </div>
-                    <div>
-                        <h6 class="text-muted">Active Users | This Year</h6>
-                        <h4>10,500</h4>
-                        <span class="text-danger">4% decrease</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-
-
-
-    </div>
-    </div>
-     
-<div class="col-12">
-    <div class="row g-3">
-        <!-- Revenue Chart Column -->
-        <div class="col-lg-8 pt-5">
-            <h3 class="text-dark fw-bold mt-3 ">Revenue by Event Type | <span class="text-danger">Last Year</span></h3>
-            <canvas id="revenueChart" class="chart-container pt-5  h-75"></canvas>
-            <div class="chart-legend d-flex justify-content-center ms-5">
-                <span class="legend-item me-5  pt-4"><span class="dot blue "></span> Football Matches</span>
-                <span class="legend-item pt-4"><span class="dot orange"></span> Entertainment Shows</span>
-            </div>
-        </div>
-<div class="col-lg-4 pt-5 mt-3 col-md-12 ">
-<!-- Recent Activity Card -->
-
-
-<div class="card shadow-sm">
-    <div class="card-body">
-        <h3 class="fw-bold">Recent Activity | <span class="text-danger">Today</span></h3>
-        <div class="position-relative" style="height: 400px;">
-            <!-- Vertical Line -->
-            <div class="position-absolute start-0 top-0 bottom-0 ms-3 border-start border-5 border-gray"></div>
-
-            <!-- Scrollable content with hidden scrollbar -->
-            <div class="h-100 overflow-hidden pe-none">  <!-- Parent container -->
-                <div class="h-100 pe-auto" style="overflow-y: auto; margin-right: -17px; padding-right: 17px;">
-                    <ul class="list-unstyled">
-                        <li *ngFor="let activity of activities" class="position-relative mb-4">
-                            <div class="position-absolute start-0 translate-middle-x text-end pt-1" 
-                                 style="width: 85px; top: 50%; transform: translateY(-50%);">
-                                <span class="text-muted small">{{ activity.time }}</span>
-                            </div>
-                            
-                            <span class="dott position-absolute translate-middle rounded-circle" 
-                                  [ngStyle]="{'background-color': activity.color}"></span>
-                            
-                            <div class="ms-5 ps-3 pt-2">
-                                <span [innerHTML]="activity.text"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-  
-        </div>
-          
-        
-      
-
+<div class="dashboard-container d-flex flex-md-row flex-column min-vh-100 p-3 bg-light gap-3">
+  <!-- Sidebar -->
+  <div class="sidebar bg-white shadow-sm p-3 position-relative rounded border" [class.collapsed]="isCollapsed">
+    <div class="sidebar-header d-flex align-items-center">
+      <button class="btn btn-outline-danger fs-4 border-0 menu-btn" (click)="toggleSidebar()">
+        <i class="bi bi-list"></i>
+      </button>
     </div>
 
-    <div class="row g-3 ">
-        <!-- Recent Bookings Table -->
-        <div class="col-12 mt-5">
-            <div class="card shadow-sm p-4">
-      <!-- Recent Bookings Title -->
-  <h3 class="fw-bold ">Recent Bookings | <span class="text-danger">Today</span></h3>
+    <ul class="nav flex-column mt-3">
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="dashboard"
+          routerLinkActive="active">
+          <i class="bi bi-speedometer2 me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Dashboard</span>
+        </a>
+      </li>
 
-  <!-- Filters Section -->
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <!-- Event Filter Dropdown -->
-    <div class="dropdown py-3">
-        <button class="btn btn-outline-danger dropdown-toggle" type="button" id="eventDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <span>{{ selectedIcon }} {{ selectedEvent }}</span>
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="addShow"
+          routerLinkActive="active">
+          <i class="bi bi-calendar-plus me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Show</span>
+        </a>
+      </li>
 
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="eventDropdown">
-            <li><button class="dropdown-item" (click)="filterByEvent('All Events')"> 📅 All Events</button></li>
-            <li><button class="dropdown-item" (click)="filterByEvent('Concerts')"> 🎤 Concerts</button></li>
-            <li><button class="dropdown-item" (click)="filterByEvent('Theater')"> 🎭 Theater</button></li>
-            <li><button class="dropdown-item" (click)="filterByEvent('Dance')"> 💃 Dance</button></li>
-            <li><button class="dropdown-item" (click)="filterByEvent('Stand-Up Comedy')"> 🎙️ Stand-Up Comedy</button></li>
-            <li><button class="dropdown-item" (click)="filterByEvent('Football Matches')"> ⚽ Football Matches</button></li>
-        </ul>
-    </div>
-    
-      
-      
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
+          routerLink="getallshows" routerLinkActive="active">
+          <i class="bi bi-collection-play me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Get All Shows</span>
+        </a>
+      </li>
 
-    <!-- Search Bar -->
-    <div class="input-group w-25 py-3 ">
-        <input type="text" class="form-control border-danger placeholder-black " id="searchInput" 
-          placeholder="Search events by name..." (input)="searchBookings($event)">
-        <span class="input-group-text border-danger"><i class="bi bi-search text-danger"></i></span>
-      </div>
-      
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3" routerLink="addMatch"
+          routerLinkActive="active">
+          <i class="bi bi-flag-fill me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed">Add Match</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center text-dark fw-semibold rounded p-2 fs-5 mb-3"
+          routerLink="getallmatches" routerLinkActive="active">
+          <i class="bi bi-trophy me-2 text-danger"></i>
+          <span class="d-md-inline d-none" *ngIf="!isCollapsed"> Get All Matches</span>
+        </a>
+      </li>
+
+    </ul>
   </div>
 
- <!-- Bookings Table -->
-<div class="table-responsive" *ngIf="paginatedBookings.length > 0; else noData">
+  <!-- Content Area -->
+  <main class="content-area flex-grow-1 bg-white shadow-sm px-2  rounded border">
+    <router-outlet></router-outlet>
 
-    <table class="table table-hover">
-      <thead class="table-danger">
-        <tr>
-          <th>User</th>
-          <th>Event Name</th>
-          <th>Event Type</th>
-          <th>Tickets</th>
-          <th>Price</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let booking of paginatedBookings">
-          <td>{{ booking.user }}</td>
-          <td>{{ booking.event }}</td>
-          <td>{{ booking.type }}</td>
-          <td>{{ booking.tickets }}</td>
-          <td>{{ booking.price }}</td>
-          <td>
-            <span 
-              [class.bg-success]="booking.status === 'Confirmed'"
-              [class.bg-warning]="booking.status === 'Upcoming'"
-              [class.bg-danger]="booking.status === 'Cancelled'"
-              class="badge text-white p-2">
-              {{ booking.status }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-</div>
-
-<!-- No Matching Results Message -->
-<ng-template #noData>
-    <div class="text-center text-danger my-4">
-      <i class="bi bi-exclamation-circle fs-1"></i>
-      <p class="mt-2 fw-bold">No matching bookings found</p>
-    </div>
-  </ng-template>
-  
-
-  
-  <!-- <p class="text-muted mt-3">
-    Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ filteredBookings.length }} entries
-  </p>
-   -->
-  <!-- Pagination Controls -->
-  <nav  *ngIf="paginatedBookings.length > 0" aria-label="Match pagination" class="mt-4">
-    <ul class="pagination justify-content-center">
-      <!-- Previous Button -->
-      <li class="page-item" [class.disabled]="currentPage === 1">
-        <a class="page-link" (click)="currentPage !== 1 && onPageChange(currentPage - 1)">Previous</a>
-      </li>
-  
-      <!-- Page Numbers -->
-      <li *ngFor="let page of pages" class="page-item" [class.active]="page === currentPage">
-        <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
-      </li>
-  
-      <!-- Next Button -->
-      <li class="page-item" [class.disabled]="currentPage === totalPages">
-        <a class="page-link" (click)="currentPage !== totalPages && onPageChange(currentPage + 1)">Next</a>
-      </li>
-    </ul>
-  </nav>
-
-  
-  <ng-template #noData>
-    <p class="text-center text-muted">No matching bookings found</p>
-  </ng-template>
-  
-            </div>
-        </div>
-    </div>
-
+  </main>
 </div>

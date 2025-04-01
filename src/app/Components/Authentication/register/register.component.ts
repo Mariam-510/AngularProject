@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../Services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RegisterComponent {
 
+  constructor(private _authService: AuthService) { }
 
   registerForm = new FormGroup({
     firstName: new FormControl("", [
@@ -19,7 +21,7 @@ export class RegisterComponent {
       Validators.pattern(/^[A-Za-z]+$/)
     ]),
     lastName: new FormControl("", [
-      Validators.required,
+      // Validators.required,
       Validators.minLength(3),
       Validators.pattern(/^[A-Za-z]+$/)
     ]),
@@ -61,12 +63,7 @@ export class RegisterComponent {
     this.registerForm.reset();
   }
   googleLogin() {
-    const clientId = '329985024640-j1e42v80vulq0c0pqom75puhm75c4f4i.apps.googleusercontent.com';
-    const redirectUri = 'http://localhost:4200/home';
-    const scope = 'email profile openid';
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
-
-    window.location.href = authUrl;
+    this._authService.googleLogin();
   }
 }
 

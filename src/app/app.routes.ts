@@ -14,7 +14,6 @@ import { LeafletMapComponent } from './Components/leaflet-map/leaflet-map.compon
 import { BookingHistoryComponent } from './Components/ProfilePages/booking-history/booking-history.component';
 import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
-
 import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/Authentication/login/login.component';
 import { RegisterComponent } from './Components/Authentication/register/register.component';
@@ -30,23 +29,21 @@ import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.co
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
 import { UserComponent } from './Components/ProfilePages/user/user.component';
-
 import { TestV2Component } from './Components/test-v2/test-v2.component';
-<<<<<<< Updated upstream
-import { TesthomeComponent } from './testhome/testhome.component';
-=======
 import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedule.component';
 import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
 import { ContactComponent } from './Components/contact/contact.component';
 import { TestqrComponent } from './Components/ProfilePages/testqr/testqr.component';
->>>>>>> Stashed changes
+import { CreateEventComponent } from './Components/Admin/create-event/create-event.component';
+import { GetAllMatchesComponent } from './Components/Admin/get-all-matches/get-all-matches.component';
+import { GetAllEventsComponent } from './Components/Admin/get-all-events/get-all-events.component';
+
 
 
 
 export const routes: Routes = [
-{path:'myhome', component:TesthomeComponent},
   { path: '', redirectTo: 'home', pathMatch: "full" },
   { path: 'home', component: HomeComponent, title: "Home" },
   { path: 'about', component: AboutComponent, title: 'About' },
@@ -56,10 +53,18 @@ export const routes: Routes = [
 
 
   {
-    path: 'admin', component: ADashboardComponent, title: "Admin",
+    path: 'admin', component: AdminHomeComponent, title: "Admin",
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminHomeComponent, title: "Dashboard" }]
+      { path: 'dashboard', component: ADashboardComponent, title: "Dashboard" },
+      { path: 'addSchedule', component: AddScheduleComponent, title: "Add New Schedule" },
+      { path: 'addTicket', component: AddTicketComponent, title: "Add New Ticket" },
+      { path: 'addPerformer', component: AddPerformerComponent, title: "Add New Performer" },
+      { path: 'addMatch', component: AddNewMatchComponent, title: "Add New Match" },
+      { path: 'addShow', component: CreateEventComponent, title: "Add New Event" },
+      { path: 'getallshows', component: GetAllEventsComponent, title: "Get All Shows" },
+      { path: 'getallmatches', component: GetAllMatchesComponent, title: "Get All Matches" },
+    ]
   },
 
   {
@@ -71,7 +76,6 @@ export const routes: Routes = [
       { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' },
       {path:'test',component:TestqrComponent,title:'testtt'}
     ]
-
   },
 
   { path: 'sports', component: SHomePageComponent, title: "Sports" },
@@ -103,6 +107,7 @@ export const routes: Routes = [
   {
     path: "t2", component: TestV2Component, title: "t2",
     children: [
+      { path: '', redirectTo: 't', pathMatch: "full" },
       { path: "t", component: TesttComponent },
     ]
   },

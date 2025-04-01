@@ -66,7 +66,7 @@
           <div
             class="show-containerV p-1 rounded bg-white mx-2 my-2 d-flex flex-column border-bottom position-relative">
             <!-- Event Image -->
-            <img [src]="event.image" class="img-fluid rounded-bottom-5 mb-2" alt="Event Image">
+            <img [src]="event.imageLarge" class="img-fluid rounded-bottom-5 mb-2" alt="Event Image">
 
             <!-- Fav Button (Top-right) -->
             <button class="btn btn-light fav-btn d-flex align-items-center position-absolute"
@@ -104,7 +104,7 @@
               </p>
               <p class="mb-0">
                 <i class="bi bi-ticket-perforated me-2 fs-5"></i>
-                <strong>Prices from ${{ event.price }}</strong>
+                <strong>Prices from {{ event.price }} EGP</strong>
               </p>
             </div>
 
@@ -133,7 +133,7 @@
         class="show-container row py-2 px-3 border-bottom rounded bg-white mx-2 my-2">
         <!-- Event Image - Full width on small screens -->
         <div class="col-12 col-md-auto text-center">
-          <img [src]="event.image" class="imgH img-fluid" alt="Event Image"
+          <img [src]="event.imageSmall" class="imgH img-fluid" alt="Event Image"
             style="max-width: 400px; max-height: 200px;">
         </div>
 
@@ -176,7 +176,7 @@
               </h6>
               <h6 class="py-2 d-flex align-items-center">
                 <i class="bi bi-cash-stack fs-5 me-2"></i>
-                <span>Prices from <strong>${{ event.price }}</strong></span>
+                <span>Prices from <strong>{{ event.price }} EGP</strong></span>
               </h6>
             </div>
 

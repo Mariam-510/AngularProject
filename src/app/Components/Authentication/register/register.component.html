@@ -1,5 +1,7 @@
 <div class="home-content">
-  <div class="form-container">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+  <div class="position-relative form-container">
     <form class=" form-Content shadow-lg rounded" [formGroup]="registerForm">
       <h4 class="text-center mt-1" style="color: red; font-weight: bold; font-family: sans-serif;">
         Create Your Account
@@ -41,10 +43,10 @@
               <input type="text" class="form-control border-0 shadow-sm" placeholder="Last Name"
                 formControlName="lastName">
             </div>
-            <div *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched"
+            <!-- <div *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched"
               class="text-danger small ps-2">
               Last Name is required.
-            </div>
+            </div> -->
             <div *ngIf="registerForm.get('lastName')?.hasError('minlength') && registerForm.get('lastName')?.touched"
               class="text-danger small ps-2">
               LastName at least 3 characters.

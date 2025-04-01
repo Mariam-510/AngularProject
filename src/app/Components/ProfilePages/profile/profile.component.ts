@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { SharedService } from '../../../Services/shared.service';
+import { AuthService } from '../../../Services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +11,7 @@ import { SharedService } from '../../../Services/shared.service';
 })
 export class ProfileComponent {
 
-  constructor(private _shared: SharedService, private router: Router) { }
+  constructor(private _authService: AuthService, private router: Router) { }
 
 
   isCollapsed = false;
@@ -26,7 +26,7 @@ export class ProfileComponent {
     const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone!");
 
     if (isConfirmed) {
-      this._shared.logout();
+      this._authService.logout();
       this.router.navigate(['/']);
     }
   }

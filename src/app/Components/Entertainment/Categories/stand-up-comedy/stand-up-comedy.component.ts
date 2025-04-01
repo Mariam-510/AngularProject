@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ShowComponent } from "../show/show.component";
+import { SharedService } from '../../../../Services/shared.service';
 
 @Component({
   selector: 'app-stand-up-comedy',
@@ -9,27 +10,12 @@ import { ShowComponent } from "../show/show.component";
   templateUrl: './stand-up-comedy.component.html',
   styleUrl: './stand-up-comedy.component.css'
 })
-export class StandUpComedyComponent {
-  // events
-  eventList = [
-    {
-      id: 1,
-      title: "PAUL SIMON",
-      venue: "Ahmanson Theater",
-      date: "July 7",
-      rating: 5,
-      image: "img/8.jpg",
-      isFavorite: true
+export class StandUpComedyComponent implements OnInit {
+  shows: any;
 
-    },
-    {
-      id: 2,
-      title: "Phantom Of The Opera",
-      venue: "Ahmanson Theater",
-      date: "July 7",
-      rating: 3.5,
-      image: "img/9.jpg",
-      isFavorite: false
-    }
-  ];
+  constructor(private sharedService: SharedService) { }
+
+  ngOnInit(): void {
+    this.shows = this.sharedService.shows.filter((show: any) => show.category === 'Stand-Up Comedy');
+  }
 }

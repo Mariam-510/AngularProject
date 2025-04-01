@@ -1,20 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ESliderComponent } from "../eslider/eslider.component";
 import { RouterModule } from '@angular/router';
+import { SharedService } from '../../../Services/shared.service';
 
-interface Event {
+export interface show {
   id: number;
   title: string;
-  image: string;
+  category: string;
+  imageSmall: string;
+  imageLarge: string;
   rating: number;
   description: string;
   date: string;
   location: string;
+  fullLocation: string;
   price: number;
   isFavorite: boolean;
-  category: string;
+  word: string;
+  reviews: number;
+  qoute: string;
+  subQoute: string;
 }
 
 @Component({
@@ -24,7 +31,7 @@ interface Event {
   templateUrl: './shows.component.html',
   styleUrl: './shows.component.css'
 })
-export class ShowsComponent {
+export class ShowsComponent implements OnInit {
 
   isGridView = false;
   searchTerm = '';
@@ -32,111 +39,16 @@ export class ShowsComponent {
   selectedCategory = '';
   categories = ['Concerts', 'Theater', 'Dance', 'Stand-Up Comedy', 'Other'];
 
-  events: Event[] = [
-    {
-      id: 1,
-      title: 'HARRY POTTER AND THE CURSED CHILD',
-      image: 'img/13.jpg',
-      rating: 4.5,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 21 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 40,
-      isFavorite: false,
-      category: 'Concerts'
-    },
-    {
-      id: 2,
-      title: 'RAIN - A TRIBUTE TO THE BEATLES',
-      image: 'img/14.jpg',
-      rating: 4,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before.Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 23 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 35,
-      isFavorite: false,
-      category: 'Theater'
-    },
-    {
-      id: 3,
-      title: 'Life of Pi',
-      image: 'img/12.jpg',
-      rating: 3.5,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before.Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 25 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 50,
-      isFavorite: false,
-      category: 'Dance'
-    },
-    {
-      id: 4,
-      title: 'The Addams Family',
-      image: 'img/18.jpg',
-      rating: 3,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before.Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 27 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 37,
-      isFavorite: false,
-      category: 'Dance'
-    },
-    {
-      id: 5,
-      title: 'HARRY POTTER AND THE CURSED CHILD',
-      image: 'img/13.jpg',
-      rating: 4.5,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before.Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 21 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 40,
-      isFavorite: false,
-      category: 'Stand-Up Comedy'
-    },
-    {
-      id: 6,
-      title: 'RAIN - A TRIBUTE TO THE BEATLES',
-      image: 'img/14.jpg',
-      rating: 4,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before.Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 28 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 35,
-      isFavorite: false,
-      category: 'Other'
-    },
-    {
-      id: 7,
-      title: 'Life of Pi',
-      image: 'img/12.jpg',
-      rating: 3.5,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before.Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 20 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 50,
-      isFavorite: false,
-      category: 'Other'
-    },
-    {
-      id: 8,
-      title: 'The Addams Family',
-      image: 'img/18.jpg',
-      rating: 3,
-      description: "Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Experience the vibrant streets of 1950s New York like never before. Immerse yourself in live entertainment with these top shows",
-      date: 'Mar 15 - 2025',
-      location: 'Pantages Theater Hollywood',
-      price: 37,
-      isFavorite: false,
-      category: 'Stand-Up Comedy'
-    },
+  events: show[] = [];
 
-  ];
+  constructor(private sharedService: SharedService) { }
 
-  filteredEvents: Event[] = [];
-
-  constructor() {
+  ngOnInit(): void {
+    this.events = this.sharedService.shows;
     this.applyFilters();
   }
+
+  filteredEvents: show[] = [];
 
   applyFilters(): void {
     let filtered = this.events.filter(event =>
