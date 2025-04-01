@@ -35,19 +35,6 @@ export interface match {
   category: string;
 }
 
-export interface ticket {
-  type: string;
-  price: number;
-  description: string;
-}
-
-export interface review {
-  user: string;
-  rating: number;
-  comment: string;
-  date: string;
-}
-
 export interface team {
   id: number;
   name: string;
@@ -66,8 +53,8 @@ export interface team {
 export class SDetailsPageComponent implements AfterViewInit, OnInit {
   matches: match[] = [];
   teams: team[] = [];
-  reviews: review[] = [];
-  tickets: ticket[] = [];
+  reviews: any;
+  tickets: any;
   Math = Math;
   sections!: NodeListOf<HTMLElement>;
   stopSection!: HTMLElement;
@@ -91,7 +78,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     location: 'Cairo International Stadium, Cairo',
     Group: 'Group Two (Stage)',
     title: 'Championship League',
-    date: 'Sunday, March 23, 2025',
+    date: 'Mar 23 - 2025',
     Kickoff: '7:00 PM',
     GatesOpen: '06:00 PM',
     price: 500,
@@ -121,10 +108,16 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.matches = this._sharedService.matches;
-    this.reviews = this._sharedService.reviews;
-    this.tickets = this._sharedService.tickets;
-  
+    this.route.paramMap.subscribe(params => {
+      const newId = Number(params.get('id'));
+      this.match = this._sharedService.matches.find(m => m.id === newId);
+      
+      if (this.match) {
+        this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
+        this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
+      }
+    });
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
     console.log('Match ID:', id);
   
@@ -139,16 +132,10 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
       this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
       this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
     }
-  
-    this.route.paramMap.subscribe(params => {
-      const newId = Number(params.get('id'));
-      this.match = this._sharedService.matches.find(m => m.id === newId);
-      
-      if (this.match) {
-        this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
-        this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
-      }
-    });
+
+    this.matches = this._sharedService.matches;
+    this.reviews = this._sharedService.generateReviewsForMatch(this.item.date, 5);
+    this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.item.price);
   }
 
   ngAfterViewInit() {

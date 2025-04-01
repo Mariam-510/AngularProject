@@ -77,19 +77,6 @@ export interface eventItem {
   category: string;
 }
 
-export interface ticket {
-  type: string;
-  price: number;
-  description: string;
-}
-
-export interface review {
-  user: string;
-  rating: number;
-  comment: string;
-  date: string;
-}
-
 export interface team {
   id: number;
   name: string;
@@ -600,7 +587,7 @@ export class SharedService {
       team1: 'ENPPI SC',
       team1Logo: 'img/ENPPI.png',
       team2Logo: 'img/ZED.png',
-      isFavorite: false,
+      isFavorite: true,
       price: 290, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
@@ -662,7 +649,7 @@ export class SharedService {
       team2: 'Pyramids FC',
       team1Logo: 'img/Al Ahly.svg',
       team2Logo: 'img/Pyramids.png',
-      isFavorite: false,
+      isFavorite: true,
       price: 500, // Add price
       category: '⚽ Egyptian Premier League'
     },
@@ -701,7 +688,7 @@ export class SharedService {
       staduim: 'img/cairo staduim.jpg',
       team1Logo: 'img/zamalekv2.png',
       team2Logo: 'img/ismaily.png',
-      isFavorite: true,
+      isFavorite: false,
       price: 300, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
@@ -831,7 +818,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'African Qualifiers Group B',
       title: 'World Cup Qualifiers 2025',
-      date: 'Fri, March 28, 2025',
+      date: 'Mar 28 - 2025',
       Kickoff: '08:30 PM',
       GatesOpen: '05:00 PM',
       price: 1100,
@@ -846,7 +833,7 @@ export class SharedService {
       location: 'Petro Sport Stadium, Cairo',
       Group: 'Quarter Finals',
       title: 'Egypt Cup 2025',
-      date: 'Mon, March 24, 2025',
+      date: 'Mar 24 - 2025',
       Kickoff: '7:30 PM',
       GatesOpen: '3:00 PM',
       price: 290,
@@ -861,7 +848,7 @@ export class SharedService {
       location: 'Khaled Bichara Stadium, Gouna',
       Group: 'Group Two (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Sun, March 23, 2025',
+      date: 'Mar 23 - 2025',
       Kickoff: '8:00 PM',
       GatesOpen: '05:00 PM',
       price: 250,
@@ -876,7 +863,7 @@ export class SharedService {
       location: 'Alexandria Stadium, Alexandria',
       Group: 'Quarter Finals',
       title: 'EPL 2024/2025',
-      date: 'Tue, March 25, 2025',
+      date: 'Mar 25 - 2025',
       Kickoff: '6:45 PM',
       GatesOpen: '03:00 PM',
       price: 500,
@@ -891,7 +878,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'Group Two (Stage)',
       title: 'Championship League',
-      date: 'Sat, March 22, 2025',
+      date: 'Mar 22 - 2025',
       Kickoff: '9:30 PM',
       GatesOpen: '06:00 PM',
       price: 500,
@@ -906,7 +893,7 @@ export class SharedService {
       location: 'Borg El Arab Stadium, Alexandria',
       Group: 'African Qualifiers Group B',
       title: 'EPL 2024/2025',
-      date: 'Sun, March 23, 2025',
+      date: 'Mar 23 - 2025',
       Kickoff: '9:00 PM',
       GatesOpen: '06:00 PM',
       price: 100,
@@ -921,7 +908,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'Group One (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Mon, March 24, 2025',
+      date: 'Mar 24 - 2025',
       Kickoff: '7:30 PM',
       GatesOpen: '06:00 PM',
       price: 300,
@@ -936,7 +923,7 @@ export class SharedService {
       location: 'Suez Canal Stadium, Ismailia',
       Group: 'Group Two (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Sat, March 22, 2025',
+      date: 'Mar 22 - 2025',
       Kickoff: '9:30 PM',
       GatesOpen: '06:00 PM',
       price: 300,
@@ -951,7 +938,7 @@ export class SharedService {
       location: 'Suez Canal Stadium, Ismailia',
       Group: 'Group Two (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Sat, March 22, 2025',
+      date: 'Mar 22 - 2025',
       Kickoff: '9:30 PM',
       GatesOpen: '06:00 PM',
       price: 100,
@@ -966,7 +953,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'Main Stage',
       title: 'Championship League',
-      date: 'Tue, April 1, 2025',
+      date: 'Apr 1 - 2025',
       Kickoff: '9:00 PM',
       GatesOpen: '06:00 PM',
       price: 900,
@@ -1095,20 +1082,59 @@ export class SharedService {
     },
   ];
 
-  reviews: review[] = [
-    { user: 'Ahmed', rating: 3.5, comment: 'Amazing service! Highly recommended.', date: '2025-03-25' },
-    { user: 'Sara', rating: 4, comment: 'Great experience, but there’s room for improvement.', date: '2025-03-24' },
-    { user: 'Mariam', rating: 5, comment: 'Fantastic! Everything was perfect.', date: '2025-03-23' },
-    { user: 'Omar', rating: 3, comment: 'It was good, but not exceptional.', date: '2025-03-22' },
-    { user: 'Nour', rating: 4, comment: 'Really enjoyed it! Will come back again.', date: '2025-03-21' }
-  ];
+  // Define ShowTicket array using the interface
+  generateMatchTicketsFromPrice(startingPrice: number): ShowTicket[] {
+    // Create an array of ticket types
+    const ticketTypes = ['CAT 3', 'CAT 2', 'CAT 1', 'VIP'];
 
-  tickets: ticket[] = [
-    { type: 'VIP', price: 400, description: 'Premium seats with VIP facilities' },
-    { type: 'CAT 1', price: 300, description: 'Premium sideline seats' },
-    { type: 'CAT 2', price: 200, description: 'Mid-field seats' },
-    { type: 'CAT 3', price: 150, description: 'Mid-field seats' }
-  ];
+    // Create a new array of tickets based on the starting price, increasing by 50 for each ticket
+    const tickets = ticketTypes.map((type, index) => ({
+      type,
+      price: startingPrice + (index * 150), // Increase by 50 for each subsequent ticket
+      description: `Description for ${type} at price $${startingPrice + (index * 50)}.`
+    }));
+
+    // Sort tickets by price in descending order (high to low)
+    return tickets.sort((a, b) => b.price - a.price);
+  }
+
+  generateReviewsForMatch(matchDate: string, numberOfReviews: number): any[] {
+    const reviews: any[] = [];
+    const comments = [
+      'Amazing service! Highly recommended.',
+      'Great experience, but there’s room for improvement.',
+      'Fantastic! Everything was perfect.',
+      'It was good, but not exceptional.',
+      'Really enjoyed it! Will come back again.',
+      'Not as expected, but decent.',
+      'A wonderful experience, would definitely come again!'
+    ];
+
+    // English names list
+    const englishNames = ['Ahmed', 'Sara', 'Mariam', 'Omar', 'Nour', 'Ali', 'Fatima', 'Khaled', 'Jamila', 'Mohamed'];
+
+    // Generate reviews with random ratings and comments
+    for (let i = 0; i < numberOfReviews; i++) {
+      const rating = (Math.random() * 2 + 3).toFixed(1); // Random rating between 3.0 and 5.0
+      const comment = comments[Math.floor(Math.random() * comments.length)]; // Random comment
+      const reviewDate = this.generateReviewDate(matchDate); // Generate review date incrementally
+
+      // Choose a random English name from the list
+      const userName = englishNames[Math.floor(Math.random() * englishNames.length)];
+
+      reviews.push({
+        user: userName,
+        rating: parseFloat(rating),
+        comment: comment,
+        date: reviewDate
+      });
+
+      // Update the showDate for the next review to be the next day
+      matchDate = reviewDate;
+    }
+
+    return reviews;
+  }
 
   //---------------------------------------------------------------------------------------------------------
 
