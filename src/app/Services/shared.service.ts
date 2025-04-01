@@ -398,41 +398,168 @@ export class SharedService {
   }
 
   //---------------------------------------------------------------------------------------------------------
-  generateCastList(show: show) {
-    const castList = [];
 
-    if (show.category === 'Dance') {
-      // Example cast for a Dance show like 'Cinderella'
-      castList.push(
-        { name: 'Elena Petrova', role: 'Cinderella (Lead Dancer)', image: 'img/cast/c1.jpg' },
-        { name: 'Mark Smith', role: 'Prince Charming', image: 'img/cast/c2.jpg' },
-        { name: 'Sophia Zhang', role: 'Fairy Godmother', image: 'img/cast/c3.jpg' },
-        { name: 'John Doe', role: 'Stepsister', image: 'img/cast/c4.jpg' }
-      );
-    } else if (show.category === 'Concerts') {
-      // Example cast for a Concert show like 'A Tribute to the Beatles'
-      castList.push(
-        { name: 'James McCarthy', role: 'John Lennon (Lead Singer)', image: 'img/cast/c5.jpg' },
-        { name: 'Emma Taylor', role: 'Paul McCartney (Bassist)', image: 'img/cast/c6.jpg' },
-        { name: 'Liam Walsh', role: 'George Harrison (Guitarist)', image: 'img/cast/c7.jpg' },
-        { name: 'Olivia Brown', role: 'Ringo Starr (Drummer)', image: 'img/cast/c8.jpg' }
-      );
-    } else if (show.category === 'Stand-Up Comedy') {
-      // Example cast for a Stand-Up Comedy show like 'Ricky Gervais'
-      castList.push(
-        { name: 'Ricky Gervais', role: 'Comedian (Lead)', image: 'img/cast/c9.jpg' }
-      );
-    } else if (show.category === 'Theater') {
-      // Example cast for a Theater show like 'Harry Potter and the Cursed Child'
-      castList.push(
-        { name: 'David Potter', role: 'Harry Potter (Lead Actor)', image: 'img/cast/c10.jpg' },
-        { name: 'Lily Evans', role: 'Hermione Granger', image: 'img/cast/c11.jpg' },
-        { name: 'Daniel Radcliffe', role: 'Ron Weasley', image: 'img/cast/c12.jpg' }
-      );
+  cast = [
+    // Dance - Cinderella (showId: 1)
+    {
+      showId: 1,
+      cast: [
+        {
+          name: 'Sophia Lee',
+          role: 'Cinderella',
+          image: 'https://image-service.usw2.wp-prod-us.cultureamp-cdn.com/lmSSHC6nC6IcQLD4RGigdC3KoBQ=/500x500/cultureampcom/production/b94/a47/9ea/b94a479eaece4ef09bda0e39/Sophia-Lee.jpeg'
+        },
+        {
+          name: 'Mark Jones',
+          role: 'Prince Charming',
+          image: 'https://source.unsplash.com/300x400/?prince,costume,man'
+        },
+        {
+          name: 'Olivia Watson',
+          role: 'Fairy Godmother',
+          image: 'https://media.licdn.com/dms/image/v2/D5603AQGRkHgI98wrFg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1698712378207?e=2147483647&v=beta&t=dYxTlLNmXutmHL1ZdQFyLSofv_4HaWz_EbQA10msTiE'
+        }
+      ]
+    },
+    // Dance - Alvin Ailey (showId: 2)
+    {
+      showId: 2,
+      cast: [
+        {
+          name: 'Samuel Thompson',
+          role: 'Lead Dancer',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkY6Yz1bndVqOI2-0i3vfm2rUei584Hm8kTw&s'
+        },
+        {
+          name: 'Tina Garcia',
+          role: 'Choreographer',
+          image: 'https://www.gmlaw.com/wp-content/uploads/2016/09/Tina-Garcia-Landing.jpeg'
+        }
+      ]
+    },
+    // Concerts - Beatles Tribute (showId: 3)
+    {
+      showId: 3,
+      cast: [
+        {
+          name: 'John Carter',
+          role: 'John Lennon Tribute',
+          image: 'https://source.unsplash.com/300x400/?beatles,singer,man'
+        },
+        {
+          name: 'Paul Adams',
+          role: 'Paul McCartney Tribute',
+          image: 'https://source.unsplash.com/300x400/?bassist,man,musician'
+        },
+        {
+          name: 'George Smith',
+          role: 'George Harrison Tribute',
+          image: 'https://source.unsplash.com/300x400/?guitarist,man,musician'
+        },
+        {
+          name: 'Ringo Bell',
+          role: 'Ringo Starr Tribute',
+          image: 'https://source.unsplash.com/300x400/?drummer,man,musician'
+        }
+      ]
+    },
+    // Concerts - Dua Lipa (showId: 4)
+    {
+      showId: 4,
+      cast: [
+        {
+          name: 'Dua Lipa',
+          role: 'Dua Lipa',
+          image: 'https://source.unsplash.com/300x400/?female,singer,popstar'
+        },
+        {
+          name: 'Tommy Perez',
+          role: 'Backup Dancer',
+          image: 'https://source.unsplash.com/300x400/?dancer,man,performance'
+        }
+      ]
+    },
+    // Concerts - Katy Perry (showId: 5)
+    {
+      showId: 5,
+      cast: [
+        {
+          name: 'Katy Perry',
+          role: 'Katy Perry',
+          image: 'https://source.unsplash.com/300x400/?female,singer,colorful'
+        },
+        {
+          name: 'David Green',
+          role: 'Lead Guitarist',
+          image: 'https://source.unsplash.com/300x400/?guitarist,rock,man'
+        }
+      ]
+    },
+    // Comedy - Ricky Gervais (showId: 6)
+    {
+      showId: 6,
+      cast: [
+        {
+          name: 'Ricky Gervais',
+          role: 'Comedian',
+          image: 'https://source.unsplash.com/300x400/?comedian,man,microphone'
+        }
+      ]
+    },
+    // Theater - Harry Potter (showId: 7)
+    {
+      showId: 7,
+      cast: [
+        {
+          name: 'Emma Stone',
+          role: 'Hermione Granger',
+          image: 'https://source.unsplash.com/300x400/?actress,book,glasses'
+        },
+        {
+          name: 'Daniel Radcliffe',
+          role: 'Harry Potter',
+          image: 'https://source.unsplash.com/300x400/?actor,glasses,scar'
+        },
+        {
+          name: 'Rupert Grint',
+          role: 'Ron Weasley',
+          image: 'https://source.unsplash.com/300x400/?actor,redhair,young'
+        }
+      ]
+    },
+    // Theater - Stereophonic (showId: 8)
+    {
+      showId: 8,
+      cast: [
+        {
+          name: 'Chris Martin',
+          role: 'Lead Actor',
+          image: 'https://source.unsplash.com/300x400/?actor,man,stage'
+        },
+        {
+          name: 'Rachel Adams',
+          role: 'Supporting Actor',
+          image: 'https://source.unsplash.com/300x400/?actress,women,theater'
+        }
+      ]
+    },
+    // Theater - Life of Pi (showId: 9)
+    {
+      showId: 9,
+      cast: [
+        {
+          name: 'Dev Patel',
+          role: 'Pi Patel',
+          image: 'https://source.unsplash.com/300x400/?indian,actor,boat'
+        },
+        {
+          name: 'Irrfan Khan',
+          role: 'Richard Parker',
+          image: 'https://source.unsplash.com/300x400/?tiger,animal,orange'
+        }
+      ]
     }
-
-    return castList;
-  }
+  ];
 
   //---------------------------------------------------------------------------------------------------------
   //MATCHES

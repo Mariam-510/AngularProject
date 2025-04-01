@@ -74,11 +74,14 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
     this.tickets = this.sharedService.generateTicketsFromPrice(this.item.price);
     this.schedules = this.sharedService.generateSchedule(this.item.date);
     this.eventList = this.sharedService.shows.filter(show => {
-      return (show.price >= this.item.price - 5 && show.price <= this.item.price + 5) || show.category === this.item.category;
+      return (show.id !== this.item.id) &&
+        ((show.price >= this.item.price - 5 && show.price <= this.item.price + 5)
+          || show.category === this.item.category);
     });
 
+
     this.reviews = this.sharedService.generateReviewsForShow(this.item.date, 5);
-    this.castList = this.sharedService.generateCastList(this.item);
+    this.castList = this.sharedService.cast.find(castItem => castItem.showId === this.item.id)?.cast || [];
   }
 
   Math = Math;
