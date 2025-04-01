@@ -34,9 +34,12 @@ import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedu
 import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
 import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
+import { ContactComponent } from './Components/contact/contact.component';
+import { TestqrComponent } from './Components/ProfilePages/testqr/testqr.component';
 import { CreateEventComponent } from './Components/Admin/create-event/create-event.component';
 import { GetAllMatchesComponent } from './Components/Admin/get-all-matches/get-all-matches.component';
 import { GetAllEventsComponent } from './Components/Admin/get-all-events/get-all-events.component';
+
 
 
 
@@ -46,6 +49,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent, title: 'About' },
   { path: 'login', component: LoginComponent, title: "Login" },
   { path: 'register', component: RegisterComponent, title: "Register" },
+  {path:'contact',component:ContactComponent, title:"Contact Us"},
 
 
   {
@@ -69,7 +73,8 @@ export const routes: Routes = [
       { path: "user", component: UserComponent, title: "User" },
       { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
       { path: 'favourites', component: FavouriteComponent, title: "Favourites" },
-      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' }
+      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' },
+      {path:'test',component:TestqrComponent,title:'testtt'}
     ]
   },
 
