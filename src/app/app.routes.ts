@@ -32,7 +32,16 @@ import { ProfileComponent } from './Components/ProfilePages/profile/profile.comp
 import { UserComponent } from './Components/ProfilePages/user/user.component';
 
 import { TestV2Component } from './Components/test-v2/test-v2.component';
+<<<<<<< Updated upstream
 import { TesthomeComponent } from './testhome/testhome.component';
+=======
+import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedule.component';
+import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
+import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
+import { AddNewMatchComponent } from './Components/Admin/add-new-match/add-new-match.component';
+import { ContactComponent } from './Components/contact/contact.component';
+import { TestqrComponent } from './Components/ProfilePages/testqr/testqr.component';
+>>>>>>> Stashed changes
 
 
 
@@ -43,6 +52,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent, title: 'About' },
   { path: 'login', component: LoginComponent, title: "Login" },
   { path: 'register', component: RegisterComponent, title: "Register" },
+  {path:'contact',component:ContactComponent, title:"Contact Us"},
 
 
   {
@@ -58,7 +68,8 @@ export const routes: Routes = [
       { path: "user", component: UserComponent, title: "User" },
       { path: 'reviews', component: ReviewsComponent, title: "Reviews" },
       { path: 'favourites', component: FavouriteComponent, title: "Favourites" },
-      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' }
+      { path: 'bookingHistory', component: BookingHistoryComponent, title: 'Booking History' },
+      {path:'test',component:TestqrComponent,title:'testtt'}
     ]
 
   },
