@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../../Services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -11,27 +12,47 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class UserComponent {
   userImage: string = 'Images/Home/user.jpeg';
+  currentUser: any;
+  MyForm!: FormGroup;
+  
+  constructor(private router: Router, private _authService: AuthService) {}
 
-  constructor(private router: Router) {
+  ngOnInit(): void {
+    // this.MyForm.setValue({
+    //   firstName: 'Shahd',
+    //   lastName: 'Abdalla',
+    //   email: 'Shahd@gmail.com',
+    //   password: 'Ma123456@',
+    //   confirmPassword: 'Ma12345@',
+    //   phoneNum: '01144756069'
+    // });
 
+    this.currentUser = this._authService.currentUser;
+    this._authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+
+    this._initializeForm();
   }
-  MyForm = new FormGroup(
+
+  private _initializeForm() {
+    this.MyForm = new FormGroup(
     {
-      firstName: new FormControl("", [
+      firstName: new FormControl(this.currentUser.firstName, [
         Validators.required,
         Validators.minLength(3),
         Validators.pattern(/^[A-Za-z]+$/)
       ]),
-      lastName: new FormControl("", [
-        Validators.required,
+      lastName: new FormControl(this.currentUser.lastName? this.currentUser.lastName : "", [
+        // Validators.required,
         Validators.minLength(3),
         Validators.pattern(/^[A-Za-z]+$/)
       ]),
-      email: new FormControl("", [
+      email: new FormControl(this.currentUser.email, [
         Validators.required,
         Validators.pattern(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/)
       ]),
-      phoneNum: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{11}$')]),
+      phoneNum: new FormControl(this.currentUser.phoneNum, [Validators.required, Validators.pattern('^[0-9]{11}$')]),
       password: new FormControl("", [
         Validators.required,
         Validators.minLength(6),
@@ -44,16 +65,8 @@ export class UserComponent {
       ])
     },
   );
-  ngOnInit(): void {
-    this.MyForm.setValue({
-      firstName: 'Shahd',
-      lastName: 'Abdalla',
-      email: 'Shahd@gmail.com',
-      password: 'Ma123456@',
-      confirmPassword: 'Ma12345@',
-      phoneNum: '01144756069'
-    });
-  }
+}
+  
 
   uploadImage() {
     const input = document.createElement('input');

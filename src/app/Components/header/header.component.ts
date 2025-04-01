@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedService } from '../../Services/shared.service';
+import { AuthService } from '../../Services/auth.service';
 // import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -13,7 +14,7 @@ import { SharedService } from '../../Services/shared.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _shared: SharedService, private router: Router) {}
+  constructor(private _shared: SharedService, private _authService: AuthService, private router: Router) {}
 
   // Component State
   currentUser: any;
@@ -24,8 +25,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkMobileView();
-    this.currentUser = this._shared.currentUser;
-    this._shared.currentUser$.subscribe(user => {
+    this.currentUser = this._authService.currentUser;
+    this._authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });
   }
@@ -80,7 +81,7 @@ export class HeaderComponent implements OnInit {
   
   logout(event: MouseEvent): void {
     event.stopPropagation();
-    this._shared.logout();
+    this._authService.logout();
     this.userMenuActive = false;
     this.menuActive = false;
     this.router.navigate(['/']);

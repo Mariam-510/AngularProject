@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractContro
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharedService } from '../../../Services/shared.service';
+import { AuthService } from '../../../Services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
 
   constructor(
     private _shared: SharedService,
-    private router: Router
+    private router: Router,
+    private _authService: AuthService
   ) {}
 
   Loginform = new FormGroup(
@@ -46,32 +48,22 @@ export class LoginComponent {
       return;
     }
 
-    // let userObj = {
-    //   email: this.Loginform.value.email,
-    //   pass: this.Loginform.value.pass,
-
-    // };
-
-    // console.log("User Registered:", userObj);
-
-    // this.Loginform.reset();
-
     const email = this.Loginform.value.email!;
     const password = this.Loginform.value.pass!;
 
-    if (this._shared.login(email, password)) {
+    if (this._authService.Userlogin(email, password)) {
       this.router.navigate(['/']);
-      console.log('Logged in as:', this._shared.currentUser?.name);
-    } else {
-      alert('Invalid credentials\nUse:\nEmail: john@test.com\nPassword: Test@123');
+      console.log('Logged in as:', this._authService.currentUser?.name);
+    }
+    else if (this._authService.Adminlogin(email, password)) {
+      this.router.navigate(['/admin']);
+      console.log('Logged in as:', this._authService.currentUser?.name);
+    } 
+    else {
+      // alert('Invalid credentials\nUse:\nEmail: john@test.com\nPassword: Test@123');
     }
   }
   googleLogin() {
-    const clientId = '329985024640-j1e42v80vulq0c0pqom75puhm75c4f4i.apps.googleusercontent.com';
-    const redirectUri = 'http://localhost:4200/home';
-    const scope = 'email profile openid';
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
-
-    window.location.href = authUrl;
+    this._authService.googleLogin();
   }
 }
