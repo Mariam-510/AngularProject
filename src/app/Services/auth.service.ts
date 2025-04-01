@@ -15,18 +15,18 @@ export class AuthService {
   currentUser$ = this.currentUserSubject.asObservable();
 
   // Mock user data
-  private mockUser = {
+  public mockUser = {
     firstName: 'John',
     lastName: 'Doe',
     email: 'john@gmail.com',
     password: 'John@123',
     phoneNum: '01140558309',
-    avatar: 'https://cdn-images.dzcdn.net/images/artist/9155cd2d5f6d81887bde3ad2d6ee26f9/1900x1900-000000-80-0-0.jpg',
+    avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
     authMethod: 'mock',
     role: 'user'
   };
 
-  private mockAdmin = {
+  public mockAdmin = {
     firstName: 'Admin',
     lastName: '1',
     email: 'admin@gmail.com',
@@ -59,7 +59,7 @@ export class AuthService {
       id: userInfo.sub,
       name: userInfo.name,
       email: userInfo.email,
-      avatar: userInfo.picture,
+      avatar: userInfo.picture ? userInfo.picture : "https://cdn-icons-png.flaticon.com/512/149/149071.png",
       firstName: userInfo.given_name,
       lastName: userInfo.family_name,
       // phoneNumber: userInfo.phone_number,
@@ -80,7 +80,7 @@ export class AuthService {
 
   // Regular login (unchanged)
   Userlogin(email: string, password: string): boolean {
-    if (email === this.mockUser.email && password === this.mockUser.password) {
+    if (email.toLowerCase() === this.mockUser.email && password === this.mockUser.password) {
       this.setUser(this.mockUser);
       return true;
     }
@@ -88,7 +88,7 @@ export class AuthService {
   }
 
   Adminlogin(email: string, password: string): boolean {
-    if (email === this.mockAdmin.email && password === this.mockAdmin.password) {
+    if (email.toLowerCase() === this.mockAdmin.email && password === this.mockAdmin.password) {
       this.setUser(this.mockAdmin);
       return true;
     }
