@@ -9,6 +9,8 @@ export class PaypalService {
 
   constructor() { }
 
+  clientId: string = 'AUaqQlDvhtB5aBRbNeCeNJc0od9OmcgBfiPF2nY89pq9w43wHZ7dilU3eMsFp2oQfN1-BzqDVxK-ASix'
+
   async loadPayPal(clientId: string) {
     try {
       const paypal = await loadScript({ clientId });
