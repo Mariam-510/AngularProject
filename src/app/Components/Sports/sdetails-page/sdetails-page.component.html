@@ -44,12 +44,12 @@
       <!-- Teams Playing -->
       <div class="card-header border-bottom-0 px-0 pt-0 match-vs text-center">
         <div class="d-flex align-items-center justify-content-between">
-          <img [src]="teams[0].logo" alt="{{teams[0].name}} logo" class="team-logo me-2">
+          <img [src]="homeTeam.logo" alt="{{homeTeam.name}} logo" class="team-logo me-2">
 
-          <strong class="text-dark">{{teams[0].name}}</strong>
+          <strong class="text-dark">{{homeTeam.name}}</strong>
           <span class="mx-2 fw-bold text-danger fs-4">VS</span>
-          <strong class="text-dark">{{teams[1].name}}</strong>
-          <img [src]="teams[1].logo" class="team-logo me-2" alt="Team B">
+          <strong class="text-dark">{{awayTeam.name}}</strong>
+          <img [src]="awayTeam.logo" class="team-logo me-2" alt="Team B">
         </div>
       </div>
 
@@ -263,7 +263,7 @@
         <h4 class="mt-3 ps-5">
           <i class="bi bi-hourglass-split me-2 pb-2"></i> Check the Match Date & Time below
           <div class="mt-3 ps-5 fs-6">
-            <p><strong>📅 Date:</strong> {{item. date}}</p>
+            <p><strong>📅 Date:</strong> {{item.date}}</p>
             <p><strong>🕗 Kickoff:</strong> {{item.Kickoff}}</p>
             <p><strong>🚪 Gates Open:</strong> {{item.GatesOpen}}</p>
           </div>
@@ -355,56 +355,87 @@
         </h2>
 
         <div class="row g-4">
-          <!-- Team Card Template -->
-          <div *ngFor="let team of teams" class="col-6 ">
+          <!-- Home Team Card -->
+          <div class="col-6">
             <div class="team-card card h-100 border-0 shadow-hover transition-all">
               <div class="card-header p-0 overflow-hidden">
-                <img [src]="team.logo" alt="{{team.name}} logo" class="main-logo img-fluid bg-light p-4 w-100">
+                <img [src]="homeTeam.logo" [alt]="homeTeam.name + ' logo'" class="main-logo img-fluid bg-light p-4 w-100">
               </div>
-
+        
               <div class="card-body p-2">
                 <div class="d-flex align-items-center justify-content-center pb-2">
-                  <h3 class="mb-0 me-2 text-gradient-primary ">{{team.name}}</h3>
+                  <h3 class="mb-0 me-2 text-gradient-primary">{{homeTeam.name}}</h3>
                   <i class="bi bi-patch-check-fill text-primary fs-5"></i>
                 </div>
-
-                <p class="text-muted text-center ">{{team.description}}</p>
-
+        
+                <p class="text-muted text-center">{{homeTeam.description}}</p>
+        
                 <div class="team-details">
                   <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="fw-bold text-danger ">
-                      <i class="bi bi-person-bounding-box "></i>
-                      Coach :
-                      <span class="text-muted ">{{team.coach}}</span>
+                    <h5 class="fw-bold text-danger">
+                      <i class="bi bi-person-bounding-box"></i>
+                      Coach:
+                      <span class="text-muted">{{homeTeam.coach}}</span>
                     </h5>
-
-
-
-                    <!-- <button class="btn btn-danger w-100 mt-2">Buy Now</button> -->
+        
+                    <h5 class="ps-2">
+                      <i class="bi bi-star-fill text-warning"></i>
+                      <span class="text-danger fw-bold mb-2">
+                        Star Players
+                      </span>
+                    </h5>
+        
+                    <div class="d-flex flex-wrap gap-2 ms-2 mb-3 justify-content-center">
+                      <span *ngFor="let player of homeTeam.keyPlayers.split(',')" 
+                            class="badge bg-gradient-secondary bg-opacity-10 text-dark">
+                        {{player.trim()}}
+                      </span>
+                    </div>
                   </div>
-
-
-
-                  <h5 class="ps-2">
-                    <i class="bi bi-star-fill text-warning "></i>
-                    <span class="  text-danger fw-bold   mb-2 ">
-                      Star Players
-                    </span>
-                  </h5>
-
-
-                  <div class=" d-flex flex-wrap gap-2 ms-2 mb-3 justify-content-center">
-                    <span *ngFor="let player of team.keyPlayers.split(',')"
-                      class="badge bg-gradient-secondary bg-opacity-10 text-dark">
-                      {{player.trim()}}
-                    </span>
-                  </div>
-
-
                 </div>
               </div>
-
-
+            </div>
+          </div>
+        
+          <!-- Away Team Card -->
+          <div class="col-6">
+            <div class="team-card card h-100 border-0 shadow-hover transition-all">
+              <div class="card-header p-0 overflow-hidden">
+                <img [src]="awayTeam.logo" [alt]="awayTeam.name + ' logo'" class="main-logo img-fluid bg-light p-4 w-100">
+              </div>
+        
+              <div class="card-body p-2">
+                <div class="d-flex align-items-center justify-content-center pb-2">
+                  <h3 class="mb-0 me-2 text-gradient-primary">{{awayTeam.name}}</h3>
+                  <i class="bi bi-patch-check-fill text-primary fs-5"></i>
+                </div>
+        
+                <p class="text-muted text-center">{{awayTeam.description}}</p>
+        
+                <div class="team-details">
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="fw-bold text-danger">
+                      <i class="bi bi-person-bounding-box"></i>
+                      Coach:
+                      <span class="text-muted">{{awayTeam.coach}}</span>
+                    </h5>
+        
+                    <h5 class="ps-2">
+                      <i class="bi bi-star-fill text-warning"></i>
+                      <span class="text-danger fw-bold mb-2">
+                        Star Players
+                      </span>
+                    </h5>
+        
+                    <div class="d-flex flex-wrap gap-2 ms-2 mb-3 justify-content-center">
+                      <span *ngFor="let player of awayTeam.keyPlayers.split(',')" 
+                            class="badge bg-gradient-secondary bg-opacity-10 text-dark">
+                        {{player.trim()}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <hr class="mt-4">
