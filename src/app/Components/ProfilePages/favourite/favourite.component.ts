@@ -232,12 +232,14 @@ export class FavouriteComponent {
   toggleFavoriteMatch(match: any) {
     // Remove match from array when unfavorited
     this.matches = this.matches.filter(m => m !== match);
+
   }
 
   // --------------------------------------------------------------------------------------------------------------------
   itemsPerPage = 3;
 
   currentPageEvent = 1;
+  e: any;
   // Calculate the total number of pages
   get totalPagesEvent() {
     return Math.ceil(this.events.length / this.itemsPerPage);
@@ -245,8 +247,14 @@ export class FavouriteComponent {
 
   // Get paginated events
   get paginatedEvents() {
-    const start = (this.currentPageEvent - 1) * this.itemsPerPage;
+    let start = (this.currentPageEvent - 1) * this.itemsPerPage;
+
+    if (this.events.slice(start, start + this.itemsPerPage).length == 0) {
+      this.changePageEvent(1);
+      start = 0;
+    }
     return this.events.slice(start, start + this.itemsPerPage);
+
   }
 
   changePageEvent(page: number) {
@@ -255,6 +263,7 @@ export class FavouriteComponent {
     }
   }
 
+  // --------------------------------------------------------------------------------------------------------------------
   currentPageMatch = 1;
   // Calculate the total number of pages
   get totalPagesMatch() {
@@ -263,8 +272,15 @@ export class FavouriteComponent {
 
   // Get paginated events
   get paginatedMatches() {
-    const start = (this.currentPageMatch - 1) * this.itemsPerPage;
+    let start = (this.currentPageMatch - 1) * this.itemsPerPage;
+
+    if (this.matches.slice(start, start + this.itemsPerPage).length == 0) {
+      this.changePageMatch(1);
+      start = 0;
+    }
     return this.matches.slice(start, start + this.itemsPerPage);
+
+
   }
 
   changePageMatch(page: number) {
