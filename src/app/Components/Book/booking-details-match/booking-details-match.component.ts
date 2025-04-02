@@ -2,32 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PaypalService } from '../../../Services/paypal.service';
+import { SharedService, match, CheckoutTicket } from '../../../Services/shared.service';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../Services/auth.service';
 
 declare var paypal: any;
-
-interface Ticket {
-  category: string;
-  quantity: number;
-  price: number;
-}
-
-interface Buyer {
-  name: string;
-  email: string;
-  phone: string;
-  avatar: string;
-}
-
-interface BookingData {
-  homeTeam: { name: string; logo: string };
-  awayTeam: { name: string; logo: string };
-  stadium: { name: string; location: string };
-  date: Date;
-  time: string;
-  tickets: Ticket[];
-  totalPrice: number;
-  buyer: Buyer;
-}
 
 @Component({
   selector: 'app-booking-details-match',
@@ -36,37 +15,64 @@ interface BookingData {
   styleUrl: './booking-details-match.component.css'
 })
 export class BookingDetailsMatchComponent implements OnInit {
-  bookingData: BookingData = {
-    homeTeam: {
-      name: 'Al Ahly FC',
-      logo: 'https://upload.wikimedia.org/wikipedia/ar/8/8c/Al_Ahly_SC_logo.png'
-    },
-    awayTeam: {
-      name: 'Enppi SC',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/2/22/ENPPI_Club_Logo.png'
-    },
-    stadium: { name: 'Al Salam Stadium', location: 'Cairo, Egypt' },
-    date: new Date('2025-03-20'),
-    time: '21:30',
-    tickets: [
-      { category: 'VIP', quantity: 2, price: 1500 },
-      { category: 'CAT 1', quantity: 1, price: 800 }
-    ],
-    totalPrice: 3800,
-    buyer: {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+20 123 456 7890',
-      avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
-    }
-  };
 
-  constructor(private payPalService: PaypalService) { }
+  constructor(private payPalService: PaypalService, private _sharedService: SharedService, private route: ActivatedRoute, private _authService: AuthService) { }
+  
+  match: any;
 
-  totalPrice: number = this.bookingData.totalPrice;
+  currentUser: any;
+
+  matchDetails: match =
+  {
+        id: 1,
+        image: 'img/cairo staduim.jpg',
+        venue: 'Cairo International Stadium, Cairo',
+        date: 'Fri 28 Mar 2025',
+        tournament: 'World Cup Qualifiers 2025',
+        staduim: 'img/cairo staduim.jpg',
+        matchNumber: 5,
+        time: '08:30 PM',
+        group: 'African Qualifiers Group B',
+        team1: 'Egypt',
+        team2: 'Algeria',
+        team1Logo: 'img/egypt.svg',
+        team2Logo: 'img/algeria.svg',
+        isFavorite: true,
+        price: 1100,
+        word: "🔥 high",
+        adv: "⏳ Limited Seats",
+        category: '⚽ Football',
+        location: 'Cairo, Egypt'
+  }
+
+  ticketQuantity: CheckoutTicket[] = [];
+  
+  totalPrice: number = 0;
+
   clientId: string = '';
 
   async ngOnInit() {
+
+    this.currentUser = this._authService.currentUser;
+    this._authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const newId = Number(params.get('id'));
+      this.match = this._sharedService.matches.find(m => m.id === newId);
+
+      if (this.match) {
+        this.matchDetails = this.match;
+      }
+    });
+
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Match ID:', id);
+
+    this.ticketQuantity = this._sharedService.checkoutTicket;
+    this.totalPrice = this.ticketQuantity.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0);
+
     try {
       this.clientId = this.payPalService.clientId;
 

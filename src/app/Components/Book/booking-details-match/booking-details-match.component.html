@@ -6,12 +6,12 @@
       <div class="event-highlight">
         <h3 class="arena-info text-center fs-2">
           <img src="Images/stadiumLogo.png" width="50" class="me-2 mb-2" />
-          {{ bookingData.stadium.name }}
+          {{ matchDetails.venue }}
         </h3>
         <div class="sport-matchup">
           <div class="team-column">
-            <img [src]="bookingData.homeTeam.logo" class="team-identity shadow-lg bg-light" />
-            <h3 class="team-designation">{{ bookingData.homeTeam.name }}</h3>
+            <img [src]="matchDetails.team1Logo" class="team-identity shadow-lg bg-light" />
+            <h3 class="team-designation">{{ matchDetails.team1 }}</h3>
           </div>
           <div class="match-separator">
             <div class="separator-line"></div>
@@ -19,22 +19,22 @@
             <div class="separator-line"></div>
           </div>
           <div class="team-column">
-            <img [src]="bookingData.awayTeam.logo" class="team-identity shadow-lg bg-light" />
-            <h3 class="team-designation">{{ bookingData.awayTeam.name }}</h3>
+            <img [src]="matchDetails.team2Logo" class="team-identity shadow-lg bg-light" />
+            <h3 class="team-designation">{{ matchDetails.team2 }}</h3>
           </div>
         </div>
 
         <div class="detail-grid mt-4">
           <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
             <i class="bi bi-geo-alt text-danger"></i>
-            {{ bookingData.stadium.location }}
+            {{ matchDetails.location }}
           </div>
           <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
             <i class="bi bi-calendar2-event text-danger"></i>
-            {{ bookingData.date | date : "EEE d MMM" }}
+            {{ matchDetails.date | date : "EEE d MMM" }}
           </div>
           <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
-            <i class="bi bi-clock text-danger"></i> {{ bookingData.time }}
+            <i class="bi bi-clock text-danger"></i> {{ matchDetails.time }}
           </div>
         </div>
 
@@ -53,7 +53,7 @@
 
       <!-- Logged in user image -->
       <div class="d-flex justify-content-center mb-4 mt-5">
-        <img [src]="bookingData.buyer.avatar" alt="User profile picture" class="rounded-circle shadow-sm" width="100"
+        <img [src]="currentUser.avatar" alt="User profile picture" class="rounded-circle shadow-sm" width="100"
           height="100" />
       </div>
 
@@ -62,19 +62,19 @@
           <dt class="fs-5">
             <i class="bi bi-person text-danger fs-4"></i> Full Name
           </dt>
-          <dd class="ms-4 fs-5">{{ bookingData.buyer.name }}</dd>
+          <dd class="ms-4 fs-5">{{ currentUser.firstName + ' ' + (currentUser.lastName? currentUser.lastName : "") }}</dd>
         </div>
         <div class="detail-unit">
           <dt class="fs-5">
             <i class="bi bi-envelope text-danger fs-4"></i> Email Address
           </dt>
-          <dd class="ms-4 fs-5">{{ bookingData.buyer.email }}</dd>
+          <dd class="ms-4 fs-5">{{ currentUser.email }}</dd>
         </div>
         <div class="detail-unit">
           <dt class="fs-5">
             <i class="bi bi-phone text-danger fs-4"></i> Phone Number
           </dt>
-          <dd class="ms-4 fs-5">{{ bookingData.buyer.phone }}</dd>
+          <dd class="ms-4 fs-5">{{ currentUser.phoneNum }}</dd>
         </div>
       </dl>
     </section>
@@ -90,11 +90,11 @@
       </h2>
 
       <div class="inventory-list">
-        @for (ticket of bookingData.tickets; track $index) {
+        @for (ticket of ticketQuantity; track $index) {
         <div class="inventory-item fs-5">
           <div class="item-meta">
             <span class="item-quantity fs-5">{{ ticket.quantity }}x</span>
-            <span class="ticket-class">{{ ticket.category }}</span>
+            <span class="ticket-class">{{ ticket.type }}</span>
           </div>
           <div class="item-value">EGP {{ ticket.price * ticket.quantity }}</div>
         </div>
@@ -104,7 +104,7 @@
       <div class="grand-total">
         <div class="total-summary fs-4">
           <span><i class="bi bi-cash text-danger fs-4"></i> Total Due</span>
-          <span class="total-amount">EGP {{ bookingData.totalPrice }}</span>
+          <span class="total-amount">EGP {{ totalPrice }}</span>
         </div>
         <p class="fee-disclaimer">All taxes and fees included</p>
       </div>

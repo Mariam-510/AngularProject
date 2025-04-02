@@ -99,7 +99,7 @@ export const routes: Routes = [
   { path: 'bookingEvent', component: BookingEventComponent, title: 'Book Event' },
   { path: 'bookingMatch/:id', component: BookingMatchComponent, title: 'Book Match' },
 
-  { path: 'bookingDetailsMatch', component: BookingDetailsMatchComponent, title: 'Match Booking Details' },
+  { path: 'bookingDetailsMatch/:id', component: BookingDetailsMatchComponent, title: 'Match Booking Details' },
   { path: 'bookingDetailsEvent', component: BookingDetailsEventComponent, title: 'Show Booking Details' },
 
   { path: "t", component: TesttComponent, title: "t" },
