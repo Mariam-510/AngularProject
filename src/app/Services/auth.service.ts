@@ -21,7 +21,7 @@ export class AuthService {
     email: 'john@gmail.com',
     password: 'John@123',
     phoneNum: '01140558309',
-    avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    avatar: 'img/userIcon.png',
     authMethod: 'mock',
     role: 'user'
   };
@@ -32,7 +32,7 @@ export class AuthService {
     email: 'admin@gmail.com',
     password: 'Admin@123',
     phoneNum: '01140558309',
-    avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    avatar: 'img/userIcon.png',
     authMethod: 'mock',
     role: 'admin'
   };
@@ -59,7 +59,7 @@ export class AuthService {
       id: userInfo.sub,
       name: userInfo.name,
       email: userInfo.email,
-      avatar: userInfo.picture ? userInfo.picture : "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+      avatar: userInfo.picture ? userInfo.picture : 'img/userIcon.png',
       firstName: userInfo.given_name,
       lastName: userInfo.family_name,
       // phoneNumber: userInfo.phone_number,

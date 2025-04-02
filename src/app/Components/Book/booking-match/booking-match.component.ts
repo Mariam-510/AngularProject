@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SharedService, match, ShowTicket } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-booking-match',
@@ -9,123 +10,99 @@ import { Router } from '@angular/router';
   templateUrl: './booking-match.component.html',
   styleUrl: './booking-match.component.css'
 })
-export class BookingMatchComponent {
+export class BookingMatchComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  match: any;
+  tickets: ShowTicket[] = [];
+  counters = signal<Record<string, number>>({});
 
-  // Football Data
-  teams = {
-    homeTeam: {
-      name: 'Al Ahly FC',
-      logo: 'https://upload.wikimedia.org/wikipedia/ar/8/8c/Al_Ahly_SC_logo.png'
-    },
-    awayTeam: {
-      name: 'Enppi SC',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/2/22/ENPPI_Club_Logo.png'
-    }
-  };
+  totalPrice = computed(() => {
+    return this.tickets.reduce((total, ticket) => 
+      total + (this.counters()[ticket.type] || 0) * ticket.price, 0);
+  });
 
-  matchDetails = {
-    stadium: {
-      name: 'Al Salam Stadium',
-      image: 'Images/stadiumSeating.jpg',
+  totalTickets = computed(() => 
+    Object.values(this.counters()).reduce((sum, count) => sum + count, 0));
+
+  constructor(private router: Router, private _sharedService: SharedService, private route: ActivatedRoute) {}
+
+    matchDetails: match =
+    {
+      id: 1,
+      image: 'img/cairo staduim.jpg',
+      venue: 'Cairo International Stadium, Cairo',
+      date: 'Fri 28 Mar 2025',
+      tournament: 'World Cup Qualifiers 2025',
+      staduim: 'img/cairo staduim.jpg',
+      matchNumber: 5,
+      time: '08:30 PM',
+      group: 'African Qualifiers Group B',
+      team1: 'Egypt',
+      team2: 'Algeria',
+      team1Logo: 'img/egypt.svg',
+      team2Logo: 'img/algeria.svg',
+      isFavorite: true,
+      price: 1100,
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
       location: 'Cairo, Egypt'
-    },
-    date: '2024-03-20T21:30:00',
-    time: '09:30 PM'
-  };
+    }
 
-  // Ticket Counters
-  cat3Counter = signal(0);
-  cat2Counter = signal(0);
-  cat1Counter = signal(0);
-  vipCounter = signal(0);
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const newId = Number(params.get('id'));
+      this.match = this._sharedService.matches.find(m => m.id === newId);
 
-  // Prices
-  cat3Price = 75;
-  cat2Price = 150;
-  cat1Price = 200;
-  vipPrice = 300;
+      if (this.match) {
+        this.matchDetails = this.match;
+      }
+    });
 
-  totalPrice = signal(0);
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Match ID:', id);
 
-  // Total Calculations
-  updateTotalPrice() {
-    this.totalPrice.set(
-      (this.cat3Counter() * this.cat3Price) +
-      (this.cat2Counter() * this.cat2Price) + 
-      (this.cat1Counter() * this.cat1Price) +
-      (this.vipCounter() * this.vipPrice)
-    );
+    this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.matchDetails.price);
+
+    // Initialize counters
+    const initialCounters = this.tickets.reduce((acc, ticket) => ({
+      ...acc,
+      [ticket.type]: 0
+    }), {});
+    this.counters.set(initialCounters);
   }
 
   isTicketLimitReached(): boolean {
     return this.totalTickets() >= 4;
   }
 
-  totalTickets(): number {
-    return (this.cat3Counter() + this.cat2Counter() + this.cat1Counter() + this.vipCounter());
-  }
-
-  // Football Ticket Controls
-  // Cat 3
-  minusCat3() {
-    if (this.cat3Counter() > 0) {
-      this.cat3Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusCat3() {
+  plusTicket(type: string) {
     if (!this.isTicketLimitReached()) {
-      this.cat3Counter.update(v => v + 1);
-      this.updateTotalPrice();
+      this.counters.update(counters => ({
+        ...counters,
+        [type]: (counters[type] || 0) + 1
+      }));
     }
   }
 
-  // Cat 2
-  minusCat2() {
-    if (this.cat2Counter() > 0) {
-      this.cat2Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusCat2() {
-    if (!this.isTicketLimitReached()) {
-      this.cat2Counter.update(v => v + 1);
-      this.updateTotalPrice();
-    }
+  minusTicket(type: string) {
+    this.counters.update(counters => {
+      const current = counters[type] || 0;
+      return current > 0 ? { ...counters, [type]: current - 1 } : counters;
+    });
   }
 
-  // Cat 1
-  minusCat1() {
-    if (this.cat1Counter() > 0) {
-      this.cat1Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusCat1() {
-    if (!this.isTicketLimitReached()) {
-      this.cat1Counter.update(v => v + 1);
-      this.updateTotalPrice();
-    }
-  }
-
-  // VIP
-  minusVip() {
-    if (this.vipCounter() > 0) {
-      this.vipCounter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusVip() {
-    if (!this.isTicketLimitReached()) {
-      this.vipCounter.update(v => v + 1);
-      this.updateTotalPrice();
-    }
+  getTicketClass(type: string): string {
+    const classMap: Record<string, string> = {
+      'VIP': 'vip',
+      'CAT 1': 'category-1',
+      'CAT 2': 'category-2',
+      'CAT 3': 'category-3'
+    };
+    return classMap[type] || '';
   }
 
   proceedToCheckout() {
-    console.log('Proceeding to checkout...');
     this.router.navigate(['/bookingDetailsMatch']);
   }
 

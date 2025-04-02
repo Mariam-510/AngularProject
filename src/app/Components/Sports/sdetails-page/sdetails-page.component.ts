@@ -3,46 +3,7 @@ declare var bootstrap: any; // Required for Bootstrap modal handling
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
-import { eventItem, SharedService } from '../../../Services/shared.service';
-
-export interface team {
-  id: number;
-  name: string;
-  logo: string;
-  description: string;
-  coach: string;
-  keyPlayers: string;
-}
-
-export interface match {
-  id: number;
-  image: string;
-  venue: string;
-  date: string;
-  tournament: string;
-  staduim?: string;
-  matchNumber: number;
-  time: string;
-  group: string;
-  team1: string;
-  team2: string;
-  team1Logo: string;
-  team2Logo: string;
-  isFavorite: boolean;
-  price: number;
-  word?: string;
-  adv?: string;
-  category: string;
-}
-
-export interface team {
-  id: number;
-  name: string;
-  logo: string;
-  description: string;
-  coach: string;
-  keyPlayers: string;
-}
+import { eventItem, team, match, SharedService } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-sdetails-page',
@@ -52,7 +13,7 @@ export interface team {
 })
 export class SDetailsPageComponent implements AfterViewInit, OnInit {
   matches: match[] = [];
-  teams: team[] = [];
+  // teams: team[] = [];
   reviews: any;
   tickets: any;
   Math = Math;

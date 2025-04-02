@@ -51,6 +51,7 @@ export interface match {
   word?: string;
   adv?: string;
   category: string;
+  location: string;
 }
 
 export interface categories {
@@ -574,7 +575,8 @@ export class SharedService {
       price: 1100,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
-      category: '⚽ Football'
+      category: '⚽ Football',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -596,6 +598,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -616,7 +619,8 @@ export class SharedService {
       price: 250, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
-      category: '⚽ Football'
+      category: '⚽ Football',
+      location: 'Gouna, Egypt'
     },
 
     {
@@ -638,7 +642,7 @@ export class SharedService {
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
       staduim: 'img/m3.jpg',
-
+      location: 'Alexandria, Egypt'
     },
 
     {
@@ -656,7 +660,8 @@ export class SharedService {
       team2Logo: 'img/Pyramids.png',
       isFavorite: true,
       price: 500, // Add price
-      category: '⚽ Egyptian Premier League'
+      category: '⚽ Egyptian Premier League',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -677,6 +682,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Alexandria, Egypt'
     },
 
     {
@@ -697,7 +703,8 @@ export class SharedService {
       price: 300, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
-      category: '⚽ Football'
+      category: '⚽ Football',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -718,6 +725,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Ismailia, Egypt'
     },
 
     {
@@ -738,6 +746,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Ismailia, Egypt'
     },
 
     {
@@ -758,6 +767,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Cairo, Egypt'
     }
   ];
 
@@ -834,7 +844,7 @@ export class SharedService {
       GatesOpen: '05:00 PM',
       price: 1100,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -849,7 +859,7 @@ export class SharedService {
       GatesOpen: '3:00 PM',
       price: 290,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -879,7 +889,7 @@ export class SharedService {
       GatesOpen: '03:00 PM',
       price: 500,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -894,7 +904,7 @@ export class SharedService {
       GatesOpen: '06:00 PM',
       price: 500,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -909,7 +919,7 @@ export class SharedService {
       GatesOpen: '06:00 PM',
       price: 100,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -969,7 +979,7 @@ export class SharedService {
       GatesOpen: '06:00 PM',
       price: 900,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -1186,7 +1196,6 @@ export class SharedService {
   }
 
 
-
   private favoriteMatchesSubject = new BehaviorSubject<match[]>(this.matches.filter(match => match.isFavorite));
   favoriteMatches$ = this.favoriteMatchesSubject.asObservable();
 
@@ -1202,6 +1211,11 @@ export class SharedService {
     }
   }
 
+
+
+//---------------------------------------------------------------------------------------------------------
+
+
   getFavoriteMatches(): any[] {
     // Filter shows to get only those that are marked as favorite
     return this.matches.filter(match => match.isFavorite);
@@ -1212,4 +1226,5 @@ export class SharedService {
     // Emit the updated list of favorites
     this.favoriteMatchesSubject.next(this.getFavoriteMatches());
   }
+
 }
