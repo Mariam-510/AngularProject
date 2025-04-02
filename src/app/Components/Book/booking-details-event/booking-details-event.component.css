@@ -1,10 +1,45 @@
+.event-essentials {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  color: white;
+}
+
+.cultural-presentation {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.event-headline {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.venue-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.event-visual {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
 /* Shared base styles */
 .checkout-layout {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
   max-width: 1440px;
-  padding: 2rem 10rem 2rem 14rem;
+  margin: 0 auto;
+  padding: 2rem 10rem 2rem 10rem;
   min-height: 100vh;
   font-family: "Inter", system-ui;
   margin: 0 auto;
@@ -16,13 +51,38 @@
   align-content: start;
 }
 
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0.1rem auto;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+}
+
+.detail-item {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  /* font-weight: 500; */
+  color: #2d3748;
+}
+
+.detail-item:hover {
+  transform: scale(1.07);
+}
+
+.transaction-overview,
 .attendee-profile,
 .order-recap,
 .payment-interface {
   transition: transform 0.2s ease;
   background: #ffffff;
   border-radius: 1rem;
-  padding: 2rem;
+  /* padding: 2rem; */
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
@@ -144,37 +204,59 @@
   margin: 1.5rem 0;
 }
 
-/* Event-specific styles */
-.cultural-presentation {
-  position: relative;
+/* Football-specific styles */
+.sport-matchup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.team-column {
+  text-align: center;
+  flex: 1;
+}
+
+.team-identity {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+  padding: 1rem;
+  /* background: #f8fafc; */
   border-radius: 1rem;
-  overflow: hidden;
 }
 
-.event-visual {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
+.team-designation {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin: 0;
 }
 
-.event-essentials {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+.match-separator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.separator-line {
+  width: 2px;
+  height: 40px;
+  background: #e2e8f0;
+}
+
+.vs-label {
+  background: #525165a2;
   color: white;
-}
-
-.event-headline {
-  margin: 0 0 0.5rem;
-  font-size: 1.75rem;
+  padding: 0.25rem 1rem;
+  border-radius: 2rem;
+  font-weight: 600;
 }
 
 .checkout-main {
-  display: contents;
-  /* Allows children to participate in parent grid */
+  display: contents; /* Allows children to participate in parent grid */
 }
 
 .transaction-overview {
@@ -182,7 +264,15 @@
   grid-row: 1;
   grid-column: 1 / -1;
   transition: transform 0.2s ease;
-  /* margin-bottom: 5px; */
+  margin-bottom: 5px;
+.checkout-main {
+  display: contents; /* Allows children to participate in parent grid */
+}
+
+.transaction-overview {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  /* margin: 0 auto; */
 }
 
 .attendee-profile {
@@ -195,97 +285,103 @@
 .transaction-sidebar {
   grid-column: 2;
   grid-row: 2;
-  align-self: start;
-  /* Aligns sidebar to the top */
+  align-self: start; /* Aligns sidebar to the top */
 }
 
-/* Modified responsive styles for medium screens */
+/* Football Responsive */
 @media (max-width: 1200px) {
   .checkout-layout {
-    padding: 2rem 5rem;
+    padding: 2rem 4rem;
   }
 }
 
 @media (max-width: 992px) {
+  /* Medium screens (tablets) */
   .checkout-layout {
     grid-template-columns: 1fr;
     padding: 2rem;
     gap: 1.5rem;
   }
 
-  .event-visual {
-    height: 250px;
+  .transaction-sidebar {
+    grid-column: 1;
+    grid-row: 3;
+    position: static;
+    margin-top: 1rem;
   }
 
-  .event-headline {
-    font-size: 1.5rem;
+  .attendee-profile {
+    grid-row: 2;
+    height: auto;
+    padding: 1.5rem;
   }
 
-  .venue-meta,
-  .temporal-info {
-    font-size: 1rem;
+  .sport-matchup {
+    margin: 1.5rem 0;
   }
 
-  .attendee-profile img {
-    width: 80px;
-    height: 80px;
+  .team-identity {
+    width: 100px;
+    height: 100px;
+  }
+
+  .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    max-width: 500px;
+  }
+
+  .detail-item {
+    padding: 0.75rem;
+    font-size: 1rem !important;
+  }
+
+  .identity-details {
+    gap: 1rem;
   }
 
   .detail-unit {
     padding: 0.75rem;
   }
 
+  .grand-total {
+    padding-top: 1rem;
+  }
+
+  .total-summary {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjustments for smaller tablets */
+  .checkout-layout {
+    padding: 1.5rem;
+  }
+
+  .team-designation {
+    font-size: 1rem;
+  }
+
+  .vs-label {
+    font-size: 1.5rem !important;
+    padding: 0.2rem 0.8rem;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .transaction-overview,
+  .attendee-profile,
   .order-recap,
   .payment-interface {
     padding: 1.5rem;
   }
 
-  .total-summary {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .checkout-layout {
-    padding: 1rem;
-  }
-
-  .event-visual {
-    height: 200px;
-  }
-
-  .event-headline {
-    font-size: 1.25rem;
-  }
-
-  .cultural-presentation {
-    flex-direction: column;
-  }
-
-  .attendee-profile {
-    height: auto;
-    padding: 1.5rem;
-  }
-}
-
-/* Existing min-width: 992px media query - keep this at bottom to maintain cascade */
-@media (min-width: 992px) {
-  .checkout-layout {
-    grid-template-columns: 1.5fr 1fr;
-    gap: 2rem;
-    padding: 2rem 8rem;
-  }
-
-  .event-essentials {
-    padding: 1.5rem;
-  }
-
-  .event-headline {
-    font-size: 1.6rem;
-  }
-
-  .venue-meta,
-  .temporal-info {
-    font-size: 1.1rem;
+  .user-avatar {
+    width: 80px;
+    height: 80px;
   }
 }
