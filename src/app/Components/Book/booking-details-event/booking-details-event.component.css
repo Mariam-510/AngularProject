@@ -42,7 +42,6 @@
   padding: 2rem 10rem 2rem 10rem;
   min-height: 100vh;
   font-family: "Inter", system-ui;
-  margin: 0 auto;
 }
 
 .checkout-main {
@@ -255,16 +254,6 @@
   font-weight: 600;
 }
 
-.checkout-main {
-  display: contents; /* Allows children to participate in parent grid */
-}
-
-.transaction-overview {
-  /* margin: 20px 0; */
-  grid-row: 1;
-  grid-column: 1 / -1;
-  transition: transform 0.2s ease;
-  margin-bottom: 5px;
 .checkout-main {
   display: contents; /* Allows children to participate in parent grid */
 }
