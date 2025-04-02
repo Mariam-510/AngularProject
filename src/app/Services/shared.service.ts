@@ -25,6 +25,12 @@ export interface ShowTicket {
   description: string;
 }
 
+export interface CheckoutTicket{
+  type: string;
+  quantity: number;
+  price: number;
+}
+
 export interface Schedule {
   date: string;
   day: string;
@@ -1101,6 +1107,29 @@ export class SharedService {
       coach: 'José Peseiro',
       keyPlayers: 'Zizo, Mahmoud El Wensh, Ahmed Fatouh'
     },
+  ];
+
+  checkoutTicket: CheckoutTicket[] = [
+    {
+      type: 'VIP',
+      quantity: 1,
+      price: 950
+    },
+    {
+      type: 'CAT 1',
+      quantity: 1,
+      price: 800
+    },
+    {
+      type: 'CAT 2',
+      quantity: 1,
+      price: 650
+    },
+    {
+      type: 'CAT 3',
+      quantity: 1,
+      price: 500
+    }
   ];
 
   // Define ShowTicket array using the interface

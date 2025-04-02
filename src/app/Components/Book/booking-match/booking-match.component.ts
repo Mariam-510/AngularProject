@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedService, match, ShowTicket } from '../../../Services/shared.service';
+import { SharedService, match, ShowTicket, CheckoutTicket } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-booking-match',
@@ -103,7 +103,17 @@ export class BookingMatchComponent implements OnInit {
   }
 
   proceedToCheckout() {
-    this.router.navigate(['/bookingDetailsMatch']);
+
+    this._sharedService.checkoutTicket = this.tickets.map(ticket => ({
+      type: ticket.type,
+      quantity: this.counters()[ticket.type],
+      price: ticket.price
+    }))
+    .filter(ticket => ticket.quantity > 0);
+
+    console.log(this._sharedService.checkoutTicket);
+
+    this.router.navigate(['/bookingDetailsMatch', this.matchDetails.id]);
   }
 
 }
