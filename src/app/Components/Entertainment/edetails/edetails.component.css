@@ -456,3 +456,13 @@ section {
     /* Hide on medium and smaller screens */
   }
 }
+
+/* -------------------------------------------------------------------------------- */
+.tab-links {
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+  /* Optional: Centers the links */
+  /* gap: 10px; */
+  /* Adds spacing between items */
+}

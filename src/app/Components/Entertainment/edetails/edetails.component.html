@@ -1,5 +1,5 @@
-<div #heroSection class="position-relative d-flex justify-content-center ">
-  <img [src]="item.imageLarge" class="img-fluid w-100 banner-rounded " alt="Event Banner"
+<div #heroSection class="position-relative d-flex justify-content-center">
+  <img [src]="item.imageLarge" class="img-fluid w-100 banner-rounded d-none d-lg-block" alt="Event Banner"
     style="max-height: 620px; object-fit: cover;">
 
   <div class="text-overlay mb-5 ms-5">
@@ -10,8 +10,8 @@
 
   <!-- Event Card -->
   <div #eventCard
-    class="position-absolute end-0 bg-white shadow rounded me-5 mt-4 smooth-card custom-card card border-0  "
-    style="max-width: 100%; width: 375px;">
+    class="position-absolute end-0 bg-white shadow rounded me-4 mt-4 smooth-card custom-card card border-0 d-none d-lg-block"
+    style="max-width: 100%; width: 24.5vw;">
 
     <div
       class="bg-dark text-white p-5 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
@@ -73,7 +73,7 @@
         <button
           class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
           (click)="toggleFavorite(item)">
-          <span class="text-danger">Add to Wishlist </span>
+          <span class="text-danger">Wishlist </span>
           <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
         </button>
 
@@ -90,12 +90,15 @@
     </div>
   </div>
 
+
+  <h1 class="d-block d-lg-none">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
+
 </div>
 
 
 
 <div class="py-2">
-  <div class="tab-links px-5 py-4" #tabLinks>
+  <div #tabLinks class="tab-links px-5 py-4 d-flex flex-wrap justify-content-center justify-content-xl-start gap-2">
     <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active ms-2 me-3">
       <i class="bi bi-info-circle-fill me-2 fs-6"></i> <span class="fs-5">Overview</span>
     </a>
@@ -130,6 +133,7 @@
       <span class="fs-5">Reviews</span>
     </a>
   </div>
+
 
 
   <div class="px-5">
