@@ -98,7 +98,7 @@
           </button>
         </div>
 
-        <a routerLink="/bookingMatch" class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2 ticket-buy-btn"><i
+        <a [routerLink]="['/bookingMatch', match.id]" class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2 ticket-buy-btn"><i
             class="bi bi-ticket-perforated"></i> GET TICKET</a>
       </div>
 
@@ -320,7 +320,7 @@
                   <span class="badge fst-italic bg-secondary text-white py-2 px-2 fs-6 ticket-price opacity-75">
                     {{ ticket.price }} EGP
                   </span>
-                  <a routerLink="/bookingEvent" class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
+                  <a [routerLink]="['/bookingMatch', match.id]" class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
                     Buy Now
                   </a>
                 </div>
@@ -687,7 +687,7 @@
                         [routerLink]="['/sports', match.id]">
                         <i class="bi bi-info-circle"></i> Details
                       </button>
-                      <a routerLink="/bookingMatch" class="btn btn-danger flex-grow-1 fw-semibold">
+                      <a [routerLink]="['/bookingMatch', match.id]" class="btn btn-danger flex-grow-1 fw-semibold">
                         <i class="bi bi-ticket-perforated"></i> Book Ticket
                       </a>
                     </div>
