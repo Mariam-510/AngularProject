@@ -73,14 +73,17 @@
 
       <div class="d-flex gap-2 justify-content-center mb-2 mt-2 buttons-container">
         <button
-          class="btn btn-light badge fav-btn d-flex align-items-center justify-content-center w-50 py-3 fs-6 shadow">
+          class="btn btn-light badge fav-btn d-flex align-items-center justify-content-center w-50 py-3 fs-6 shadow"
+          (click)="toggleFavorite(item)">
           <span class="text-danger">Wishlist </span>
           <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
         </button>
 
         <button
-          class="more-info btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow">
+          class="more-info btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
+          (click)="shareItem(item)">
           Share it <i class="bi bi-share-fill ms-2"></i>
+
         </button>
       </div>
 
