@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { BehaviorSubject } from 'rxjs';
 export interface show {
   id: number;
   title: string;
@@ -514,12 +514,13 @@ export class SharedService {
       team2: 'Smouha SC',
       team1Logo: 'img/AlIttihad.png',
       team2Logo: 'img/Smouha.png',
-      isFavorite: false,
+      isFavorite: true,
       price: 500, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
       staduim: 'img/m3.jpg',
+      
     },
 
     {
@@ -556,8 +557,8 @@ export class SharedService {
       isFavorite: true,
       price: 1200,
       word: "🔥 high",
-      adv: "🌍 Must-win Match!",
-      category: '🌎 World Cup Qualifiers'
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
     },
 
     {
@@ -596,7 +597,9 @@ export class SharedService {
       team2Logo: 'img/mahalla.png',
       isFavorite: false,
       price: 300, // Add price
-      category: '⚽ Egyptian Premier League'
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
     },
 
     {
@@ -614,7 +617,9 @@ export class SharedService {
       team2Logo: 'img/zamalekv2.png',
       isFavorite: false,
       price: 100,
-      category: '⚽ Egyptian Premier League'
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
     },
 
     {
@@ -632,7 +637,9 @@ export class SharedService {
       team2Logo: 'img/zamalekv2.png',
       isFavorite: true,
       price: 900,
-      category: '⚽ Egyptian Premier League'
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
     }
   ];
 
@@ -934,7 +941,7 @@ export class SharedService {
     {
       id: 10,
       name: 'Ismaily SC',
-      logo: '/img/ismaily.png',
+      logo: '/img/Ismailyy.png',
       description: 'Professional football club based in Ismailia, Egypt. Founded in 1924, Ismaily is one of the oldest and most successful clubs in Egyptian football.',
       coach: 'Shawky Gharib',
       keyPlayers: 'Ahmed El Sheikh, Kamal El Sayed, Eric Traoré'
@@ -961,7 +968,7 @@ export class SharedService {
     {
       id: 13,
       name: 'Zamalek SC',
-      logo: '/img/zmalekk.png',
+      logo: '/img/Zamalek.svg',
       description: 'One of the most successful and prestigious football clubs in Egypt and Africa. Based in Cairo, the club was founded in 1911 and has a rich history in both domestic and international football.',
       coach: 'José Peseiro',
       keyPlayers: 'Zizo, Mahmoud El Wensh, Ahmed Fatouh'
@@ -988,7 +995,59 @@ export class SharedService {
 
 
   //---------------------------------------------------------------------------------------------------------
+//favorite shows
+private favoriteShowsSubject = new BehaviorSubject<show[]>(this.shows.filter(show => show.isFavorite));
+favoriteShows$ = this.favoriteShowsSubject.asObservable();
+
+// Toggle favorite status of a show by its ID
+toggleFavorite(showId: number): void {
+  const show = this.shows.find(s => s.id === showId);
+  if (show) {
+    // Toggle the favorite status
+    show.isFavorite = !show.isFavorite;
+
+    // Update the favorite shows list and emit the updated array
+    this.favoriteShowsSubject.next(this.getFavoriteShows());
+  }
+}
+
+// Get the list of favorite shows (filtered)
+getFavoriteShows(): any[] {
+  // Filter shows to get only those that are marked as favorite
+  return this.shows.filter(show => show.isFavorite);
+}
+// Add or set the shows list
+setShows(shows: any[]): void {
+  this.shows = shows;
+  // Emit the updated list of favorites
+  this.favoriteShowsSubject.next(this.getFavoriteShows());
+}
 
 
 
+private favoriteMatchesSubject = new BehaviorSubject<match[]>(this.matches.filter(match => match.isFavorite));
+favoriteMatches$ = this.favoriteMatchesSubject.asObservable();
+
+// Toggle favorite status of a show by its ID
+toggleFavoritematch(matchId: number): void {
+  const match = this.matches.find(m => m.id === matchId);
+  if (match) {
+    // Toggle the favorite status
+    match.isFavorite = !match.isFavorite;
+
+    // Update the favorite shows list and emit the updated array
+    this.favoriteMatchesSubject.next(this.getFavoriteShows());
+  }
+}
+
+getFavoriteMatches(): any[] {
+  // Filter shows to get only those that are marked as favorite
+  return this.matches.filter(match => match.isFavorite);
+}
+// Add or set the shows list
+setMatches(matches: any[]): void {
+  this.matches = matches;
+  // Emit the updated list of favorites
+  this.favoriteMatchesSubject.next(this.getFavoriteMatches());
+}
 }
