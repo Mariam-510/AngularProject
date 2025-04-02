@@ -90,6 +90,94 @@
     </div>
   </div>
 
+<<<<<<< Updated upstream
+=======
+<!-- Section -->
+  <!-- <h1 class="d-block d-lg-none">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1> -->
+  <div class="d-block d-lg-none ">
+    <div class="container-fluid mt-4 ">
+      <div class=" text-white  position-relative w-100">
+          <img [src]="item.imageLarge" class="card-img " alt="Event Background">
+          <div class="card-img-overlay d-flex flex-column justify-content-end ">
+            <div class="smalltext-overlay mb-3 ms-2">
+              <h1 class="fw-bold text-uppercase text-white smallresponsive-title">{{ item.qoute }}</h1>
+              <p class="fw-bold text-white smallresponsive-subtitle ">{{ item.subQoute }}</p>
+            </div>
+          </div>
+      </div>
+  
+      <div class="shadow">
+        <div class="bg-dark text-white w-100 d-flex align-items-center justify-content-center" style="height: 40px;">
+          <h3 class="m-0 p-0">{{ item.title }}</h3>
+        </div> 
+      
+        <div class="card-body w-100 rounded-0 px-3 pb-3 pt-2">
+          <div class="d-flex flex-wrap gap-4 align-items-center  justify-content-center pb-3">
+            <span class="badge-item bg-light text-danger px-3 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
+              {{ categoryIcons[item.category] }} {{ item.category }}
+            </span>
+        
+            <span class="badge-item bg-light text-danger px-2 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
+              🔥 {{ item.word }}
+            </span>
+            <span class="badge-item bg-light text-danger px-2 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
+              ⭐ {{ item.rating }}
+            </span>
+          
+          </div>
+        
+          <div class="mx-2 px-3 mt-1">
+            <div class="row">
+              <!-- Event Details Column -->
+              <div class="col-7">
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-calendar3 fs-5 me-2"></i>
+                  <strong>{{ item.date }}</strong>
+                </h6>
+        
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-geo-alt-fill fs-5 me-2"></i>
+                  <span>{{ item.location }}</span>
+                </h6>
+        
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-cash-stack fs-5 me-2"></i>
+                  <span>Prices from <strong>{{ item.price }} EGP</strong></span>
+                </h6>
+        
+              
+              </div>
+        
+              <!-- Buttons Column -->
+              <div class="col-5 d-flex flex-column gap-2 justify-content-center pb-3">
+                <button class="btn btn-light badge fav-btn d-flex align-items-center justify-content-center w-100 py-3 fs-6"
+                  (click)="toggleFavorite(item)">
+                  <span class="text-danger">Wishlist</span>
+                  <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
+                </button>
+        
+                <button class="more-info btn btn-light badge text-danger d-flex align-items-center w-100 justify-content-center py-3 fs-6"
+                  (click)="shareItem(item)">
+                  Share it <i class="bi bi-share-fill ms-2"></i>
+                </button>
+        
+                <a routerLink="/bookingEvent" class="ticket-btn btn btn-danger w-100 mt-2 py-2 fs-5">
+                  <i class="bi bi-ticket-perforated"></i> GET TICKET
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+
+
+
+   
+>>>>>>> Stashed changes
 </div>
 
 
