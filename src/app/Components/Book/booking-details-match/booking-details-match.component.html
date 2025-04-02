@@ -90,7 +90,7 @@
       </h2>
 
       <div class="inventory-list">
-        @for (ticket of ticketQuantity; track $index) {
+        @for (ticket of checkoutTicket; track $index) {
         <div class="inventory-item fs-5">
           <div class="item-meta">
             <span class="item-quantity fs-5">{{ ticket.quantity }}x</span>

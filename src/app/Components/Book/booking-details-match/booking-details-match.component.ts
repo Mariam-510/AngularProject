@@ -45,8 +45,8 @@ export class BookingDetailsMatchComponent implements OnInit {
         location: 'Cairo, Egypt'
   }
 
-  ticketQuantity: CheckoutTicket[] = [];
-  
+  checkoutTicket: CheckoutTicket[] = [];
+
   totalPrice: number = 0;
 
   clientId: string = '';
@@ -70,8 +70,8 @@ export class BookingDetailsMatchComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     console.log('Match ID:', id);
 
-    this.ticketQuantity = this._sharedService.checkoutTicket;
-    this.totalPrice = this.ticketQuantity.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0);
+    this.checkoutTicket = this._sharedService.checkoutTicket;
+    this.totalPrice = this.checkoutTicket.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0);
 
     try {
       this.clientId = this.payPalService.clientId;
