@@ -1,5 +1,5 @@
 <div #heroSection class="position-relative d-flex justify-content-center ">
-  <img [src]="match.image" class="img-fluid w-100 banner-rounded " alt="Event Banner"
+  <img [src]="match.image" class="img-fluid w-100 banner-rounded d-none d-lg-block" alt="Event Banner"
     style="max-height: 620px; object-fit: cover;">
 
   <!-- <div class="text-overlay mb-5 ms-5 ">
@@ -15,9 +15,8 @@
   <!-- Modified Event Card -->
 
   <div #eventCard
-    class="position-absolute end-0 bg-white shadow rounded me-5 mt-4  smooth-card custom-card card border-0  "
+    class="position-absolute end-0 bg-white shadow rounded me-5 mt-4  smooth-card custom-card card border-0 d-none d-lg-block"
     style="max-width: 100%; width: 24.5vw;">
-
 
 
     <div
@@ -25,56 +24,74 @@
       style="height: 120px;">
       <h3 class="m-0"> {{item.title}}</h3>
     </div>
-    <div class="d-flex gap-2 align-items-center mt-3 ms-3">
-      <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
-        item.category }}</span>
-      <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{ item.adv
-        }}</span>
-      <span class="bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3 badge-item">{{
-        item.word }}</span>
-    </div>
-    <div class="event-image">
-      <img src="img/national.jpg" class=" event-image rounded-bottom" alt="Juliet Banner">
-    </div>
 
+    <div class="d-flex gap-2 align-items-center mt-3 ms-3 badges-container">
+      <span class="badge-item bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3">
+        {{ item.category }}
+      </span>
 
+      <span class="badge-item bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3">
+        {{ item.word }}
+      </span>
+
+      <span class="badge-item bg-light text-danger fs-6 p-2 d-inline-flex align-items-center rounded-3">
+        {{ item.adv }}
+      </span>
+    </div>
 
 
     <div class="card-body d-flex flex-column">
+
       <!-- Teams Playing -->
       <div class="card-header border-bottom-0 px-0 pt-0 match-vs text-center">
-        <div class="d-flex align-items-center justify-content-between">
-          <img [src]="homeTeam.logo" alt="{{homeTeam.name}} logo" class="team-logo me-2">
+        <div class="teams-container d-flex align-items-center justify-content-between">
 
-          <strong class="text-dark">{{homeTeam.name}}</strong>
-          <span class="mx-2 fw-bold text-danger fs-4">VS</span>
-          <strong class="text-dark">{{awayTeam.name}}</strong>
-          <img [src]="awayTeam.logo" class="team-logo me-2" alt="Team B">
+          <div class="team-item">
+            <img [src]="homeTeam.logo" alt="{{homeTeam.name}} logo" class="team-logo mx-3 team1">
+            <strong class="text-dark">{{homeTeam.name}}</strong>
+          </div>
+
+          <span class="fw-bold text-danger fs-4">VS</span>
+
+          <div class="team-item">
+            <strong class="text-dark me-3 team2">{{awayTeam.name}}</strong>
+            <img [src]="awayTeam.logo" alt="{{awayTeam.name}} logo" class="team-logo team2-logo me-3">
+          </div>
+
         </div>
       </div>
 
 
-      <div class="bg-white border-bottom-0 my-3 ">
+
+      <div class="bg-white border-bottom-0 my-2 ">
         <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center  ">{{item.location}}</h5>
-        <small class="text-muted  d-flex justify-content-center ">
-          <i class="bi bi-calendar-event me-1 text-danger  "></i> {{item.date}}
+
+        <small class="text-muted  d-flex justify-content-center mb-1 date1">
+          <i class="bi bi-calendar-event me-1 text-danger"></i> {{item.date}}
         </small>
 
       </div>
 
-
-
       <div class="mb-1 px-2">
+
+        <div class="d-flex align-items-center mb-2 date2 d-none">
+          <i class="bi bi-calendar-event me-2 text-danger"></i>
+          <strong class="me-2">Date:</strong>
+          <span class="text-dark">{{item.date}}</span>
+        </div>
+
         <div class="d-flex align-items-center mb-2">
           <i class="bi bi-clock-history me-2 text-danger"></i>
           <strong class="me-2">Time:</strong>
           <span class="text-dark">{{item.Kickoff}}</span>
         </div>
+
         <div class="d-flex align-items-center mb-2">
           <i class="bi bi-trophy me-2 text-danger"></i>
           <strong class="me-2">Group:</strong>
           <span class="text-dark">{{item.Group}}</span>
         </div>
+
         <div class="d-flex align-items-center ">
           <i class="bi bi-cash-stack me-2 text-danger"></i>
           <strong class="me-2">Price:</strong>
@@ -82,24 +99,28 @@
 
         </div>
       </div>
-      <div class="mx-2  py-1 mt-1">
-        <div class="d-flex gap-2 justify-content-center mb-2">
+
+      <div class="mx-2">
+
+        <div class="d-flex gap-2 justify-content-center mb-2 mt-1 buttons-container">
           <button
-            class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
-            (click)="toggleFavorite(item)">
-            <span class="text-danger">Add to Wishlist </span>
+            class="btn btn-light badge fav-btn d-flex align-items-center justify-content-center w-50 py-3 fs-6 shadow">
+            <span class="text-danger">Wishlist </span>
             <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
           </button>
 
           <button
-            class="btn btn-light more-info text-danger badge d-flex align-items-center w-50 justify-content-center fs-6 shadow"
-            (click)="shareItem(item)">
+            class="more-info btn btn-light badge text-danger d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow">
             Share it <i class="bi bi-share-fill ms-2"></i>
           </button>
         </div>
 
-        <a routerLink="/bookingMatch" class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2 ticket-buy-btn"><i
-            class="bi bi-ticket-perforated"></i> GET TICKET</a>
+
+
+        <a routerLink="/bookingEvent" class="ticket-btn btn btn-danger w-100 mt-1 py-2 fs-5 mb-2"><i
+            class="bi bi-ticket-perforated"></i> GET
+          TICKET</a>
+
       </div>
 
     </div>
