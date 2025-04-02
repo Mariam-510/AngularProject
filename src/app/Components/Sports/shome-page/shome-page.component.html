@@ -101,7 +101,6 @@
               </button>
             </div>
             <a [routerLink]="['/bookingMatch', match.id]" class="btn btn-danger w-100 mt-2 py-2 fs-5 mb-2 ticket-btn"><i
-
                 class="bi bi-ticket-perforated "></i> GET
               TICKET</a>
           </div>
@@ -113,7 +112,6 @@
   </div>
 </div>
 
-<!-- Add Bootstrap CSS -->
 <!-- Matches Section -->
 <div class="container py-3">
   <h2 class="mb-4 fw-bold">Matches</h2>
@@ -127,16 +125,18 @@
       style="display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; padding: 10px;">
 
       <div *ngFor="let category of categories" class="col-md-4 col-6">
-        <a href="javascript:void(0)" class="text-decoration-none" (click)="filterByCategory(category)">
+
+        <a href="javascript:void(0)" class="text-decoration-none cat" (click)="filterByCategory(category)">
           <div class="category-card position-relative overflow-hidden rounded-3">
             <img [src]="category.image" class="category-bg" [alt]="category.title">
-            <div class="category-content position-absolute p-3 text-white">
+            <div class="category-content position-absolute p-3 text-white text-wrap">
               <h3 class="mb-1">{{ category.title }}</h3>
               <small class="d-block">{{ category.subtitle }}</small>
               <span class="badge mt-2" [ngClass]="category.badgeClass">{{ category.badgeText }}</span>
             </div>
           </div>
         </a>
+
       </div>
 
     </div>
