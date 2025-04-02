@@ -7,3 +7,27 @@
   height: 35px;
   width: 35px;
 }
+
+
+@media (min-width: 768px) {
+  .custom-img {
+    max-width: 275px;
+  }
+
+  .custom-bg-md {
+    background-color: white !important;
+  }
+}
+
+/* Scale effect on hover */
+.scale-hover {
+  transition: transform 0.3s ease-in-out;
+}
+
+.scale-hover:hover {
+  transform: scale(1.05);
+}
+
+.read:hover {
+  color: white;
+}

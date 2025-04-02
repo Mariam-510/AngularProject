@@ -5,16 +5,16 @@
       <div class="event-highlight">
         <div class="arena-info text-center fs-2">
           <img src="Images/stadiumLogo.png" width="47" class="me-2 mb-2" />
-          {{ matchDetails.stadium.name }}
+          {{ matchDetails.venue }}
         </div>
 
         <div class="sport-matchup">
           <div class="team-column">
             <img
-              [src]="teams.homeTeam.logo"
+              [src]="matchDetails.team1Logo"
               class="team-identity shadow-lg bg-light"
             />
-            <h3 class="team-designation">{{ teams.homeTeam.name }}</h3>
+            <h3 class="team-designation">{{ matchDetails.team1 }}</h3>
           </div>
 
           <div class="match-separator">
@@ -25,17 +25,17 @@
 
           <div class="team-column">
             <img
-              [src]="teams.awayTeam.logo"
+              [src]="matchDetails.team2Logo"
               class="team-identity shadow-lg bg-light"
             />
-            <h3 class="team-designation">{{ teams.awayTeam.name }}</h3>
+            <h3 class="team-designation">{{ matchDetails.team2 }}</h3>
           </div>
         </div>
 
         <div class="detail-grid mt-4">
           <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
             <i class="bi bi-geo-alt text-danger"></i>
-            {{ matchDetails.stadium.location }}
+            {{ matchDetails.location }}
           </div>
           <div class="detail-item fs-5 bg-light shadow-lg rounded-4">
             <i class="bi bi-calendar2-event text-danger"></i>
@@ -53,7 +53,7 @@
       <div class="checkout-column">
         <div class="checkout-card">
           <h2 class="card-title mb-3">🏟️Venue Seating Map</h2>
-          <img [src]="matchDetails.stadium.image" class="venue-image" />
+          <img src="Images/stadiumSeating.jpg" class="venue-image" />
         </div>
 
         <div class="checkout-card total-card">
@@ -83,107 +83,34 @@
             🎟️Select Tickets
             <span class="badge bg-secondary">Max 4 tickets!</span>
           </h2>
-
+          
           <div class="ticket-categories">
-            <div class="ticket-card vip">
-              <div class="ticket-info">
-                <h6 class="ticket-category">VIP Experience</h6>
-                <p class="ticket-price mb-0">EGP {{ vipPrice }}</p>
-                <small>Premium seats with VIP facilities</small>
+            @for(ticket of tickets; track $index;){
+              <div class="ticket-card {{ getTicketClass(ticket.type) }}">
+                <div class="ticket-info">
+                  <h6 class="ticket-category">{{ ticket.type }}</h6>
+                  <p class="ticket-price mb-0">EGP {{ ticket.price }}</p>
+                  <small class="text-white-50">{{ ticket.description }}</small>
+                </div>
+                <div class="ticket-controls">
+                  <button
+                    class="btn-minus"
+                    (click)="minusTicket(ticket.type)"
+                    [disabled]="counters()[ticket.type] === 0"
+                  >
+                    -
+                  </button>
+                  <span class="mx-{{ $index === 0 ? '2' : '3' }}">{{ counters()[ticket.type] }}</span>
+                  <button
+                    class="btn-plus"
+                    (click)="plusTicket(ticket.type)"
+                    [disabled]="isTicketLimitReached()"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              <div class="ticket-controls">
-                <button
-                  class="btn-minus"
-                  (click)="minusVip()"
-                  [disabled]="vipCounter() === 0"
-                >
-                  -
-                </button>
-                <span class="mx-2">{{ vipCounter() }}</span>
-                <button
-                  class="btn-plus"
-                  (click)="plusVip()"
-                  [disabled]="isTicketLimitReached()"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            <div class="ticket-card category-1">
-              <div class="ticket-info">
-                <h6 class="ticket-category">CAT 1</h6>
-                <p class="ticket-price mb-0">EGP {{ cat1Price }}</p>
-                <small class="text-white-50">Premium sideline seats</small>
-              </div>
-              <div class="ticket-controls">
-                <button
-                  class="btn-minus"
-                  (click)="minusCat1()"
-                  [disabled]="cat1Counter() === 0"
-                >
-                  -
-                </button>
-                <span class="mx-3">{{ cat1Counter() }}</span>
-                <button
-                  class="btn-plus"
-                  (click)="plusCat1()"
-                  [disabled]="isTicketLimitReached()"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            <div class="ticket-card category-2">
-              <div class="ticket-info">
-                <h6 class="ticket-category">CAT 2</h6>
-                <p class="ticket-price mb-0">EGP {{ cat2Price }}</p>
-                <small class="text-white-50">Mid-field seats</small>
-              </div>
-              <div class="ticket-controls">
-                <button
-                  class="btn-minus"
-                  (click)="minusCat2()"
-                  [disabled]="cat2Counter() === 0"
-                >
-                  -
-                </button>
-                <span class="mx-3">{{ cat2Counter() }}</span>
-                <button
-                  class="btn-plus"
-                  (click)="plusCat2()"
-                  [disabled]="isTicketLimitReached()"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            <div class="ticket-card category-3">
-              <div class="ticket-info">
-                <h6 class="ticket-category">CAT 3</h6>
-                <p class="ticket-price mb-0">EGP {{ cat3Price }}</p>
-                <small class="text-white-50">Standard seating</small>
-              </div>
-              <div class="ticket-controls">
-                <button
-                  class="btn-minus"
-                  (click)="minusCat3()"
-                  [disabled]="cat3Counter() === 0"
-                >
-                  -
-                </button>
-                <span class="mx-3">{{ cat3Counter() }}</span>
-                <button
-                  class="btn-plus"
-                  (click)="plusCat3()"
-                  [disabled]="isTicketLimitReached()"
-                >
-                  +
-                </button>
-              </div>
-            </div>
+            }
           </div>
         </div>
       </div>

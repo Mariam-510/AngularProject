@@ -543,3 +543,78 @@ section {
     display: none;
   }
 }
+
+
+/* ------------------------------------------------------------------------------------- */
+@media (max-width: 1300px) {
+
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .buttons-container button,
+  .ticket-btn {
+    width: 100% !important;
+    padding: 15px !important;
+    font-size: 15px !important;
+  }
+
+  .ticket-btn {
+    width: 100% !important;
+    padding: 10px !important;
+    font-size: 15px !important;
+    margin-top: 2px !important;
+  }
+
+  .badges-container {
+    display: none !important;
+  }
+
+  .date1 {
+    display: none !important;
+  }
+
+  .date2 {
+    display: block !important;
+  }
+
+  .group {
+    display: none !important;
+  }
+
+}
+
+
+@media (max-width: 1300px) {
+  .teams-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center;
+  }
+
+  .team-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .teams-container span {
+    display: block;
+  }
+
+  .team2 {
+    order: 1 !important;
+    margin: 0 !important;
+    margin-left: 20px !important;
+  }
+
+  .team2-logo {
+    margin: 0 !important;
+  }
+
+  .team1 {
+    margin: 0 !important;
+    margin-right: 20px !important;
+  }
+
+}

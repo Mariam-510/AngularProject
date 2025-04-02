@@ -13,8 +13,8 @@ import { SharedService } from '../../../Services/shared.service';
 })
 export class FavouriteComponent implements OnInit {
   favoriteShows: any[] = [];
-  favoriteMatches:any[]=[];
-  constructor(private sharedService: SharedService) {}
+  favoriteMatches: any[] = [];
+  constructor(private sharedService: SharedService) { }
   ngOnInit() {
     this.favoriteShows = this.sharedService.getFavoriteShows();
 
@@ -29,7 +29,7 @@ export class FavouriteComponent implements OnInit {
     this.sharedService.favoriteMatches$.subscribe(favorites => {
       this.favoriteMatches = favorites;
     });
-    
+
   }
   removeFavorite(showId: number) {
     const show = this.favoriteShows.find((event) => event.id === showId);
@@ -38,15 +38,15 @@ export class FavouriteComponent implements OnInit {
     }
   }
   //----------------------------------------------------------------------------------------------------------------------
-  
+
 
   // --------------------------------------------------------------------------------------------------------------------
   Math = Math;
 
- 
+
 
   toggleFavoriteMatch(match: any) {
-    match.isFavorite=!match.isFavorite;
+    match.isFavorite = !match.isFavorite;
     // Remove match from array when unfavorited
 
     if (!match.isFavorite) {
@@ -124,13 +124,16 @@ export class FavouriteComponent implements OnInit {
   };
 
   //----------------------------------------------------------------------------------------------------------------------
-  shareItem(item: any): void {
+  shareEvent(item: any): void {
     const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.location} on ${item.date}. Price: $${item.price}`;
+    const baseUrl = window.location.origin; // Gets the host URL (e.g., http://localhost:4200)
+    const shareUrl = `${baseUrl}/shows/${item.id}`; // Combine the host URL with the item's ID
+
     if (navigator.share) {
       navigator.share({
         title: item.title,
         text: shareText,
-        url: window.location.href
+        url: shareUrl // Use the dynamic URL
       }).then(() => console.log('Shared successfully'))
         .catch(err => console.error('Sharing failed', err));
     } else {
@@ -138,6 +141,26 @@ export class FavouriteComponent implements OnInit {
       alert(`Copy and share this: ${shareText}`);
     }
   }
+
+
+  shareMatch(item: any): void {
+    const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.location} on ${item.date}. Price: $${item.price}`;
+    const baseUrl = window.location.origin; // Gets the host URL (e.g., http://localhost:4200)
+    const shareUrl = `${baseUrl}/sports/${item.id}`; // Combine the host URL with the item's ID
+
+    if (navigator.share) {
+      navigator.share({
+        title: item.title,
+        text: shareText,
+        url: shareUrl // Use the dynamic URL
+      }).then(() => console.log('Shared successfully'))
+        .catch(err => console.error('Sharing failed', err));
+    } else {
+      // Fallback for browsers that don’t support navigator.share
+      alert(`Copy and share this: ${shareText}`);
+    }
+  }
+
 
 
   //----------------------------------------------------------------------------------------------------------------------

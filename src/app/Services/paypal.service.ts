@@ -8,8 +8,8 @@ import { loadScript } from '@paypal/paypal-js';
 export class PaypalService {
 
   constructor() { }
-
-  clientId: string = 'AUaqQlDvhtB5aBRbNeCeNJc0od9OmcgBfiPF2nY89pq9w43wHZ7dilU3eMsFp2oQfN1-BzqDVxK-ASix'
+  
+  clientId: string = 'AZuxIa7n8XCyfxL7XWL5DQVy4Tkdq8nxUJuAxEGRKb_0RNv5ezVH4qJ5Oi6J1v-gjr4UOOLSQ-ghsIF6'
 
   async loadPayPal(clientId: string) {
     try {

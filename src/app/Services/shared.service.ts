@@ -25,6 +25,12 @@ export interface ShowTicket {
   description: string;
 }
 
+export interface CheckoutTicket{
+  type: string;
+  quantity: number;
+  price: number;
+}
+
 export interface Schedule {
   date: string;
   day: string;
@@ -51,6 +57,7 @@ export interface match {
   word?: string;
   adv?: string;
   category: string;
+  location: string;
 }
 
 export interface categories {
@@ -268,20 +275,24 @@ export class SharedService {
   //---------------------------------------------------------------------------------------------------------
   // Define ShowTicket array using the interface
   generateTicketsFromPrice(startingPrice: number): ShowTicket[] {
-    // Create an array of ticket types
-    const ticketTypes = ['Economy', 'Regular', 'VIP', 'Backstage Pass'];
+    // Create an array of ticket types with corresponding descriptions
+    const ticketDetails = [
+      { type: 'Economy', description: 'Budget-friendly seating option.' },
+      { type: 'Regular', description: 'Standard seating with great view.' },
+      { type: 'VIP', description: 'Exclusive access with premium seating.' },
+      { type: 'Backstage Pass', description: 'Meet the performers & backstage access.' }
+    ];
 
-    // Create a new array of tickets based on the starting price, increasing by 50 for each ticket
-    const tickets = ticketTypes.map((type, index) => ({
-      type,
+    // Generate ticket objects with increasing prices
+    const tickets = ticketDetails.map((ticket, index) => ({
+      type: ticket.type,
       price: startingPrice + (index * 50), // Increase by 50 for each subsequent ticket
-      description: `Description for ${type} at price $${startingPrice + (index * 50)}.`
+      description: ticket.description
     }));
 
     // Sort tickets by price in descending order (high to low)
     return tickets.sort((a, b) => b.price - a.price);
   }
-
 
   //---------------------------------------------------------------------------------------------------------
   // Function to convert showDate (e.g., "Jun 12 - 2025") into a Date object
@@ -570,7 +581,8 @@ export class SharedService {
       price: 1100,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
-      category: '⚽ Football'
+      category: '⚽ Football',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -592,6 +604,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -612,7 +625,8 @@ export class SharedService {
       price: 250, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
-      category: '⚽ Football'
+      category: '⚽ Football',
+      location: 'Gouna, Egypt'
     },
 
     {
@@ -634,7 +648,7 @@ export class SharedService {
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
       staduim: 'img/m3.jpg',
-      
+      location: 'Alexandria, Egypt'
     },
 
     {
@@ -652,7 +666,8 @@ export class SharedService {
       team2Logo: 'img/Pyramids.png',
       isFavorite: true,
       price: 500, // Add price
-      category: '⚽ Egyptian Premier League'
+      category: '⚽ Egyptian Premier League',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -673,6 +688,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Alexandria, Egypt'
     },
 
     {
@@ -693,7 +709,8 @@ export class SharedService {
       price: 300, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
-      category: '⚽ Football'
+      category: '⚽ Football',
+      location: 'Cairo, Egypt'
     },
 
     {
@@ -714,6 +731,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Ismailia, Egypt'
     },
 
     {
@@ -734,6 +752,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Ismailia, Egypt'
     },
 
     {
@@ -754,6 +773,7 @@ export class SharedService {
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football',
+      location: 'Cairo, Egypt'
     }
   ];
 
@@ -830,7 +850,7 @@ export class SharedService {
       GatesOpen: '05:00 PM',
       price: 1100,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -845,7 +865,7 @@ export class SharedService {
       GatesOpen: '3:00 PM',
       price: 290,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -875,7 +895,7 @@ export class SharedService {
       GatesOpen: '03:00 PM',
       price: 500,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -890,7 +910,7 @@ export class SharedService {
       GatesOpen: '06:00 PM',
       price: 500,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -905,7 +925,7 @@ export class SharedService {
       GatesOpen: '06:00 PM',
       price: 100,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -965,7 +985,7 @@ export class SharedService {
       GatesOpen: '06:00 PM',
       price: 900,
       description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
+      isFavorite: true,
       word: "🔥 high",
       adv: "⏳ Limited Seats",
       category: '⚽ Football'
@@ -1089,16 +1109,44 @@ export class SharedService {
     },
   ];
 
+  checkoutTicket: CheckoutTicket[] = [
+    {
+      type: 'VIP',
+      quantity: 1,
+      price: 950
+    },
+    {
+      type: 'CAT 1',
+      quantity: 1,
+      price: 800
+    },
+    {
+      type: 'CAT 2',
+      quantity: 1,
+      price: 650
+    },
+    {
+      type: 'CAT 3',
+      quantity: 1,
+      price: 500
+    }
+  ];
+
   // Define ShowTicket array using the interface
   generateMatchTicketsFromPrice(startingPrice: number): ShowTicket[] {
-    // Create an array of ticket types
-    const ticketTypes = ['CAT 3', 'CAT 2', 'CAT 1', 'VIP'];
+    // Create an array of ticket types with corresponding descriptions
+    const ticketDetails = [
+      { type: 'CAT 3', description: 'Standard seating' },
+      { type: 'CAT 2', description: 'Mid-field seats' },
+      { type: 'CAT 1', description: 'Premium sideline seats' },
+      { type: 'VIP', description: 'Premium seats with VIP facilities' }
+    ];
 
-    // Create a new array of tickets based on the starting price, increasing by 50 for each ticket
-    const tickets = ticketTypes.map((type, index) => ({
-      type,
-      price: startingPrice + (index * 150), // Increase by 50 for each subsequent ticket
-      description: `Description for ${type} at price $${startingPrice + (index * 50)}.`
+    // Generate ticket objects with increasing prices
+    const tickets = ticketDetails.map((ticket, index) => ({
+      type: ticket.type,
+      price: startingPrice + (index * 150), // Increase by 150 for each subsequent ticket
+      description: ticket.description
     }));
 
     // Sort tickets by price in descending order (high to low)
@@ -1148,59 +1196,64 @@ export class SharedService {
 
 
   //---------------------------------------------------------------------------------------------------------
-//favorite shows
-private favoriteShowsSubject = new BehaviorSubject<show[]>(this.shows.filter(show => show.isFavorite));
-favoriteShows$ = this.favoriteShowsSubject.asObservable();
+  //favorite shows
+  private favoriteShowsSubject = new BehaviorSubject<show[]>(this.shows.filter(show => show.isFavorite));
+  favoriteShows$ = this.favoriteShowsSubject.asObservable();
 
-// Toggle favorite status of a show by its ID
-toggleFavorite(showId: number): void {
-  const show = this.shows.find(s => s.id === showId);
-  if (show) {
-    // Toggle the favorite status
-    show.isFavorite = !show.isFavorite;
+  // Toggle favorite status of a show by its ID
+  toggleFavorite(showId: number): void {
+    const show = this.shows.find(s => s.id === showId);
+    if (show) {
+      // Toggle the favorite status
+      show.isFavorite = !show.isFavorite;
 
-    // Update the favorite shows list and emit the updated array
+      // Update the favorite shows list and emit the updated array
+      this.favoriteShowsSubject.next(this.getFavoriteShows());
+    }
+  }
+
+  // Get the list of favorite shows (filtered)
+  getFavoriteShows(): any[] {
+    // Filter shows to get only those that are marked as favorite
+    return this.shows.filter(show => show.isFavorite);
+  }
+  // Add or set the shows list
+  setShows(shows: any[]): void {
+    this.shows = shows;
+    // Emit the updated list of favorites
     this.favoriteShowsSubject.next(this.getFavoriteShows());
   }
-}
-
-// Get the list of favorite shows (filtered)
-getFavoriteShows(): any[] {
-  // Filter shows to get only those that are marked as favorite
-  return this.shows.filter(show => show.isFavorite);
-}
-// Add or set the shows list
-setShows(shows: any[]): void {
-  this.shows = shows;
-  // Emit the updated list of favorites
-  this.favoriteShowsSubject.next(this.getFavoriteShows());
-}
 
 
+  private favoriteMatchesSubject = new BehaviorSubject<match[]>(this.matches.filter(match => match.isFavorite));
+  favoriteMatches$ = this.favoriteMatchesSubject.asObservable();
 
-private favoriteMatchesSubject = new BehaviorSubject<match[]>(this.matches.filter(match => match.isFavorite));
-favoriteMatches$ = this.favoriteMatchesSubject.asObservable();
+  // Toggle favorite status of a show by its ID
+  toggleFavoritematch(matchId: number): void {
+    const match = this.matches.find(m => m.id === matchId);
+    if (match) {
+      // Toggle the favorite status
+      match.isFavorite = !match.isFavorite;
 
-// Toggle favorite status of a show by its ID
-toggleFavoritematch(matchId: number): void {
-  const match = this.matches.find(m => m.id === matchId);
-  if (match) {
-    // Toggle the favorite status
-    match.isFavorite = !match.isFavorite;
-
-    // Update the favorite shows list and emit the updated array
-    this.favoriteMatchesSubject.next(this.getFavoriteShows());
+      // Update the favorite shows list and emit the updated array
+      this.favoriteMatchesSubject.next(this.getFavoriteShows());
+    }
   }
-}
 
-getFavoriteMatches(): any[] {
-  // Filter shows to get only those that are marked as favorite
-  return this.matches.filter(match => match.isFavorite);
-}
-// Add or set the shows list
-setMatches(matches: any[]): void {
-  this.matches = matches;
-  // Emit the updated list of favorites
-  this.favoriteMatchesSubject.next(this.getFavoriteMatches());
-}
+
+
+//---------------------------------------------------------------------------------------------------------
+
+
+  getFavoriteMatches(): any[] {
+    // Filter shows to get only those that are marked as favorite
+    return this.matches.filter(match => match.isFavorite);
+  }
+  // Add or set the shows list
+  setMatches(matches: any[]): void {
+    this.matches = matches;
+    // Emit the updated list of favorites
+    this.favoriteMatchesSubject.next(this.getFavoriteMatches());
+  }
+
 }

@@ -456,8 +456,6 @@ section {
     /* Hide on medium and smaller screens */
   }
 }
-<<<<<<< Updated upstream
-=======
 
 /* -------------------------------------------------------------------------------- */
 @media (max-width: 1300px) {
@@ -515,6 +513,7 @@ section {
   }
 
 }
+
 /* ----------------------------------------------------------------------- */
 /* //SECTION */
 .card-img-overlay {
@@ -566,4 +565,4 @@ section {
     font-size: 1rem !important; /* Equivalent to Bootstrap fs-6 */
   }
 }
->>>>>>> Stashed changes
+
