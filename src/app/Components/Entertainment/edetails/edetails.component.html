@@ -97,7 +97,7 @@
   </div>
 
 
-  <h1 class="d-block d-lg-none">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
+  <!-- <h1 class="d-block d-lg-none">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1> -->
 
 </div>
 
@@ -526,16 +526,37 @@
           <div class="col-12 mb-3" *ngFor="let review of reviews">
             <div class="card shadow border-0">
               <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2">
+
+                <!-- <div class="d-flex justify-content-between align-items-center mb-2">
+
                   <div class="d-flex align-items-center">
                     <i class="bi bi-person-circle text-danger fs-4 me-2"></i>
                     <h5 class="m-0 fs-5">{{ review.user }}</h5>
                   </div>
+
                   <div class="m-0 text-justify fw-light fst-italic me-2 text-secondary text-danger">Shared on {{
                     review.date }}
                   </div>
 
+                </div> -->
+
+                <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-person-circle text-danger fs-4 me-2"></i>
+                    <h5 class="m-0 fs-5 me-3">{{ review.user }}</h5>
+                  </div>
+
+                  <div class="d-block d-lg-none w-100">
+                    <span class="fw-light fst-italic text-secondary text-danger">Shared on {{ review.date }}</span>
+                  </div>
+
+                  <div class="d-none d-lg-block">
+                    <span class="fw-light fst-italic text-secondary text-danger">Shared on {{ review.date }}</span>
+                  </div>
+
                 </div>
+
 
                 <!-- Star Ratings -->
                 <div class="text-warning mb-2 fs-6">
