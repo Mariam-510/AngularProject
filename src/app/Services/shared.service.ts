@@ -77,19 +77,6 @@ export interface eventItem {
   category: string;
 }
 
-export interface ticket {
-  type: string;
-  price: number;
-  description: string;
-}
-
-export interface review {
-  user: string;
-  rating: number;
-  comment: string;
-  date: string;
-}
-
 export interface team {
   id: number;
   name: string;
@@ -398,41 +385,168 @@ export class SharedService {
   }
 
   //---------------------------------------------------------------------------------------------------------
-  generateCastList(show: show) {
-    const castList = [];
 
-    if (show.category === 'Dance') {
-      // Example cast for a Dance show like 'Cinderella'
-      castList.push(
-        { name: 'Elena Petrova', role: 'Cinderella (Lead Dancer)', image: 'img/cast/c1.jpg' },
-        { name: 'Mark Smith', role: 'Prince Charming', image: 'img/cast/c2.jpg' },
-        { name: 'Sophia Zhang', role: 'Fairy Godmother', image: 'img/cast/c3.jpg' },
-        { name: 'John Doe', role: 'Stepsister', image: 'img/cast/c4.jpg' }
-      );
-    } else if (show.category === 'Concerts') {
-      // Example cast for a Concert show like 'A Tribute to the Beatles'
-      castList.push(
-        { name: 'James McCarthy', role: 'John Lennon (Lead Singer)', image: 'img/cast/c5.jpg' },
-        { name: 'Emma Taylor', role: 'Paul McCartney (Bassist)', image: 'img/cast/c6.jpg' },
-        { name: 'Liam Walsh', role: 'George Harrison (Guitarist)', image: 'img/cast/c7.jpg' },
-        { name: 'Olivia Brown', role: 'Ringo Starr (Drummer)', image: 'img/cast/c8.jpg' }
-      );
-    } else if (show.category === 'Stand-Up Comedy') {
-      // Example cast for a Stand-Up Comedy show like 'Ricky Gervais'
-      castList.push(
-        { name: 'Ricky Gervais', role: 'Comedian (Lead)', image: 'img/cast/c9.jpg' }
-      );
-    } else if (show.category === 'Theater') {
-      // Example cast for a Theater show like 'Harry Potter and the Cursed Child'
-      castList.push(
-        { name: 'David Potter', role: 'Harry Potter (Lead Actor)', image: 'img/cast/c10.jpg' },
-        { name: 'Lily Evans', role: 'Hermione Granger', image: 'img/cast/c11.jpg' },
-        { name: 'Daniel Radcliffe', role: 'Ron Weasley', image: 'img/cast/c12.jpg' }
-      );
+  cast = [
+    // Dance - Cinderella (showId: 1)
+    {
+      showId: 1,
+      cast: [
+        {
+          name: 'Sophia Lee',
+          role: 'Cinderella',
+          image: 'https://image-service.usw2.wp-prod-us.cultureamp-cdn.com/lmSSHC6nC6IcQLD4RGigdC3KoBQ=/500x500/cultureampcom/production/b94/a47/9ea/b94a479eaece4ef09bda0e39/Sophia-Lee.jpeg'
+        },
+        {
+          name: 'Mark Jones',
+          role: 'Prince Charming',
+          image: 'https://source.unsplash.com/300x400/?prince,costume,man'
+        },
+        {
+          name: 'Olivia Watson',
+          role: 'Fairy Godmother',
+          image: 'https://media.licdn.com/dms/image/v2/D5603AQGRkHgI98wrFg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1698712378207?e=2147483647&v=beta&t=dYxTlLNmXutmHL1ZdQFyLSofv_4HaWz_EbQA10msTiE'
+        }
+      ]
+    },
+    // Dance - Alvin Ailey (showId: 2)
+    {
+      showId: 2,
+      cast: [
+        {
+          name: 'Samuel Thompson',
+          role: 'Lead Dancer',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkY6Yz1bndVqOI2-0i3vfm2rUei584Hm8kTw&s'
+        },
+        {
+          name: 'Tina Garcia',
+          role: 'Choreographer',
+          image: 'https://www.gmlaw.com/wp-content/uploads/2016/09/Tina-Garcia-Landing.jpeg'
+        }
+      ]
+    },
+    // Concerts - Beatles Tribute (showId: 3)
+    {
+      showId: 3,
+      cast: [
+        {
+          name: 'John Carter',
+          role: 'John Lennon Tribute',
+          image: 'https://source.unsplash.com/300x400/?beatles,singer,man'
+        },
+        {
+          name: 'Paul Adams',
+          role: 'Paul McCartney Tribute',
+          image: 'https://source.unsplash.com/300x400/?bassist,man,musician'
+        },
+        {
+          name: 'George Smith',
+          role: 'George Harrison Tribute',
+          image: 'https://source.unsplash.com/300x400/?guitarist,man,musician'
+        },
+        {
+          name: 'Ringo Bell',
+          role: 'Ringo Starr Tribute',
+          image: 'https://source.unsplash.com/300x400/?drummer,man,musician'
+        }
+      ]
+    },
+    // Concerts - Dua Lipa (showId: 4)
+    {
+      showId: 4,
+      cast: [
+        {
+          name: 'Dua Lipa',
+          role: 'Dua Lipa',
+          image: 'https://source.unsplash.com/300x400/?female,singer,popstar'
+        },
+        {
+          name: 'Tommy Perez',
+          role: 'Backup Dancer',
+          image: 'https://source.unsplash.com/300x400/?dancer,man,performance'
+        }
+      ]
+    },
+    // Concerts - Katy Perry (showId: 5)
+    {
+      showId: 5,
+      cast: [
+        {
+          name: 'Katy Perry',
+          role: 'Katy Perry',
+          image: 'https://source.unsplash.com/300x400/?female,singer,colorful'
+        },
+        {
+          name: 'David Green',
+          role: 'Lead Guitarist',
+          image: 'https://source.unsplash.com/300x400/?guitarist,rock,man'
+        }
+      ]
+    },
+    // Comedy - Ricky Gervais (showId: 6)
+    {
+      showId: 6,
+      cast: [
+        {
+          name: 'Ricky Gervais',
+          role: 'Comedian',
+          image: 'https://source.unsplash.com/300x400/?comedian,man,microphone'
+        }
+      ]
+    },
+    // Theater - Harry Potter (showId: 7)
+    {
+      showId: 7,
+      cast: [
+        {
+          name: 'Emma Stone',
+          role: 'Hermione Granger',
+          image: 'https://source.unsplash.com/300x400/?actress,book,glasses'
+        },
+        {
+          name: 'Daniel Radcliffe',
+          role: 'Harry Potter',
+          image: 'https://source.unsplash.com/300x400/?actor,glasses,scar'
+        },
+        {
+          name: 'Rupert Grint',
+          role: 'Ron Weasley',
+          image: 'https://source.unsplash.com/300x400/?actor,redhair,young'
+        }
+      ]
+    },
+    // Theater - Stereophonic (showId: 8)
+    {
+      showId: 8,
+      cast: [
+        {
+          name: 'Chris Martin',
+          role: 'Lead Actor',
+          image: 'https://source.unsplash.com/300x400/?actor,man,stage'
+        },
+        {
+          name: 'Rachel Adams',
+          role: 'Supporting Actor',
+          image: 'https://source.unsplash.com/300x400/?actress,women,theater'
+        }
+      ]
+    },
+    // Theater - Life of Pi (showId: 9)
+    {
+      showId: 9,
+      cast: [
+        {
+          name: 'Dev Patel',
+          role: 'Pi Patel',
+          image: 'https://source.unsplash.com/300x400/?indian,actor,boat'
+        },
+        {
+          name: 'Irrfan Khan',
+          role: 'Richard Parker',
+          image: 'https://source.unsplash.com/300x400/?tiger,animal,orange'
+        }
+      ]
     }
-
-    return castList;
-  }
+  ];
 
   //---------------------------------------------------------------------------------------------------------
   //MATCHES
@@ -473,7 +587,7 @@ export class SharedService {
       team1: 'ENPPI SC',
       team1Logo: 'img/ENPPI.png',
       team2Logo: 'img/ZED.png',
-      isFavorite: false,
+      isFavorite: true,
       price: 290, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
@@ -536,7 +650,7 @@ export class SharedService {
       team2: 'Pyramids FC',
       team1Logo: 'img/Al Ahly.svg',
       team2Logo: 'img/Pyramids.png',
-      isFavorite: false,
+      isFavorite: true,
       price: 500, // Add price
       category: '⚽ Egyptian Premier League'
     },
@@ -575,7 +689,7 @@ export class SharedService {
       staduim: 'img/cairo staduim.jpg',
       team1Logo: 'img/zamalekv2.png',
       team2Logo: 'img/ismaily.png',
-      isFavorite: true,
+      isFavorite: false,
       price: 300, // Add price
       word: "🔥 high",
       adv: "⏳ Limited Seats",
@@ -711,7 +825,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'African Qualifiers Group B',
       title: 'World Cup Qualifiers 2025',
-      date: 'Fri, March 28, 2025',
+      date: 'Mar 28 - 2025',
       Kickoff: '08:30 PM',
       GatesOpen: '05:00 PM',
       price: 1100,
@@ -726,7 +840,7 @@ export class SharedService {
       location: 'Petro Sport Stadium, Cairo',
       Group: 'Quarter Finals',
       title: 'Egypt Cup 2025',
-      date: 'Mon, March 24, 2025',
+      date: 'Mar 24 - 2025',
       Kickoff: '7:30 PM',
       GatesOpen: '3:00 PM',
       price: 290,
@@ -741,7 +855,7 @@ export class SharedService {
       location: 'Khaled Bichara Stadium, Gouna',
       Group: 'Group Two (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Sun, March 23, 2025',
+      date: 'Mar 23 - 2025',
       Kickoff: '8:00 PM',
       GatesOpen: '05:00 PM',
       price: 250,
@@ -756,7 +870,7 @@ export class SharedService {
       location: 'Alexandria Stadium, Alexandria',
       Group: 'Quarter Finals',
       title: 'EPL 2024/2025',
-      date: 'Tue, March 25, 2025',
+      date: 'Mar 25 - 2025',
       Kickoff: '6:45 PM',
       GatesOpen: '03:00 PM',
       price: 500,
@@ -771,7 +885,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'Group Two (Stage)',
       title: 'Championship League',
-      date: 'Sat, March 22, 2025',
+      date: 'Mar 22 - 2025',
       Kickoff: '9:30 PM',
       GatesOpen: '06:00 PM',
       price: 500,
@@ -786,7 +900,7 @@ export class SharedService {
       location: 'Borg El Arab Stadium, Alexandria',
       Group: 'African Qualifiers Group B',
       title: 'EPL 2024/2025',
-      date: 'Sun, March 23, 2025',
+      date: 'Mar 23 - 2025',
       Kickoff: '9:00 PM',
       GatesOpen: '06:00 PM',
       price: 100,
@@ -801,7 +915,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'Group One (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Mon, March 24, 2025',
+      date: 'Mar 24 - 2025',
       Kickoff: '7:30 PM',
       GatesOpen: '06:00 PM',
       price: 300,
@@ -816,7 +930,7 @@ export class SharedService {
       location: 'Suez Canal Stadium, Ismailia',
       Group: 'Group Two (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Sat, March 22, 2025',
+      date: 'Mar 22 - 2025',
       Kickoff: '9:30 PM',
       GatesOpen: '06:00 PM',
       price: 300,
@@ -831,7 +945,7 @@ export class SharedService {
       location: 'Suez Canal Stadium, Ismailia',
       Group: 'Group Two (Stage)',
       title: 'EPL 2024/2025',
-      date: 'Sat, March 22, 2025',
+      date: 'Mar 22 - 2025',
       Kickoff: '9:30 PM',
       GatesOpen: '06:00 PM',
       price: 100,
@@ -846,7 +960,7 @@ export class SharedService {
       location: 'Cairo International Stadium, Cairo',
       Group: 'Main Stage',
       title: 'Championship League',
-      date: 'Tue, April 1, 2025',
+      date: 'Apr 1 - 2025',
       Kickoff: '9:00 PM',
       GatesOpen: '06:00 PM',
       price: 900,
@@ -975,20 +1089,59 @@ export class SharedService {
     },
   ];
 
-  reviews: review[] = [
-    { user: 'Ahmed', rating: 3.5, comment: 'Amazing service! Highly recommended.', date: '2025-03-25' },
-    { user: 'Sara', rating: 4, comment: 'Great experience, but there’s room for improvement.', date: '2025-03-24' },
-    { user: 'Mariam', rating: 5, comment: 'Fantastic! Everything was perfect.', date: '2025-03-23' },
-    { user: 'Omar', rating: 3, comment: 'It was good, but not exceptional.', date: '2025-03-22' },
-    { user: 'Nour', rating: 4, comment: 'Really enjoyed it! Will come back again.', date: '2025-03-21' }
-  ];
+  // Define ShowTicket array using the interface
+  generateMatchTicketsFromPrice(startingPrice: number): ShowTicket[] {
+    // Create an array of ticket types
+    const ticketTypes = ['CAT 3', 'CAT 2', 'CAT 1', 'VIP'];
 
-  tickets: ticket[] = [
-    { type: 'VIP', price: 400, description: 'Premium seats with VIP facilities' },
-    { type: 'CAT 1', price: 300, description: 'Premium sideline seats' },
-    { type: 'CAT 2', price: 200, description: 'Mid-field seats' },
-    { type: 'CAT 3', price: 150, description: 'Mid-field seats' }
-  ];
+    // Create a new array of tickets based on the starting price, increasing by 50 for each ticket
+    const tickets = ticketTypes.map((type, index) => ({
+      type,
+      price: startingPrice + (index * 150), // Increase by 50 for each subsequent ticket
+      description: `Description for ${type} at price $${startingPrice + (index * 50)}.`
+    }));
+
+    // Sort tickets by price in descending order (high to low)
+    return tickets.sort((a, b) => b.price - a.price);
+  }
+
+  generateReviewsForMatch(matchDate: string, numberOfReviews: number): any[] {
+    const reviews: any[] = [];
+    const comments = [
+      'Amazing service! Highly recommended.',
+      'Great experience, but there’s room for improvement.',
+      'Fantastic! Everything was perfect.',
+      'It was good, but not exceptional.',
+      'Really enjoyed it! Will come back again.',
+      'Not as expected, but decent.',
+      'A wonderful experience, would definitely come again!'
+    ];
+
+    // English names list
+    const englishNames = ['Ahmed', 'Sara', 'Mariam', 'Omar', 'Nour', 'Ali', 'Fatima', 'Khaled', 'Jamila', 'Mohamed'];
+
+    // Generate reviews with random ratings and comments
+    for (let i = 0; i < numberOfReviews; i++) {
+      const rating = (Math.random() * 2 + 3).toFixed(1); // Random rating between 3.0 and 5.0
+      const comment = comments[Math.floor(Math.random() * comments.length)]; // Random comment
+      const reviewDate = this.generateReviewDate(matchDate); // Generate review date incrementally
+
+      // Choose a random English name from the list
+      const userName = englishNames[Math.floor(Math.random() * englishNames.length)];
+
+      reviews.push({
+        user: userName,
+        rating: parseFloat(rating),
+        comment: comment,
+        date: reviewDate
+      });
+
+      // Update the showDate for the next review to be the next day
+      matchDate = reviewDate;
+    }
+
+    return reviews;
+  }
 
   //---------------------------------------------------------------------------------------------------------
 

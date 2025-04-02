@@ -1,15 +1,17 @@
 <!-- Event Cards -->
 <div class="row" id="eventContainer">
-  <div class="col-md-4 event-card" *ngFor="let event of paginatedEvents">
+  <div class="col-12 col-lg-6 col-xl-4 event-card" *ngFor="let event of paginatedEvents">
     <div class="card shadow-sm position-relative">
       <img [src]="event.imageSmall" class="card-img-top rounded-top" [alt]="event.title">
 
-      <span class="position-absolute bg-white text-dark px-3 py-1 rounded fw-bold m-2">
+      <!-- Rating moved to the right -->
+      <span class="position-absolute bg-white text-dark px-3 py-1 rounded fw-bold m-2 end-0">
         {{ event.rating }} ★
       </span>
 
       <div class="card-body text-center">
-        <h4 class="fw-bold">{{ event.title }}</h4>
+        <!-- <h4 class="fw-bold">{{ event.title }}</h4> -->
+        <h4 class="fw-bold text-wrap text-break">{{ event.title }}</h4>
         <div class="mb-1">{{ event.location }}</div>
 
         <div class="text-danger mb-3 mt-1 fs-5">
@@ -30,13 +32,13 @@
         <div class="d-flex gap-2 justify-content-center mb-2">
           <button class="btn btn-light fav-btn d-flex align-items-center w-50 justify-content-center py-2 fs-6"
             (click)="toggleFavorite(event)">
-            <span class="text-danger">Add to Wishlist </span>
+            <span class="text-danger">Wishlist </span>
             <i class="bi ms-2" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
           </button>
 
           <a [routerLink]="['/shows', event.id]"
             class="btn btn-light text-danger d-flex align-items-center w-50 justify-content-center fs-6">
-            <i class="bi bi-info-circle me-2"></i> More Info
+            More Info <i class="bi bi-info-circle ms-2"></i>
           </a>
 
         </div>

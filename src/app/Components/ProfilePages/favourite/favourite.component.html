@@ -190,7 +190,7 @@
 
 </div>
 
-@if(paginatedEvents.length>0 && selectedCategory === 'events')
+@if(events.length>0 && selectedCategory === 'events')
 {
 <!-- Pagination for Events -->
 <nav aria-label="Events Page navigation" *ngIf="selectedCategory === 'events'">
@@ -227,7 +227,7 @@
   </div>
   }
 
-  @if(paginatedMatches.length>0 && selectedCategory === 'matches')
+  @if(matches.length>0 && selectedCategory === 'matches')
   {
   <!-- Pagination for Matches -->
   <nav aria-label="Matches Page navigation" *ngIf="selectedCategory === 'matches'">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,13 +11,25 @@ import { AuthService } from '../../../Services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  mockUserDetails: any;
+  mockAdminDetails: any;
+
 
   constructor(
     private _shared: SharedService,
     private router: Router,
     private _authService: AuthService
-  ) {}
+    
+    
+  ) {console.log(this.Loginform);}
+
+
+  ngOnInit(): void {
+    this.mockUserDetails = this._authService.mockUser;
+    this.mockAdminDetails = this._authService.mockAdmin;
+  }
+
 
   Loginform = new FormGroup(
     {
@@ -41,6 +53,8 @@ export class LoginComponent {
     });
   }
 
+  invalidCredentials = false;
+
   login() {
     if (this.Loginform.invalid) {
       this.markFormGroupTouched(this.Loginform);
@@ -61,6 +75,7 @@ export class LoginComponent {
     } 
     else {
       // alert('Invalid credentials\nUse:\nEmail: john@test.com\nPassword: Test@123');
+        this.invalidCredentials = true;
     }
   }
   googleLogin() {

@@ -48,15 +48,18 @@ export class FavouriteComponent implements OnInit {
   toggleFavoriteMatch(match: any) {
     match.isFavorite=!match.isFavorite;
     // Remove match from array when unfavorited
+
     if (!match.isFavorite) {
       this.favoriteMatches = this.favoriteMatches.filter(m => m !== match);
     }
+
   }
 
   // --------------------------------------------------------------------------------------------------------------------
   itemsPerPage = 3;
 
   currentPageEvent = 1;
+  e: any;
   // Calculate the total number of pages
   get totalPagesEvent() {
     return Math.ceil(this.favoriteShows.length / this.itemsPerPage);
@@ -65,11 +68,13 @@ export class FavouriteComponent implements OnInit {
   // Get paginated events
   get paginatedEvents() {
     let start = (this.currentPageEvent - 1) * this.itemsPerPage;
+
     if (this.favoriteShows.slice(start, start + this.itemsPerPage).length == 0) {
       this.changePageEvent(1);
       start = 0;
     }
     return this.favoriteShows.slice(start, start + this.itemsPerPage);
+
   }
 
   changePageEvent(page: number) {
@@ -78,6 +83,7 @@ export class FavouriteComponent implements OnInit {
     }
   }
 
+  // --------------------------------------------------------------------------------------------------------------------
   currentPageMatch = 1;
   // Calculate the total number of pages
   get totalPagesMatch() {
@@ -94,13 +100,11 @@ export class FavouriteComponent implements OnInit {
   //   return this.favoriteShows.slice(start, start + this.itemsPerPage);
   get paginatedMatches() {
     let start = (this.currentPageMatch - 1) * this.itemsPerPage;
-
     if (this.favoriteMatches.slice(start, start + this.itemsPerPage).length == 0) {
       this.changePageMatch(1);
       start = 0;
     }
     return this.favoriteMatches.slice(start, start + this.itemsPerPage);
-
 
   }
 
