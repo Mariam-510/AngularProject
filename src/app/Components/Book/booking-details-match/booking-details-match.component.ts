@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PaypalService } from '../../../Services/paypal.service';
 
 declare var paypal: any;
 
@@ -35,7 +36,6 @@ interface BookingData {
   styleUrl: './booking-details-match.component.css'
 })
 export class BookingDetailsMatchComponent implements OnInit {
-  @ViewChild('paypalButton', { static: true }) paypalElement!: ElementRef;
   bookingData: BookingData = {
     homeTeam: {
       name: 'Al Ahly FC',
@@ -61,51 +61,43 @@ export class BookingDetailsMatchComponent implements OnInit {
     }
   };
 
-  ngOnInit() {
-    this.loadPaypalScript().then(() => {
+  constructor(private payPalService: PaypalService) { }
+
+  totalPrice: number = this.bookingData.totalPrice;
+  clientId: string = '';
+
+  async ngOnInit() {
+    try {
+      this.clientId = this.payPalService.clientId;
+
+      const paypal = await this.payPalService.loadPayPal(this.clientId);
+
+      if (!paypal || !paypal.Buttons) {
+        console.error('PayPal SDK failed to load');
+        return;
+      }
+
       paypal.Buttons({
         createOrder: (data: any, actions: any) => {
           return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: this.bookingData.totalPrice.toFixed(2),
-                currency_code: 'EGP'
-              },
-              description: 'Match Tickets Purchase'
-            }]
+            purchase_units: [{ amount: { value: this.totalPrice.toFixed(2) } }]
           });
         },
         onApprove: async (data: any, actions: any) => {
           const order = await actions.order.capture();
-          this.handlePaymentSuccess(order);
+          console.log('Payment captured:', order);
+          // window.location.href = `/success?orderId=${data.orderID}`;
+          window.location.href = `/profile/bookingHistory`;
         },
         onError: (err: any) => {
           console.error('PayPal Error:', err);
           alert('Payment failed. Please try again.');
         }
-      }).render(this.paypalElement.nativeElement);
-    });
-  }
+      }).render('#paypal-button-container');
 
-  private loadPaypalScript(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=AbhuBdc9RMYmvHh15roopwWEvAYs35_F69UC2rfmQDeuO9y6iTJeQwdcZI9xpFPqCa6viCsJrqGZdk59&currency=EGP`;
-      script.onload = () => resolve();
-      script.onerror = (error) => {
-        console.error('Failed to load PayPal SDK:', error);
-        reject(error);
-        alert('Failed to load payment processor. Please refresh the page.');
-      };
-      document.head.appendChild(script);
-    });
-  }
-
-  private handlePaymentSuccess(order: any) {
-    console.log('Payment Completed:', order);
-    // Implement your payment success logic here
-    alert('Payment successful! Your tickets are being processed.');
-    // You can navigate to confirmation page here
+    } catch (error) {
+      console.error('Error initializing PayPal:', error);
+    }
   }
 
 }

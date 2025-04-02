@@ -73,21 +73,21 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService) { }
 
   item: eventItem =
-  {
-    id: 1,
-    location: 'Cairo International Stadium, Cairo',
-    Group: 'Group Two (Stage)',
-    title: 'Championship League',
-    date: 'Mar 23 - 2025',
-    Kickoff: '7:00 PM',
-    GatesOpen: '06:00 PM',
-    price: 500,
-    description: "Football isn't just a sport—it's an emotion that brings people together...",
-    isFavorite: false,
-    word: "🔥 high",
-    adv: "⏳ Limited Seats",
-    category: '⚽ Football'
-  }
+    {
+      id: 1,
+      location: 'Cairo International Stadium, Cairo',
+      Group: 'Group Two (Stage)',
+      title: 'Championship League',
+      date: 'Mar 23 - 2025',
+      Kickoff: '7:00 PM',
+      GatesOpen: '06:00 PM',
+      price: 500,
+      description: "Football isn't just a sport—it's an emotion that brings people together...",
+      isFavorite: false,
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football'
+    }
 
   homeTeam: team = {
     id: 1,
@@ -100,18 +100,18 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   awayTeam: team = {
     id: 2,
-      name: 'Algeria',
-      logo: '/img/algeria.svg',
-      description: 'One of the most prominent teams in African football. They have won the Africa Cup of Nations (AFCON) twice, in 1990 and 2019.',
-      coach: 'Vladimir Petković',
-      keyPlayers: 'Riyad Mahrez, Ismaël Bennacer, Saïd Benrahma'
+    name: 'Algeria',
+    logo: '/img/algeria.svg',
+    description: 'One of the most prominent teams in African football. They have won the Africa Cup of Nations (AFCON) twice, in 1990 and 2019.',
+    coach: 'Vladimir Petković',
+    keyPlayers: 'Riyad Mahrez, Ismaël Bennacer, Saïd Benrahma'
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const newId = Number(params.get('id'));
       this.match = this._sharedService.matches.find(m => m.id === newId);
-      
+
       if (this.match) {
         this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
         this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
@@ -120,14 +120,14 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
     console.log('Match ID:', id);
-  
+
     this.match = this._sharedService.matches.find(m => m.id === id);
-  
+
     const foundItem = this._sharedService.eventItems.find((e: eventItem) => e.id === id);
     if (foundItem) {
       this.item = foundItem;
     }
-  
+
     if (this.match) {
       this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
       this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
@@ -148,7 +148,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
       console.warn("tabLinks is not available in ngAfterViewInit");
       return;
     }
-    this.checkScroll();
+    this.checkScrollTicket();
   }
 
   toggleFavorite(event: any) {
@@ -181,7 +181,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     const card = this.eventCard.nativeElement;
     this.stickyThreshold = hero.offsetTop + hero.offsetHeight - card.offsetHeight;
   }
-  
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -299,19 +299,22 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   @ViewChild('ticketContainer') ticketContainer!: ElementRef;
 
+  canScrollLeftTicket: boolean = false;
+  canScrollRightTicket: boolean = true;
+
+  checkScrollTicket() {
+    const container = this.ticketContainer.nativeElement;
+    this.canScrollLeftTicket = container.scrollLeft > 0;
+    this.canScrollRightTicket = container.scrollLeft < container.scrollWidth - (container.clientWidth + 25);
+  }
+
   scrollLeftTicket() {
-    this.ticketContainer.nativeElement.scrollBy({ left: -250, behavior: 'smooth' });
-    setTimeout(() => this.checkScroll(), 300); // Allow time for scrolling
+    this.ticketContainer.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });
+    setTimeout(() => this.checkScrollTicket(), 300);
   }
 
   scrollRightTicket() {
-    this.ticketContainer.nativeElement.scrollBy({ left: 250, behavior: 'smooth' });
-    setTimeout(() => this.checkScroll(), 300);
-  }
-
-  checkScroll() {
-    const el = this.ticketContainer.nativeElement;
-    this.canScrollLeft = el.scrollLeft > 0;
-    this.canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 5;
+    this.ticketContainer.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
+    setTimeout(() => this.checkScrollTicket(), 300);
   }
 }

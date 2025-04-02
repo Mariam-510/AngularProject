@@ -1,5 +1,5 @@
-<div #heroSection class="position-relative d-flex justify-content-center ">
-  <img [src]="item.imageLarge" class="img-fluid w-100 banner-rounded " alt="Event Banner"
+<div #heroSection class="position-relative d-flex justify-content-center">
+  <img [src]="item.imageLarge" class="img-fluid w-100 banner-rounded d-none d-lg-block" alt="Event Banner"
     style="max-height: 620px; object-fit: cover;">
 
   <div class="text-overlay mb-5 ms-5">
@@ -10,8 +10,8 @@
 
   <!-- Event Card -->
   <div #eventCard
-    class="position-absolute end-0 bg-white shadow rounded me-5 mt-4 smooth-card custom-card card border-0  "
-    style="max-width: 100%; width: 375px;">
+    class="position-absolute end-0 bg-white shadow rounded me-4 mt-4 smooth-card custom-card card border-0 d-none d-lg-block"
+    style="max-width: 100%; width: 24.5vw;">
 
     <div
       class="bg-dark text-white p-5 rounded-top rounded-bottom text-center d-flex align-items-center justify-content-center"
@@ -73,7 +73,7 @@
         <button
           class="btn btn-light badge fav-btn d-flex align-items-center w-50 justify-content-center py-3 fs-6 shadow"
           (click)="toggleFavorite(item)">
-          <span class="text-danger">Add to Wishlist </span>
+          <span class="text-danger">Wishlist </span>
           <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
         </button>
 
@@ -90,12 +90,15 @@
     </div>
   </div>
 
+
+  <h1 class="d-block d-lg-none">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
+
 </div>
 
 
 
 <div class="py-2">
-  <div class="tab-links px-5 py-4" #tabLinks>
+  <div #tabLinks class="tab-links px-5 py-4 d-flex flex-wrap justify-content-center justify-content-xl-start gap-2">
     <a href="#overview" (click)="scrollToSection($event, 'overview')" class="active ms-2 me-3">
       <i class="bi bi-info-circle-fill me-2 fs-6"></i> <span class="fs-5">Overview</span>
     </a>
@@ -130,6 +133,7 @@
       <span class="fs-5">Reviews</span>
     </a>
   </div>
+
 
 
   <div class="px-5">
@@ -246,14 +250,18 @@
 
       <div class="d-flex align-items-center">
         <!-- Left Scroll Button -->
-        <button class="btn text-secondary opacity-100 border-0"
+        <button *ngIf="canScrollLeftSchedule" class="btn text-secondary border-0"
           [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftSchedule}" (click)="scrollLeftSchedule()"
           [disabled]="!canScrollLeftSchedule">
           <i class="bi bi-chevron-left fs-4"></i>
         </button>
 
         <!-- Scrollable Container -->
-        <div #scheduleContainer class="schedule-scroll-container py-2">
+        <!-- <div #scheduleContainer class="schedule-scroll-container py-2"> -->
+        <div #scheduleContainer class="d-flex gap-3 scroll-container py-2 schedule-scroll-container"
+          style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;"
+          (scroll)="checkScrollSchedule()" [ngClass]="{'ms-5': !canScrollLeftSchedule}">
+
           <div class="schedule-list">
             <div *ngFor="let item of schedules" class="schedule-card shadow-sm px-4 py-3 mx-1">
               <div class="schedule-content">
@@ -274,7 +282,7 @@
         </div>
 
         <!-- Right Scroll Button -->
-        <button class="btn text-secondary opacity-100 border-0"
+        <button *ngIf="canScrollRightSchedule" class="btn text-secondary border-0"
           [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightSchedule}" (click)="scrollRightSchedule()"
           [disabled]="!canScrollRightSchedule">
           <i class="bi bi-chevron-right fs-4"></i>
@@ -298,61 +306,55 @@
           <i class="bi bi-cart-check me-2"></i> Tickets Available – Grab Yours Today!
           <span class="text-muted ms-2 fs-5 fw-light fst-italic">({{ tickets.length }} Types Available)</span>
         </h4>
-        <div>
-
-        </div>
       </div>
 
       <!-- Scrollable Ticket List -->
-      <div class="d-flex justify-content-start align-items-center overflow-hidden">
+      <div class="ps-2">
+        <div class="d-flex justify-content-start align-items-center overflow-hidden pe-2 mt-2">
+          <!-- Left Button (Hidden if Not Scrollable) -->
+          <button *ngIf="canScrollLeftTicket" class="btn text-secondary border-0"
+            [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftTicket}" (click)="scrollLeftTicket()"
+            [disabled]="!canScrollLeftTicket">
+            <i class="bi bi-chevron-left fs-4"></i>
+          </button>
 
-        <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeft}"
-          (click)="scrollLeftTicket()" [disabled]="!canScrollLeft">
-          <i class="bi bi-chevron-left fs-4"></i>
-        </button>
+          <!-- Scrollable Tickets List -->
+          <div #ticketContainer class="d-flex gap-3 scroll-container py-2"
+            style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;"
+            (scroll)="checkScrollTicket()" [ngClass]="{'ms-5': !canScrollLeftTicket}">
 
-        <div #ticketContainer class="d-flex gap-3 scroll-container py-2 px-1"
-          style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;">
+            <div *ngFor="let ticket of tickets" class="card ticket-card border-0 shadow-sm flex-shrink-0 px-2"
+              style="min-width: 250px; border-radius: 10px; transition: transform 0.3s ease-in-out;">
+              <div class="card-body d-flex flex-column justify-content-between p-3">
+                <!-- Ticket Type with Icon -->
+                <h5 class="fw-bold d-flex align-items-center text-danger">
+                  <i class="bi bi-ticket-perforated-fill me-2 fs-4"></i> {{ ticket.type }}
+                </h5>
 
-          <div *ngFor="let ticket of tickets" class="card ticket-card border-0 shadow-sm flex-shrink-0 px-2"
-            style="min-width: 250px; border-radius: 10px;">
+                <!-- Description -->
+                <div class="text-muted mb-2 py-1 fst-italic">{{ ticket.description }}</div>
 
-            <div class="card-body d-flex flex-column justify-content-between p-3">
-              <!-- Ticket Type with Icon -->
-              <h5 class="fw-bold d-flex align-items-center text-danger">
-                <i class="bi bi-ticket-perforated-fill me-2 fs-4"></i> {{ ticket.type }}
-              </h5>
-
-
-              <!-- Description -->
-              <div class="text-muted mb-2 py-1 fst-italic">{{ ticket.description }}</div>
-
-              <!-- Price Badge -->
-              <div class="d-flex justify-content-between align-items-center mb-1">
-                <!-- Price Badge -->
-                <span class="badge fst-italic bg-secondary text-white py-2 px-2 fs-6 ticket-price opacity-75">
-                  {{ ticket.price }} EGP
-                </span>
-
-                <!-- Buy Now Button -->
-                <a routerLink="/bookingEvent" class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
-                  Buy Now
-                </a>
+                <!-- Price Badge and Buy Button -->
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="badge fst-italic bg-secondary text-white py-2 px-2 fs-6 ticket-price opacity-75">
+                    {{ ticket.price }} EGP
+                  </span>
+                  <a routerLink="/bookingEvent" class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
+                    Buy Now
+                  </a>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Right Button (Hidden if Not Scrollable) -->
+          <button *ngIf="canScrollRightTicket" class="btn text-secondary border-0"
+            [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightTicket}" (click)="scrollRightTicket()"
+            [disabled]="!canScrollRightTicket">
+            <i class="bi bi-chevron-right fs-4"></i>
+          </button>
         </div>
-
-        <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollRight}"
-          (click)="scrollRightTicket()" [disabled]="!canScrollRight">
-          <i class="bi bi-chevron-right fs-4"></i>
-        </button>
-
       </div>
-
-
-
-
       <hr class="mt-4">
     </section>
 
@@ -369,23 +371,23 @@
       </h4>
 
       <div class="ps-2">
-
         <div class="d-flex justify-content-start align-items-center overflow-hidden pe-2 mt-2">
-
-          <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftCast}"
-            (click)="scrollLeftCast()" [disabled]="!canScrollLeftCast">
+          <!-- Left Button (Hidden if Not Scrollable) -->
+          <button *ngIf="canScrollLeftCast" class="btn text-secondary border-0"
+            [ngClass]="{'opacity-30 disabled-opacity': !canScrollLeftCast}" (click)="scrollLeftCast()"
+            [disabled]="!canScrollLeftCast">
             <i class="bi bi-chevron-left fs-4"></i>
           </button>
 
+          <!-- Scrollable Cast List -->
           <div #castContainer class="d-flex gap-3 scroll-container py-2"
-            style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;">
+            style="max-width: 100%; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth;"
+            (scroll)="checkScrollCast()" [ngClass]="{'ms-5': !canScrollLeftCast}">
 
             <div *ngFor="let castMember of castList" class="cast-card flex-shrink-0 text-center px-2"
               style="min-width: 180px; border-radius: 10px; transition: transform 0.3s ease-in-out;">
-
               <img [src]="castMember.image" class="card-img-top rounded-circle mt-3 mx-auto"
                 style="width: 130px; height: 130px; object-fit: cover;" alt="{{ castMember.name }}">
-
               <div class="p-2">
                 <h5 class="fw-bold text-danger">{{ castMember.name }}</h5>
                 <p class="text-muted fs-6 mb-1 fst-italic">{{ castMember.role }}</p>
@@ -393,15 +395,17 @@
             </div>
           </div>
 
-          <button class="btn text-secondary border-0" [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightCast}"
-            (click)="scrollRightCast()" [disabled]="!canScrollRightCast">
+          <!-- Right Button (Hidden if Not Scrollable) -->
+          <button *ngIf="canScrollRightCast" class="btn text-secondary border-0"
+            [ngClass]="{'opacity-30 disabled-opacity': !canScrollRightCast}" (click)="scrollRightCast()"
+            [disabled]="!canScrollRightCast">
             <i class="bi bi-chevron-right fs-4"></i>
           </button>
-
         </div>
-
-        <hr class="mt-4">
       </div>
+
+      <hr class="mt-4">
+
     </section>
 
 

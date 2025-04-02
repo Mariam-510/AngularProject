@@ -8,12 +8,9 @@ import { loadScript } from '@paypal/paypal-js';
 export class PaypalService {
 
   constructor() { }
-
-<<<<<<< Updated upstream
-=======
+  
   clientId: string = 'AZuxIa7n8XCyfxL7XWL5DQVy4Tkdq8nxUJuAxEGRKb_0RNv5ezVH4qJ5Oi6J1v-gjr4UOOLSQ-ghsIF6'
 
->>>>>>> Stashed changes
   async loadPayPal(clientId: string) {
     try {
       const paypal = await loadScript({ clientId });

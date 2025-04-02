@@ -42,6 +42,7 @@
   padding: 2rem 10rem 2rem 10rem;
   min-height: 100vh;
   font-family: "Inter", system-ui;
+  margin: 0 auto;
 }
 
 .checkout-main {
@@ -254,13 +255,16 @@
   font-weight: 600;
 }
 
-<<<<<<< Updated upstream
+.checkout-main {
+  display: contents; /* Allows children to participate in parent grid */
+}
+
 .transaction-overview {
-  margin: 20px 0;
+  /* margin: 20px 0; */
+  grid-row: 1;
   grid-column: 1 / -1;
   transition: transform 0.2s ease;
   margin-bottom: 5px;
-=======
 .checkout-main {
   display: contents; /* Allows children to participate in parent grid */
 }
@@ -282,7 +286,6 @@
   grid-column: 2;
   grid-row: 2;
   align-self: start; /* Aligns sidebar to the top */
->>>>>>> Stashed changes
 }
 
 /* Football Responsive */
@@ -297,6 +300,7 @@
   .checkout-layout {
     grid-template-columns: 1fr;
     padding: 2rem;
+    gap: 1.5rem;
   }
 
   .transaction-sidebar {
@@ -376,58 +380,8 @@
     padding: 1.5rem;
   }
 
-<<<<<<< Updated upstream
-  .total-summary {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .checkout-layout {
-    padding: 1rem;
-  }
-
-  .event-visual {
-    height: 200px;
-  }
-
-  .event-headline {
-    font-size: 1.25rem;
-  }
-
-  .cultural-presentation {
-    flex-direction: column;
-  }
-
-  .attendee-profile {
-    height: auto;
-    padding: 1.5rem;
-  }
-}
-
-/* Existing min-width: 992px media query - keep this at bottom to maintain cascade */
-@media (min-width: 992px) {
-  .checkout-layout {
-    grid-template-columns: 1.5fr 1fr; /* Better proportion for medium screens */
-    gap: 2rem;
-    padding: 2rem 8rem; /* Reduced side padding */
-  }
-
-  .event-essentials {
-    padding: 1.5rem;
-  }
-
-  .event-headline {
-    font-size: 1.6rem;
-  }
-
-  .venue-meta,
-  .temporal-info {
-    font-size: 1.1rem;
-=======
   .user-avatar {
     width: 80px;
     height: 80px;
->>>>>>> Stashed changes
   }
 }
