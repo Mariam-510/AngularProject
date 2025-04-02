@@ -57,7 +57,7 @@ export class EHomePageComponent implements OnInit {
       .sort((a: show, b: show) => {
         const dateA = this.parseCustomDate(a.date);
         const dateB = this.parseCustomDate(b.date);
-        return dateA - dateB; // Ascending order (earliest date first)
+        return dateB - dateA; // Ascending order (earliest date first)
       })
       .slice(0, 3); // Take only the first 3
   }

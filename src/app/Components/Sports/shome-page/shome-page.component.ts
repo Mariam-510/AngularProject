@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, AfterViewInit, ViewChild, OnInit} from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { SharedService } from '../../../Services/shared.service';
@@ -36,37 +36,50 @@ export interface categories {
 declare var bootstrap: any;
 @Component({
   selector: 'app-shome-page',
-  imports: [CommonModule,FormsModule,RouterLink,RouterModule],
+  imports: [CommonModule, FormsModule, RouterLink, RouterModule],
   templateUrl: './shome-page.component.html',
   styleUrl: './shome-page.component.css'
 })
 export class SHomePageComponent implements OnInit {
   matches: match[] = [];
   categories: categories[] = [];
-  venues: string[] = [];
-  prices: string[] = [];
-  dates: string[] = [];
+  venues: any;
+  prices: any;
+  dates: any;
 
-  constructor(private _sharedService: SharedService) {}
+  constructor(private _sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.matches = this._sharedService.matches;
-    this.categories = this._sharedService.categories;
+    this.categories = this._sharedService.categories.sort((a: categories, b: categories) => a.title.localeCompare(b.title));;
     this.filteredMatches = this.matches;
-    this.venues = this._sharedService.venues;
-    this.prices = this._sharedService.prices;
-    this.dates = this._sharedService.dates;
-    this.updatePagination();
+    this.applyFilters();
+
+    // Filter options (sHome Page)
+    this.venues = ['All Venues', ...new Set(this.matches.map(m => m.venue))];
+
+    this.prices = [
+      'All Prices',
+      'Below 300',
+      '300 - 600',
+      '600 - 1000',
+      'Above 1000'
+    ];
+
+    this.dates = [
+      'Most Recent',
+      'Least Recent'
+    ];
   }
-  
+
   // Selected filter values
   selectedVenue = 'All Venues';
   selectedPrice: string = 'All Prices';
-  selectedDate: string = 'All Dates';
+  selectedDate: string = 'Most Recent';
   selectedTournament: string = 'All Tournaments';
 
   @ViewChild('matchSlider', { static: false }) matchSlider!: ElementRef;
-  
+
   filteredMatches = [...this.matches];
   pageSize = 3;
   currentPage = 1;
@@ -89,12 +102,12 @@ export class SHomePageComponent implements OnInit {
     this.selectedPrice = priceRange;
     this.applyFilters();
   }
-  
+
   selectDate(dateFilter: string) {
     this.selectedDate = dateFilter;
     this.applyFilters();
   }
-  
+
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
@@ -113,18 +126,18 @@ export class SHomePageComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.filteredMatches = this.matches.filter(match =>{
+    this.filteredMatches = this.matches.filter(match => {
       const matchPrice = match.price;
-    
+
       // Check Tournament
       const tournamentMatch = this.selectedTournament === 'All Tournaments' || match.tournament.includes(this.selectedTournament);
-  
+
       // Check Venue
       const venueMatch = this.selectedVenue === 'All Venues' || match.venue === this.selectedVenue;
-  
+
       // Check Date
       // Convert match date to a JavaScript Date object for proper sorting
-      const matchDate = new Date(match.date);  
+      const matchDate = new Date(match.date);
       // Check Price Range
       let priceMatch = true;
       switch (this.selectedPrice) {
@@ -143,15 +156,15 @@ export class SHomePageComponent implements OnInit {
         default:
           priceMatch = true; // 'All Prices' case
       }
-      return tournamentMatch && venueMatch &&  priceMatch;
+      return tournamentMatch && venueMatch && priceMatch;
     });
 
-   // Sorting by date if applicable
+    // Sorting by date if applicable
     if (this.selectedDate === 'Most Recent') {
-    this.filteredMatches.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  } else if (this.selectedDate === 'Least Recent') {
-    this.filteredMatches.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  }
+      this.filteredMatches.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } else if (this.selectedDate === 'Least Recent') {
+      this.filteredMatches.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    }
     this.currentPage = 1;
     this.updatePagination();
   }
@@ -166,7 +179,7 @@ export class SHomePageComponent implements OnInit {
     this.selectedDate = 'All Dates';
     this.applyFilters(); // Ensure filters are reapplied after reset
   }
-  
+
   filterByCategory(category: any) {
     this.selectedTournament = category.title; // Using category subtitle as tournament filter
     this.applyFilters();
