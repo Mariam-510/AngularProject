@@ -49,50 +49,50 @@
     <div class="mb-5"></div>
 
     <div class="container">
-      <div class="row">
+      <h2 class="fw-bold">
+        <i class="bi bi-megaphone-fill text-danger"></i> LATEST NEWS
+      </h2>
+      <hr>
+      <div class="row align-items-stretch">
         <!-- Left Column: Events -->
-        <div class="col-md-9">
-          <h2 class="fw-bold">
-            <i class="bi bi-megaphone-fill text-danger"></i> LATEST NEWS
-          </h2>
-          <hr>
+        <div class="col-12 col-lg-9 d-flex flex-column">
 
-          @for (event of events; track event) {
-          <div class="d-flex mb-4">
-            <img [src]="event.imageSmall" class="img-fluid me-3 rounded" alt="Event Image"
-              style="max-width: 250px; height: auto;">
-            <div>
+          <div class="flex-grow-1 d-flex flex-column">
+            @for (event of events; track event) {
+            <div
+              class="d-flex flex-column flex-md-row mb-4 align-items-md-start bg-light p-2 p-md-0 rounded custom-bg-md">
+              <img [src]="event.imageSmall" class="img-fluid rounded w-100 w-md-auto" alt="Event Image"
+                style="height: auto;" class="custom-img">
 
-              <h4>{{ event.title }}</h4>
+              <div class="ms-0 ms-md-3 mt-2 w-100">
+                <h4>{{ event.title }}</h4>
+                <div class="text-muted mb-1">{{ event.date }}</div>
+                <p>{{ (event.description | slice:0:200) + '...' }}</p>
 
-              <div class="text-muted mb-1">{{ event.date }}</div>
-              <p>{{ (event.description | slice:0:200) + '...' }}</p>
+                <div class="d-flex align-items-center gap-2">
+                  <button
+                    class="btn btn-light badge p-2 fs-6 shadow-sm fav-btn d-flex align-items-center border scale-hover"
+                    (click)="toggleFavorite(event)">
+                    <span class="text-danger">Wishlist</span>
+                    <i class="bi ms-2"
+                      [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+                  </button>
 
-              <div class="d-flex align-items-center gap-2">
-                <button class="btn btn-light badge p-2 fs-6 fav-btn d-flex align-items-center border"
-                  (click)="toggleFavorite(event)">
-                  <span class="text-danger">Wishlist</span>
-                  <i class="bi ms-2"
-                    [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
-                </button>
-
-                <a [routerLink]="['/shows', event.id]" class="btn badge bg-danger p-2 fs-6">Read more</a>
+                  <a [routerLink]="['/shows', event.id]"
+                    class="btn badge bg-danger p-2 fs-6 shadow-sm scale-hover read">Read
+                    more</a>
+                </div>
               </div>
-
-
             </div>
+            }
           </div>
-          }
-
         </div>
 
-
-        <div class="col-md-3">
-
-          <!-- Image Carousel -->
-          <div id="imgCarousel" class="mt-5 carousel slide h-100" data-bs-ride="carousel" data-bs-interval="1200"
-            style="max-height: 600px;">
-            <div class="carousel-inner h-100">
+        <!-- Right Column: Image Carousel -->
+        <div class="col-lg-3 d-none d-lg-flex flex-column mb-4">
+          <div id="imgCarousel" class="carousel slide flex-grow-1 d-flex flex-column" data-bs-ride="carousel"
+            data-bs-interval="1200">
+            <div class="carousel-inner flex-grow-1">
               @for (image of images; track image) {
               <div class="carousel-item h-100" [class.active]="image === images[0]">
                 <img [src]="image" class="d-block w-100 h-100 rounded" [alt]="image" style="object-fit: cover;">
@@ -110,14 +110,10 @@
               <span class="carousel-control-next-icon custom-icon" aria-hidden="true"></span>
             </button>
           </div>
-
-
         </div>
-
-
-
       </div>
     </div>
+
   </div>
 
 

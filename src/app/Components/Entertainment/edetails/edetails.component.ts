@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedService } from '../../../Services/shared.service';
@@ -33,7 +33,7 @@ export interface show {
 })
 export class EdetailsComponent implements AfterViewInit, OnInit {
 
-  constructor(private sharedService: SharedService, private route: ActivatedRoute, private renderer: Renderer2, private elRef: ElementRef) { }
+  constructor(private sharedService: SharedService, private route: ActivatedRoute, private renderer: Renderer2, private elRef: ElementRef, private cdr: ChangeDetectorRef) { }
 
   item: show =
     {
@@ -82,6 +82,7 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
     this.reviews = this.sharedService.generateReviewsForShow(this.item.date, 5);
     this.castList = this.sharedService.cast.find(castItem => castItem.showId === this.item.id)?.cast || [];
+
   }
 
   Math = Math;
@@ -135,7 +136,6 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
     this.checkScrollSchedule();
 
-    // this.updateScrollButtons();
     this.checkScrollCast();
 
     this.updateScrollButtonState();
@@ -299,12 +299,6 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
   canScrollLeftTicket: boolean = false;
   canScrollRightTicket: boolean = true;
 
-  checkScrollTicket() {
-    const container = this.ticketContainer.nativeElement;
-    this.canScrollLeftTicket = container.scrollLeft > 0;
-    this.canScrollRightTicket = container.scrollLeft < container.scrollWidth - (container.clientWidth + 25);
-  }
-
   scrollLeftTicket() {
     this.ticketContainer.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });
     setTimeout(() => this.checkScrollTicket(), 300);
@@ -313,6 +307,14 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
   scrollRightTicket() {
     this.ticketContainer.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
     setTimeout(() => this.checkScrollTicket(), 300);
+  }
+
+  checkScrollTicket() {
+    const container = this.ticketContainer.nativeElement;
+    this.canScrollLeftTicket = container.scrollLeft > 0;
+    this.canScrollRightTicket = container.scrollLeft < container.scrollWidth - (container.clientWidth + 25);
+    // Trigger change detection manually to prevent the ExpressionChangedAfterItHasBeenCheckedError
+    this.cdr.detectChanges();
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -344,60 +346,17 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
     const el = this.scheduleContainer.nativeElement;
     this.canScrollLeftSchedule = el.scrollLeft > 0;
     this.canScrollRightSchedule = el.scrollLeft < el.scrollWidth - el.clientWidth - 5;
+    // Trigger change detection manually to prevent the ExpressionChangedAfterItHasBeenCheckedError
+    this.cdr.detectChanges();
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // castList = [
-  //   {
-  //     name: 'Daniel Radcliffe',
-  //     role: 'Harry Potter',
-  //     image: 'img/h.jpeg'
-  //   },
-  //   {
-  //     name: 'Emma Watson',
-  //     role: 'Hermione Granger',
-  //     image: 'img/e.jpeg'
-  //   },
-  //   {
-  //     name: 'Rupert Grint',
-  //     role: 'Ron Weasley',
-  //     image: 'img/h.jpeg'
-  //   },
-  //   {
-  //     name: 'Tom Felton',
-  //     role: 'Draco Malfoy',
-  //     image: 'img/e.jpeg'
-  //   },
-  //   {
-  //     name: 'Alan Rickman',
-  //     role: 'Severus Snape',
-  //     image: 'img/h.jpeg'
-  //   },
-  //   {
-  //     name: 'Maggie Smith',
-  //     role: 'Minerva McGonagall',
-  //     image: 'img/e.jpeg'
-  //   },
-  //   {
-  //     name: 'Robbie Coltrane',
-  //     role: 'Rubeus Hagrid',
-  //     image: 'img/h.jpeg'
-  //   }
-  // ];
-
 
   // -----------------------------------------------------------------------------------------------------
+  @ViewChild('castContainer') castContainer!: ElementRef;
 
-  @ViewChild('castContainer', { static: false }) castContainer!: ElementRef;
 
   canScrollLeftCast: boolean = false;
   canScrollRightCast: boolean = true;
-
-  checkScrollCast() {
-    const container = this.castContainer.nativeElement;
-    this.canScrollLeftCast = container.scrollLeft > 0;
-    this.canScrollRightCast = container.scrollLeft < container.scrollWidth - (container.clientWidth + 25);
-  }
 
   scrollLeftCast() {
     this.castContainer.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });
@@ -407,6 +366,14 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
   scrollRightCast() {
     this.castContainer.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
     setTimeout(() => this.checkScrollCast(), 300);
+  }
+
+  checkScrollCast() {
+    const container = this.castContainer.nativeElement;
+    this.canScrollLeftCast = container.scrollLeft > 0;
+    this.canScrollRightCast = container.scrollLeft < container.scrollWidth - (container.clientWidth + 25);
+    // Trigger change detection manually to prevent the ExpressionChangedAfterItHasBeenCheckedError
+    this.cdr.detectChanges();
   }
 
   // -----------------------------------------------------------------------------------------------------
