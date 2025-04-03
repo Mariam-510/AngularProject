@@ -255,13 +255,14 @@ export class SharedService {
       }
     ];
 
+
   addShow(show: any) {
     const newShow = {
       id: this.shows.length + 1,
       title: show.EventName,
       category: show.EventCategory,
-      imageSmall: 'img/Shows/d1.jpg',
-      imageLarge: 'img/Shows/d11.jpg',
+      imageSmall: show.EventImage,
+      imageLarge: show.EventImage,
       rating: 0,
       description: show.EventDescription,
       date: this.getFormattedDate(),
@@ -289,6 +290,7 @@ export class SharedService {
 
     return formattedDate;
   }
+
 
   //---------------------------------------------------------------------------------------------------------
   // Define ShowTicket array using the interface
