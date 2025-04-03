@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedService, match, ShowTicket, CheckoutTicket } from '../../../Services/shared.service';
+import { SharedService, match, ShowTicket } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-booking-match',

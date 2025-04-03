@@ -101,7 +101,7 @@
             </a>
           </div>
 
-          <a routerLink="/bookingEvent" class="ticket-btn btn btn-danger w-100 mt-1 py-1 fs-5 mb-2"><i
+          <a [routerLink]="['/bookingEvent', item.id]" class="ticket-btn btn btn-danger w-100 mt-1 py-1 fs-5 mb-2"><i
               class="bi bi-ticket-perforated"></i> GET
             TICKET</a>
         </div>

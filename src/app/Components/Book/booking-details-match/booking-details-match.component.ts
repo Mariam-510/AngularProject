@@ -24,25 +24,25 @@ export class BookingDetailsMatchComponent implements OnInit {
 
   matchDetails: match =
   {
-        id: 1,
-        image: 'img/cairo staduim.jpg',
-        venue: 'Cairo International Stadium, Cairo',
-        date: 'Fri 28 Mar 2025',
-        tournament: 'World Cup Qualifiers 2025',
-        staduim: 'img/cairo staduim.jpg',
-        matchNumber: 5,
-        time: '08:30 PM',
-        group: 'African Qualifiers Group B',
-        team1: 'Egypt',
-        team2: 'Algeria',
-        team1Logo: 'img/egypt.svg',
-        team2Logo: 'img/algeria.svg',
-        isFavorite: true,
-        price: 1100,
-        word: "🔥 high",
-        adv: "⏳ Limited Seats",
-        category: '⚽ Football',
-        location: 'Cairo, Egypt'
+    id: 1,
+    image: 'img/cairo staduim.jpg',
+    venue: 'Cairo International Stadium, Cairo',
+    date: 'Fri 28 Mar 2025',
+    tournament: 'World Cup Qualifiers 2025',
+    staduim: 'img/cairo staduim.jpg',
+    matchNumber: 5,
+    time: '08:30 PM',
+    group: 'African Qualifiers Group B',
+    team1: 'Egypt',
+    team2: 'Algeria',
+    team1Logo: 'img/egypt.svg',
+    team2Logo: 'img/algeria.svg',
+    isFavorite: true,
+    price: 1100,
+    word: "🔥 high",
+    adv: "⏳ Limited Seats",
+    category: '⚽ Football',
+    location: 'Cairo, Egypt'
   }
 
   checkoutTicket: CheckoutTicket[] = [];

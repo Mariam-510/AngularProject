@@ -43,7 +43,7 @@
 
         </div>
 
-        <a routerLink="/bookingEvent" class="btn btn-danger w-100 mt-2 py-2">
+        <a [routerLink]="['/bookingEvent', event.id]" class="btn btn-danger w-100 mt-2 py-2">
           <i class="bi bi-ticket me-2"></i> BOOK TICKETS
         </a>
       </div>
