@@ -86,10 +86,11 @@ export class BookingHistoryComponent {
       tickets: [{ category: 'Golden Circle', quantity: 4 }],
       totalPrice: 600,
       artist: {
-        name: 'Eslam Kabonga',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRENpQTI_YcumCAclbUuQCMvnky2HtADaYkRnOR1gBD11lOBwdkAdsagncW12PesVQp9sk&usqp=CAU',
+        name: 'Amir Eid',
+        
+        image: 'img/Shows/amir.jpg',
       },
-      tourName: 'Eslam Kabonga Concert',
+      tourName: 'Cairokee Concert',
     },
     // Completed Match
     {
@@ -148,10 +149,10 @@ export class BookingHistoryComponent {
       tickets: [{ category: 'Golden Circle', quantity: 4 }],
       totalPrice: 600,
       artist: {
-        name: 'Hamo Bika',
-        image: 'https://africanmusiclibrary.org/_next/image?url=https%3A%2F%2Fd31btwpnsku5px.cloudfront.net%2Fbcd15d9541ae.jpg&w=3840&q=75',
+        name: 'Marwan Pablo',
+        image: 'img/Shows/pablo.jpg',
       },
-      tourName: 'Hamo Bika Concert',
+      tourName: 'Marwan Pablo Concert',
     },
     // Cancelled Concert
     {
@@ -166,10 +167,10 @@ export class BookingHistoryComponent {
       tickets: [{ category: 'Golden Circle', quantity: 4 }],
       totalPrice: 600,
       artist: {
-        name: 'Filo',
-        image: 'https://pbs.twimg.com/profile_images/1386647394507530244/BQUf_a4r_400x400.jpg',
+        name: 'Lege-Cy',
+        image: 'img/Shows/legyc.jpg',
       },
-      tourName: 'Filo Concert',
+      tourName: 'Lege-Cy Concert',
     },
     // Confirmed Match
     {

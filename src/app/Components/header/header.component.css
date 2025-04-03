@@ -83,19 +83,31 @@
 /* Middle Section */
 .header-middle {
   display: flex;
-  justify-content: start;
+  justify-content: start; /* Centers the navigation */
+  align-items: center;
   flex-grow: 1;
   margin: 0 1rem;
   min-width: 0;
   /* Allow shrinking */
 }
-
+.header-middle nav ul {
+  display: flex;
+  justify-content: center; /* Centers the items */
+  align-items: center;
+  gap: 3rem; /* Adjust space between links */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap; /* Ensures responsiveness */
+}
 .header-middle nav ul li a {
   text-decoration: none;
   color: #333;
   font-size: 1.12rem;
-  position: relative;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem; /* Adds padding for better spacing */
+  display: inline-block;
+  white-space: nowrap; /* Prevents text wrapping */
+  
 }
 
 .header-middle nav ul li a::after {

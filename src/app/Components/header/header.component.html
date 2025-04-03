@@ -2,7 +2,7 @@
   <!-- Left Section: Logo and Hamburger -->
   <div class="header-left">
     <div class="logo">
-      <a routerLink="/">ShowBooking</a>
+      <a routerLink="/"><i class="bi bi-music-note me-1"></i>Show<span class="text-danger">Booking</span></a>
     </div>
     <button class="hamburger" [class.active]="menuActive" (click)="toggleMenu($event)">
       <span></span>
@@ -16,17 +16,17 @@
   <div class="header-middle" [class.active]="menuActive">
     <nav>
       <ul>
-        <li>
+        <li class="me-4 me-3">
           <a routerLink="/shows" routerLinkActive="active"><i class="bi bi-music-note me-1"></i> Shows & Events</a>
         </li>
-        <li>
+        <li class="me-4">
           <a routerLink="/sports" routerLinkActive="active"><i class="fa fa-soccer-ball-o me-1"></i> Football
             Matches</a>
         </li>
-        <li>
+        <li class="me-4">
           <a routerLink="/about" routerLinkActive="active"><i class="fa fa-info-circle me-1"></i> About Us</a>
         </li>
-        <li>
+        <li class="me-4">
           <a routerLink="/contact" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Contact</a>
         </li>
       </ul>
@@ -34,25 +34,25 @@
   </div>
   } @else {
   <!-- Middle Section: Navigation Links -->
-  <div class="header-middle" [class.active]="menuActive">
+ <div class="header-middle " [class.active]="menuActive">
     <nav>
       <ul>
-        <li>
-          <a routerLink="/admin/dashboard" routerLinkActive="active"><i class="bi bi-music-note me-1"></i> Dashboard</a>
+        <li class="me-4 ms-3">
+          <a routerLink="/admin/dashboard" routerLinkActive="active"><i class="bi bi-graph-down me-1 "></i> Dashboard</a>
         </li>
-        <li>
-          <a routerLink="/admin/addShow" routerLinkActive="active"><i class="fa fa-soccer-ball-o me-1"></i> Add
+        <li class="me-4">
+          <a routerLink="/admin/addShow" routerLinkActive="active"><i class="bi bi-calendar-plus me-1"></i> Add
             Show</a>
         </li>
-        <li>
-          <a routerLink="/admin/getallshows" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Get All
-            Events</a>
+        <li class="me-4">
+          <a routerLink="/admin/getallshows" routerLinkActive="active"><i class="bi bi-collection-play me-1"></i> Get All
+            Shows</a>
         </li>
-        <li>
-          <a routerLink="/admin/addMatch" routerLinkActive="active"><i class="fa fa-info-circle me-1"></i> Add Match</a>
+        <li class="me-4">
+          <a routerLink="/admin/addMatch" routerLinkActive="active"><i class="fa fa-soccer-ball-o me-1"></i> Add Match</a>
         </li>
-        <li>
-          <a routerLink="/admin/getallmatches" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Get All
+        <li class="me-4">
+          <a routerLink="/admin/getallmatches" routerLinkActive="active"><i class="bi bi-trophy  me-1"></i> Get All
             Matches</a>
         </li>
       </ul>
@@ -62,10 +62,7 @@
 
   <!-- Right Section: Search and User Menu -->
   <div class="header-right">
-    <div class="search-container">
-      <input type="text" [(ngModel)]="searchQuery" placeholder="Search..." />
-      <button (click)="onSearch()"><i class="fa fa-search"></i></button>
-    </div>
+   
     <div class="user-menu-container" (click)="toggleUserMenu($event)">
       @if (currentUser) {
       <span class="user-greeting me-2">Hello, {{ currentUser.firstName }}</span>
@@ -89,7 +86,7 @@
             <p class="user-email">{{ currentUser.email }}</p>
           </div>
         </div>
-        <a routerLink="/profile/user" class="dropdown-item">
+        <a routerLink="/profile/user" class="dropdown-item" >
           <i class="fa fa-user-circle me-1"></i> Profile
         </a>
         <a routerLink="/profile/favourites" class="dropdown-item">
