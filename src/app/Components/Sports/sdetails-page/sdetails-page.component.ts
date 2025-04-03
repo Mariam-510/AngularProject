@@ -33,7 +33,6 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   match: match = {
     id: 1,
-    image: 'img/cairo staduim.jpg',
     venue: 'Cairo International Stadium, Cairo', // location
     date: 'Fri 28 Mar 2025',
     tournament: 'World Cup Qualifiers 2025', //title

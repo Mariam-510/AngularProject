@@ -10,7 +10,7 @@
     <div *ngFor="let match of matches.slice(0, 3); let i = index" class="carousel-item position-relative"
       [class.active]="i === 0">
 
-      <img src="{{match.staduim}}" class="d-block w-100" alt="{{ match.tournament }}"
+      <img [src]="match.staduim" class="d-block w-100" alt="{{ match.tournament }}"
         style="max-height: 620px; object-fit: cover;">
 
       <div class="text-overlay mb-5 ms-5">
@@ -227,7 +227,7 @@
       <div class="card border-0 shadow-lg h-100">
         <!-- Image Section -->
         <div class="position-relative">
-          <img [src]="match.image" class="card-img-top" style="height: 200px; object-fit: cover;" [alt]="match.venue">
+          <img [src]="match.staduim" class="card-img-top" style="height: 200px; object-fit: cover;" [alt]="match.venue">
 
 
           <!-- Fav Button (Top-right) -->

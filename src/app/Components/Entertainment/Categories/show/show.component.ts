@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SharedService } from '../../../../Services/shared.service';
 
 export interface show {
   id: number;
@@ -30,6 +31,9 @@ export interface show {
 export class ShowComponent implements OnInit {
 
   @Input() shows: show[] = [];
+
+  constructor(private sharedService: SharedService) { }
+
 
   parseCustomDate(dateStr: string): number {
     const months: Record<string, number> = {
