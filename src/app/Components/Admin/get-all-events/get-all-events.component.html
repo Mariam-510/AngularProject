@@ -12,31 +12,31 @@
   </div>
 
   <div *ngFor="let event of paginatedEvents"
-    class="show-container row py-4 border-bottom rounded bg-white my-2 d-flex align-items-center">
+    class="show-container row py-4 border-bottom rounded bg-white my-2 d-flex align-items-center ">
     <!-- Event Image -->
-    <div class="col-12 col-md-auto text-center">
-      <img [src]="event.imageSmall" class="imgH img-fluid" alt="Event Image"
-        style="max-width: 400px; max-height: 200px;">
+    <div class="col-12 col-xl-auto d-flex justify-content-center text-center">
+      <img [src]="event.imageSmall" class="imgH img-fluid event-image" alt="Event Image">
     </div>
 
     <!-- Event Details and Buttons Container -->
-    <div class="col d-flex justify-content-between align-items-center">
+    <div class="eventList col d-flex">
       <!-- Event Details -->
-      <div class="d-flex flex-column">
-        <h1 class="fs-2 ">{{ event.title }}</h1>
-        <div class="content-text">
-          <div class="text-danger mb-2 d-flex align-items-center" style="font-size: 18px;">
-            <i class="bi bi-geo-alt-fill me-2"></i>
-            <span>{{ event.location }}</span>
-          </div>
-          <p class="text-muted" style="font-size: 16px;">
-            {{ (event.description | slice:0:200) + '...' }}
-          </p>
+
+      <div class="content-text w-60 pe-3 position-relative d-flex flex-column justify-content-center">
+        <div class=" d-flex justify-content-between align-items-start">
+          <h2 class="flex-grow-1">{{ event.title }}</h2>
         </div>
+        <!-- Rating -->
+        <div class="text-danger mb-2 d-flex align-items-center" style="font-size: 18px;">
+          <i class="bi bi-geo-alt-fill me-2"></i>
+          <span>{{ event.location }}</span>
+        </div>
+        <!-- Description -->
+        <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
       </div>
 
       <!-- Buttons (Aligned Right) -->
-      <div class="event-info-actions ps-5 d-flex flex-column align-items-end mt-5">
+      <!-- <div class="event-info-actions ps-5 d-flex flex-column align-items-end mt-5">
         <a [routerLink]="['/admin/addTicket']" class="btn btn-light text-danger border border-1 rounded mb-2"
           style="width: 180px;">
           <i class="bi bi-ticket me-2"></i> Add Ticket
@@ -49,7 +49,24 @@
           style="width: 180px;">
           <i class="bi bi-people me-2"></i> Add Performer
         </a>
+      </div> -->
+
+      <!-- Buttons: Row on sm/md/lg, Column on xl -->
+      <div class="event-info-actions ps-5 d-flex flex-row flex-xl-column align-items-center justify-content-center mt-0 mt-xl-5">
+        <a [routerLink]="['/admin/addTicket']"
+          class="btn btn-light text-danger border border-1 rounded mb-xl-2 me-2 me-xl-0" style="width: 180px;">
+          <i class="bi bi-ticket me-2"></i> Add Ticket
+        </a>
+        <a [routerLink]="['/admin/addSchedule']"
+          class="btn btn-danger text-white border border-1 rounded mb-xl-2 me-2 me-xl-0" style="width: 180px;">
+          <i class="bi bi-clock me-2"></i> Add Schedule
+        </a>
+        <a [routerLink]="['/admin/addPerformer']" class="btn btn-light text-danger border border-1 rounded"
+          style="width: 180px;">
+          <i class="bi bi-people me-2"></i> Add Performer
+        </a>
       </div>
+
     </div>
   </div>
 

@@ -110,7 +110,8 @@ export class SharedService {
         id: 2,
         title: 'Alvin Ailey American Dance',
         category: 'Dance',
-        imageSmall: 'img/Shows/d2.jpg',
+        // imageSmall: 'img/Shows/d2.jpg',
+        imageSmall: 'img/s.png',
         imageLarge: 'img/Shows/d22.jpg',
         rating: 3,
         description: `A breathtaking fusion of contemporary and African-American dance, this performance captivates with its raw emotion and powerful storytelling.`,
@@ -281,6 +282,7 @@ export class SharedService {
     console.log(this.shows);
 
   }
+
   convertTo12HourFormat(time: string): string {
     const [hours, minutes] = time.split(':').map(Number);
     const period = hours >= 12 ? 'PM' : 'AM';
