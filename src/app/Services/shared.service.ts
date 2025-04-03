@@ -272,7 +272,38 @@ export class SharedService {
     ];
 
   addShow(show: any) {
-    this.shows.push(show);
+    const newShow = {
+      id: this.shows.length + 1,
+      title: show.EventName,
+      category: show.EventCategory,
+      imageSmall: 'img/Shows/d1.jpg',
+      imageLarge: 'img/Shows/d11.jpg',
+      rating: 0,
+      description: show.EventDescription,
+      date: this.getFormattedDate(),
+      location: show.EventLocation,
+      fullLocation: show.EventLocation,
+      price: 150,
+      isFavorite: false,
+      word: 'Unforgettable!',
+      reviews: 0,
+      qoute: 'Feel the magic come to life!',
+      subQoute: 'A story that will touch your heart.'
+    };
+
+    this.shows.push(newShow);
+
+    console.log(this.shows);
+
+  }
+
+  getFormattedDate() {
+    const now = new Date();
+
+    const options: Intl.DateTimeFormatOptions = { month: 'short', day: '2-digit', year: 'numeric' };
+    const formattedDate = now.toLocaleDateString('en-US', options).replace(',', '');
+
+    return formattedDate;
   }
 
   //---------------------------------------------------------------------------------------------------------
@@ -335,6 +366,16 @@ export class SharedService {
 
     return schedule;
   }
+
+  //---------------------------------------------------------------------------------------------------------
+  showCategories = [
+    { name: 'All', link: '' },
+    { name: 'Concerts', link: 'concerts' },
+    { name: 'Theater', link: 'theater' },
+    { name: 'Dance', link: 'dance' },
+    { name: 'Stand-Up Comedy', link: 'standUpComedy' },
+    { name: 'Other', link: 'other' }
+  ];
 
   //---------------------------------------------------------------------------------------------------------
   // Function to generate a review date incrementing by 1 day after each review

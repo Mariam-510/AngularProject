@@ -47,3 +47,8 @@
 .border-bottom {
   border-color: #ddd !important;
 }
+
+/* ------------------------------------------------------------------------------------------ */
+.page-item {
+  cursor: pointer;
+}

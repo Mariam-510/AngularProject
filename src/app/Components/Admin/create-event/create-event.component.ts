@@ -12,17 +12,20 @@ import { SharedService } from '../../../Services/shared.service';
 export class CreateEventComponent implements OnInit {
   selectedEventLocation: string = 'Cairo, Egypt';
   showMap: boolean = true;
+  categories: any
+
   MyForm = new FormGroup({
     EventName: new FormControl("", [Validators.required, Validators.maxLength(50)]),
     EventImage: new FormControl("", [Validators.required]),
     EventDescription: new FormControl("", [Validators.required, Validators.maxLength(500)]),
-    EventLocation: new FormControl("", [Validators.required, Validators.maxLength(200)])
+    EventLocation: new FormControl("", [Validators.required, Validators.maxLength(200)]),
+    EventCategory: new FormControl("", [Validators.required]) // Added category field
   });
 
   constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
-
+    this.categories = this.sharedService.showCategories;
   }
   onLocationBlur(): void {
     const location = this.MyForm.get('EventLocation')?.value;
@@ -50,28 +53,19 @@ export class CreateEventComponent implements OnInit {
     }, 1);
   }
 
-  // submitForm() {
-  //   if (this.MyForm.invalid) {
-  //     this.MyForm.markAllAsTouched();
-  //     return;
-  //   }
-  //   alert('Event Created Successfully!');
-  //   this.MyForm.reset();
-  // }
-
   submitForm() {
     if (this.MyForm.invalid) {
       this.MyForm.markAllAsTouched();
       return;
     }
+    alert('Event Created Successfully!');
 
-    // Get the event details from the form
     const newEvent = this.MyForm.value;
 
-    // Call the method in your shared service to add the event to the events array
+    console.log(newEvent);
+
     this.sharedService.addShow(newEvent);
 
-    // Reset the form after adding the event
     this.MyForm.reset();
   }
 
