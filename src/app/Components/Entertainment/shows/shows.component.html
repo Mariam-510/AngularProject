@@ -35,10 +35,9 @@
 
     <!-- Filter by Category -->
     <select class="custom-select form-select w-25 me-2" [(ngModel)]="selectedCategory" (change)="applyFilters()">
-      <option value="">All Categories</option>
       @for (category of categories; track $index)
       {
-      <option [value]="category">{{ category }}</option>
+      <option [value]="category.name">{{ category.name }}</option>
       }
     </select>
 

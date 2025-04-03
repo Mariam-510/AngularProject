@@ -41,17 +41,19 @@
           <a routerLink="/admin/dashboard" routerLinkActive="active"><i class="bi bi-music-note me-1"></i> Dashboard</a>
         </li>
         <li>
-          <a routerLink="/admin/addEvent" routerLinkActive="active"><i class="fa fa-soccer-ball-o me-1"></i> Add
-            Event</a>
+          <a routerLink="/admin/addShow" routerLinkActive="active"><i class="fa fa-soccer-ball-o me-1"></i> Add
+            Show</a>
+        </li>
+        <li>
+          <a routerLink="/admin/getallshows" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Get All
+            Events</a>
         </li>
         <li>
           <a routerLink="/admin/addMatch" routerLinkActive="active"><i class="fa fa-info-circle me-1"></i> Add Match</a>
         </li>
         <li>
-          <a routerLink="/contact" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Get All Events</a>
-        </li>
-        <li>
-          <a routerLink="/contact" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Get All Matches</a>
+          <a routerLink="/admin/getallmatches" routerLinkActive="active"><i class="fa fa-phone me-1"></i> Get All
+            Matches</a>
         </li>
       </ul>
     </nav>
@@ -72,7 +74,7 @@
         @if (currentUser) {
         <img [src]="currentUser?.avatar" alt="User" class="user-avatar" />
         } @else {
-        <img src="img/userIcon.png" width="40px"/>
+        <img src="img/userIcon.png" width="40px" />
         }
       </div>
       <div class="user-dropdown" [class.active]="userMenuActive">

@@ -31,13 +31,14 @@ export interface show {
 })
 export class GetAllEventsComponent {
   events: show[] = [];
-  Math = Math;
 
   constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
-    this.events = this.sharedService.shows;
+    this.events = this.sharedService.shows.sort((a: show, b: show) => a.title.localeCompare(b.title));
   }
+
+  Math = Math;
 
   currentPage = 1;
   itemsPerPage = 5;

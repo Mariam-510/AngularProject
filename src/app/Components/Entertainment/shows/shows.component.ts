@@ -36,8 +36,8 @@ export class ShowsComponent implements OnInit {
   isGridView = false;
   searchTerm = '';
   sortBy = '';
-  selectedCategory = '';
-  categories = ['Concerts', 'Theater', 'Dance', 'Stand-Up Comedy', 'Other'];
+  selectedCategory = 'All';
+  categories: any;
 
   events: show[] = [];
 
@@ -46,6 +46,8 @@ export class ShowsComponent implements OnInit {
   ngOnInit(): void {
     this.events = this.sharedService.shows;
     this.applyFilters();
+
+    this.categories = this.sharedService.showCategories;
   }
 
   filteredEvents: show[] = [];
@@ -55,7 +57,7 @@ export class ShowsComponent implements OnInit {
       event.title.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
 
-    if (this.selectedCategory) {
+    if (this.selectedCategory != 'All') {
       filtered = filtered.filter(event => event.category === this.selectedCategory);
     }
 

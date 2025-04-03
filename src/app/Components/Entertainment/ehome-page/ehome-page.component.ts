@@ -32,6 +32,8 @@ export interface show {
 export class EHomePageComponent implements OnInit {
   events: show[] = [];
 
+  categories: any;
+
   constructor(private sharedService: SharedService) { }
 
   parseCustomDate(dateStr: string): number {
@@ -60,6 +62,8 @@ export class EHomePageComponent implements OnInit {
         return dateB - dateA; // Ascending order (earliest date first)
       })
       .slice(0, 3); // Take only the first 3
+
+    this.categories = this.sharedService.showCategories;
   }
 
 
@@ -72,17 +76,5 @@ export class EHomePageComponent implements OnInit {
     "img/15.jpg",
     "img/17.jpg"
   ];
-
-
-  categories = [
-    { name: 'All', link: '' },
-    { name: 'Concerts', link: 'concerts' },
-    { name: 'Theater', link: 'theater' },
-    { name: 'Dance', link: 'dance' },
-    { name: 'Stand-Up Comedy', link: 'standUpComedy' },
-    { name: 'Other', link: 'other' }
-  ];
-
-
 
 }
