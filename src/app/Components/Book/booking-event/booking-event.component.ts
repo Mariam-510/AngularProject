@@ -108,9 +108,7 @@ export class BookingEventComponent implements OnInit {
     }))
     .filter(ticket => ticket.quantity > 0);
 
-    console.log(this._sharedService.checkoutTicket);
-
-    // this.router.navigate(['/bookingDetailsEvent', this.showDetails.id]);
+    this.router.navigate(['/bookingDetailsEvent', this.showDetails.id]);
   }
 
 }
