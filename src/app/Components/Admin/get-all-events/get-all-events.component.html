@@ -11,7 +11,7 @@
     </nav>
   </div>
 
-  <div *ngFor="let event of events"
+  <div *ngFor="let event of paginatedEvents"
     class="show-container row py-4 border-bottom rounded bg-white my-2 d-flex align-items-center">
     <!-- Event Image -->
     <div class="col-12 col-md-auto text-center">
@@ -52,4 +52,45 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Pagination Controls -->
+  @if(paginatedEvents.length>0)
+  {
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-4">
+      <!-- Previous Button -->
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link text-danger" (click)="changePage(currentPage - 1)" aria-label="Previous">
+          Previous
+        </a>
+      </li>
+
+      <!-- Page Numbers -->
+      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1">
+        <a class="page-link"
+          [ngClass]="{ 'text-white bg-danger border-danger': currentPage === i + 1, 'text-danger': currentPage !== i + 1 }"
+          (click)="changePage(i + 1)">
+          {{ i + 1 }}
+        </a>
+      </li>
+
+      <!-- Next Button -->
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link text-danger" (click)="changePage(currentPage + 1)" aria-label="Next">
+          Next
+        </a>
+      </li>
+    </ul>
+  </nav>
+  }
+  @else
+  {
+  <div class="text-center text-danger my-5 py-5">
+    <i class="bi bi-exclamation-circle fs-1"></i>
+    <p class="mt-2 fw-bold">No matching shows found</p>
+  </div>
+  }
+
 </div>

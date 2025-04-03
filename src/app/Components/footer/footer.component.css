@@ -126,26 +126,34 @@
     flex: 1 1 100%;
     margin-bottom: 1.5rem;
     padding-right: 0;
-    
+
   }
+
   .footer-section {
     width: 100%;
     text-align: center;
     padding: 0;
   }
+
   .footer-section {
     flex: 1 1 100%;
     margin-bottom: 1rem;
   }
+
   .footer-section nav ul li a {
     justify-content: center;
   }
 
   .footer-logo a {
     font-size: 1.5rem;
-   
-   
+
   }
+
+  .footer-logo {
+    margin-top: 15px;
+
+  }
+
   .footer-description {
     margin: 1rem auto;
     max-width: 100%;
@@ -154,6 +162,7 @@
   .social-links {
     justify-content: center;
   }
+
   .contact-info p {
     justify-content: center;
   }

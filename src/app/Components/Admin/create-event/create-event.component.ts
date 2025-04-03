@@ -2,24 +2,30 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
+import { SharedService } from '../../../Services/shared.service';
 @Component({
   selector: 'app-create-event',
-  imports: [ReactiveFormsModule, CommonModule,LeafletMapComponent],
+  imports: [ReactiveFormsModule, CommonModule, LeafletMapComponent],
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.css'
 })
 export class CreateEventComponent implements OnInit {
   selectedEventLocation: string = 'Cairo, Egypt';
   showMap: boolean = true;
-   MyForm = new FormGroup({
+  categories: any
+
+  MyForm = new FormGroup({
     EventName: new FormControl("", [Validators.required, Validators.maxLength(50)]),
     EventImage: new FormControl("", [Validators.required]),
     EventDescription: new FormControl("", [Validators.required, Validators.maxLength(500)]),
-    EventLocation: new FormControl("", [Validators.required, Validators.maxLength(200)])
+    EventLocation: new FormControl("", [Validators.required, Validators.maxLength(200)]),
+    EventCategory: new FormControl("", [Validators.required]) // Added category field
   });
 
+  constructor(private sharedService: SharedService) { }
+
   ngOnInit(): void {
-  
+    this.categories = this.sharedService.showCategories;
   }
   onLocationBlur(): void {
     const location = this.MyForm.get('EventLocation')?.value;
@@ -34,7 +40,7 @@ export class CreateEventComponent implements OnInit {
     this.showMap = false;
 
     setTimeout(() => {
-      this.selectedEventLocation = location; 
+      this.selectedEventLocation = location;
       this.showMap = true;
     }, 1);
   }
@@ -42,7 +48,7 @@ export class CreateEventComponent implements OnInit {
   private resetMapToDefault(): void {
     this.showMap = false;
     setTimeout(() => {
-      this.selectedEventLocation = 'Cairo, Egypt'; 
+      this.selectedEventLocation = 'Cairo, Egypt';
       this.showMap = true;
     }, 1);
   }
@@ -53,7 +59,15 @@ export class CreateEventComponent implements OnInit {
       return;
     }
     alert('Event Created Successfully!');
-    this.MyForm.reset();
 
+    const newEvent = this.MyForm.value;
+
+    console.log(newEvent);
+
+    this.sharedService.addShow(newEvent);
+
+    this.MyForm.reset();
   }
+
+
 }

@@ -25,7 +25,7 @@ export interface ShowTicket {
   description: string;
 }
 
-export interface CheckoutTicket{
+export interface CheckoutTicket {
   type: string;
   quantity: number;
   price: number;
@@ -130,7 +130,7 @@ export class SharedService {
         imageLarge: 'img/Shows/d22.jpg',
         rating: 3,
         description: `A breathtaking fusion of contemporary and African-American dance, this performance captivates with its raw emotion and powerful storytelling.`,
-        date: 'Apr 2 - 2025',
+        date: 'May 31 - 2025',
         location: 'Cairo International Conference Center',
         fullLocation: 'Cairo, Egypt',
         price: 700,
@@ -149,7 +149,7 @@ export class SharedService {
         imageLarge: 'img/Shows/c11.jpg',
         rating: 4,
         description: `Relive the magic of The Beatles with this incredible tribute, featuring iconic hits and an unforgettable live experience.`,
-        date: 'Oct 4 - 2025',
+        date: 'Apr 2 - 2025',
         location: 'The American University in Cairo (AUC)', // this location is found
         fullLocation: 'New Cairo, Egypt',
         price: 600,
@@ -167,7 +167,7 @@ export class SharedService {
         imageLarge: 'img/Shows/c22.jpg',
         rating: 3.5,
         description: `Pop sensation Dua Lipa takes the stage for an electrifying night of chart-topping hits and high-energy performances.`,
-        date: 'Apr 29 - 2025',
+        date: 'Jul 13 - 2025',
         location: 'The American University in Cairo (AUC)', // this location is found
         fullLocation: 'New Cairo, Egypt',
         price: 850,
@@ -185,7 +185,7 @@ export class SharedService {
         imageLarge: 'img/Shows/c33.jpg',
         rating: 3,
         description: `A dazzling spectacle of music and performance, Katy Perry’s show is filled with hits, stunning visuals, and endless energy.`,
-        date: 'Jul 13 - 2025',
+        date: 'Apr 29 - 2025',
         location: 'El Gouna Conference & Culture Center',
         fullLocation: 'El Gouna, Egypt',
         price: 800,
@@ -204,7 +204,7 @@ export class SharedService {
         imageLarge: 'img/Shows/s11.jpg',
         rating: 3.5,
         description: `A night of sharp wit and fearless comedy, Ricky Gervais delivers his signature humor with bold and hilarious takes on life.`,
-        date: 'May 31 - 2025',
+        date: 'Oct 4 - 2025',
         location: 'Bibliotheca Alexandrina',
         fullLocation: 'Alexandria, Egypt',
         price: 300,
@@ -241,7 +241,7 @@ export class SharedService {
         imageLarge: 'img/Shows/t22.jpg',
         rating: 3,
         description: `A gripping drama that takes audiences behind the scenes of a band on the edge of fame, blending music and storytelling seamlessly.`,
-        date: 'May 6 - 2025',
+        date: 'Dec 9 - 2025',
         location: 'Cairo International Conference Center',
         fullLocation: 'Cairo, Egypt',
         price: 300,
@@ -259,7 +259,7 @@ export class SharedService {
         imageLarge: 'img/Shows/t33.jpg',
         rating: 4.5,
         description: `An extraordinary theatrical adaptation of the beloved novel, bringing to life a tale of survival, imagination, and adventure.`,
-        date: 'Dec 9 - 2025',
+        date: 'May 6 - 2025',
         location: 'El Gouna Conference & Culture Center',
         fullLocation: 'El Gouna, Egypt',
         price: 450,
@@ -271,6 +271,40 @@ export class SharedService {
       }
     ];
 
+  addShow(show: any) {
+    const newShow = {
+      id: this.shows.length + 1,
+      title: show.EventName,
+      category: show.EventCategory,
+      imageSmall: 'img/Shows/d1.jpg',
+      imageLarge: 'img/Shows/d11.jpg',
+      rating: 0,
+      description: show.EventDescription,
+      date: this.getFormattedDate(),
+      location: show.EventLocation,
+      fullLocation: show.EventLocation,
+      price: 150,
+      isFavorite: false,
+      word: 'Unforgettable!',
+      reviews: 0,
+      qoute: 'Feel the magic come to life!',
+      subQoute: 'A story that will touch your heart.'
+    };
+
+    this.shows.push(newShow);
+
+    console.log(this.shows);
+
+  }
+
+  getFormattedDate() {
+    const now = new Date();
+
+    const options: Intl.DateTimeFormatOptions = { month: 'short', day: '2-digit', year: 'numeric' };
+    const formattedDate = now.toLocaleDateString('en-US', options).replace(',', '');
+
+    return formattedDate;
+  }
 
   //---------------------------------------------------------------------------------------------------------
   // Define ShowTicket array using the interface
@@ -333,6 +367,16 @@ export class SharedService {
 
     return schedule;
   }
+
+  //---------------------------------------------------------------------------------------------------------
+  showCategories = [
+    { name: 'All', link: '' },
+    { name: 'Concerts', link: 'concerts' },
+    { name: 'Theater', link: 'theater' },
+    { name: 'Dance', link: 'dance' },
+    { name: 'Stand-Up Comedy', link: 'standUpComedy' },
+    { name: 'Other', link: 'other' }
+  ];
 
   //---------------------------------------------------------------------------------------------------------
   // Function to generate a review date incrementing by 1 day after each review
@@ -820,22 +864,6 @@ export class SharedService {
     },
   ];
 
-  // Filter options (sHome Page)
-  venues = ['All Venues', ...new Set(this.matches.map(m => m.venue))];
-
-  prices = [
-    'All Prices',
-    'Below 300',
-    '300 - 600',
-    '600 - 1000',
-    'Above 1000'
-  ];
-
-  dates = [
-    'All Dates',
-    'Most Recent',
-    'Least Recent'
-  ];
 
   //---------------------------------------------------------------------------------------------------------
   //MATCH DETAILS
@@ -1243,7 +1271,7 @@ export class SharedService {
 
 
 
-//---------------------------------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------------------------------
 
 
   getFavoriteMatches(): any[] {

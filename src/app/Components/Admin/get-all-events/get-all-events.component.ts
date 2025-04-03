@@ -31,12 +31,33 @@ export interface show {
 })
 export class GetAllEventsComponent {
   events: show[] = [];
-  Math = Math;
 
   constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
-    this.events = this.sharedService.shows;
+    this.events = this.sharedService.shows.sort((a: show, b: show) => a.title.localeCompare(b.title));
   }
 
+  Math = Math;
+
+  currentPage = 1;
+  itemsPerPage = 5;
+
+  // Calculate the total number of pages
+  get totalPages() {
+    return Math.ceil(this.events.length / this.itemsPerPage);
+  }
+
+  // Get paginated events
+  get paginatedEvents() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.events.slice(start, start + this.itemsPerPage);
+  }
+
+  // Change Page
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
 }

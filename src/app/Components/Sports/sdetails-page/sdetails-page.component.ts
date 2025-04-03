@@ -39,7 +39,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
       location: 'Cairo International Stadium, Cairo',
       Group: 'Group Two (Stage)',
       title: 'Championship League',
-      date: 'Mar 23 - 2025',
+      date: 'Mar 2 - 2025',
       Kickoff: '7:00 PM',
       GatesOpen: '06:00 PM',
       price: 500,
@@ -84,17 +84,28 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
     this.match = this._sharedService.matches.find(m => m.id === id);
 
+    console.log(this.match)
+
     const foundItem = this._sharedService.eventItems.find((e: eventItem) => e.id === id);
     if (foundItem) {
       this.item = foundItem;
     }
+
+    console.log(this.item)
 
     if (this.match) {
       this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
       this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
     }
 
-    this.matches = this._sharedService.matches;
+    // this.matches = this._sharedService.matches;
+
+    this.matches = this._sharedService.matches.filter(match => {
+      return (match.id !== this.item.id) &&
+        ((match.price >= this.item.price - 100 && match.price <= this.item.price + 100)
+          || match.venue === this.item.location);
+    });
+
     this.reviews = this._sharedService.generateReviewsForMatch(this.item.date, 5);
     this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.item.price);
   }
