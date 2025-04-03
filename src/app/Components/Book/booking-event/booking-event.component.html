@@ -6,17 +6,17 @@
         <div class="cultural-presentation">
           <img [src]="showDetails.imageLarge" class="event-visual" />
           <div class="event-essentials">
-            <h2 class="event-headline fs-2">{{ showDetails.title }}</h2>
-            <div class="venue-meta fs-4">
-              <span class="location-icon">📍</span>
-              {{ showDetails.location }} • {{ showDetails.fullLocation }}
-            </div>
+            <h2 class="event-headline fs-2 ms-2">{{ showDetails.title }}</h2>
             <div class="temporal-info fs-4">
               <div class="event-timing">
-                <!-- 🕒 {{ showDetails.date | date }} • -->
-                <!-- {{ eventDetails.time }} -->
+                <!-- 💭{{ showDetails.qoute }} -->
+                 <!-- • {{ eventDetails.time }} -->
               </div>
             </div>
+            <div class="venue-meta fs-4">
+              📌 {{ showDetails.location }}, {{ showDetails.fullLocation }}
+            </div>
+            
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <button
               class="btn btn-checkout"
               (click)="proceedToCheckout()"
-              [disabled]="totalTickets() === 0"
+              [disabled]="totalTickets() === 0 || !isScheduleSelected()"
             >
               Proceed to Secure Checkout
             </button>
@@ -52,6 +52,20 @@
 
       <!-- Right Column -->
       <div class="checkout-column">
+        <!-- <div class="d-flex flex-column align-items-center"> -->
+        <div class="checkout-card">
+          <div class="">
+            <h2 class="card-title mb-4">📅 Select Date</h2>
+            <select class="form-select" [(ngModel)]="selectedDate" (change) = 'UpdateScheduleDate()'>
+              <option value="">----------Select Date----------</option>
+              @for (item of schedule; track $index) {
+                <option value="{{item.day}} - {{item.date}} - {{item.time}}">
+                  {{ item.day.slice(0,3) | uppercase }}   │   {{ item.date | date }}   │   {{ item.time }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
         <!-- Ticket Selector Card -->
         <div class="checkout-card">
           <h2 class="card-title mb-4">
