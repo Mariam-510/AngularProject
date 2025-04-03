@@ -105,6 +105,10 @@ export class CreateEventComponent implements OnInit {
     this.sharedService.addShow(newEvent);
 
     this.MyForm.reset();
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.value = '';
+  }
   }
 
 
