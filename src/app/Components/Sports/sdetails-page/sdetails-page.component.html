@@ -2,10 +2,6 @@
   <img [src]="match.image" class="img-fluid w-100 banner-rounded d-none d-lg-block" alt="Event Banner"
     style="max-height: 620px; object-fit: cover;">
 
-  <!-- <div class="text-overlay mb-5 ms-5 ">
-      <h1 class="fw-bold text-uppercase text-white fs-1 fs-lg-2 fs-md-3 fs-sm-4 lh-1  " >🏟️ {{ item.location }}</h1>
-    </div> -->
-
   <div class="text-overlay mb-5 ms-5">
     <div class="fw-bold text-uppercase text-white mt-2 responsive-text text-wrap">
       🏟️ {{ match.venue }}
@@ -15,7 +11,7 @@
   <!-- Modified Event Card -->
 
   <div #eventCard
-    class="position-absolute end-0 bg-white shadow rounded me-5 mt-4  smooth-card custom-card card border-0 d-none d-lg-block"
+    class="position-absolute end-0 bg-white shadow rounded me-5 mt-5  smooth-card custom-card card border-0 d-none d-lg-block"
     style="max-width: 100%; width: 24.5vw;">
 
 
@@ -64,7 +60,8 @@
 
 
       <div class="bg-white border-bottom-0 my-2 ">
-        <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center ms-3">{{match.venue}}</h5>
+        <h5 class="card-title mb-1 fw-bold text-dark  d-flex justify-content-center ms-3 stadiumName">{{match.venue}}
+        </h5>
 
         <small class="text-muted  d-flex justify-content-center mb-1 date1">
           <i class="bi bi-calendar-event me-1 text-danger"></i> {{match.date}}
