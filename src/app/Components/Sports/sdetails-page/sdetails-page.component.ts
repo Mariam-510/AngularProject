@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 declare var bootstrap: any; // Required for Bootstrap modal handling
-import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
-import { eventItem, team, match, SharedService } from '../../../Services/shared.service';
+import { team, match, SharedService } from '../../../Services/shared.service';
+
 
 @Component({
   selector: 'app-sdetails-page',
@@ -22,33 +23,39 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   isNavigationSticky: boolean = false; // Indicates whether the navigation buttons are sticky
   currentActiveSection: string = 'overview'; // Default active section
   private lastScrollTop: number = 0;
-  match: any;
   isMapVisible: boolean = true;
   locationUrl: string = '';
   showMore: boolean = false;
-  canScrollLeft = false;
-  canScrollRight = true; // Assume initial state
   private initialCardTop = 0;
   private stickyThreshold = 0;
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService) { }
+  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService, private cdr: ChangeDetectorRef) { }
 
-  item: eventItem =
-    {
-      id: 1,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group Two (Stage)',
-      title: 'Championship League',
-      date: 'Mar 23 - 2025',
-      Kickoff: '7:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    }
+  match: match = {
+    id: 1,
+    image: 'img/cairo staduim.jpg',
+    venue: 'Cairo International Stadium, Cairo', // location
+    date: 'Fri 28 Mar 2025',
+    tournament: 'World Cup Qualifiers 2025', //title
+    staduim: 'img/cairo staduim.jpg',
+    matchNumber: 5,
+    time: '08:30 PM', //Kickoff
+    GatesOpen: '05:00 PM',
+    group: 'African Qualifiers Group B', //Group
+    team1: 'Egypt',
+    team2: 'Algeria',
+    team1Logo: 'img/egypt.svg',
+    team2Logo: 'img/algeria.svg',
+    isFavorite: true,
+    price: 1100,
+    word: "🔥 high",
+    adv: "⏳ Limited Seats",
+    category: '⚽ Football',
+    location: 'Cairo, Egypt'
+  };
+
+  description: string = `Football isn't just a sport—it's a passion that unites people across the world. It's more than just a game of skill and strategy; it's a celebration of culture, identity, and community. When the whistle blows, it signals the start of something bigger than a match—it’s an event that stirs emotions, fuels rivalries, and builds lifelong memories. Whether it’s the roar of the crowd, the anticipation of a goal, or the heartbreak of a last-minute loss, football has the power to bring people together, transcending borders and languages. It's a shared experience that connects fans in a way few other things can, making it a universal language spoken in every corner of the globe.`
+
 
   homeTeam: team = {
     id: 1,
@@ -71,32 +78,26 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const newId = Number(params.get('id'));
-      this.match = this._sharedService.matches.find(m => m.id === newId);
+      const foundMatch = this._sharedService.matches.find(m => m.id === newId);
+      console.log(foundMatch);
 
-      if (this.match) {
+      if (foundMatch) {
+        this.match = foundMatch;
         this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
         this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
+      } else {
+        console.warn("Match not found for ID:", newId);
       }
     });
 
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('Match ID:', id);
+    this.matches = this._sharedService.matches.filter(match => {
+      return (match.id !== this.match.id) &&
+        ((match.price >= this.match.price - 100 && match.price <= this.match.price + 100)
+          || match.venue === this.match.venue);
+    }).slice(0, 2);
 
-    this.match = this._sharedService.matches.find(m => m.id === id);
-
-    const foundItem = this._sharedService.eventItems.find((e: eventItem) => e.id === id);
-    if (foundItem) {
-      this.item = foundItem;
-    }
-
-    if (this.match) {
-      this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
-      this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
-    }
-
-    this.matches = this._sharedService.matches;
-    this.reviews = this._sharedService.generateReviewsForMatch(this.item.date, 5);
-    this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.item.price);
+    this.reviews = this._sharedService.generateReviewsForMatch(this.match.date, 5);
+    this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.match.price);
   }
 
   ngAfterViewInit() {
@@ -110,6 +111,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
       return;
     }
     this.checkScrollTicket();
+    this.updateScrollButtonState();
   }
 
   toggleFavorite(event: any) {
@@ -117,7 +119,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   }
 
   shareItem(item: any): void {
-    const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.location} on ${item.date}. Price: $${item.price} .Group: ${item.Group} .Kickoff: ${item.Kickoff} .GatesOpen: ${item.GatesOpen} .`;
+    const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.venue} on ${item.date}. Price: $${item.price} .Group: ${item.Group} .Kickoff: ${item.Kickoff} .GatesOpen: ${item.GatesOpen} .`;
     if (navigator.share) {
       navigator.share({
         title: item.title,
@@ -157,57 +159,78 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     let flag = true;
 
     // Detect Scroll Direction
-    const scrollingDown = scrollY > this.lastScrollTop;
+    const scrollingDown = (scrollY) > this.lastScrollTop;
+    console.log(card.offsetHeight);
 
     // Stop scrolling effect at "YOU MIGHT ALSO LIKE"
     if (this.stopSection) {
-      const stopPoint = this.stopSection.offsetTop - 200;
+      const stopPoint = this.stopSection.offsetTop - 300;
 
       if (scrollingDown) {
-        if (scrollPosition >= stopPoint - 350) {
+        //card
+        if (scrollPosition >= stopPoint - 300) {
           this.renderer.removeClass(card, 'fixed-event-card');
-
           // this.renderer.setStyle(card, 'position', 'absolute');
-          this.renderer.setStyle(card, 'top', `${stopPoint - 500}px`);
+          this.renderer.setStyle(card, 'top', `${stopPoint - card.offsetHeight + 100}px`);
+          // console.log('card-----------------------------------------');
         }
         else {
           this.renderer.addClass(card, 'fixed-event-card');
+          // console.log('card************************************************');
         }
       }
+      //card
+      if (!scrollingDown && scrollPosition < stopPoint - 300) {
+        this.renderer.addClass(card, 'fixed-event-card');
+        // console.log('card#################################################');
+      }
 
+      //tabBar
       if (scrollingDown && scrollPosition >= stopPoint) {
         flag = false;
         tabBar.classList.remove('sticky'); // Remove when reaching stop section
+        // console.log('---------------------------------');
       }
 
-      if (!scrollingDown && scrollPosition < stopPoint - 350) {
-        this.renderer.addClass(card, 'fixed-event-card');
-      }
-
+      //tabBar
       else if (!scrollingDown && scrollPosition < stopPoint) {
         flag = true;
         tabBar.classList.add('sticky'); // Re-add when scrolling up above stop section
+        // console.log('**************************************');
+
       }
-
-
     }
 
     // Keep tabBar sticky only when scrolling down and past the tabBar's original position
+    //tabBar
     if (scrollingDown && scrollY >= tabBarOffset && flag) {
       tabBar.classList.add('sticky');
+      // console.log('///////////////////////////////////////////////////');
+
     }
     else if (!scrollingDown && scrollY <= tabBarOffset + 500) {
       flag = true;
       tabBar.classList.remove('sticky'); // Return to original position when scrolling up
+      // console.log('####################################################');
+
     }
 
     // Change active tab based on scroll
     this.sections.forEach((section) => {
       if (
-        scrollPosition >= section.offsetTop &&
-        scrollPosition < section.offsetTop + section.offsetHeight
+        scrollPosition >= section.offsetTop - 50 &&
+        scrollPosition < section.offsetTop + section.offsetHeight && scrollingDown
       ) {
         this.setActiveTab(section.id);
+        // console.log("*************************************");
+      }
+
+      if (
+        scrollPosition >= section.offsetTop - 200 &&
+        scrollPosition < section.offsetTop + section.offsetHeight && !scrollingDown
+      ) {
+        this.setActiveTab(section.id);
+        // console.log("---------------------------------------------");
       }
     });
 
@@ -229,22 +252,46 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     });
   }
 
+
+  @ViewChild('eventContainer') eventContainer!: ElementRef;
+  canScrollLeft: boolean = false;
+  canScrollRight: boolean = true;
+
+  updateScrollButtonState() {
+    const container = this.eventContainer?.nativeElement;
+    if (container) {
+      this.canScrollLeft = container.scrollLeft > 0;
+      this.canScrollRight = container.scrollWidth > container.clientWidth + container.scrollLeft;
+    }
+    this.cdr.detectChanges();
+  }
+
   scrollLeft() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft -= 450; // Adjust scroll distance as needed
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: -500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
   }
 
   scrollRight() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft += 450; // Adjust scroll distance as needed
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: 500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
   }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.updateScrollButtonState();
+  }
+
 
   toggleMap() {
     this.isMapVisible = !this.isMapVisible;
   }
 
   openShareModal() {
-    this.locationUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.item.location)}`;
+    this.locationUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.match.venue)}`;
 
     // Open Bootstrap Modal
     const modalElement = document.getElementById('shareLocationModal');
@@ -267,6 +314,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     const container = this.ticketContainer.nativeElement;
     this.canScrollLeftTicket = container.scrollLeft > 0;
     this.canScrollRightTicket = container.scrollLeft < container.scrollWidth - (container.clientWidth + 25);
+    this.cdr.detectChanges();
   }
 
   scrollLeftTicket() {

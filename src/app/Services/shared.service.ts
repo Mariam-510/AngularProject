@@ -25,7 +25,7 @@ export interface ShowTicket {
   description: string;
 }
 
-export interface CheckoutTicket{
+export interface CheckoutTicket {
   type: string;
   quantity: number;
   price: number;
@@ -47,6 +47,7 @@ export interface match {
   staduim?: string;
   matchNumber: number;
   time: string;
+  GatesOpen: string;
   group: string;
   team1: string;
   team2: string;
@@ -68,22 +69,6 @@ export interface categories {
   badgeClass: string;
 }
 
-export interface eventItem {
-  id: number;
-  location: string;
-  Group: string;
-  title: string;
-  date: string;
-  Kickoff: string;
-  GatesOpen: string;
-  price: number;
-  description: string;
-  isFavorite: boolean;
-  word: string;
-  adv: string;
-  category: string;
-}
-
 export interface team {
   id: number;
   name: string;
@@ -92,7 +77,6 @@ export interface team {
   coach: string;
   keyPlayers: string;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -130,7 +114,7 @@ export class SharedService {
         imageLarge: 'img/Shows/d22.jpg',
         rating: 3,
         description: `A breathtaking fusion of contemporary and African-American dance, this performance captivates with its raw emotion and powerful storytelling.`,
-        date: 'Apr 2 - 2025',
+        date: 'May 31 - 2025',
         location: 'Cairo International Conference Center',
         fullLocation: 'Cairo, Egypt',
         price: 700,
@@ -149,7 +133,7 @@ export class SharedService {
         imageLarge: 'img/Shows/c11.jpg',
         rating: 4,
         description: `Relive the magic of The Beatles with this incredible tribute, featuring iconic hits and an unforgettable live experience.`,
-        date: 'Oct 4 - 2025',
+        date: 'Apr 2 - 2025',
         location: 'The American University in Cairo (AUC)', // this location is found
         fullLocation: 'New Cairo, Egypt',
         price: 600,
@@ -167,7 +151,7 @@ export class SharedService {
         imageLarge: 'img/Shows/c22.jpg',
         rating: 3.5,
         description: `Pop sensation Dua Lipa takes the stage for an electrifying night of chart-topping hits and high-energy performances.`,
-        date: 'Apr 29 - 2025',
+        date: 'Jul 13 - 2025',
         location: 'The American University in Cairo (AUC)', // this location is found
         fullLocation: 'New Cairo, Egypt',
         price: 850,
@@ -185,7 +169,7 @@ export class SharedService {
         imageLarge: 'img/Shows/c33.jpg',
         rating: 3,
         description: `A dazzling spectacle of music and performance, Katy Perry’s show is filled with hits, stunning visuals, and endless energy.`,
-        date: 'Jul 13 - 2025',
+        date: 'Apr 29 - 2025',
         location: 'El Gouna Conference & Culture Center',
         fullLocation: 'El Gouna, Egypt',
         price: 800,
@@ -204,7 +188,7 @@ export class SharedService {
         imageLarge: 'img/Shows/s11.jpg',
         rating: 3.5,
         description: `A night of sharp wit and fearless comedy, Ricky Gervais delivers his signature humor with bold and hilarious takes on life.`,
-        date: 'May 31 - 2025',
+        date: 'Oct 4 - 2025',
         location: 'Bibliotheca Alexandrina',
         fullLocation: 'Alexandria, Egypt',
         price: 300,
@@ -241,7 +225,7 @@ export class SharedService {
         imageLarge: 'img/Shows/t22.jpg',
         rating: 3,
         description: `A gripping drama that takes audiences behind the scenes of a band on the edge of fame, blending music and storytelling seamlessly.`,
-        date: 'May 6 - 2025',
+        date: 'Dec 9 - 2025',
         location: 'Cairo International Conference Center',
         fullLocation: 'Cairo, Egypt',
         price: 300,
@@ -259,7 +243,7 @@ export class SharedService {
         imageLarge: 'img/Shows/t33.jpg',
         rating: 4.5,
         description: `An extraordinary theatrical adaptation of the beloved novel, bringing to life a tale of survival, imagination, and adventure.`,
-        date: 'Dec 9 - 2025',
+        date: 'May 6 - 2025',
         location: 'El Gouna Conference & Culture Center',
         fullLocation: 'El Gouna, Egypt',
         price: 450,
@@ -271,8 +255,7 @@ export class SharedService {
       }
     ];
 
-<<<<<<< Updated upstream
-=======
+
   addShow(show: any) {
     const newShow = {
       id: this.shows.length + 1,
@@ -307,17 +290,18 @@ export class SharedService {
 
     return formattedDate;
   }
->>>>>>> Stashed changes
+
 
   //---------------------------------------------------------------------------------------------------------
   // Define ShowTicket array using the interface
   generateTicketsFromPrice(startingPrice: number): ShowTicket[] {
     // Create an array of ticket types with corresponding descriptions
     const ticketDetails = [
-      { type: 'Economy', description: 'Budget-friendly seating option.' },
-      { type: 'Regular', description: 'Standard seating with great view.' },
-      { type: 'VIP', description: 'Exclusive access with premium seating.' },
-      { type: 'Backstage Pass', description: 'Meet the performers & backstage access.' }
+      { type: 'Economy', description: 'Basic seating with a decent view.' },
+      { type: 'Regular', description: 'Standard seating with a better view.' },
+      { type: 'Premium', description: 'Upgraded seating with more comfort.' },
+      { type: 'VIP', description: 'Prime seating with perks like drinks/snacks.' },
+      { type: 'Backstage Pass', description: 'Access to backstage + premium seating.' }
     ];
 
     // Generate ticket objects with increasing prices
@@ -369,6 +353,16 @@ export class SharedService {
 
     return schedule;
   }
+
+  //---------------------------------------------------------------------------------------------------------
+  showCategories = [
+    { name: 'All', link: '' },
+    { name: 'Concerts', link: 'concerts' },
+    { name: 'Theater', link: 'theater' },
+    { name: 'Dance', link: 'dance' },
+    { name: 'Stand-Up Comedy', link: 'standUpComedy' },
+    { name: 'Other', link: 'other' }
+  ];
 
   //---------------------------------------------------------------------------------------------------------
   // Function to generate a review date incrementing by 1 day after each review
@@ -603,13 +597,14 @@ export class SharedService {
     {
       id: 1,
       image: 'img/cairo staduim.jpg',
-      venue: 'Cairo International Stadium, Cairo',
+      venue: 'Cairo International Stadium, Cairo', // location
       date: 'Fri 28 Mar 2025',
-      tournament: 'World Cup Qualifiers 2025',
+      tournament: 'World Cup Qualifiers 2025', //title
       staduim: 'img/cairo staduim.jpg',
       matchNumber: 5,
-      time: '08:30 PM',
-      group: 'African Qualifiers Group B',
+      time: '08:30 PM', //Kickoff
+      GatesOpen: '05:00 PM',
+      group: 'African Qualifiers Group B', //Group
       team1: 'Egypt',
       team2: 'Algeria',
       team1Logo: 'img/egypt.svg',
@@ -630,6 +625,7 @@ export class SharedService {
       tournament: 'Egypt Cup 2025',
       matchNumber: 19,
       time: '07:30 PM',
+      GatesOpen: '3:00 PM',
       group: 'Quarter Finals',
       staduim: 'img/s1.jpg',
       team2: 'ZED FC',
@@ -652,6 +648,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 18,
       time: '08:00 PM',
+      GatesOpen: '05:00 PM',
       group: 'Group Two (Stage)',
       team1: 'El Gouna SC',
       team2: 'Smouha SC',
@@ -674,6 +671,7 @@ export class SharedService {
       tournament: 'Derby Match',
       matchNumber: 20,
       time: '06:45 PM',
+      GatesOpen: '03:00 PM',
       group: 'Quarter Finals',
       team1: 'Al Ittihad Alexandria SC',
       team2: 'Smouha SC',
@@ -696,6 +694,7 @@ export class SharedService {
       tournament: 'Championship League',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Al Ahly SC',
       team2: 'Pyramids FC',
@@ -715,6 +714,7 @@ export class SharedService {
       tournament: 'World Cup Qualifiers 2025',
       matchNumber: 7,
       time: '09:00 PM',
+      GatesOpen: '06:00 PM',
       group: 'African Qualifiers Group B',
       team1: 'Egypt',
       team2: 'Nigeria',
@@ -736,6 +736,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 19,
       time: '07:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group One (Stage)',
       team1: 'Zamalek SC',
       team2: 'Ismaily SC',
@@ -758,6 +759,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Ismaily SC',
       team2: 'Ghazl Elmahala FC',
@@ -779,6 +781,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Ceramica Cleopatra FC',
       team2: 'Zamalek SC',
@@ -800,6 +803,7 @@ export class SharedService {
       tournament: 'Derby Match',
       matchNumber: 22,
       time: '09:00 PM',
+      GatesOpen: '06:00 PM',
       group: 'Main Stage',
       team1: 'Al Ahly SC',
       team2: 'Zamalek SC',
@@ -856,178 +860,8 @@ export class SharedService {
     },
   ];
 
-  // Filter options (sHome Page)
-  venues = ['All Venues', ...new Set(this.matches.map(m => m.venue))];
-
-  prices = [
-    'All Prices',
-    'Below 300',
-    '300 - 600',
-    '600 - 1000',
-    'Above 1000'
-  ];
-
-  dates = [
-    'All Dates',
-    'Most Recent',
-    'Least Recent'
-  ];
 
   //---------------------------------------------------------------------------------------------------------
-  //MATCH DETAILS
-
-  eventItems: eventItem[] = [
-    {
-      id: 1,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'African Qualifiers Group B',
-      title: 'World Cup Qualifiers 2025',
-      date: 'Mar 28 - 2025',
-      Kickoff: '08:30 PM',
-      GatesOpen: '05:00 PM',
-      price: 1100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 2,
-      location: 'Petro Sport Stadium, Cairo',
-      Group: 'Quarter Finals',
-      title: 'Egypt Cup 2025',
-      date: 'Mar 24 - 2025',
-      Kickoff: '7:30 PM',
-      GatesOpen: '3:00 PM',
-      price: 290,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 3,
-      location: 'Khaled Bichara Stadium, Gouna',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 23 - 2025',
-      Kickoff: '8:00 PM',
-      GatesOpen: '05:00 PM',
-      price: 250,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 4,
-      location: 'Alexandria Stadium, Alexandria',
-      Group: 'Quarter Finals',
-      title: 'EPL 2024/2025',
-      date: 'Mar 25 - 2025',
-      Kickoff: '6:45 PM',
-      GatesOpen: '03:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 5,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group Two (Stage)',
-      title: 'Championship League',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 6,
-      location: 'Borg El Arab Stadium, Alexandria',
-      Group: 'African Qualifiers Group B',
-      title: 'EPL 2024/2025',
-      date: 'Mar 23 - 2025',
-      Kickoff: '9:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 7,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group One (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 24 - 2025',
-      Kickoff: '7:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 300,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 8,
-      location: 'Suez Canal Stadium, Ismailia',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 300,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 9,
-      location: 'Suez Canal Stadium, Ismailia',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 10,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Main Stage',
-      title: 'Championship League',
-      date: 'Apr 1 - 2025',
-      Kickoff: '9:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 900,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-  ]
 
   teams: team[] = [
     {
@@ -1144,6 +978,15 @@ export class SharedService {
       coach: 'José Peseiro',
       keyPlayers: 'Zizo, Mahmoud El Wensh, Ahmed Fatouh'
     },
+    {
+      id: 14,
+      name: 'Nigeria',
+      logo: '/img/nigeria.svg',
+      description: 'A dominant force in African football, Nigeria has won the Africa Cup of Nations (AFCON) three times and is known for its talented players and attacking style.',
+      coach: 'José Peseiro',
+      keyPlayers: 'Victor Osimhen, Kelechi Iheanacho, Moses Simon'
+    }
+
   ];
 
   checkoutTicket: CheckoutTicket[] = [
@@ -1279,7 +1122,7 @@ export class SharedService {
 
 
 
-//---------------------------------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------------------------------
 
 
   getFavoriteMatches(): any[] {

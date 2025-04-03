@@ -62,7 +62,7 @@ export class AuthService {
       avatar: userInfo.picture ? userInfo.picture : 'img/userIcon.png',
       firstName: userInfo.given_name,
       lastName: userInfo.family_name,
-      phoneNum: userInfo.phone_number,
+      phoneNum: userInfo.phone_number || '011',
       authMethod: 'google',
       idToken: userInfo.id_token // Will be null unless you request it specifically
     };

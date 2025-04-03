@@ -2,37 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PaypalService } from '../../../Services/paypal.service';
+import { AuthService } from '../../../Services/auth.service';
+import { SharedService, show, CheckoutTicket } from '../../../Services/shared.service';
+import { ActivatedRoute } from '@angular/router';
 
 declare var paypal: any;
-
-interface Ticket {
-  category: string;
-  quantity: number;
-  price: number;
-}
-
-interface Buyer {
-  name: string;
-  email: string;
-  phone: string;
-  avatar: string;
-}
-
-interface Venue {
-  name: string;
-  location: string;
-}
-
-interface BookingData {
-  title: string;
-  eventImage: string;
-  venue: Venue;
-  date: Date;
-  time: string;
-  tickets: Ticket[];
-  totalPrice: number;
-  buyer: Buyer;
-}
 
 @Component({
   selector: 'app-booking-details-event',
@@ -42,34 +16,59 @@ interface BookingData {
 })
 export class BookingDetailsEventComponent implements OnInit {
 
-  bookingData: BookingData = {
-    title: 'The Phantom of the Opera',
-    eventImage: 'img/3.jpg',
-    venue: {
-      name: 'Cairo Opera House',
-      location: 'Zamalek, Cairo'
-    },
-    date: new Date('2024-04-15'),
-    time: '19:30',
-    tickets: [
-      { category: 'Level 1', quantity: 2, price: 2000 },
-      { category: 'Level 3', quantity: 1, price: 1000 }
-    ],
-    totalPrice: 5000,
-    buyer: {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+20 123 456 7890',
-      avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
-    }
-  };
+  constructor(private payPalService: PaypalService, private _sharedService: SharedService, private route: ActivatedRoute, private _authService: AuthService) { }
 
-  constructor(private payPalService: PaypalService) { }
+  show: any;
 
-  totalPrice: number = this.bookingData.totalPrice;
+  currentUser: any;
+
+  showDetails: show =
+  {
+    id: 1,
+    title: 'Cinderella',
+    category: 'Dance',
+    imageSmall: 'img/Shows/d1.jpg',
+    imageLarge: 'img/Shows/d11.jpg',
+    rating: 3.5,
+    description: `A mesmerizing performance blending ballet and storytelling, Cinderella brings the classic fairytale to life with stunning choreography and enchanting music.`,
+    date: 'Jun 12 - 2025',
+    location: 'Cairo Opera House',
+    fullLocation: 'Cairo, Egypt',
+    price: 500,
+    isFavorite: false,
+    word: 'Enchanting!',
+    reviews: 6,
+    qoute: "Step into a world of wonder!",
+    subQoute: "Experience a fairytale on stage."
+  }
+
+  checkoutTicket: CheckoutTicket[] = [];
+
+  totalPrice: number = 0;
   clientId: string = '';
 
   async ngOnInit() {
+
+    this.currentUser = this._authService.currentUser;
+    this._authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const newId = Number(params.get('id'));
+      this.show = this._sharedService.shows.find(s => s.id === newId);
+
+      if (this.show) {
+        this.showDetails = this.show;
+      }
+
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Show ID:', id);
+
+    this.checkoutTicket = this._sharedService.checkoutTicket;
+    this.totalPrice = this.checkoutTicket.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0);
+    });
+
     try {
       this.clientId = this.payPalService.clientId;
 

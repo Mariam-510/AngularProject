@@ -149,14 +149,15 @@ section {
   width: 72%;
 }
 
-@media (max-width: 992px) { 
+@media (max-width: 992px) {
   section {
     width: 100%;
   }
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
-.event-scroll-wrapper {
+/* .event-scroll-wrapper {
   overflow-x: auto;
   scroll-behavior: smooth;
   white-space: nowrap;
@@ -168,14 +169,31 @@ section {
   display: flex;
   flex-wrap: nowrap;
   gap: 15px;
-}
+}*/
 
 .event-scroll-wrapper::-webkit-scrollbar {
   display: none;
 }
 
+.event-scroll-wrapper {
+  display: block;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+.event-scroll-wrapper .row {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  width: max-content;
+}
+
 .event-card {
-  width: 420px;
+  width: 470px;
+  height: 550px;
   /* min-width: 300px; */
   /* Ensures horizontal scrolling */
 }
@@ -482,16 +500,6 @@ section {
     margin-top: 2px !important;
   }
 
-  /* .badges-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .badges-container .badge-item {
-    width: fit-content;
-  } */
-
   .badges-container {
     display: flex;
     flex-wrap: wrap;
@@ -516,7 +524,18 @@ section {
     justify-content: center;
   }
 
+  .reviewTxt {
+    display: none !important;
+  }
+
 }
+
+/* @media (max-width: 1200px) {
+
+  .badges-container {
+    display: none !important;
+  }
+} */
 
 /* ----------------------------------------------------------------------- */
 /* //SECTION */
@@ -526,21 +545,24 @@ section {
   justify-content: center;
   height: 100%;
 }
+
 .event-details {
   background: rgba(255, 255, 255, 0.9);
 
   border-radius: 5px;
 }
+
 .smalltext-overlay {
   position: absolute;
   bottom: 1%;
   left: 5%;
-  
+
   background: rgba(40, 37, 37, 0.5);
   padding: 0rem 1rem;
   border-radius: 3px;
   max-width: 100%;
 }
+
 .smallresponsive-title {
   font-size: 2.8vw;
   /* Larger size for h1 */
@@ -558,15 +580,21 @@ section {
   overflow-wrap: break-word;
   hyphens: auto;
 }
-@media (min-width: 768px) { /* Medium (md) and larger screens */
+
+@media (min-width: 768px) {
+
+  /* Medium (md) and larger screens */
   .responsive-badge {
-    font-size: 1.25rem !important; /* Equivalent to Bootstrap fs-5 */
+    font-size: 1.25rem !important;
+    /* Equivalent to Bootstrap fs-5 */
   }
 }
 
-@media (max-width: 767px) { /* Small (sm) screens */
+@media (max-width: 767px) {
+
+  /* Small (sm) screens */
   .responsive-badge {
-    font-size: 1rem !important; /* Equivalent to Bootstrap fs-6 */
+    font-size: 1rem !important;
+    /* Equivalent to Bootstrap fs-6 */
   }
 }
-

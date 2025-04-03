@@ -12,15 +12,6 @@
       <img [src]="item.imageLarge" class="d-block w-100" alt="{{ item.title }}"
         style="max-height: 600px; object-fit: cover;">
 
-      <!-- <div class="text-overlay mb-5 ms-5">
-        <h1 class="fw-bold text-uppercase text-white fs-1">{{item.qoute}}</h1>
-        <p class="fw-bold text-white fs-5">{{item.subQoute}}</p>
-      </div> -->
-      <!--
-      <div class="text-overlay mb-5 ms-5 d-none d-lg-block">
-        <h1 class="fw-bold text-uppercase text-white fs-3 fs-lg-1 fs-xl-1">{{item.qoute}}</h1>
-        <p class="fw-bold text-white fs-6 fs-lg-5 fs-xl-3">{{item.subQoute}}</p>
-      </div> -->
 
       <div class="text-overlay mb-5 ms-5">
         <h1 class="fw-bold text-uppercase text-white responsive-title">{{ item.qoute }}</h1>
@@ -101,7 +92,7 @@
             </a>
           </div>
 
-          <a routerLink="/bookingEvent" class="ticket-btn btn btn-danger w-100 mt-1 py-1 fs-5 mb-2"><i
+          <a [routerLink]="['/bookingEvent', item.id]" class="ticket-btn btn btn-danger w-100 mt-1 py-1 fs-5 mb-2"><i
               class="bi bi-ticket-perforated"></i> GET
             TICKET</a>
         </div>

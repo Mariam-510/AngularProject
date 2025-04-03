@@ -1,6 +1,6 @@
 <!-- Event Cards -->
 <div class="row" id="eventContainer">
-  <div class="col-12 col-lg-6 col-xl-4 event-card" *ngFor="let event of paginatedEvents">
+  <div class="col-12 col-lg-6 col-xl-4 event-card mb-2" *ngFor="let event of paginatedEvents">
     <div class="card shadow-sm position-relative">
       <img [src]="event.imageSmall" class="card-img-top rounded-top" [alt]="event.title">
 
@@ -43,7 +43,7 @@
 
         </div>
 
-        <a routerLink="/bookingEvent" class="btn btn-danger w-100 mt-2 py-2">
+        <a [routerLink]="['/bookingEvent', event.id]" class="btn btn-danger w-100 mt-2 py-2">
           <i class="bi bi-ticket me-2"></i> BOOK TICKETS
         </a>
       </div>

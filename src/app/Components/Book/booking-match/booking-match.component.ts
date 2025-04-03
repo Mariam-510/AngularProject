@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedService, match, ShowTicket, CheckoutTicket } from '../../../Services/shared.service';
+import { SharedService, match, ShowTicket } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-booking-match',
@@ -17,16 +17,16 @@ export class BookingMatchComponent implements OnInit {
   counters = signal<Record<string, number>>({});
 
   totalPrice = computed(() => {
-    return this.tickets.reduce((total, ticket) => 
+    return this.tickets.reduce((total, ticket) =>
       total + (this.counters()[ticket.type] || 0) * ticket.price, 0);
   });
 
-  totalTickets = computed(() => 
+  totalTickets = computed(() =>
     Object.values(this.counters()).reduce((sum, count) => sum + count, 0));
 
-  constructor(private router: Router, private _sharedService: SharedService, private route: ActivatedRoute) {}
+  constructor(private router: Router, private _sharedService: SharedService, private route: ActivatedRoute) { }
 
-    matchDetails: match =
+  matchDetails: match =
     {
       id: 1,
       image: 'img/cairo staduim.jpg',
@@ -36,6 +36,7 @@ export class BookingMatchComponent implements OnInit {
       staduim: 'img/cairo staduim.jpg',
       matchNumber: 5,
       time: '08:30 PM',
+      GatesOpen: '05:00 PM',
       group: 'African Qualifiers Group B',
       team1: 'Egypt',
       team2: 'Algeria',
@@ -109,7 +110,7 @@ export class BookingMatchComponent implements OnInit {
       quantity: this.counters()[ticket.type],
       price: ticket.price
     }))
-    .filter(ticket => ticket.quantity > 0);
+      .filter(ticket => ticket.quantity > 0);
 
     console.log(this._sharedService.checkoutTicket);
 
