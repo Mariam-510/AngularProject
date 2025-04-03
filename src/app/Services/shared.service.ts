@@ -454,6 +454,7 @@ export class SharedService {
     return reviews;
   }
 
+
   //---------------------------------------------------------------------------------------------------------
 
   cast = [
@@ -1061,6 +1062,19 @@ export class SharedService {
     return tickets.sort((a, b) => b.price - a.price);
   }
 
+  generateDateMatch(matchDate: string): string {
+
+    const date = new Date(matchDate);
+
+    // Get the short month name, day, and year
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    // Format as "Month Day - Year"
+    return `${month} ${day} - ${year}`;
+  }
+
   generateReviewsForMatch(matchDate: string, numberOfReviews: number): any[] {
     const reviews: any[] = [];
     const comments = [
@@ -1075,6 +1089,9 @@ export class SharedService {
 
     // English names list
     const englishNames = ['Ahmed', 'Sara', 'Mariam', 'Omar', 'Nour', 'Ali', 'Fatima', 'Khaled', 'Jamila', 'Mohamed'];
+
+    matchDate = this.generateDateMatch(matchDate);
+    console.log(matchDate);
 
     // Generate reviews with random ratings and comments
     for (let i = 0; i < numberOfReviews; i++) {
