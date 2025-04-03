@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SharedService, show, ShowTicket } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-booking-event',
@@ -9,132 +10,107 @@ import { Router } from '@angular/router';
   templateUrl: './booking-event.component.html',
   styleUrl: './booking-event.component.css'
 })
-export class BookingEventComponent {
+export class BookingEventComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  show: any;
+  tickets: ShowTicket[] = [];
+  counters = signal<Record<string, number>>({});
 
-  // Event Data
-  eventDetails = {
-    title: 'The Phantom of the Opera',
-    image: 'img/3.jpg',
-    date: '2024-04-15T19:30:00',
-    time: '07:30 PM',
-    venue: {
-      name: 'Cairo Opera House',
-      image: 'Images/eventSeating.png',
-      location: 'Zamalek, Cairo'
-    }
-  };
+  totalPrice = computed(() => {
+    return this.tickets.reduce((total, ticket) => 
+      total + (this.counters()[ticket.type] || 0) * ticket.price, 0);
+  });
 
-  // Ticket Counters
-  level1Counter = signal(0);
-  level2Counter = signal(0);
-  level3Counter = signal(0);
-  level4Counter = signal(0);
-  level5Counter = signal(0);
+  totalTickets = computed(() => 
+    Object.values(this.counters()).reduce((sum, count) => sum + count, 0));
 
-  // Prices
-  level1Price = 2000;
-  level2Price = 1500;
-  level3Price = 1000;
-  level4Price = 750;
-  level5Price = 500;
+  constructor(private router: Router, private _sharedService: SharedService, private route: ActivatedRoute) {}
 
-  totalPrice = signal(0);
+  showDetails: show =
+  {
+    id: 1,
+    title: 'Cinderella',
+    category: 'Dance',
+    imageSmall: 'img/Shows/d1.jpg',
+    imageLarge: 'img/Shows/d11.jpg',
+    rating: 3.5,
+    description: `A mesmerizing performance blending ballet and storytelling, Cinderella brings the classic fairytale to life with stunning choreography and enchanting music.`,
+    date: 'Jun 12 - 2025',
+    location: 'Cairo Opera House',
+    fullLocation: 'Cairo, Egypt',
+    price: 500,
+    isFavorite: false,
+    word: 'Enchanting!',
+    reviews: 6,
+    qoute: "Step into a world of wonder!",
+    subQoute: "Experience a fairytale on stage."
+  }
 
-  // Total Calculations
-  updateTotalPrice() {
-    this.totalPrice.set(
-      (this.level1Counter() * this.level1Price) +
-      (this.level2Counter() * this.level2Price) +
-      (this.level3Counter() * this.level3Price) +
-      (this.level4Counter() * this.level4Price) +
-      (this.level5Counter() * this.level5Price)
-    );
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const newId = Number(params.get('id'));
+      this.show = this._sharedService.shows.find(s => s.id === newId);
+
+      if (this.show) {
+        this.showDetails = this.show;
+      }
+    });
+
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Show ID:', id);
+
+    this.tickets = this._sharedService.generateTicketsFromPrice(this.showDetails.price);
+    // Initialize counters
+    const initialCounters = this.tickets.reduce((acc, ticket) => ({
+      ...acc,
+      [ticket.type]: 0
+    }), {});
+    this.counters.set(initialCounters);
   }
 
   isTicketLimitReached(): boolean {
     return this.totalTickets() >= 4;
   }
 
-  totalTickets(): number {
-    return (this.level1Counter() + this.level2Counter() + this.level3Counter() + this.level4Counter() + this.level5Counter());
-  }
-
-  // Event Ticket Controls
-  // Level 1
-  minusLevel1() {
-    if (this.level1Counter() > 0) {
-      this.level1Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusLevel1() {
+  plusTicket(type: string) {
     if (!this.isTicketLimitReached()) {
-      this.level1Counter.update(v => v + 1);
-      this.updateTotalPrice();
+      this.counters.update(counters => ({
+        ...counters,
+        [type]: (counters[type] || 0) + 1
+      }));
     }
   }
 
-  // Level 2
-  minusLevel2() {
-    if (this.level2Counter() > 0) {
-      this.level2Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusLevel2() {
-    if (!this.isTicketLimitReached()) {
-      this.level2Counter.update(v => v + 1);
-      this.updateTotalPrice();
-    }
+  minusTicket(type: string) {
+    this.counters.update(counters => {
+      const current = counters[type] || 0;
+      return current > 0 ? { ...counters, [type]: current - 1 } : counters;
+    });
   }
 
-  // Level 3
-  minusLevel3() {
-    if (this.level3Counter() > 0) {
-      this.level3Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusLevel3() {
-    if (!this.isTicketLimitReached()) {
-      this.level3Counter.update(v => v + 1);
-      this.updateTotalPrice();
-    }
-  }
-
-  // Level 4
-  minusLevel4() {
-    if (this.level4Counter() > 0) {
-      this.level4Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusLevel4() {
-    if (!this.isTicketLimitReached()) {
-      this.level4Counter.update(v => v + 1);
-      this.updateTotalPrice();
-    }
-  }
-
-  // Level 5
-  minusLevel5() {
-    if (this.level5Counter() > 0) {
-      this.level5Counter.update(v => v - 1);
-      this.updateTotalPrice();
-    }
-  }
-  plusLevel5() {
-    if (!this.isTicketLimitReached()) {
-      this.level5Counter.update(v => v + 1);
-      this.updateTotalPrice();
-    }
+  getTicketClass(type: string): string {
+    const classMap: Record<string, string> = {
+      'Economy': 'level-5',
+      'Regular': 'level-3',
+      'Premium': 'level-4',
+      'VIP': 'level-2',
+      'Backstage Pass': 'level-1',
+    };
+    return classMap[type] || '';
   }
 
   proceedToCheckout() {
-    console.log('Proceeding to checkout...');
-    this.router.navigate(['/bookingDetailsEvent']);
+
+    this._sharedService.checkoutTicket = this.tickets.map(ticket => ({
+      type: ticket.type,
+      quantity: this.counters()[ticket.type],
+      price: ticket.price
+    }))
+    .filter(ticket => ticket.quantity > 0);
+
+    console.log(this._sharedService.checkoutTicket);
+
+    // this.router.navigate(['/bookingDetailsEvent', this.showDetails.id]);
   }
 
 }

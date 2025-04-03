@@ -113,7 +113,7 @@
                 class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
                 <i class="bi bi-info-circle me-2"></i> More Info
               </a>
-              <a routerLink="/bookingEvent"
+              <a [routerLink]="['/bookingEvent', event.id]"
                 class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
                 <i class="bi bi-ticket me-2"></i> BOOK TICKETS
               </a>
@@ -185,7 +185,7 @@
                 class="btn btn-light text-danger flex-grow-1 me-2 border border-1 rounded">
                 <i class="bi bi-info-circle me-2"></i> More Info
               </a>
-              <a routerLink="/bookingEvent"
+              <a [routerLink]="['/bookingEvent', event.id]"
                 class="btn btn-danger text-white flex-grow-1 d-flex align-items-center justify-content-center rounded">
                 <i class="bi bi-ticket me-2"></i> BOOK TICKETS
               </a>

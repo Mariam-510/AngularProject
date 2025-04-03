@@ -311,10 +311,11 @@ export class SharedService {
   generateTicketsFromPrice(startingPrice: number): ShowTicket[] {
     // Create an array of ticket types with corresponding descriptions
     const ticketDetails = [
-      { type: 'Economy', description: 'Budget-friendly seating option.' },
-      { type: 'Regular', description: 'Standard seating with great view.' },
-      { type: 'VIP', description: 'Exclusive access with premium seating.' },
-      { type: 'Backstage Pass', description: 'Meet the performers & backstage access.' }
+      { type: 'Economy', description: 'Basic seating with a decent view.' },
+      { type: 'Regular', description: 'Standard seating with a better view.' },
+      { type: 'Premium', description: 'Upgraded seating with more comfort.' },
+      { type: 'VIP', description: 'Prime seating with perks like drinks/snacks.' },
+      { type: 'Backstage Pass', description: 'Access to backstage + premium seating.' }
     ];
 
     // Generate ticket objects with increasing prices
