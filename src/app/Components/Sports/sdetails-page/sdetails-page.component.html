@@ -733,14 +733,18 @@
     <hr>
 
     <!-- Scroll Buttons -->
-    <div class="scroll-container d-flex">
-      <button class="scroll-btn left me-2" (click)="scrollLeft()">&#10094;</button>
+    <div class="scroll-container d-flex align-items-center ms-4" #scrollContainer>
+
+      <!-- Conditionally Show Left Button -->
+      <button *ngIf="canScrollLeft" class="scroll-btn left" (click)="scrollLeft()">
+        &#10094;
+      </button>
 
       <!-- Scrollable Event List -->
-      <div class="event-scroll-wrapper">
+      <div class="event-scroll-wrapper" #eventContainer (scroll)="updateScrollButtonState()">
         <div class="row flex-nowrap" id="eventContainer">
           @for (match of matches; track match) {
-          <div class="col-md-4 event-card" style="width: 470px;">
+          <div class="col-md-4 event-card">
             <div class="card shadow-sm position-relative">
               <!-- Match Cards Grid -->
               <div class="card border-0 h-80 ">
@@ -827,7 +831,11 @@
         </div>
       </div>
 
-      <button class="scroll-btn right ms-2" (click)="scrollRight()">&#10095;</button>
+      <!-- Conditionally Show Right Button -->
+      <button *ngIf="canScrollRight" class="scroll-btn right me-2" (click)="scrollRight()">
+        &#10095;
+      </button>
+
     </div>
   </div>
 </div>

@@ -157,7 +157,7 @@ section {
 
 /* --------------------------------------------------------------------------------------------- */
 
-.event-scroll-wrapper {
+/* .event-scroll-wrapper {
   overflow-x: auto;
   scroll-behavior: smooth;
   white-space: nowrap;
@@ -169,14 +169,31 @@ section {
   display: flex;
   flex-wrap: nowrap;
   gap: 15px;
-}
+}*/
 
 .event-scroll-wrapper::-webkit-scrollbar {
   display: none;
 }
 
+.event-scroll-wrapper {
+  display: block;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+.event-scroll-wrapper .row {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  width: max-content;
+}
+
 .event-card {
-  width: 420px;
+  width: 470px;
+  height: 550px;
   /* min-width: 300px; */
   /* Ensures horizontal scrolling */
 }
