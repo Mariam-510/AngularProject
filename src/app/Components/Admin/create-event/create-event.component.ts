@@ -57,11 +57,11 @@ export class CreateEventComponent implements OnInit {
   }
   onFileTouched() {
     this.isTouched = true; // Mark the file input as touched when the user leaves the input field
-  // If no file is selected after it is touched, trigger the validation error
-  if (!this.selectedFile) {
-    this.validationMessage = 'Event image is required.';
-    this.isImageInvalid = true;
-  }
+    // If no file is selected after it is touched, trigger the validation error
+    if (!this.selectedFile) {
+      this.validationMessage = 'Event image is required.';
+      this.isImageInvalid = true;
+    }
   }
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -75,7 +75,7 @@ export class CreateEventComponent implements OnInit {
       this.selectedFile = file;
       this.isImageInvalid = false; // Valid file
       const reader = new FileReader();
-      
+
       reader.onload = (e: any) => {
         this.MyForm.patchValue({ EventImage: e.target.result });
       };
@@ -85,7 +85,7 @@ export class CreateEventComponent implements OnInit {
       this.isImageInvalid = true;
     }
   }
- 
+
 
   submitForm() {
     if (!this.selectedFile) {
@@ -106,9 +106,9 @@ export class CreateEventComponent implements OnInit {
 
     this.MyForm.reset();
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-  if (fileInput) {
-    fileInput.value = '';
-  }
+    if (fileInput) {
+      fileInput.value = '';
+    }
   }
 
 
