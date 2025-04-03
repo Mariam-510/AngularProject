@@ -283,6 +283,13 @@ export class SharedService {
 
   }
 
+  convertTo12HourFormat(time: string): string {
+    const [hours, minutes] = time.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert 0 -> 12 for AM
+    return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+  }
+  
   addMatch(match: any) {
     const newMatch = {
       id: this.matches.length + 1,
@@ -292,7 +299,7 @@ export class SharedService {
       tournament: match.league,
       staduim: "img/m4.jpg",
       matchNumber: 19,
-      time: match.matchTime,
+      time: this.convertTo12HourFormat(match.matchTime),
       GatesOpen: match.matchTime,
       group: 'Group Two (Stage)',
       team1: match.homeTeam,
