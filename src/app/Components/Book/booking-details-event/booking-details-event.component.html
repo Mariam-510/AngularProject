@@ -4,16 +4,16 @@
     <section class="transaction-overview">
       <div class="event-highlight">
         <div class="cultural-presentation">
-          <img [src]="bookingData.eventImage" class="event-visual" />
+          <img [src]="showDetails.imageLarge" class="event-visual" />
           <div class="event-essentials">
-            <h2 class="event-headline fs-2">{{ bookingData.title }}</h2>
+            <h2 class="event-headline fs-2">{{ showDetails.title }}</h2>
             <div class="venue-meta fs-4">
               <span class="location-icon">📍</span>
-              {{ bookingData.venue.name }}
+              {{ showDetails.location }}
             </div>
             <div class="temporal-info fs-4">
               <div class="event-timing">
-                🕒 {{ bookingData.date | date }} • {{ bookingData.time }}
+                <!-- 🕒 {{ showDetails.date | date }} • {{ bookingData.time }} -->
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@
 
       <!-- Logged in user image -->
       <div class="d-flex justify-content-center mb-4 mt-5">
-        <img [src]="bookingData.buyer.avatar" alt="User profile picture" class="rounded-circle shadow-sm" width="100"
+        <img [src]="currentUser?.avatar" alt="User profile picture" class="rounded-circle shadow-sm" width="100"
           height="100" />
       </div>
 
@@ -38,19 +38,19 @@
           <dt class="fs-5">
             <i class="bi bi-person text-danger fs-4"></i> Full Name
           </dt>
-          <dd class="ms-4 fs-5">{{ bookingData.buyer.name }}</dd>
+          <dd class="ms-4 fs-5">{{ currentUser?.firstName + ' ' + (currentUser?.lastName? currentUser?.lastName : "") }}</dd>
         </div>
         <div class="detail-unit">
           <dt class="fs-5">
             <i class="bi bi-envelope text-danger fs-4"></i> Email Address
           </dt>
-          <dd class="ms-4 fs-5">{{ bookingData.buyer.email }}</dd>
+          <dd class="ms-4 fs-5">{{ currentUser?.email }}</dd>
         </div>
         <div class="detail-unit">
           <dt class="fs-5">
             <i class="bi bi-phone text-danger fs-4"></i> Phone Number
           </dt>
-          <dd class="ms-4 fs-5">{{ bookingData.buyer.phone }}</dd>
+          <dd class="ms-4 fs-5">{{ currentUser?.phoneNum }}</dd>
         </div>
       </dl>
     </section>
@@ -66,11 +66,11 @@
       </h2>
 
       <div class="inventory-list">
-        @for (ticket of bookingData.tickets; track $index) {
+        @for (ticket of checkoutTicket; track $index) {
         <div class="inventory-item fs-5">
           <div class="item-meta">
             <span class="item-quantity fs-5">{{ ticket.quantity }}x</span>
-            <span class="ticket-class">{{ ticket.category }}</span>
+            <span class="ticket-class">{{ ticket.type }}</span>
           </div>
           <div class="item-value">EGP {{ ticket.price * ticket.quantity }}</div>
         </div>
@@ -80,7 +80,7 @@
       <div class="grand-total">
         <div class="total-summary fs-4">
           <span><i class="bi bi-cash text-danger fs-4"></i> Total Due</span>
-          <span class="total-amount">EGP {{ bookingData.totalPrice }}</span>
+          <span class="total-amount">EGP {{ totalPrice }}</span>
         </div>
         <p class="fee-disclaimer">All taxes and fees included</p>
       </div>
