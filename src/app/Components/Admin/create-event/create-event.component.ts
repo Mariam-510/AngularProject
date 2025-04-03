@@ -11,7 +11,16 @@ import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 export class CreateEventComponent implements OnInit {
   selectedEventLocation: string = 'Cairo, Egypt';
   showMap: boolean = true;
+<<<<<<< Updated upstream
    MyForm = new FormGroup({
+=======
+  categories: any
+  selectedFile: File | null = null;
+  isImageInvalid = false;
+  validationMessage = '';
+  isTouched = false;
+  MyForm = new FormGroup({
+>>>>>>> Stashed changes
     EventName: new FormControl("", [Validators.required, Validators.maxLength(50)]),
     EventImage: new FormControl("", [Validators.required]),
     EventDescription: new FormControl("", [Validators.required, Validators.maxLength(500)]),
@@ -46,13 +55,58 @@ export class CreateEventComponent implements OnInit {
       this.showMap = true;
     }, 1);
   }
+  onFileTouched() {
+    this.isTouched = true; // Mark the file input as touched when the user leaves the input field
+  // If no file is selected after it is touched, trigger the validation error
+  if (!this.selectedFile) {
+    this.validationMessage = 'Event image is required.';
+    this.isImageInvalid = true;
+  }
+  }
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) {
+      this.selectedFile = null;
+      this.validationMessage = 'Event image is required.';
+      this.isImageInvalid = true;
+      return;
+    }
+    if (file && file.type.startsWith('image/')) {
+      this.selectedFile = file;
+      this.isImageInvalid = false; // Valid file
+      const reader = new FileReader();
+      
+      reader.onload = (e: any) => {
+        this.MyForm.patchValue({ EventImage: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.validationMessage = 'Only image files are allowed.';
+      this.isImageInvalid = true;
+    }
+  }
+ 
 
   submitForm() {
-    if (this.MyForm.invalid) {
+    if (!this.selectedFile) {
+      this.validationMessage = 'Event image is required.';
+      this.isImageInvalid = true;
+      return;
+    }
+    if (this.MyForm.invalid || this.isImageInvalid) {
       this.MyForm.markAllAsTouched();
       return;
     }
     alert('Event Created Successfully!');
+<<<<<<< Updated upstream
+=======
+    const newEvent = this.MyForm.value;
+
+    console.log(newEvent);
+
+    this.sharedService.addShow(newEvent);
+
+>>>>>>> Stashed changes
     this.MyForm.reset();
 
   }
