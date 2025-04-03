@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 declare var bootstrap: any; // Required for Bootstrap modal handling
-import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { team, match, SharedService } from '../../../Services/shared.service';
@@ -26,12 +26,10 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   isMapVisible: boolean = true;
   locationUrl: string = '';
   showMore: boolean = false;
-  canScrollLeft = false;
-  canScrollRight = true; // Assume initial state
   private initialCardTop = 0;
   private stickyThreshold = 0;
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService) { }
+  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService, private cdr: ChangeDetectorRef) { }
 
   match: match = {
     id: 1,
@@ -96,7 +94,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
       return (match.id !== this.match.id) &&
         ((match.price >= this.match.price - 100 && match.price <= this.match.price + 100)
           || match.venue === this.match.venue);
-    });
+    }).slice(0, 2);
 
     this.reviews = this._sharedService.generateReviewsForMatch(this.match.date, 5);
     this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.match.price);
@@ -113,6 +111,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
       return;
     }
     this.checkScrollTicket();
+    this.updateScrollButtonState();
   }
 
   toggleFavorite(event: any) {
@@ -253,15 +252,39 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     });
   }
 
+
+  @ViewChild('eventContainer') eventContainer!: ElementRef;
+  canScrollLeft: boolean = false;
+  canScrollRight: boolean = true;
+
+  updateScrollButtonState() {
+    const container = this.eventContainer?.nativeElement;
+    if (container) {
+      this.canScrollLeft = container.scrollLeft > 0;
+      this.canScrollRight = container.scrollWidth > container.clientWidth + container.scrollLeft;
+    }
+    this.cdr.detectChanges();
+  }
+
   scrollLeft() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft -= 450; // Adjust scroll distance as needed
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: -500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
   }
 
   scrollRight() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft += 450; // Adjust scroll distance as needed
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: 500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
   }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.updateScrollButtonState();
+  }
+
 
   toggleMap() {
     this.isMapVisible = !this.isMapVisible;
@@ -291,6 +314,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     const container = this.ticketContainer.nativeElement;
     this.canScrollLeftTicket = container.scrollLeft > 0;
     this.canScrollRightTicket = container.scrollLeft < container.scrollWidth - (container.clientWidth + 25);
+    this.cdr.detectChanges();
   }
 
   scrollLeftTicket() {

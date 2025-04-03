@@ -73,12 +73,14 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
     this.tickets = this.sharedService.generateTicketsFromPrice(this.item.price);
     this.schedules = this.sharedService.generateSchedule(this.item.date);
+
     this.eventList = this.sharedService.shows.filter(show => {
       return (show.id !== this.item.id) &&
         ((show.price >= this.item.price - 5 && show.price <= this.item.price + 5)
           || show.category === this.item.category);
     });
 
+    // this.eventList = this.sharedService.shows;
 
     this.reviews = this.sharedService.generateReviewsForShow(this.item.date, 5);
     this.castList = this.sharedService.cast.find(castItem => castItem.showId === this.item.id)?.cast || [];
@@ -164,7 +166,7 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
     // Detect Scroll Direction
     const scrollingDown = (scrollY) > this.lastScrollTop;
-    console.log(card.offsetHeight);
+    // console.log(card.offsetHeight);
 
     // Stop scrolling effect at "YOU MIGHT ALSO LIKE"
     if (this.stopSection) {
@@ -230,7 +232,7 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
       }
 
       if (
-        scrollPosition >= section.offsetTop - 200 &&
+        scrollPosition >= section.offsetTop - 250 &&
         scrollPosition < section.offsetTop + section.offsetHeight && !scrollingDown
       ) {
         this.setActiveTab(section.id);
@@ -260,31 +262,40 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
   // -----------------------------------------------------------------------------------------------------
 
-  isLeftDisabled = true;  // Initially disable the left button
-  isRightDisabled = false; // Initially enable the right button
+  @ViewChild('eventContainer') eventContainer!: ElementRef;
+  canScrollLeft: boolean = false;
+  canScrollRight: boolean = true;
+
+  updateScrollButtonState() {
+    const container = this.eventContainer?.nativeElement;
+    if (container) {
+      this.canScrollLeft = container.scrollLeft > 0;
+      this.canScrollRight = container.scrollWidth > container.clientWidth + container.scrollLeft;
+    }
+    this.cdr.detectChanges();
+  }
 
   scrollLeft() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft -= 500; // Adjust scroll distance as needed
-    this.updateScrollButtonState();
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: -500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
   }
 
   scrollRight() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft += 500; // Adjust scroll distance as needed
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: 500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
     this.updateScrollButtonState();
   }
 
-  updateScrollButtonState() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    const maxScroll = container.scrollWidth - container.clientWidth;
 
-    // Disable left button if we're at the beginning
-    this.isLeftDisabled = container.scrollLeft === 0;
 
-    // Disable right button if we've reached the end
-    this.isRightDisabled = container.scrollLeft === maxScroll;
-  }
 
   // -----------------------------------------------------------------------------------------------------
   isMapVisible: boolean = true;

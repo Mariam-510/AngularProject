@@ -97,18 +97,18 @@
   </div>
 
 
-<!-- Section -->
+  <!-- Section -->
   <!-- <h1 class="d-block d-lg-none">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1> -->
   <div class="d-block d-lg-none ">
     <div class="container-fluid mt-4 ">
       <div class=" text-white  position-relative w-100">
-          <img [src]="item.imageLarge" class="card-img " alt="Event Background">
-          <div class="card-img-overlay d-flex flex-column justify-content-end ">
-            <div class="smalltext-overlay mb-3 ms-2">
-              <h1 class="fw-bold text-uppercase text-white smallresponsive-title">{{ item.qoute }}</h1>
-              <p class="fw-bold text-white smallresponsive-subtitle ">{{ item.subQoute }}</p>
-            </div>
+        <img [src]="item.imageLarge" class="card-img " alt="Event Background">
+        <div class="card-img-overlay d-flex flex-column justify-content-end ">
+          <div class="smalltext-overlay mb-3 ms-2">
+            <h1 class="fw-bold text-uppercase text-white smallresponsive-title">{{ item.qoute }}</h1>
+            <p class="fw-bold text-white smallresponsive-subtitle ">{{ item.subQoute }}</p>
           </div>
+        </div>
       </div>
 
       <div class="shadow">
@@ -118,14 +118,17 @@
 
         <div class="card-body w-100 rounded-0 px-3 pb-3 pt-2">
           <div class="d-flex flex-wrap gap-4 align-items-center  justify-content-center pb-3">
-            <span class="badge-item bg-light text-danger px-3 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
+            <span
+              class="badge-item bg-light text-danger px-3 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
               {{ categoryIcons[item.category] }} {{ item.category }}
             </span>
 
-            <span class="badge-item bg-light text-danger px-2 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
+            <span
+              class="badge-item bg-light text-danger px-2 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
               🔥 {{ item.word }}
             </span>
-            <span class="badge-item bg-light text-danger px-2 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
+            <span
+              class="badge-item bg-light text-danger px-2 fs-6 fs-md-5 p-2 d-inline-flex align-items-center rounded-3 responsive-badge">
               ⭐ {{ item.rating }}
             </span>
 
@@ -155,13 +158,16 @@
 
               <!-- Buttons Column -->
               <div class="col-5 d-flex flex-column gap-2 justify-content-center pb-3">
-                <button class="btn btn-light badge fav-btn d-flex align-items-center justify-content-center w-100 py-3 fs-6"
+                <button
+                  class="btn btn-light badge fav-btn d-flex align-items-center justify-content-center w-100 py-3 fs-6"
                   (click)="toggleFavorite(item)">
                   <span class="text-danger">Wishlist</span>
-                  <i class="bi ms-2" [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
+                  <i class="bi ms-2"
+                    [ngClass]="item.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-danger'"></i>
                 </button>
 
-                <button class="more-info btn btn-light badge text-danger d-flex align-items-center w-100 justify-content-center py-3 fs-6"
+                <button
+                  class="more-info btn btn-light badge text-danger d-flex align-items-center w-100 justify-content-center py-3 fs-6"
                   (click)="shareItem(item)">
                   Share it <i class="bi bi-share-fill ms-2"></i>
                 </button>
@@ -425,7 +431,8 @@
                   <span class="badge fst-italic bg-secondary text-white py-2 px-2 fs-6 ticket-price opacity-75">
                     {{ ticket.price }} EGP
                   </span>
-                  <a [routerLink]="['/bookingEvent', item.id]" class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
+                  <a [routerLink]="['/bookingEvent', item.id]"
+                    class="btn btn-sm btn-outline-danger fs-6 ticket-buy-btn fst-italic">
                     Buy Now
                   </a>
                 </div>
@@ -677,20 +684,23 @@
 
     <hr>
 
-    <!-- Scroll Buttons -->
-    <div class="scroll-container d-flex">
-      <button class="scroll-btn left me-2" (click)="scrollLeft()" [disabled]="isLeftDisabled">&#10094;</button>
+    <!-- Scrollable Event List -->
+    <div class="scroll-container d-flex align-items-center ms-4" #scrollContainer>
 
+      <!-- Conditionally Show Left Button -->
+      <button *ngIf="canScrollLeft" class="scroll-btn left" (click)="scrollLeft()">
+        &#10094;
+      </button>
 
-      <!-- Scrollable Event List -->
-      <div class="event-scroll-wrapper">
-
-        <div class="row" id="eventContainer">
+      <div class="event-scroll-wrapper" #eventContainer (scroll)="updateScrollButtonState()">
+        <div class="row flex-nowrap" id="eventContainer">
           @for (event of eventList; track event) {
-          <div class="col-12 col-xl-4 col-md-6 d-flex">
-            <div class="card shadow-sm position-relative d-flex flex-column h-100 w-100">
+          <div class="col-12 col-xl-4 col-md-6 d-flex flex-column event-card">
+
+            <div class="card shadow-sm position-relative">
+
               <img [src]="event.imageSmall" class="card-img-top rounded-top" [alt]="event.title"
-                style="height: 200px; object-fit: cover;">
+                style="height: 250px; object-fit: cover;">
 
               <span class="position-absolute bg-white text-dark px-3 py-1 rounded fw-bold m-2">
                 {{ event.rating }} ★
@@ -703,10 +713,10 @@
                 <div class="text-danger mb-3 mt-1 fs-5">
                   <ng-container *ngFor="let star of [].constructor(5); let i = index">
                     <i class="bi" [ngClass]="{
-                                'bi-star-fill': i < Math.floor(event.rating),
-                                'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
-                                'bi-star': i >= Math.ceil(event.rating)
-                              }"></i>
+                              'bi-star-fill': i < Math.floor(event.rating),
+                              'bi-star-half': i === Math.floor(event.rating) && event.rating % 1 !== 0,
+                              'bi-star': i >= Math.ceil(event.rating)
+                            }"></i>
                   </ng-container>
                 </div>
 
@@ -728,7 +738,7 @@
                   </a>
                 </div>
 
-                <a [routerLink]="['/bookingEvent', item.id]" class="btn btn-danger w-100 mt-2 py-2">
+                <a [routerLink]="['/bookingEvent', event.id]" class="btn btn-danger w-100 mt-2 py-2">
                   <i class="bi bi-ticket me-2"></i> BOOK TICKETS
                 </a>
               </div>
@@ -736,13 +746,12 @@
           </div>
           }
         </div>
-
-
-
       </div>
 
-      <button class="scroll-btn right ms-2" (click)="scrollRight()" [disabled]="isRightDisabled">&#10095;</button>
+      <!-- Conditionally Show Right Button -->
+      <button *ngIf="canScrollRight" class="scroll-btn right me-2" (click)="scrollRight()">
+        &#10095;
+      </button>
     </div>
     }
-
   </div>
