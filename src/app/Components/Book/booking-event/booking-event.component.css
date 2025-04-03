@@ -55,6 +55,10 @@
   gap: 1rem;
 }
 
+.form-select {
+  font-family: monospace;
+}
+
 .ticket-card {
   display: flex;
   justify-content: space-between;

@@ -1046,6 +1046,13 @@ export class SharedService {
     }
   ];
 
+  scheduleDetails: Schedule =
+    {
+      date: '2025-06-13',
+      day: 'Friday',
+      time: '07:30 PM - 09:30 PM'
+    };
+
   // Define ShowTicket array using the interface
   generateMatchTicketsFromPrice(startingPrice: number): ShowTicket[] {
     // Create an array of ticket types with corresponding descriptions

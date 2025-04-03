@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SharedService, show, ShowTicket } from '../../../Services/shared.service';
+import { SharedService, show, ShowTicket, Schedule } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-booking-event',
@@ -15,6 +15,7 @@ export class BookingEventComponent implements OnInit {
   show: any;
   tickets: ShowTicket[] = [];
   counters = signal<Record<string, number>>({});
+  selectedDate: string = '';
 
   totalPrice = computed(() => {
     return this.tickets.reduce((total, ticket) => 
@@ -46,6 +47,14 @@ export class BookingEventComponent implements OnInit {
     subQoute: "Experience a fairytale on stage."
   }
 
+  schedule: any;
+
+  scheduleDetails: Schedule = {
+    date: '',
+    day: '',
+    time: ''
+  };
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const newId = Number(params.get('id'));
@@ -60,12 +69,19 @@ export class BookingEventComponent implements OnInit {
     console.log('Show ID:', id);
 
     this.tickets = this._sharedService.generateTicketsFromPrice(this.showDetails.price);
+
+    this.schedule = this._sharedService.generateSchedule(this.showDetails.date);
+
     // Initialize counters
     const initialCounters = this.tickets.reduce((acc, ticket) => ({
       ...acc,
       [ticket.type]: 0
     }), {});
     this.counters.set(initialCounters);
+  }
+
+  isScheduleSelected(): boolean {
+    return this.selectedDate !== '';
   }
 
   isTicketLimitReached(): boolean {
@@ -99,6 +115,16 @@ export class BookingEventComponent implements OnInit {
     return classMap[type] || '';
   }
 
+  UpdateScheduleDate()
+  {
+    const [day, date, startTime, endTime] = this.selectedDate.split(' - ');
+    this.scheduleDetails = {
+      day,
+      date,
+      time: `${startTime} - ${endTime}`
+    };
+  }
+
   proceedToCheckout() {
 
     this._sharedService.checkoutTicket = this.tickets.map(ticket => ({
@@ -108,6 +134,9 @@ export class BookingEventComponent implements OnInit {
     }))
     .filter(ticket => ticket.quantity > 0);
 
+    this._sharedService.scheduleDetails = this.scheduleDetails;
+    // console.log(this.selectedDate);
+    // console.log(this.scheduleDetails);
     this.router.navigate(['/bookingDetailsEvent', this.showDetails.id]);
   }
 
