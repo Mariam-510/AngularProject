@@ -2,28 +2,27 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
-import { SharedService } from '../../../Services/shared.service';
+import { match, SharedService } from '../../../Services/shared.service';
 
-export interface match {
-  id: number;
-  image: string;
-  venue: string;
-  date: string;
-  tournament: string;
-  staduim?: string;
-  matchNumber: number;
-  time: string;
-  group: string;
-  team1: string;
-  team2: string;
-  team1Logo: string;
-  team2Logo: string;
-  isFavorite: boolean;
-  price: number;
-  word?: string;
-  adv?: string;
-  category: string;
-}
+// export interface match {
+//   id: number;
+//   venue: string;
+//   date: string;
+//   tournament: string;
+//   staduim: string;
+//   matchNumber: number;
+//   time: string;
+//   group: string;
+//   team1: string;
+//   team2: string;
+//   team1Logo: string;
+//   team2Logo: string;
+//   isFavorite: boolean;
+//   price: number;
+//   word: string;
+//   adv: string;
+//   category: string;
+// }
 
 export interface categories {
   image: string;

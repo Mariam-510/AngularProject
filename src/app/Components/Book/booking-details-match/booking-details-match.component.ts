@@ -25,7 +25,6 @@ export class BookingDetailsMatchComponent implements OnInit {
   matchDetails: match =
     {
       id: 1,
-      image: 'img/cairo staduim.jpg',
       venue: 'Cairo International Stadium, Cairo',
       date: 'Fri 28 Mar 2025',
       tournament: 'World Cup Qualifiers 2025',
