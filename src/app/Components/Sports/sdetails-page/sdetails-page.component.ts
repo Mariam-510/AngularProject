@@ -3,7 +3,8 @@ declare var bootstrap: any; // Required for Bootstrap modal handling
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
-import { eventItem, team, match, SharedService } from '../../../Services/shared.service';
+import { team, match, SharedService } from '../../../Services/shared.service';
+
 
 @Component({
   selector: 'app-sdetails-page',
@@ -22,7 +23,6 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   isNavigationSticky: boolean = false; // Indicates whether the navigation buttons are sticky
   currentActiveSection: string = 'overview'; // Default active section
   private lastScrollTop: number = 0;
-  match: any;
   isMapVisible: boolean = true;
   locationUrl: string = '';
   showMore: boolean = false;
@@ -33,22 +33,31 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService) { }
 
-  item: eventItem =
-    {
-      id: 1,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group Two (Stage)',
-      title: 'Championship League',
-      date: 'Mar 2 - 2025',
-      Kickoff: '7:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    }
+  match: match = {
+    id: 1,
+    image: 'img/cairo staduim.jpg',
+    venue: 'Cairo International Stadium, Cairo', // location
+    date: 'Fri 28 Mar 2025',
+    tournament: 'World Cup Qualifiers 2025', //title
+    staduim: 'img/cairo staduim.jpg',
+    matchNumber: 5,
+    time: '08:30 PM', //Kickoff
+    GatesOpen: '05:00 PM',
+    group: 'African Qualifiers Group B', //Group
+    team1: 'Egypt',
+    team2: 'Algeria',
+    team1Logo: 'img/egypt.svg',
+    team2Logo: 'img/algeria.svg',
+    isFavorite: true,
+    price: 1100,
+    word: "🔥 high",
+    adv: "⏳ Limited Seats",
+    category: '⚽ Football',
+    location: 'Cairo, Egypt'
+  };
+
+  description: string = `Football isn't just a sport—it's a passion that unites people across the world. It's more than just a game of skill and strategy; it's a celebration of culture, identity, and community. When the whistle blows, it signals the start of something bigger than a match—it’s an event that stirs emotions, fuels rivalries, and builds lifelong memories. Whether it’s the roar of the crowd, the anticipation of a goal, or the heartbreak of a last-minute loss, football has the power to bring people together, transcending borders and languages. It's a shared experience that connects fans in a way few other things can, making it a universal language spoken in every corner of the globe.`
+
 
   homeTeam: team = {
     id: 1,
@@ -71,43 +80,26 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const newId = Number(params.get('id'));
-      this.match = this._sharedService.matches.find(m => m.id === newId);
+      const foundMatch = this._sharedService.matches.find(m => m.id === newId);
+      console.log(foundMatch);
 
-      if (this.match) {
+      if (foundMatch) {
+        this.match = foundMatch;
         this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
         this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
+      } else {
+        console.warn("Match not found for ID:", newId);
       }
     });
 
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('Match ID:', id);
-
-    this.match = this._sharedService.matches.find(m => m.id === id);
-
-    console.log(this.match)
-
-    const foundItem = this._sharedService.eventItems.find((e: eventItem) => e.id === id);
-    if (foundItem) {
-      this.item = foundItem;
-    }
-
-    console.log(this.item)
-
-    if (this.match) {
-      this.homeTeam = this._sharedService.teams.find(t => t.name === this.match.team1) || this._sharedService.teams[0];
-      this.awayTeam = this._sharedService.teams.find(t => t.name === this.match.team2) || this._sharedService.teams[1];
-    }
-
-    // this.matches = this._sharedService.matches;
-
     this.matches = this._sharedService.matches.filter(match => {
-      return (match.id !== this.item.id) &&
-        ((match.price >= this.item.price - 100 && match.price <= this.item.price + 100)
-          || match.venue === this.item.location);
+      return (match.id !== this.match.id) &&
+        ((match.price >= this.match.price - 100 && match.price <= this.match.price + 100)
+          || match.venue === this.match.venue);
     });
 
-    this.reviews = this._sharedService.generateReviewsForMatch(this.item.date, 5);
-    this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.item.price);
+    this.reviews = this._sharedService.generateReviewsForMatch(this.match.date, 5);
+    this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.match.price);
   }
 
   ngAfterViewInit() {
@@ -128,7 +120,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   }
 
   shareItem(item: any): void {
-    const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.location} on ${item.date}. Price: $${item.price} .Group: ${item.Group} .Kickoff: ${item.Kickoff} .GatesOpen: ${item.GatesOpen} .`;
+    const shareText = `Check out this event: ${item.title} - ${item.description} at ${item.venue} on ${item.date}. Price: $${item.price} .Group: ${item.Group} .Kickoff: ${item.Kickoff} .GatesOpen: ${item.GatesOpen} .`;
     if (navigator.share) {
       navigator.share({
         title: item.title,
@@ -255,7 +247,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   }
 
   openShareModal() {
-    this.locationUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.item.location)}`;
+    this.locationUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.match.venue)}`;
 
     // Open Bootstrap Modal
     const modalElement = document.getElementById('shareLocationModal');

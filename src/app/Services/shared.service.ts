@@ -47,6 +47,7 @@ export interface match {
   staduim?: string;
   matchNumber: number;
   time: string;
+  GatesOpen: string;
   group: string;
   team1: string;
   team2: string;
@@ -68,22 +69,6 @@ export interface categories {
   badgeClass: string;
 }
 
-export interface eventItem {
-  id: number;
-  location: string;
-  Group: string;
-  title: string;
-  date: string;
-  Kickoff: string;
-  GatesOpen: string;
-  price: number;
-  description: string;
-  isFavorite: boolean;
-  word: string;
-  adv: string;
-  category: string;
-}
-
 export interface team {
   id: number;
   name: string;
@@ -92,7 +77,6 @@ export interface team {
   coach: string;
   keyPlayers: string;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -611,13 +595,14 @@ export class SharedService {
     {
       id: 1,
       image: 'img/cairo staduim.jpg',
-      venue: 'Cairo International Stadium, Cairo',
+      venue: 'Cairo International Stadium, Cairo', // location
       date: 'Fri 28 Mar 2025',
-      tournament: 'World Cup Qualifiers 2025',
+      tournament: 'World Cup Qualifiers 2025', //title
       staduim: 'img/cairo staduim.jpg',
       matchNumber: 5,
-      time: '08:30 PM',
-      group: 'African Qualifiers Group B',
+      time: '08:30 PM', //Kickoff
+      GatesOpen: '05:00 PM',
+      group: 'African Qualifiers Group B', //Group
       team1: 'Egypt',
       team2: 'Algeria',
       team1Logo: 'img/egypt.svg',
@@ -638,6 +623,7 @@ export class SharedService {
       tournament: 'Egypt Cup 2025',
       matchNumber: 19,
       time: '07:30 PM',
+      GatesOpen: '3:00 PM',
       group: 'Quarter Finals',
       staduim: 'img/s1.jpg',
       team2: 'ZED FC',
@@ -660,6 +646,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 18,
       time: '08:00 PM',
+      GatesOpen: '05:00 PM',
       group: 'Group Two (Stage)',
       team1: 'El Gouna SC',
       team2: 'Smouha SC',
@@ -682,6 +669,7 @@ export class SharedService {
       tournament: 'Derby Match',
       matchNumber: 20,
       time: '06:45 PM',
+      GatesOpen: '03:00 PM',
       group: 'Quarter Finals',
       team1: 'Al Ittihad Alexandria SC',
       team2: 'Smouha SC',
@@ -704,6 +692,7 @@ export class SharedService {
       tournament: 'Championship League',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Al Ahly SC',
       team2: 'Pyramids FC',
@@ -723,6 +712,7 @@ export class SharedService {
       tournament: 'World Cup Qualifiers 2025',
       matchNumber: 7,
       time: '09:00 PM',
+      GatesOpen: '06:00 PM',
       group: 'African Qualifiers Group B',
       team1: 'Egypt',
       team2: 'Nigeria',
@@ -744,6 +734,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 19,
       time: '07:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group One (Stage)',
       team1: 'Zamalek SC',
       team2: 'Ismaily SC',
@@ -766,6 +757,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Ismaily SC',
       team2: 'Ghazl Elmahala FC',
@@ -787,6 +779,7 @@ export class SharedService {
       tournament: 'EPL 2024/2025',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Ceramica Cleopatra FC',
       team2: 'Zamalek SC',
@@ -808,6 +801,7 @@ export class SharedService {
       tournament: 'Derby Match',
       matchNumber: 22,
       time: '09:00 PM',
+      GatesOpen: '06:00 PM',
       group: 'Main Stage',
       team1: 'Al Ahly SC',
       team2: 'Zamalek SC',
@@ -866,160 +860,6 @@ export class SharedService {
 
 
   //---------------------------------------------------------------------------------------------------------
-  //MATCH DETAILS
-
-  eventItems: eventItem[] = [
-    {
-      id: 1,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'African Qualifiers Group B',
-      title: 'World Cup Qualifiers 2025',
-      date: 'Mar 28 - 2025',
-      Kickoff: '08:30 PM',
-      GatesOpen: '05:00 PM',
-      price: 1100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 2,
-      location: 'Petro Sport Stadium, Cairo',
-      Group: 'Quarter Finals',
-      title: 'Egypt Cup 2025',
-      date: 'Mar 24 - 2025',
-      Kickoff: '7:30 PM',
-      GatesOpen: '3:00 PM',
-      price: 290,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 3,
-      location: 'Khaled Bichara Stadium, Gouna',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 23 - 2025',
-      Kickoff: '8:00 PM',
-      GatesOpen: '05:00 PM',
-      price: 250,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 4,
-      location: 'Alexandria Stadium, Alexandria',
-      Group: 'Quarter Finals',
-      title: 'EPL 2024/2025',
-      date: 'Mar 25 - 2025',
-      Kickoff: '6:45 PM',
-      GatesOpen: '03:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 5,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group Two (Stage)',
-      title: 'Championship League',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 6,
-      location: 'Borg El Arab Stadium, Alexandria',
-      Group: 'African Qualifiers Group B',
-      title: 'EPL 2024/2025',
-      date: 'Mar 23 - 2025',
-      Kickoff: '9:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 7,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group One (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 24 - 2025',
-      Kickoff: '7:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 300,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 8,
-      location: 'Suez Canal Stadium, Ismailia',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 300,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 9,
-      location: 'Suez Canal Stadium, Ismailia',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 10,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Main Stage',
-      title: 'Championship League',
-      date: 'Apr 1 - 2025',
-      Kickoff: '9:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 900,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-  ]
 
   teams: team[] = [
     {
@@ -1136,6 +976,15 @@ export class SharedService {
       coach: 'José Peseiro',
       keyPlayers: 'Zizo, Mahmoud El Wensh, Ahmed Fatouh'
     },
+    {
+      id: 14,
+      name: 'Nigeria',
+      logo: '/img/nigeria.svg',
+      description: 'A dominant force in African football, Nigeria has won the Africa Cup of Nations (AFCON) three times and is known for its talented players and attacking style.',
+      coach: 'José Peseiro',
+      keyPlayers: 'Victor Osimhen, Kelechi Iheanacho, Moses Simon'
+    }
+
   ];
 
   checkoutTicket: CheckoutTicket[] = [
