@@ -281,6 +281,34 @@ export class SharedService {
     console.log(this.shows);
 
   }
+  addMatch(match: any) {
+    const newMatch = {
+      id: this.matches.length + 1,
+      image: "img/m4.jpg",
+
+      date: match.matchDate,
+      tournament: match.league,
+      staduim: "img/m4.jpg",
+      matchNumber: 19,
+      time: match.matchTime,
+      GatesOpen: match.matchTime,
+      group: 'Group Two (Stage)',
+      team1: match.homeTeam,
+      team2: match.awayTeam,
+      team1Logo: match.homeTeamLogo,
+      team2Logo: match.awayTeamLogo,
+      isFavorite: false,
+      price: 500,
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
+      location: match.location,
+      venue: match.stadium + ', ' + match.location,
+    }
+    this.matches.push(newMatch);
+
+    console.log(this.matches);
+  }
 
   getFormattedDate() {
     const now = new Date();

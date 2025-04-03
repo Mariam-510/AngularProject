@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
+import { SharedService } from '../../../Services/shared.service';
 
 @Component({
   selector: 'app-add-new-match',
@@ -61,7 +62,7 @@ export class AddNewMatchComponent implements OnInit {
 
   stadiums = this.stadiumData.map(stadium => stadium.name);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private sharedService: SharedService) {
     this.matchForm = this.fb.group({
       league: ['', Validators.required],
       homeTeam: ['', Validators.required],
@@ -159,7 +160,8 @@ export class AddNewMatchComponent implements OnInit {
       
       console.log('Form submitted:', matchData);
       alert('Match added successfully!');
-      
+      this.sharedService.addMatch(matchData);
+
       // Reset the form
       this.matchForm.reset({
         location: 'Cairo'
