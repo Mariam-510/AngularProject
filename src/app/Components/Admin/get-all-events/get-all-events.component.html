@@ -35,24 +35,9 @@
         <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
       </div>
 
-      <!-- Buttons (Aligned Right) -->
-      <!-- <div class="event-info-actions ps-5 d-flex flex-column align-items-end mt-5">
-        <a [routerLink]="['/admin/addTicket']" class="btn btn-light text-danger border border-1 rounded mb-2"
-          style="width: 180px;">
-          <i class="bi bi-ticket me-2"></i> Add Ticket
-        </a>
-        <a [routerLink]="['/admin/addSchedule']" class="btn btn-danger text-white border border-1 rounded mb-2"
-          style="width: 180px;">
-          <i class="bi bi-clock me-2"></i> Add Schedule
-        </a>
-        <a [routerLink]="['/admin/addPerformer']" class="btn btn-light text-danger border border-1 rounded"
-          style="width: 180px;">
-          <i class="bi bi-people me-2"></i> Add Performer
-        </a>
-      </div> -->
-
       <!-- Buttons: Row on sm/md/lg, Column on xl -->
-      <div class="event-info-actions ps-5 d-flex flex-row flex-xl-column align-items-center justify-content-center mt-0 mt-xl-5">
+      <div
+        class="event-info-actions ps-5 d-flex flex-row flex-xl-column align-items-center justify-content-center mt-0 mt-xl-5">
         <a [routerLink]="['/admin/addTicket']"
           class="btn btn-light text-danger border border-1 rounded mb-xl-2 me-2 me-xl-0" style="width: 180px;">
           <i class="bi bi-ticket me-2"></i> Add Ticket
