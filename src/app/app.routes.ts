@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { NotfoundComponent } from './Components/notfound/notfound.component';
-import { TesttComponent } from './Components/testt/testt.component';
 import { EHomePageComponent } from './Components/Entertainment/ehome-page/ehome-page.component';
 import { ShowsComponent } from './Components/Entertainment/shows/shows.component';
 import { ConcertsComponent } from './Components/Entertainment/Categories/concerts/concerts.component';
@@ -10,7 +9,6 @@ import { DanceComponent } from './Components/Entertainment/Categories/dance/danc
 import { StandUpComedyComponent } from './Components/Entertainment/Categories/stand-up-comedy/stand-up-comedy.component';
 import { OtherComponent } from './Components/Entertainment/Categories/other/other.component';
 import { EdetailsComponent } from './Components/Entertainment/edetails/edetails.component';
-import { LeafletMapComponent } from './Components/leaflet-map/leaflet-map.component';
 import { BookingHistoryComponent } from './Components/ProfilePages/booking-history/booking-history.component';
 import { SDetailsPageComponent } from './Components/Sports/sdetails-page/sdetails-page.component';
 import { SHomePageComponent } from './Components/Sports/shome-page/shome-page.component';
@@ -29,7 +27,6 @@ import { ADashboardComponent } from './Components/Admin/adashboard/adashboard.co
 import { AdminHomeComponent } from './Components/Admin/admin-home/admin-home.component';
 import { ProfileComponent } from './Components/ProfilePages/profile/profile.component';
 import { UserComponent } from './Components/ProfilePages/user/user.component';
-import { TestV2Component } from './Components/test-v2/test-v2.component';
 import { AddScheduleComponent } from './Components/Admin/add-schedule/add-schedule.component';
 import { AddTicketComponent } from './Components/Admin/add-ticket/add-ticket.component';
 import { AddPerformerComponent } from './Components/Admin/add-performer/add-performer.component';
@@ -101,14 +98,6 @@ export const routes: Routes = [
 
   { path: 'bookingDetailsMatch/:id', component: BookingDetailsMatchComponent, title: 'Match Booking Details' },
   { path: 'bookingDetailsEvent/:id', component: BookingDetailsEventComponent, title: 'Show Booking Details' },
-
-  { path: "t", component: TesttComponent, title: "t" },
-
-  { path: "t2", component: TestV2Component, title: "t2" },
-
-  { path: "t", component: TesttComponent, title: "t" },
-
-  { path: "l", component: LeafletMapComponent, title: "l" },
 
   { path: "**", component: NotfoundComponent },
 
