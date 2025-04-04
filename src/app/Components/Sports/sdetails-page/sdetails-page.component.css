@@ -11,8 +11,7 @@
 .fixed-event-card {
   position: fixed !important;
   top: calc(20px + var(--sticky-header-height)) !important;
-
-
+  z-index: 1000;
 }
 
 .sticky-header {

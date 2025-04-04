@@ -10,6 +10,7 @@
 .fixed-event-card {
   position: fixed !important;
   top: calc(20px + var(--sticky-header-height)) !important;
+  z-index: 1000;
 }
 
 .sticky-header {
@@ -110,6 +111,7 @@
   background-color: white;
   position: relative;
   transition: all 0.3s ease-in-out;
+  /* z-index: -1; */
 }
 
 .tab-links a {

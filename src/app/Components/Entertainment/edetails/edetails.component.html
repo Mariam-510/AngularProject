@@ -98,7 +98,6 @@
 
 
   <!-- Section -->
-  <!-- <h1 class="d-block d-lg-none">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1> -->
   <div class="d-block d-lg-none ">
     <div class="container-fluid mt-4 ">
       <div class=" text-white  position-relative w-100">
@@ -246,13 +245,13 @@
         <p class="lead ms-3 text-justify fw-light fst-italic">
           {{ item.description.length > 200 ? (showMore ? item.description : item.description.slice(0, 200) + '...') : item.description }}
         </p>
-        
+
         <!-- Show More / Show Less Button (Only appears if description > 200) -->
         <button *ngIf="item.description.length > 200" class="btn btn-light text-danger me-2" (click)="showMore = !showMore">
           <i class="bi" [ngClass]="showMore ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
           {{ showMore ? 'Show Less' : 'Show More' }}
         </button>
-        
+
 
 
         <hr class="mt-4">
