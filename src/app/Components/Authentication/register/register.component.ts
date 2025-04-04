@@ -65,5 +65,15 @@ export class RegisterComponent {
   googleLogin() {
     this._authService.googleLogin();
   }
+  showPassword: boolean = false;
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+  showConfirmPassword: boolean = false;
+
+  toggleConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
 }
 

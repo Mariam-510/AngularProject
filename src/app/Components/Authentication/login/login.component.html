@@ -37,16 +37,17 @@
           <span class="input-group-text bg-light border-0">
             <i class="bi bi-key-fill text-muted red-icon"></i>
           </span>
-          <input type="password" class="form-control border-0 shadow-sm" placeholder="Enter password"
-            formControlName="pass" />
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control border-0 shadow-sm"
+            placeholder="Enter password" formControlName="pass" />
+          <span class="input-group-text bg-light border-0" (click)="togglePassword()" style="cursor: pointer;">
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye' : 'bi-eye-slash'"></i>
+          </span>
         </div>
-        <div *ngIf="
-            Loginform.get('pass')?.hasError('required') &&
-            Loginform.get('pass')?.touched
-          " class="text-danger small ps-2">
+        <div *ngIf="Loginform.get('pass')?.hasError('required') && Loginform.get('pass')?.touched" class="text-danger small ps-2">
           Password is required.
         </div>
       </div>
+      
 
       @if (invalidCredentials){
         <div class="text-danger fw-bold small ps-2">
