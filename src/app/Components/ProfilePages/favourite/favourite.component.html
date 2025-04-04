@@ -26,112 +26,115 @@
   </div>
 
   <div *ngIf="selectedCategory === 'events'">
-    <div *ngFor="let event of paginatedEvents" class="show-container row px-4 py-3 border-bottom rounded bg-white mx-2
-            justify-content-center align-items-center">
-      <!-- Left Section: Event Image -->
-      <div class="col-12 col-lg-auto d-flex justify-content-center text-center">
-        <img [src]="event.imageSmall" class="imgH img-fluid rounded-4 event-image" alt="Event Image">
-      </div>
+    <div *ngFor="let event of paginatedEvents" class="show-container row py-3 border-bottom rounded bg-white mx-2">
+      <div
+        class="d-flex flex-column flex-xl-row align-items-center gap-2 mx-auto bg-white rounded-3 justify-content-center">
 
-      <!-- Right Section: Event Details & Actions -->
-      <div class="col d-flex flex-column ms-md-3 bg-light pt-2 rounded-3">
-        <!-- Title & Favorite -->
-        <div class="d-flex justify-content-between align-items-start ms-3">
-          <h2 class="flex-grow-1">🎟️ {{ event.title }}</h2>
-
-          <button class="hoverbtn btn fav-btn d-flex align-items-center fs-5 ms-auto me-2 bg-white shadow"
-            (click)="toggleFavoriteEvent(event)">
-            <i class="bi" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
-          </button>
+        <!-- Left Section: Event Image -->
+        <div class="col-12 col-xl-auto d-flex justify-content-center text-center">
+          <img [src]="event.imageSmall" class="imgH img-fluid event-image" alt="Event Image">
         </div>
 
-        <!-- Category Badge -->
-        <div class="d-flex gap-2 align-items-center ms-3">
-          <span
-            class="badge-item bg-white text-danger shadow-sm fs-6 p-2 d-inline-flex align-items-center rounded-3 me-1">
-            {{ categoryIcons[event.category] }} {{ event.category }}
-          </span>
+        <!-- Right Section: Event Details & Actions -->
+        <div class=" col-12 col-xl-9 d-flex flex-column ms-md-4 bg-light pt-2 rounded-3 h-100 p-3">
 
-          <span
-            class="badge-item bg-white text-danger shadow-sm fs-6 p-2 d-inline-flex align-items-center rounded-3 me-1">
-            ⭐ {{ event.rating }}
-          </span>
-
-          <span
-            class="badge-item bg-white text-danger shadow-sm fs-6 p-2 d-inline-flex align-items-center rounded-3 me-1">
-            🔥 {{ event.word }}
-          </span>
-        </div>
-
-        <div class="d-flex flex-wrap justify-content-between align-items-start px-3 pt-1 rounded-5">
-          <!-- Event Information -->
-          <div class="info-box px-4 py-1 rounded-3 text-dark w-50">
-            <h6 class="border-bottom py-2 d-flex align-items-center">
-              <i class="bi bi-calendar3 me-2 text-danger fs-5"></i>
-              <span class="fw-semibold">{{ event.date }}</span>
-            </h6>
-            <h6 class="border-bottom py-2 d-flex align-items-center">
-              <i class="bi bi-geo-alt-fill me-2 text-danger fs-5"></i>
-              <span class="fw-semibold">{{ event.location }}</span>
-            </h6>
-            <h6 class="border-bottom py-2 d-flex align-items-center">
-              <i class="bi bi-cash-stack me-2 text-danger fs-5"></i>
-              <span class="fw-semibold">Price From ${{ event.price }}</span>
-            </h6>
+          <!-- Title & Favorite -->
+          <div class="d-flex justify-content-between align-items-start ms-2">
+            <h2 class="flex-grow-1">🎟️ {{ event.title }}</h2>
+            <button class="hoverbtn btn fav-btn d-flex align-items-center fs-5 ms-auto me-2 bg-white shadow"
+              (click)="toggleFavoriteEvent(event)">
+              <i class="bi" [ngClass]="event.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-dark'"></i>
+            </button>
           </div>
 
-          <!-- Action Buttons -->
-          <div class="d-flex flex-column align-items-end mt-4">
-            <!-- More Info & Share Buttons in the Same Row -->
-            <div class="d-flex gap-2 mb-3 w-100" style="max-width: 320px;">
-              <a routerLink="/shows/5"
-                class="hoverbtn btn bg-white text-danger flex-grow-1 rounded px-3 py-2 shadow transition">
-                <i class="bi bi-info-circle me-2"></i> More Info
-              </a>
-              <button class="hoverbtn btn bg-white text-danger flex-grow-1 rounded px-3 py-2 shadow transition"
-                (click)="shareEvent(event)">
-                Share it <i class="bi bi-share-fill ms-2"></i>
-              </button>
+          <!-- Category Badge -->
+          <div class="d-flex gap-3 align-items-center ms-3 d-none d-xl-block mt-3 mb-2">
+            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3 me-2">{{
+              categoryIcons[event.category]
+              }}
+              {{ event.category }}</span>
+            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3 me-2">⭐ {{ event.rating }}</span>
+            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3">🔥 {{ event.word }}</span>
+          </div>
+
+          <!-- Event Information and Action Buttons -->
+          <div class="row px-3 pt-1">
+
+            <!-- Info Box (50% width on large and extra-large screens) -->
+            <div class="col-12 col-lg-6 col-xl-6">
+              <div class="info-box px-4 py-1 rounded-3 text-dark">
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-calendar3 me-2 text-danger fs-5"></i>
+                  <span class="fw-semibold">{{ event.date }}</span>
+                </h6>
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-geo-alt-fill me-2 text-danger fs-5"></i>
+                  <span class="fw-semibold">{{ event.location }}</span>
+                </h6>
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-cash-stack me-2 text-danger fs-5"></i>
+                  <span class="fw-semibold">Price From ${{ event.price }}</span>
+                </h6>
+              </div>
             </div>
 
-            <!-- BOOK NOW Button Below with Same Width -->
-            <a routerLink="/bookingEvent"
-              class="hoverbtn btn btn-danger text-white rounded px-4 py-2 d-flex align-items-center justify-content-center shadow-lg transition w-100"
-              style="max-width: 320px;">
-              <i class="bi bi-ticket me-2"></i> BOOK NOW
-            </a>
-          </div>
+            <!-- Action Buttons Column (50% width on large and extra-large screens) -->
+            <div class="col-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-center gap-2">
+              <div class="d-flex flex-column flex-xl-row w-100 gap-2">
+                <!-- More Info Button -->
+                <a routerLink="/shows/5"
+                  class="hoverbtn btn bg-white text-danger rounded-3 px-3 py-2 shadow w-100 w-xl-auto">
+                  More Info <i class="bi bi-info-circle ms-2"></i>
+                </a>
+                <!-- Share It Button -->
+                <button class="hoverbtn btn bg-white text-danger rounded-3 px-3 py-2 shadow w-100 w-xl-auto"
+                  (click)="shareEvent(event)">
+                  Share It <i class="bi bi-share-fill ms-2"></i>
+                </button>
+              </div>
 
+              <!-- Book Now Button, always below the others -->
+              <a routerLink="/bookingEvent"
+                class="hoverbtn btn btn-danger text-white rounded-3 px-4 py-2 shadow-lg w-100">
+                <i class="bi bi-ticket me-2"></i> Book Now
+              </a>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
   </div>
 
 
+
   <div *ngIf="selectedCategory === 'matches'">
-    <div *ngFor="let match of paginatedMatches" class="show-container row  py-3 border-bottom rounded bg-white mx-2">
+    <div *ngFor="let match of paginatedMatches" class="show-container row py-3 border-bottom rounded bg-white mx-2">
+      <div
+        class="d-flex flex-column flex-xl-row align-items-center gap-2 mx-auto bg-white rounded-3 justify-content-center">
 
-      <div class="d-flex flex-column flex-xl-row align-items-stretch mx-auto bg-white rounded-3 ">
-
+        <!-- Left Section: Team Info and Logos -->
         <div class="d-flex flex-column align-items-center col-12 col-xl-3 h-100 mt-3">
           <div class="d-flex flex-column align-items-center">
             <div class="d-flex align-items-center justify-content-center">
               <div class="d-flex flex-column align-items-center mx-3">
                 <img [src]="match.team1Logo" class="img-fluid rounded-4" alt="{{ match.team1 }}"
                   style="max-width: 50px; max-height: 50px;">
-                <h6 class="mt-1 mb-1 fw-bold text-center ">{{ match.team1 }}</h6>
+                <h6 class="mt-1 mb-1 fw-bold text-center">{{ match.team1 }}</h6>
               </div>
               <div class="fw-bold text-danger fs-4 mx-3">VS</div>
               <div class="d-flex flex-column align-items-center mx-3">
                 <img [src]="match.team2Logo" class="img-fluid rounded-4" alt="{{ match.team2 }}"
                   style="max-width: 50px; max-height: 50px;">
-                <h6 class="mt-1 mb-1 fw-bold text-center ">{{ match.team2 }}</h6>
+                <h6 class="mt-1 mb-1 fw-bold text-center">{{ match.team2 }}</h6>
               </div>
             </div>
           </div>
         </div>
-        <!-- Right Section: Event Details & Actions (Full Width on Small/Large, 75% on Extra-Large) -->
+
+        <!-- Right Section: Event Details & Actions -->
         <div class="col-12 col-xl-9 d-flex flex-column ms-md-4 bg-light pt-2 rounded-3 h-100 p-3">
+
           <!-- Title & Favorite -->
           <div class="d-flex justify-content-between align-items-start ms-2">
             <h2 class="flex-grow-1">🏟️ {{ match.venue }}</h2>
@@ -142,50 +145,63 @@
           </div>
 
           <!-- Category Badges -->
-          <div class="d-flex gap-2 align-items-center ms-2">
-            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3">{{ match.category }}</span>
-            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3">{{ match.adv }}</span>
-            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3">{{ match.word }}</span>
+          <div class="d-flex gap-2 align-items-center ms-4 d-none d-xl-block mt-3 mb-2">
+            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3 me-2">{{ match.category }}</span>
+            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3 me-2">{{ match.adv }}</span>
+            <span class="badge-item bg-white text-danger shadow-sm fs-6 p-2 rounded-3 ">{{ match.word }}</span>
           </div>
 
-          <!-- Event Information -->
-          <div class="d-flex flex-wrap justify-content-between align-items-start px-3 pt-1">
-            <div class="info-box px-4 py-1 rounded-3 text-dark w-50">
-              <h6 class="border-bottom py-2 d-flex align-items-center">
-                <i class="bi bi-calendar3 me-2 text-danger fs-5"></i>
-                <span class="fw-semibold">{{ match.date }}</span>
-              </h6>
-              <h6 class="border-bottom py-2 d-flex align-items-center">
-                <i class="bi bi-clock me-2 text-danger fs-5"></i>
-                <span class="fw-semibold">{{ match.time }}</span>
-              </h6>
-              <h6 class="border-bottom py-2 d-flex align-items-center">
-                <i class="bi bi-cash-stack me-2 text-danger fs-5"></i>
-                <span class="fw-semibold">Price From ${{ match.price }}</span>
-              </h6>
+          <!-- Event Information and Action Buttons (Side by side in the same row for larger screens) -->
+          <div class="row px-3 pt-1">
+
+            <!-- Info Box (50% width on large and extra-large screens) -->
+            <div class="col-12 col-lg-6 col-xl-6">
+              <div class="info-box px-4 py-1 rounded-3 text-dark">
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-calendar3 me-2 text-danger fs-5"></i>
+                  <span class="fw-semibold">{{ match.date }}</span>
+                </h6>
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-clock me-2 text-danger fs-5"></i>
+                  <span class="fw-semibold">{{ match.time }}</span>
+                </h6>
+                <h6 class="border-bottom py-2 d-flex align-items-center">
+                  <i class="bi bi-cash-stack me-2 text-danger fs-5"></i>
+                  <span class="fw-semibold">Price From ${{ match.price }}</span>
+                </h6>
+              </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="d-flex flex-column align-items-end mt-4">
-              <div class="d-flex gap-2 mb-3 w-100" style="max-width: 320px;">
-                <a routerLink="/shows/5" class="hoverbtn btn bg-white text-danger flex-grow-1 rounded px-3 py-2 shadow">
-                  <i class="bi bi-info-circle me-2"></i> More Info
+            <!-- Buttons Column (50% width on large and extra-large screens) -->
+            <div class="col-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-center gap-2">
+              <!-- On xl screens, first two buttons will be side by side -->
+              <div class="d-flex flex-column flex-xl-row w-100 gap-2">
+                <!-- More Info button -->
+                <a routerLink="/shows/5"
+                  class="hoverbtn btn bg-white text-danger rounded-3 px-3 py-2 shadow w-100 w-xl-auto">
+                  More Info <i class="bi bi-info-circle ms-2"></i>
                 </a>
-                <button class="hoverbtn btn bg-white text-danger flex-grow-1 rounded px-3 py-2 shadow"
+                <!-- Share It button -->
+                <button class="hoverbtn btn bg-white text-danger rounded-3 px-3 py-2 shadow w-100 w-xl-auto"
                   (click)="shareMatch(match)">
-                  Share it <i class="bi bi-share-fill ms-2"></i>
+                  Share It <i class="bi bi-share-fill ms-2"></i>
                 </button>
               </div>
-              <a routerLink="/bookingEvent" class="hoverbtn btn btn-danger text-white rounded px-4 py-2 shadow-lg w-100"
-                style="max-width: 320px;">
-                <i class="bi bi-ticket me-2"></i> BOOK NOW
+              <!-- Book Now button, always below the others -->
+              <a routerLink="/bookingEvent"
+                class="hoverbtn btn btn-danger text-white rounded-3 px-4 py-2 shadow-lg w-100">
+                <i class="bi bi-ticket me-2"></i> Book Now
               </a>
             </div>
+
+
           </div>
+
+
         </div>
       </div>
-
     </div>
+
 
   </div>
 
