@@ -43,7 +43,7 @@
 
 
 /* Media query for screens 992px and below (Bootstrap's 'md' breakpoint) */
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
   .eventList {
     flex-direction: column;
     align-items: center;
@@ -52,14 +52,11 @@
   .content-text,
   .event-info-actions {
     width: 90%;
-    /* Make sections take up full width */
     text-align: center;
-    /* Center text for both sections */
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 
-  /* Ensure image stays centered */
   .event-image {
     border-radius: 5%;
     width: 85%;
