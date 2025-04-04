@@ -303,7 +303,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   copyToClipboard() {
     navigator.clipboard.writeText(this.locationUrl).then(() => {
-      this.toastr.info('Location link copied to clipboard!');
+      this.toastr.success('Location link copied to clipboard!');
     });
   }
 
