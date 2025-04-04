@@ -81,4 +81,9 @@ export class LoginComponent implements OnInit {
   googleLogin() {
     this._authService.googleLogin();
   }
+  showPassword: boolean = false;
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 }
