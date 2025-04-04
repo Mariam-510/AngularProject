@@ -33,6 +33,16 @@
             {{ (event.description | slice:0:200) + '...' }}
           </p>
         </div>
+<<<<<<< Updated upstream
+=======
+        <!-- Rating -->
+        <div class="text-danger mb-2 d-flex align-items-center" style="font-size: 18px;">
+          <i class="bi bi-geo-alt-fill me-2"></i>
+          <span>{{ event.location }}</span>
+        </div>
+        <!-- Description -->
+        <p class="text-muted">{{ event.description.length > 200 ? (event.description | slice:0:200) + '...' : event.description }}</p>
+>>>>>>> Stashed changes
       </div>
 
       <!-- Buttons (Aligned Right) -->

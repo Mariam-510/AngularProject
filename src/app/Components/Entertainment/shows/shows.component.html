@@ -89,8 +89,10 @@
             </div>
 
             <!-- Event Description -->
-            <p class="text-muted flex-grow-1">{{ (event.description | slice:0:120) + '...' }}</p>
-
+            <p class="text-muted flex-grow-1 ">
+              {{ event.description.length > 100 ? (event.description | slice:0:100) + '...' : event.description }}
+            </p>
+            <!-- <p class="text-muted flex-grow-1">{{ (event.description | slice:0:120) + '...' }}</p> -->
             <!-- Event Info Box -->
             <div class="info-boxV px-3 py-1 rounded bg-light text-dark text-start flex-grow-0">
               <p class="mb-2 fw-bold pb-1 border-bottom">
@@ -158,7 +160,9 @@
               </ng-container>
             </div>
             <!-- Description -->
-            <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
+            <p class="text-muted">{{ event.description.length > 200 ? (event.description | slice:0:120) + '...' : event.description }}
+            </p>
+            <!-- <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p> -->
           </div>
 
           <!-- Right Section (40%): Event Info & Action Buttons -->
