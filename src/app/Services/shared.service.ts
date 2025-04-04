@@ -38,6 +38,22 @@ export interface Schedule {
   time: string
 }
 
+export interface ShowCategory {
+  name: string;
+  link: string;
+}
+
+export interface Review {
+  user: string;
+  rating: number;
+  comment: string;
+  date: string;
+  title: string;
+  location: string;
+  category: string;
+
+}
+
 //---------------------------------------------------------------------------------------------------
 export interface match {
   id: number;
@@ -292,9 +308,9 @@ export class SharedService {
 
   addMatch(match: any) {
     const datePipe = new DatePipe('en-US');
-      const formattedDate = datePipe.transform(match.matchDate, 'EEE dd MMM yyyy') || '';
+    const formattedDate = datePipe.transform(match.matchDate, 'EEE dd MMM yyyy') || '';
     const newMatch = {
-      
+
       id: this.matches.length + 1,
       image: "img/m4.jpg",
 
@@ -330,7 +346,7 @@ export class SharedService {
 
     return formattedDate;
   }
- 
+
 
   //---------------------------------------------------------------------------------------------------------
   // Define ShowTicket array using the interface
@@ -395,7 +411,7 @@ export class SharedService {
   }
 
   //---------------------------------------------------------------------------------------------------------
-  showCategories = [
+  showCategories: ShowCategory[] = [
     { name: 'All', link: '' },
     { name: 'Concerts', link: 'concerts' },
     { name: 'Theater', link: 'theater' },
@@ -429,7 +445,7 @@ export class SharedService {
 
   // Function to generate random reviews based on a show date
   generateReviewsForShow(showDate: string, numberOfReviews: number): any[] {
-    const reviews: any[] = [];
+    const reviews: Review[] = [];
     const comments = [
       'Amazing service! Highly recommended.',
       'Great experience, but there’s room for improvement.',
@@ -456,7 +472,10 @@ export class SharedService {
         user: userName,
         rating: parseFloat(rating),
         comment: comment,
-        date: reviewDate
+        date: reviewDate,
+        title: '',
+        location: '',
+        category: ''
       });
 
       // Update the showDate for the next review to be the next day
@@ -1092,17 +1111,19 @@ export class SharedService {
   }
 
   generateReviewsForMatch(matchDate: string, numberOfReviews: number): any[] {
-    const reviews: any[] = [];
+    const reviews: Review[] = [];
     const comments = [
-      'Amazing service! Highly recommended.',
-      'Great experience, but there’s room for improvement.',
-      'Fantastic! Everything was perfect.',
-      'It was good, but not exceptional.',
-      'Really enjoyed it! Will come back again.',
-      'Not as expected, but decent.',
-      'A wonderful experience, would definitely come again!'
+      'Seamless booking experience, got my tickets instantly!',
+      'Easy and fast process, but the seating options could be clearer.',
+      'Great service! No issues with ticket confirmation.',
+      'Had trouble with payment, but support was helpful.',
+      'Tickets were available at a great price, highly recommended!',
+      'Smooth process, but wish there were more payment options.',
+      'Quick and hassle-free booking. Would use again!',
+      'Got my tickets without any issues. Great experience!',
+      'The interface was simple and easy to navigate.',
+      'Had to wait a bit for confirmation, but overall a good service.'
     ];
-
     // English names list
     const englishNames = ['Ahmed', 'Sara', 'Mariam', 'Omar', 'Nour', 'Ali', 'Fatima', 'Khaled', 'Jamila', 'Mohamed'];
 
@@ -1122,7 +1143,10 @@ export class SharedService {
         user: userName,
         rating: parseFloat(rating),
         comment: comment,
-        date: reviewDate
+        date: reviewDate,
+        title: '',
+        location: '',
+        category: ''
       });
 
       // Update the showDate for the next review to be the next day
@@ -1133,6 +1157,150 @@ export class SharedService {
   }
 
   //---------------------------------------------------------------------------------------------------------
+
+  reviews: Review[] = [
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 3,
+      comment: "A good blend of music and drama, but a bit slow at times.",
+      date: "2025-03-26",
+      title: "Stereophonic - Theater",
+      location: "Cairo International Conference Center",
+      category: "Shows",
+    },
+    // Sports Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 4,
+      comment: "A thrilling quarter-final match. The energy in the stadium was unmatched!",
+      date: "2025-03-15",
+      title: "ENPPI SC vs ZED FC - Egypt Cup 2025",
+      location: "Petro Sport Stadium",
+      category: "Sports",
+    },
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 3.5,
+      comment: "A beautiful ballet performance with a magical twist.",
+      date: "2025-03-16",
+      title: "Cinderella - Dance",
+      location: "Cairo Opera House",
+      category: "Shows",
+    },
+    // Sports Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 5,
+      comment: "The iconic Cairo Derby, absolutely unforgettable!",
+      date: "2025-04-07",
+      title: "Al Ahly SC vs Zamalek SC - Derby Match",
+      location: "Cairo International Stadium",
+      category: "Sports",
+    },
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 4.5,
+      comment: "An unforgettable magical experience for all Harry Potter fans.",
+      date: "2025-03-24",
+      title: "Harry Potter and the Cursed Child - Theater",
+      location: "Cairo Opera House",
+      category: "Shows",
+    },
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 4,
+      comment: "Hilarious show with a lot of edgy humor.",
+      date: "2025-04-5",
+      title: "Ricky Gervais - Stand-Up Comedy",
+      location: "Bibliotheca Alexandrina",
+      category: "Shows",
+    },
+    // Sports Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 4,
+      comment: "Great match with some excellent goals.",
+      date: "2025-04-04",
+      title: "Ceramica Cleopatra FC vs Zamalek SC - EPL 2024/2025",
+      location: "Suez Canal Stadium",
+      category: "Sports",
+    },
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 4,
+      comment: "A nostalgic tribute that captures the magic of The Beatles!",
+      date: "2025-03-14",
+      title: "A Tribute to the Beatles - Concert",
+      location: "The American University in Cairo (AUC)",
+      category: "Shows",
+    },
+    // Sports Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 3.5,
+      comment: "A nice match with some good moments, but not a standout.",
+      date: "2025-04-02",
+      title: "Ismaily SC vs Ghazl Elmahala FC - EPL 2024/2025",
+      location: "Ismailia Stadium",
+      category: "Sports",
+    },
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 3.5,
+      comment: "An impressive show, but not everyone will connect with the style.",
+      date: "2025-04-03",
+      title: "Alvin Ailey American Dance - Dance",
+      location: "Cairo Opera House",
+      category: "Shows",
+    },
+    // Sports Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 3,
+      comment: "A decent match, but a lot more can be expected from these two teams.",
+      date: "2025-03-30",
+      title: "Zamalek SC vs Ismaily SC - EPL 2024/2025",
+      location: "Cairo International Stadium",
+      category: "Sports",
+    },
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 4.5,
+      comment: "A high-energy concert that was truly unforgettable.",
+      date: "2025-04-3",
+      title: "Dua Lipa - Concert",
+      location: "The American University in Cairo (AUC)",
+      category: "Shows",
+    },
+    // Sports Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 3.5,
+      comment: "Decent match, but the crowd could have been more lively.",
+      date: "2025-03-18",
+      title: "El Gouna SC vs Smouha SC - EPL 2024/2025",
+      location: "El Gouna Stadium",
+      category: "Sports",
+    },
+    // Shows Reviews
+    {
+      user: "Mariam Ashraf",
+      rating: 3,
+      comment: "A dazzling show, but some performances felt a bit repetitive.",
+      date: "2025-05-20",
+      title: "Katy Perry - Concert",
+      location: "El Gouna Conference & Culture Center",
+      category: "Shows",
+    }
+  ];
+
 
 
 }

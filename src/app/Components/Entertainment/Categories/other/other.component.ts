@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../../../../Services/shared.service';
+import { SharedService,show } from '../../../../Services/shared.service';
 import { ShowComponent } from "../show/show.component";
 
 @Component({
@@ -9,7 +9,7 @@ import { ShowComponent } from "../show/show.component";
   styleUrl: './other.component.css'
 })
 export class OtherComponent implements OnInit {
-  shows: any;
+  shows: show[] = [];
 
   constructor(private sharedService: SharedService) { }
 

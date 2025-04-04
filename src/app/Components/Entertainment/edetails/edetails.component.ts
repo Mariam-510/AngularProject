@@ -2,29 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SharedService } from '../../../Services/shared.service';
+import { SharedService, show, ShowTicket, Schedule, Review } from '../../../Services/shared.service';
 import { ToastrService } from '../../../Services/toastr.service';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
 
-export interface show {
-  id: number;
-  title: string;
-  category: string;
-  imageSmall: string;
-  imageLarge: string;
-  rating: number;
-  description: string;
-  date: string;
-  location: string;
-  fullLocation: string;
-  price: number;
-  isFavorite: boolean;
-  word: string;
-  reviews: number;
-  qoute: string;
-  subQoute: string;
-}
 
 @Component({
   selector: 'app-edetails',
@@ -35,7 +17,7 @@ export interface show {
 export class EdetailsComponent implements AfterViewInit, OnInit {
 
   constructor(private sharedService: SharedService, private route: ActivatedRoute, private renderer: Renderer2,
-     private elRef: ElementRef, private cdr: ChangeDetectorRef, private toastr: ToastrService) { }
+    private elRef: ElementRef, private cdr: ChangeDetectorRef, private toastr: ToastrService) { }
 
   item: show =
     {
@@ -57,10 +39,10 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
       subQoute: "Experience the magic live."
     };
 
-  tickets: any;
-  schedules: any
-  eventList: any;
-  reviews: any;
+  tickets: ShowTicket[] = [];
+  schedules: Schedule[] = []
+  eventList: show[] = [];
+  reviews: Review[] = [];
   castList: any;
 
 

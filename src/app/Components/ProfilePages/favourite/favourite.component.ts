@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ESliderComponent } from '../../Entertainment/eslider/eslider.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SharedService } from '../../../Services/shared.service';
+import { SharedService, show, match } from '../../../Services/shared.service';
 import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
@@ -13,8 +12,9 @@ import { ToastrService } from '../../../Services/toastr.service';
   styleUrl: './favourite.component.css'
 })
 export class FavouriteComponent implements OnInit {
-  favoriteShows: any[] = [];
-  favoriteMatches: any[] = [];
+  favoriteShows: show[] = [];
+  favoriteMatches: match[] = [];
+
   constructor(private sharedService: SharedService, private toastr: ToastrService) { }
   ngOnInit() {
     this.favoriteShows = this.sharedService.shows.filter(show => show.isFavorite);
