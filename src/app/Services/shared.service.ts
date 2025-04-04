@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DatePipe } from '@angular/common';
 export interface show {
   id: number;
   title: string;
@@ -290,11 +291,14 @@ export class SharedService {
   }
 
   addMatch(match: any) {
+    const datePipe = new DatePipe('en-US');
+      const formattedDate = datePipe.transform(match.matchDate, 'EEE dd MMM yyyy') || '';
     const newMatch = {
+      
       id: this.matches.length + 1,
       image: "img/m4.jpg",
 
-      date: match.matchDate,
+      date: formattedDate,
       tournament: match.league,
       staduim: "img/m4.jpg",
       matchNumber: 19,
@@ -326,7 +330,7 @@ export class SharedService {
 
     return formattedDate;
   }
-
+ 
 
   //---------------------------------------------------------------------------------------------------------
   // Define ShowTicket array using the interface
