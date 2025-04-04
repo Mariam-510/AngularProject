@@ -74,7 +74,10 @@
             </ng-container>
           </div>
 
-          <p class="fst-italic text-muted">{{ (item.description | slice:0:110) + '...' }}</p>
+          <!-- <p class="fst-italic text-muted">{{ (item.description | slice:0:110) + '...' }}</p> -->
+          <p class="fst-italic text-muted"> {{ item.description.length > 105 ? (item.description | slice:0:105) + '...'
+            : item.description }}</p>
+
 
 
           <div class="d-flex gap-2 justify-content-center mb-2">
