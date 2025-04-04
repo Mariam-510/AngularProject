@@ -150,7 +150,7 @@ export class SharedService {
         imageSmall: 'img/Shows/c2.jpg',
         imageLarge: 'img/Shows/c22.jpg',
         rating: 3.5,
-        description: `Pop sensation Dua Lipa takes the stage for an electrifying night of chart-topping hits and high-energy performances.`,
+        description: `Pop sensation Dua Lipa takes the stage for an electrifying night of chart-topping hits and high-energy performances. Experience an unforgettable evening as she delivers her biggest hits with stunning vocals, dynamic choreography, and breathtaking stage effects. From the pulsating beats of "Don't Start Now" to the anthemic energy of "Levitating," this concert promises an immersive journey through her iconic discography. With dazzling lights, mesmerizing visuals, and an atmosphere filled with excitement, Dua Lipa's live show is a must-see event that will have the audience dancing all night long!`,
         date: 'Jul 13 - 2025',
         location: 'The American University in Cairo (AUC)', // this location is found
         fullLocation: 'New Cairo, Egypt',

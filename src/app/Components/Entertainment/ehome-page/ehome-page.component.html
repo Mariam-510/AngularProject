@@ -67,7 +67,8 @@
               <div class="ms-0 ms-md-3 mt-2 w-100">
                 <h4>{{ event.title }}</h4>
                 <div class="text-muted mb-1">{{ event.date }}</div>
-                <p>{{ (event.description | slice:0:200) + '...' }}</p>
+                <p> {{ event.description.length > 200 ? (event.description | slice:0:200) + '...' : event.description }}</p>
+               
 
                 <div class="d-flex align-items-center gap-2">
                   <button
