@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DatePipe } from '@angular/common';
 export interface show {
   id: number;
   title: string;
@@ -40,13 +41,13 @@ export interface Schedule {
 //---------------------------------------------------------------------------------------------------
 export interface match {
   id: number;
-  image: string;
   venue: string;
   date: string;
   tournament: string;
   staduim?: string;
   matchNumber: number;
   time: string;
+  GatesOpen: string;
   group: string;
   team1: string;
   team2: string;
@@ -68,22 +69,6 @@ export interface categories {
   badgeClass: string;
 }
 
-export interface eventItem {
-  id: number;
-  location: string;
-  Group: string;
-  title: string;
-  date: string;
-  Kickoff: string;
-  GatesOpen: string;
-  price: number;
-  description: string;
-  isFavorite: boolean;
-  word: string;
-  adv: string;
-  category: string;
-}
-
 export interface team {
   id: number;
   name: string;
@@ -92,7 +77,6 @@ export interface team {
   coach: string;
   keyPlayers: string;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -111,7 +95,7 @@ export class SharedService {
         imageSmall: 'img/Shows/d1.jpg',
         imageLarge: 'img/Shows/d11.jpg',
         rating: 3.5,
-        description: `A mesmerizing performance blending ballet and storytelling, Cinderella brings the classic fairytale to life with stunning choreography and enchanting music.`,
+        description: `A mesmerizing performance blending ballet and storytelling, Cinderella brings the classic fairytale to life with stunning choreography and enchanting music. Witness the magic unfold as breathtaking costumes, dazzling stage effects, and a captivating musical score transport you into a world of wonder. With graceful movements and expressive artistry, the dancers narrate Cinderella’s journey from hardship to happiness, making it an unforgettable experience for audiences of all ages.`,
         date: 'Jun 12 - 2025',
         location: 'Cairo Opera House',
         fullLocation: 'Cairo, Egypt',
@@ -127,6 +111,7 @@ export class SharedService {
         title: 'Alvin Ailey American Dance',
         category: 'Dance',
         imageSmall: 'img/Shows/d2.jpg',
+        // imageSmall: 'img/s.png',
         imageLarge: 'img/Shows/d22.jpg',
         rating: 3,
         description: `A breathtaking fusion of contemporary and African-American dance, this performance captivates with its raw emotion and powerful storytelling.`,
@@ -166,7 +151,7 @@ export class SharedService {
         imageSmall: 'img/Shows/c2.jpg',
         imageLarge: 'img/Shows/c22.jpg',
         rating: 3.5,
-        description: `Pop sensation Dua Lipa takes the stage for an electrifying night of chart-topping hits and high-energy performances.`,
+        description: `Pop sensation Dua Lipa takes the stage for an electrifying night of chart-topping hits and high-energy performances. Experience an unforgettable evening as she delivers her biggest hits with stunning vocals, dynamic choreography, and breathtaking stage effects. From the pulsating beats of "Don't Start Now" to the anthemic energy of "Levitating," this concert promises an immersive journey through her iconic discography. With dazzling lights, mesmerizing visuals, and an atmosphere filled with excitement, Dua Lipa's live show is a must-see event that will have the audience dancing all night long!`,
         date: 'Jul 13 - 2025',
         location: 'The American University in Cairo (AUC)', // this location is found
         fullLocation: 'New Cairo, Egypt',
@@ -222,7 +207,7 @@ export class SharedService {
         imageSmall: 'img/Shows/t1.jpg',
         imageLarge: 'img/Shows/t11.jpg',
         rating: 4,
-        description: `Step into the magical world of Harry Potter with this spectacular theatrical experience, full of wonder and adventure.`,
+        description: `Step into the magical world of Harry Potter with this spectacular theatrical experience, full of wonder and adventure. Witness spellbinding performances, breathtaking special effects, and a captivating storyline that brings the wizarding world to life like never before. From the bustling streets of Diagon Alley to the grandeur of Hogwarts Castle, immerse yourself in a world of magic, friendship, and bravery. With dazzling set designs, enchanting music, and unforgettable characters, this production is a must-see for fans of all ages. Prepare to be transported into a world where anything is possible, and the magic is real!`,
         date: 'Jun 22 - 2025',
         location: 'Cairo Opera House',
         fullLocation: 'Cairo, Egypt',
@@ -271,13 +256,14 @@ export class SharedService {
       }
     ];
 
+
   addShow(show: any) {
     const newShow = {
       id: this.shows.length + 1,
       title: show.EventName,
       category: show.EventCategory,
-      imageSmall: 'img/Shows/d1.jpg',
-      imageLarge: 'img/Shows/d11.jpg',
+      imageSmall: show.EventImage,
+      imageLarge: show.EventImage,
       rating: 0,
       description: show.EventDescription,
       date: this.getFormattedDate(),
@@ -297,6 +283,45 @@ export class SharedService {
 
   }
 
+  convertTo12HourFormat(time: string): string {
+    const [hours, minutes] = time.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert 0 -> 12 for AM
+    return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+  }
+
+  addMatch(match: any) {
+    const datePipe = new DatePipe('en-US');
+      const formattedDate = datePipe.transform(match.matchDate, 'EEE dd MMM yyyy') || '';
+    const newMatch = {
+      
+      id: this.matches.length + 1,
+      image: "img/m4.jpg",
+
+      date: formattedDate,
+      tournament: match.league,
+      staduim: "img/m4.jpg",
+      matchNumber: 19,
+      time: this.convertTo12HourFormat(match.matchTime),
+      GatesOpen: match.matchTime,
+      group: 'Group Two (Stage)',
+      team1: match.homeTeam,
+      team2: match.awayTeam,
+      team1Logo: match.homeTeamLogo,
+      team2Logo: match.awayTeamLogo,
+      isFavorite: false,
+      price: 500,
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
+      location: match.location,
+      venue: match.stadium + ', ' + match.location,
+    }
+    this.matches.push(newMatch);
+
+    console.log(this.matches);
+  }
+
   getFormattedDate() {
     const now = new Date();
 
@@ -305,6 +330,7 @@ export class SharedService {
 
     return formattedDate;
   }
+ 
 
   //---------------------------------------------------------------------------------------------------------
   // Define ShowTicket array using the interface
@@ -439,6 +465,7 @@ export class SharedService {
 
     return reviews;
   }
+
 
   //---------------------------------------------------------------------------------------------------------
 
@@ -610,14 +637,14 @@ export class SharedService {
   matches: match[] = [
     {
       id: 1,
-      image: 'img/cairo staduim.jpg',
-      venue: 'Cairo International Stadium, Cairo',
+      venue: 'Cairo International Stadium, Cairo', // location
       date: 'Fri 28 Mar 2025',
-      tournament: 'World Cup Qualifiers 2025',
+      tournament: 'World Cup Qualifiers 2025', //title
       staduim: 'img/cairo staduim.jpg',
       matchNumber: 5,
-      time: '08:30 PM',
-      group: 'African Qualifiers Group B',
+      time: '08:30 PM', //Kickoff
+      GatesOpen: '05:00 PM',
+      group: 'African Qualifiers Group B', //Group
       team1: 'Egypt',
       team2: 'Algeria',
       team1Logo: 'img/egypt.svg',
@@ -632,12 +659,12 @@ export class SharedService {
 
     {
       id: 2,
-      image: 'img/s1.jpg',
       venue: 'Petro Sport Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
       tournament: 'Egypt Cup 2025',
       matchNumber: 19,
       time: '07:30 PM',
+      GatesOpen: '3:00 PM',
       group: 'Quarter Finals',
       staduim: 'img/s1.jpg',
       team2: 'ZED FC',
@@ -654,12 +681,12 @@ export class SharedService {
 
     {
       id: 3,
-      image: 'img/s3.jpg',
       venue: 'Khaled Bichara Stadium, Gouna',
       date: 'Sun 23 Mar 2025',
       tournament: 'EPL 2024/2025',
       matchNumber: 18,
       time: '08:00 PM',
+      GatesOpen: '05:00 PM',
       group: 'Group Two (Stage)',
       team1: 'El Gouna SC',
       team2: 'Smouha SC',
@@ -676,12 +703,12 @@ export class SharedService {
 
     {
       id: 4,
-      image: 'img/m3.jpg',
       venue: 'Alexandria Stadium, Alexandria',
       date: 'Tue 25 Mar 2025',
       tournament: 'Derby Match',
       matchNumber: 20,
       time: '06:45 PM',
+      GatesOpen: '03:00 PM',
       group: 'Quarter Finals',
       team1: 'Al Ittihad Alexandria SC',
       team2: 'Smouha SC',
@@ -698,12 +725,13 @@ export class SharedService {
 
     {
       id: 5,
-      image: 'img/cairo3.jpg',
+      staduim: 'img/cairo3.jpg',
       venue: 'Cairo International Stadium, Cairo', // Corrected venue
       date: 'Sat 22 Mar 2025',
       tournament: 'Championship League',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Al Ahly SC',
       team2: 'Pyramids FC',
@@ -711,18 +739,21 @@ export class SharedService {
       team2Logo: 'img/Pyramids.png',
       isFavorite: true,
       price: 500, // Add price
-      category: '⚽ Egyptian Premier League',
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
       location: 'Cairo, Egypt'
     },
 
     {
       id: 6,
-      image: 'img/m4.jpg',
+      staduim: 'img/m4.jpg',
       venue: 'Borg El Arab Stadium, Alexandria',
       date: 'Tue 15 Apr 2025',
       tournament: 'World Cup Qualifiers 2025',
       matchNumber: 7,
       time: '09:00 PM',
+      GatesOpen: '06:00 PM',
       group: 'African Qualifiers Group B',
       team1: 'Egypt',
       team2: 'Nigeria',
@@ -738,12 +769,12 @@ export class SharedService {
 
     {
       id: 7,
-      image: 'img/cairo.jpg',
       venue: 'Cairo International Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
       tournament: 'EPL 2024/2025',
       matchNumber: 19,
       time: '07:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group One (Stage)',
       team1: 'Zamalek SC',
       team2: 'Ismaily SC',
@@ -760,12 +791,13 @@ export class SharedService {
 
     {
       id: 8,
-      image: 'img/m2.jpg',
+      staduim: 'img/m2.jpg',
       venue: 'Suez Canal Stadium, Ismailia',
       date: 'Sat 22 Mar 2025',
       tournament: 'EPL 2024/2025',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Ismaily SC',
       team2: 'Ghazl Elmahala FC',
@@ -781,12 +813,13 @@ export class SharedService {
 
     {
       id: 9,
-      image: 'img/m1.jpg',
+      staduim: 'img/m1.jpg',
       venue: 'Suez Canal Stadium, Ismailia',
       date: 'Sat 22 Mar 2025',
       tournament: 'EPL 2024/2025',
       matchNumber: 17,
       time: '09:30 PM',
+      GatesOpen: '06:00 PM',
       group: 'Group Two (Stage)',
       team1: 'Ceramica Cleopatra FC',
       team2: 'Zamalek SC',
@@ -802,12 +835,13 @@ export class SharedService {
 
     {
       id: 10,
-      image: 'img/cairo4.jpg',
+      staduim: 'img/cairo4.jpg',
       venue: 'Cairo International Stadium, Cairo',
       date: 'Tue 1 Apr 2025',
       tournament: 'Derby Match',
       matchNumber: 22,
       time: '09:00 PM',
+      GatesOpen: '06:00 PM',
       group: 'Main Stage',
       team1: 'Al Ahly SC',
       team2: 'Zamalek SC',
@@ -866,160 +900,6 @@ export class SharedService {
 
 
   //---------------------------------------------------------------------------------------------------------
-  //MATCH DETAILS
-
-  eventItems: eventItem[] = [
-    {
-      id: 1,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'African Qualifiers Group B',
-      title: 'World Cup Qualifiers 2025',
-      date: 'Mar 28 - 2025',
-      Kickoff: '08:30 PM',
-      GatesOpen: '05:00 PM',
-      price: 1100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 2,
-      location: 'Petro Sport Stadium, Cairo',
-      Group: 'Quarter Finals',
-      title: 'Egypt Cup 2025',
-      date: 'Mar 24 - 2025',
-      Kickoff: '7:30 PM',
-      GatesOpen: '3:00 PM',
-      price: 290,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 3,
-      location: 'Khaled Bichara Stadium, Gouna',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 23 - 2025',
-      Kickoff: '8:00 PM',
-      GatesOpen: '05:00 PM',
-      price: 250,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 4,
-      location: 'Alexandria Stadium, Alexandria',
-      Group: 'Quarter Finals',
-      title: 'EPL 2024/2025',
-      date: 'Mar 25 - 2025',
-      Kickoff: '6:45 PM',
-      GatesOpen: '03:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 5,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group Two (Stage)',
-      title: 'Championship League',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 500,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 6,
-      location: 'Borg El Arab Stadium, Alexandria',
-      Group: 'African Qualifiers Group B',
-      title: 'EPL 2024/2025',
-      date: 'Mar 23 - 2025',
-      Kickoff: '9:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 7,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Group One (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 24 - 2025',
-      Kickoff: '7:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 300,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 8,
-      location: 'Suez Canal Stadium, Ismailia',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 300,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 9,
-      location: 'Suez Canal Stadium, Ismailia',
-      Group: 'Group Two (Stage)',
-      title: 'EPL 2024/2025',
-      date: 'Mar 22 - 2025',
-      Kickoff: '9:30 PM',
-      GatesOpen: '06:00 PM',
-      price: 100,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: false,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-    {
-      id: 10,
-      location: 'Cairo International Stadium, Cairo',
-      Group: 'Main Stage',
-      title: 'Championship League',
-      date: 'Apr 1 - 2025',
-      Kickoff: '9:00 PM',
-      GatesOpen: '06:00 PM',
-      price: 900,
-      description: "Football isn't just a sport—it's an emotion that brings people together...",
-      isFavorite: true,
-      word: "🔥 high",
-      adv: "⏳ Limited Seats",
-      category: '⚽ Football'
-    },
-  ]
 
   teams: team[] = [
     {
@@ -1136,6 +1016,15 @@ export class SharedService {
       coach: 'José Peseiro',
       keyPlayers: 'Zizo, Mahmoud El Wensh, Ahmed Fatouh'
     },
+    {
+      id: 14,
+      name: 'Nigeria',
+      logo: '/img/nigeria.svg',
+      description: 'A dominant force in African football, Nigeria has won the Africa Cup of Nations (AFCON) three times and is known for its talented players and attacking style.',
+      coach: 'José Peseiro',
+      keyPlayers: 'Victor Osimhen, Kelechi Iheanacho, Moses Simon'
+    }
+
   ];
 
   checkoutTicket: CheckoutTicket[] = [
@@ -1189,6 +1078,19 @@ export class SharedService {
     return tickets.sort((a, b) => b.price - a.price);
   }
 
+  generateDateMatch(matchDate: string): string {
+
+    const date = new Date(matchDate);
+
+    // Get the short month name, day, and year
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    // Format as "Month Day - Year"
+    return `${month} ${day} - ${year}`;
+  }
+
   generateReviewsForMatch(matchDate: string, numberOfReviews: number): any[] {
     const reviews: any[] = [];
     const comments = [
@@ -1203,6 +1105,9 @@ export class SharedService {
 
     // English names list
     const englishNames = ['Ahmed', 'Sara', 'Mariam', 'Omar', 'Nour', 'Ali', 'Fatima', 'Khaled', 'Jamila', 'Mohamed'];
+
+    matchDate = this.generateDateMatch(matchDate);
+    console.log(matchDate);
 
     // Generate reviews with random ratings and comments
     for (let i = 0; i < numberOfReviews; i++) {
@@ -1229,67 +1134,5 @@ export class SharedService {
 
   //---------------------------------------------------------------------------------------------------------
 
-
-
-  //---------------------------------------------------------------------------------------------------------
-  //favorite shows
-  private favoriteShowsSubject = new BehaviorSubject<show[]>(this.shows.filter(show => show.isFavorite));
-  favoriteShows$ = this.favoriteShowsSubject.asObservable();
-
-  // Toggle favorite status of a show by its ID
-  toggleFavorite(showId: number): void {
-    const show = this.shows.find(s => s.id === showId);
-    if (show) {
-      // Toggle the favorite status
-      show.isFavorite = !show.isFavorite;
-
-      // Update the favorite shows list and emit the updated array
-      this.favoriteShowsSubject.next(this.getFavoriteShows());
-    }
-  }
-
-  // Get the list of favorite shows (filtered)
-  getFavoriteShows(): any[] {
-    // Filter shows to get only those that are marked as favorite
-    return this.shows.filter(show => show.isFavorite);
-  }
-  // Add or set the shows list
-  setShows(shows: any[]): void {
-    this.shows = shows;
-    // Emit the updated list of favorites
-    this.favoriteShowsSubject.next(this.getFavoriteShows());
-  }
-
-
-  private favoriteMatchesSubject = new BehaviorSubject<match[]>(this.matches.filter(match => match.isFavorite));
-  favoriteMatches$ = this.favoriteMatchesSubject.asObservable();
-
-  // Toggle favorite status of a show by its ID
-  toggleFavoritematch(matchId: number): void {
-    const match = this.matches.find(m => m.id === matchId);
-    if (match) {
-      // Toggle the favorite status
-      match.isFavorite = !match.isFavorite;
-
-      // Update the favorite shows list and emit the updated array
-      this.favoriteMatchesSubject.next(this.getFavoriteShows());
-    }
-  }
-
-
-
-  //---------------------------------------------------------------------------------------------------------
-
-
-  getFavoriteMatches(): any[] {
-    // Filter shows to get only those that are marked as favorite
-    return this.matches.filter(match => match.isFavorite);
-  }
-  // Add or set the shows list
-  setMatches(matches: any[]): void {
-    this.matches = matches;
-    // Emit the updated list of favorites
-    this.favoriteMatchesSubject.next(this.getFavoriteMatches());
-  }
 
 }

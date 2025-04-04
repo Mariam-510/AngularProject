@@ -65,7 +65,7 @@
           <div
             class="show-containerV p-1 rounded bg-white mx-2 my-2 d-flex flex-column border-bottom position-relative">
             <!-- Event Image -->
-            <img [src]="event.imageLarge" class="img-fluid rounded-bottom-5 mb-2" alt="Event Image">
+            <img [src]="event.imageSmall" class="img-fluid rounded-bottom-5 mb-2" alt="Event Image">
 
             <!-- Fav Button (Top-right) -->
             <button class="btn btn-light fav-btn d-flex align-items-center position-absolute"
@@ -89,8 +89,10 @@
             </div>
 
             <!-- Event Description -->
-            <p class="text-muted flex-grow-1">{{ (event.description | slice:0:120) + '...' }}</p>
-
+            <p class="text-muted flex-grow-1 ">
+              {{ event.description.length > 100 ? (event.description | slice:0:100) + '...' : event.description }}
+            </p>
+            <!-- <p class="text-muted flex-grow-1">{{ (event.description | slice:0:120) + '...' }}</p> -->
             <!-- Event Info Box -->
             <div class="info-boxV px-3 py-1 rounded bg-light text-dark text-start flex-grow-0">
               <p class="mb-2 fw-bold pb-1 border-bottom">
@@ -128,19 +130,19 @@
     <!-- List View -->
     <div *ngSwitchCase="false">
 
-      <div *ngFor="let event of paginatedEvents"
-        class="show-container row py-2 px-3 border-bottom rounded bg-white mx-2 my-2">
+      <div *ngFor="let event of paginatedEvents" class="show-container row py-2 px-3 border-bottom rounded bg-white mx-2 my-2
+        justify-content-center align-items-center">
+
         <!-- Event Image - Full width on small screens -->
-        <div class="col-12 col-md-auto text-center">
-          <img [src]="event.imageSmall" class="imgH img-fluid" alt="Event Image"
-            style="max-width: 400px; max-height: 200px;">
+        <div class="col-12 col-lg-auto d-flex justify-content-center text-center">
+          <img [src]="event.imageSmall" class="imgH img-fluid event-image" alt="Event Image">
         </div>
 
         <!-- Event Details -->
-        <div class="col d-flex">
+        <div class="eventList col d-flex">
           <!-- Left Section (60%): Title & Description -->
-          <div class="content-text w-60 pe-3 position-relative">
-            <div class="d-flex justify-content-between align-items-start">
+          <div class="content-text w-60 pe-3 position-relative d-flex flex-column justify-content-center">
+            <div class=" d-flex justify-content-between align-items-start">
               <h2 class="flex-grow-1">{{ event.title }}</h2>
               <!-- Favorite Button -->
               <button class="btn fav-btn d-flex align-items-center fs-5 ms-auto" (click)="toggleFavorite(event)">
@@ -158,7 +160,9 @@
               </ng-container>
             </div>
             <!-- Description -->
-            <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p>
+            <p class="text-muted">{{ event.description.length > 200 ? (event.description | slice:0:120) + '...' : event.description }}
+            </p>
+            <!-- <p class="text-muted">{{ (event.description | slice:0:200) + '...' }}</p> -->
           </div>
 
           <!-- Right Section (40%): Event Info & Action Buttons -->

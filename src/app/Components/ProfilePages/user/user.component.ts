@@ -79,7 +79,9 @@ export class UserComponent {
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.userImage = e.target?.result as string;
+          // this.userImage = e.target?.result as string;
+          this.currentUser.avatar = e.target?.result; // ✅ Update the image shown
+
         };
         reader.readAsDataURL(file);
       }

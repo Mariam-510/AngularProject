@@ -98,11 +98,16 @@
       <div class="mb-2">
         <label class="form-label fw-semibold mb-0">Password</label>
         <div class="input-group">
-          <span class="input-group-text bg-light border-0 "><i class="bi bi-key text-muted red-icon "></i></span>
-          <input type="password" class="form-control border-0 shadow-sm" placeholder="Enter password"
-            formControlName="password">
+          <span class="input-group-text bg-light border-0">
+            <i class="bi bi-key text-muted red-icon"></i>
+          </span>
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control border-0 shadow-sm"
+            placeholder="Enter password" formControlName="password">
+          <span class="input-group-text bg-light border-0" (click)="togglePassword()" style="cursor: pointer;">
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye'  : 'bi-eye-slash'"></i>
+          </span>
         </div>
-
+      
         <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
           class="text-danger small ps-2">
           Password is required.
@@ -117,31 +122,38 @@
         </div>
         <div *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')?.touched"
           class="text-danger small ps-2">
-          Password must contain at least one uppercase letter, one lowercase letter, one number, and one special
-          character.
+          Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
         </div>
       </div>
+      
 
 
       <!-- Confirm Password -->
       <div class="mb-2">
         <label class="form-label fw-semibold mb-0">Confirm Password</label>
         <div class="input-group">
-          <span class="input-group-text bg-light border-0"><i
-              class="bi bi-key-fill text-muted red-icon fs-5 "></i></span>
-          <input type="password" class="form-control border-0 shadow-sm" placeholder="Confirm password"
-            formControlName="confirmPassword">
+          <span class="input-group-text bg-light border-0">
+            <i class="bi bi-key-fill text-muted red-icon fs-5"></i>
+          </span>
+          <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control border-0 shadow-sm"
+            placeholder="Confirm password" formControlName="confirmPassword">
+          <span class="input-group-text bg-light border-0" (click)="toggleConfirmPassword()" style="cursor: pointer;">
+            <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye' : 'bi-eye-slash'"></i>
+          </span>
         </div>
-        <div
-          *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched"
+      
+        <div *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched"
           class="text-danger small ps-2">
           Confirm Password is required.
         </div>
+      
         <div *ngIf="registerForm.get('password')?.touched && registerForm.get('confirmPassword')?.touched
             && registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value"
-          class="text-danger small ps-2"> confirm Passwords do not match.</div>
-
+          class="text-danger small ps-2">
+          Confirm Passwords do not match.
+        </div>
       </div>
+      
 
 
 

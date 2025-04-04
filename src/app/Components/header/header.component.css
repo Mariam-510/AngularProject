@@ -8,7 +8,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 5000;
 }
 
 /* Left Section */
@@ -55,7 +55,7 @@
   cursor: pointer;
   padding: 0;
   position: relative;
-  z-index: 1001;
+  z-index: 5001;
 }
 
 .hamburger span {
@@ -84,18 +84,38 @@
 .header-middle {
   display: flex;
   justify-content: start;
+  /* Centers the navigation */
+  align-items: center;
   flex-grow: 1;
   margin: 0 1rem;
   min-width: 0;
   /* Allow shrinking */
 }
 
+.header-middle nav ul {
+  display: flex;
+  justify-content: center;
+  /* Centers the items */
+  align-items: center;
+  gap: 3rem;
+  /* Adjust space between links */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  /* Ensures responsiveness */
+}
+
 .header-middle nav ul li a {
   text-decoration: none;
   color: #333;
   font-size: 1.12rem;
-  position: relative;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  /* Adds padding for better spacing */
+  display: inline-block;
+  white-space: nowrap;
+  /* Prevents text wrapping */
+
 }
 
 .header-middle nav ul li a::after {
@@ -123,6 +143,7 @@
   min-width: 150px;
   /* Prevent shrinking too much */
   justify-content: flex-end;
+  z-index: 5000;
 }
 
 .search-container {
@@ -200,17 +221,19 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  /* z-index: 1000; */
   display: flex;
   flex-direction: column;
   min-width: 150px;
   width: auto;
-  max-width: 90vw; /* Prevent exceeding viewport width */
+  max-width: 90vw;
+  /* Prevent exceeding viewport width */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   word-wrap: break-word;
   overflow: hidden;
+  z-index: 5000;
 
 }
 
@@ -443,10 +466,13 @@
     gap: 0;
   }
 }
+
 @media (max-width: 768px) {
   .user-dropdown {
-    right: 10px; /* Prevents it from sticking to the edge */
-    left: auto; /* Ensures it doesn’t get pushed off-screen */
+    right: 10px;
+    /* Prevents it from sticking to the edge */
+    left: auto;
+    /* Ensures it doesn’t get pushed off-screen */
     width: auto;
     max-width: 200px;
   }

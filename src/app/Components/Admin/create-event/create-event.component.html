@@ -38,12 +38,11 @@
       <div class="mt-3">
         <label class="form-label fw-semibold mb-1">Event Image</label>
         <div class="input-group">
-          <input type="file" class="form-control border-0 shadow-sm w-100" accept="image/*"
-            formControlName="EventImage">
+          <input type="file"  id="fileInput" class="form-control border-0 shadow-sm w-100" accept="image/*"
+             (change)="onFileSelected($event) "(blur)="onFileTouched()">
         </div>
-        <div *ngIf="MyForm.get('EventImage')?.hasError('required') && MyForm.get('EventImage')?.touched"
-          class="text-danger small ps-2 mt-1">
-          Event image is required.
+        <div *ngIf="isTouched && isImageInvalid" class="text-danger small ps-2 mt-1">
+          {{ validationMessage }}
         </div>
       </div>
 

@@ -11,8 +11,7 @@
 .fixed-event-card {
   position: fixed !important;
   top: calc(20px + var(--sticky-header-height)) !important;
-
-
+  z-index: 1000;
 }
 
 .sticky-header {
@@ -206,7 +205,7 @@ section {
 
 /* --------------------------------------------------------------------------------------------- */
 
-.event-scroll-wrapper {
+/* .event-scroll-wrapper {
   overflow-x: auto;
   scroll-behavior: smooth;
   white-space: nowrap;
@@ -218,14 +217,30 @@ section {
   display: flex;
   flex-wrap: nowrap;
   gap: 15px;
-}
+} */
 
 .event-scroll-wrapper::-webkit-scrollbar {
   display: none;
 }
 
+.event-scroll-wrapper {
+  display: block;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+.event-scroll-wrapper .row {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  width: max-content;
+}
+
 .event-card {
-  width: 400px;
+  width: 470px;
   height: 550px;
   /* min-width: 300px; */
   /* Ensures horizontal scrolling */
@@ -618,16 +633,18 @@ section {
   }
 
 }
+
 .smalltext-overlay {
   position: absolute;
   bottom: 1%;
   left: 5%;
-  
+
   background: rgba(40, 37, 37, 0.5);
   padding: 0rem 1rem;
   border-radius: 3px;
   max-width: 70%;
 }
+
 .smallresponsive-title {
   font-size: 3vw;
   /* Larger size for h1 */
@@ -643,33 +660,47 @@ section {
   justify-content: center;
   height: 100%;
 }
+
 .smallteam-logo {
   width: 40px;
   height: 40px;
   object-fit: contain;
 }
+
 .smallteam2 {
   order: 1 !important;
   margin: 0 !important;
   margin-left: 20px !important;
 }
 
-
-
-
-@media (min-width: 768px) { /* Medium (md) and larger screens */
-  .responsive-badge {
-    font-size: 1.25rem !important; /* Equivalent to Bootstrap fs-5 */
+@media (max-width: 1200px) {
+  .stadiumName {
+    display: none !important;
   }
 }
 
-@media (max-width: 767px) { /* Small (sm) screens */
+/* ----------------------------------------------------------------------------------------------- */
+
+
+@media (min-width: 768px) {
+
+  /* Medium (md) and larger screens */
   .responsive-badge {
-    font-size: 1rem !important; /* Equivalent to Bootstrap fs-6 */
+    font-size: 1.25rem !important;
+    /* Equivalent to Bootstrap fs-5 */
   }
 }
 
-@media (max-width: 992px) { 
+@media (max-width: 767px) {
+
+  /* Small (sm) screens */
+  .responsive-badge {
+    font-size: 1rem !important;
+    /* Equivalent to Bootstrap fs-6 */
+  }
+}
+
+@media (max-width: 992px) {
   section {
     width: 100%;
   }

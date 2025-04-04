@@ -75,12 +75,14 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
     this.tickets = this.sharedService.generateTicketsFromPrice(this.item.price);
     this.schedules = this.sharedService.generateSchedule(this.item.date);
+
     this.eventList = this.sharedService.shows.filter(show => {
       return (show.id !== this.item.id) &&
         ((show.price >= this.item.price - 5 && show.price <= this.item.price + 5)
           || show.category === this.item.category);
     });
 
+    // this.eventList = this.sharedService.shows;
 
     this.reviews = this.sharedService.generateReviewsForShow(this.item.date, 5);
     this.castList = this.sharedService.cast.find(castItem => castItem.showId === this.item.id)?.cast || [];
@@ -149,6 +151,7 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
     const card = this.eventCard.nativeElement;
     this.stickyThreshold = hero.offsetTop + hero.offsetHeight - card.offsetHeight;
   }
+
   private lastScrollTop: number = 0;
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -164,57 +167,78 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
     let flag = true;
 
     // Detect Scroll Direction
-    const scrollingDown = scrollY > this.lastScrollTop;
+    const scrollingDown = (scrollY) > this.lastScrollTop;
+    // console.log(card.offsetHeight);
 
     // Stop scrolling effect at "YOU MIGHT ALSO LIKE"
     if (this.stopSection) {
-      const stopPoint = this.stopSection.offsetTop - 200;
+      const stopPoint = this.stopSection.offsetTop - 300;
 
       if (scrollingDown) {
-        if (scrollPosition >= stopPoint - 350) {
+        //card
+        if (scrollPosition >= stopPoint - 300) {
           this.renderer.removeClass(card, 'fixed-event-card');
-
           // this.renderer.setStyle(card, 'position', 'absolute');
-          this.renderer.setStyle(card, 'top', `${stopPoint - 500}px`);
+          this.renderer.setStyle(card, 'top', `${stopPoint - card.offsetHeight + 100}px`);
+          // console.log('card-----------------------------------------');
         }
         else {
           this.renderer.addClass(card, 'fixed-event-card');
+          // console.log('card************************************************');
         }
       }
+      //card
+      if (!scrollingDown && scrollPosition < stopPoint - 300) {
+        this.renderer.addClass(card, 'fixed-event-card');
+        // console.log('card#################################################');
+      }
 
+      //tabBar
       if (scrollingDown && scrollPosition >= stopPoint) {
         flag = false;
         tabBar.classList.remove('sticky'); // Remove when reaching stop section
+        // console.log('---------------------------------');
       }
 
-      if (!scrollingDown && scrollPosition < stopPoint - 350) {
-        this.renderer.addClass(card, 'fixed-event-card');
-      }
-
+      //tabBar
       else if (!scrollingDown && scrollPosition < stopPoint) {
         flag = true;
         tabBar.classList.add('sticky'); // Re-add when scrolling up above stop section
+        // console.log('**************************************');
+
       }
-
-
     }
 
     // Keep tabBar sticky only when scrolling down and past the tabBar's original position
+    //tabBar
     if (scrollingDown && scrollY >= tabBarOffset && flag) {
       tabBar.classList.add('sticky');
+      // console.log('///////////////////////////////////////////////////');
+
     }
     else if (!scrollingDown && scrollY <= tabBarOffset + 500) {
       flag = true;
       tabBar.classList.remove('sticky'); // Return to original position when scrolling up
+      // console.log('####################################################');
+
     }
 
     // Change active tab based on scroll
     this.sections.forEach((section) => {
       if (
-        scrollPosition >= section.offsetTop &&
-        scrollPosition < section.offsetTop + section.offsetHeight
+        scrollPosition >= section.offsetTop - 50 &&
+        scrollPosition < section.offsetTop + section.offsetHeight && scrollingDown
       ) {
         this.setActiveTab(section.id);
+        // console.log("*************************************");
+      }
+
+      if (
+        scrollPosition >= section.offsetTop - 250 &&
+        scrollPosition < section.offsetTop + section.offsetHeight && !scrollingDown
+      ) {
+        this.setActiveTab(section.id);
+        // console.log("---------------------------------------------");
       }
     });
 
@@ -240,31 +264,40 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
   // -----------------------------------------------------------------------------------------------------
 
-  isLeftDisabled = true;  // Initially disable the left button
-  isRightDisabled = false; // Initially enable the right button
+  @ViewChild('eventContainer') eventContainer!: ElementRef;
+  canScrollLeft: boolean = false;
+  canScrollRight: boolean = true;
+
+  updateScrollButtonState() {
+    const container = this.eventContainer?.nativeElement;
+    if (container) {
+      this.canScrollLeft = container.scrollLeft > 0;
+      this.canScrollRight = container.scrollWidth > container.clientWidth + container.scrollLeft;
+    }
+    this.cdr.detectChanges();
+  }
 
   scrollLeft() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft -= 500; // Adjust scroll distance as needed
-    this.updateScrollButtonState();
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: -500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
   }
 
   scrollRight() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    container.scrollLeft += 500; // Adjust scroll distance as needed
+    if (this.eventContainer) {
+      this.eventContainer.nativeElement.scrollBy({ left: 500, behavior: 'smooth' });
+      setTimeout(() => this.updateScrollButtonState(), 300);
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
     this.updateScrollButtonState();
   }
 
-  updateScrollButtonState() {
-    const container = document.querySelector('.event-scroll-wrapper') as HTMLElement;
-    const maxScroll = container.scrollWidth - container.clientWidth;
 
-    // Disable left button if we're at the beginning
-    this.isLeftDisabled = container.scrollLeft === 0;
 
-    // Disable right button if we've reached the end
-    this.isRightDisabled = container.scrollLeft === maxScroll;
-  }
 
   // -----------------------------------------------------------------------------------------------------
   isMapVisible: boolean = true;
