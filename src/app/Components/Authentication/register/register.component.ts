@@ -14,7 +14,7 @@ import { ToastrService } from '../../../Services/toastr.service';
 export class RegisterComponent {
 
 
-  constructor(private _authService: AuthService, private toastr: ToastrService) { }
+  constructor(private _authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
 
   registerForm = new FormGroup({
