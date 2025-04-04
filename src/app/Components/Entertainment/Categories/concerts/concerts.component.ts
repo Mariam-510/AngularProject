@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowComponent } from "../show/show.component";
-import { SharedService } from '../../../../Services/shared.service';
+import { SharedService,show } from '../../../../Services/shared.service';
 
 @Component({
   selector: 'app-concerts',
@@ -9,7 +9,7 @@ import { SharedService } from '../../../../Services/shared.service';
   styleUrl: './concerts.component.css'
 })
 export class ConcertsComponent implements OnInit {
-  shows: any;
+  shows: show[] = [];
 
   constructor(private sharedService: SharedService) { }
 

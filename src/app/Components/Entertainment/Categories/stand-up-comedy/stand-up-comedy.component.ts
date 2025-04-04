@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ShowComponent } from "../show/show.component";
-import { SharedService } from '../../../../Services/shared.service';
+import { SharedService,show } from '../../../../Services/shared.service';
 
 @Component({
   selector: 'app-stand-up-comedy',
@@ -11,7 +11,7 @@ import { SharedService } from '../../../../Services/shared.service';
   styleUrl: './stand-up-comedy.component.css'
 })
 export class StandUpComedyComponent implements OnInit {
-  shows: any;
+  shows: show[] = [];
 
   constructor(private sharedService: SharedService) { }
 

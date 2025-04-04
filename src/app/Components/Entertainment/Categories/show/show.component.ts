@@ -1,26 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedService } from '../../../../Services/shared.service';
-
-export interface show {
-  id: number;
-  title: string;
-  category: string;
-  imageSmall: string;
-  imageLarge: string;
-  rating: number;
-  description: string;
-  date: string;
-  location: string;
-  fullLocation: string;
-  price: number;
-  isFavorite: boolean;
-  word: string;
-  reviews: number;
-  qoute: string;
-  subQoute: string;
-}
+import { SharedService, show } from '../../../../Services/shared.service';
 
 @Component({
   selector: 'app-show',

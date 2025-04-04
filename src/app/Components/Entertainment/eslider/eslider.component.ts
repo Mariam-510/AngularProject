@@ -1,28 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedService } from '../../../Services/shared.service';
+import { SharedService, show } from '../../../Services/shared.service';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
 
-export interface show {
-  id: number;
-  title: string;
-  category: string;
-  imageSmall: string;
-  imageLarge: string;
-  rating: number;
-  description: string;
-  date: string;
-  location: string;
-  fullLocation: string;
-  price: number;
-  isFavorite: boolean;
-  word: string;
-  reviews: number;
-  qoute: string;
-  subQoute: string;
-}
 
 @Component({
   selector: 'app-eslider',

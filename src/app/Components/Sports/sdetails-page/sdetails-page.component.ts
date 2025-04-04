@@ -4,7 +4,7 @@ import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 
-import { team, match, SharedService } from '../../../Services/shared.service';
+import { team, match, SharedService, ShowTicket, Review } from '../../../Services/shared.service';
 import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
@@ -15,9 +15,8 @@ import { ToastrService } from '../../../Services/toastr.service';
 })
 export class SDetailsPageComponent implements AfterViewInit, OnInit {
   matches: match[] = [];
-  // teams: team[] = [];
-  reviews: any;
-  tickets: any;
+  reviews: Review[] = [];
+  tickets: ShowTicket[] = [];
   Math = Math;
   sections!: NodeListOf<HTMLElement>;
   stopSection!: HTMLElement;
@@ -31,7 +30,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   private stickyThreshold = 0;
 
   constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute,
-     private _sharedService: SharedService, private cdr: ChangeDetectorRef, private toastr: ToastrService) { }
+    private _sharedService: SharedService, private cdr: ChangeDetectorRef, private toastr: ToastrService) { }
 
 
   match: match = {
