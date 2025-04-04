@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../Services/auth.service';
 
@@ -12,7 +12,7 @@ import { AuthService } from '../../../Services/auth.service';
 })
 export class RegisterComponent {
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService,private router: Router) { }
 
   registerForm = new FormGroup({
     firstName: new FormControl("", [
@@ -59,6 +59,7 @@ export class RegisterComponent {
     };
 
     console.log("User Registered:", userObj);
+    this.router.navigate(['/login']);
 
     this.registerForm.reset();
   }
