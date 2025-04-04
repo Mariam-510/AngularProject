@@ -54,6 +54,17 @@ export interface Review {
 
 }
 
+export interface CastMember {
+  name: string;
+  role: string;
+  image: string;
+}
+
+export interface ShowCast {
+  showId: number;
+  cast: CastMember[];
+}
+
 //---------------------------------------------------------------------------------------------------
 export interface match {
   id: number;
@@ -488,7 +499,7 @@ export class SharedService {
 
   //---------------------------------------------------------------------------------------------------------
 
-  cast = [
+  cast: ShowCast[] = [
     // Dance - Cinderella (showId: 1)
     {
       showId: 1,
@@ -497,11 +508,6 @@ export class SharedService {
           name: 'Sophia Lee',
           role: 'Cinderella',
           image: 'https://image-service.usw2.wp-prod-us.cultureamp-cdn.com/lmSSHC6nC6IcQLD4RGigdC3KoBQ=/500x500/cultureampcom/production/b94/a47/9ea/b94a479eaece4ef09bda0e39/Sophia-Lee.jpeg'
-        },
-        {
-          name: 'Mark Jones',
-          role: 'Prince Charming',
-          image: 'https://source.unsplash.com/300x400/?prince,costume,man'
         },
         {
           name: 'Olivia Watson',
@@ -533,22 +539,22 @@ export class SharedService {
         {
           name: 'John Carter',
           role: 'John Lennon Tribute',
-          image: 'https://source.unsplash.com/300x400/?beatles,singer,man'
+          image: 'https://louderthanwar.com/wp-content/uploads/2022/03/Jcart.jpg'
         },
         {
           name: 'Paul Adams',
           role: 'Paul McCartney Tribute',
-          image: 'https://source.unsplash.com/300x400/?bassist,man,musician'
+          image: 'https://i.ytimg.com/vi/yiSw9tF1syA/sddefault.jpg'
         },
         {
           name: 'George Smith',
           role: 'George Harrison Tribute',
-          image: 'https://source.unsplash.com/300x400/?guitarist,man,musician'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyNa9dLo-kJiBAu74_WXR_oXweZFEP4Sv5Hg&s'
         },
         {
           name: 'Ringo Bell',
           role: 'Ringo Starr Tribute',
-          image: 'https://source.unsplash.com/300x400/?drummer,man,musician'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkURsBau0sxjJ3M2NMiEZCtEaSy7y_G4Oldg&s'
         }
       ]
     },
@@ -559,12 +565,12 @@ export class SharedService {
         {
           name: 'Dua Lipa',
           role: 'Dua Lipa',
-          image: 'https://source.unsplash.com/300x400/?female,singer,popstar'
+          image: 'https://i.scdn.co/image/ab67616d0000b273838698485511bd9108fadadc'
         },
         {
           name: 'Tommy Perez',
           role: 'Backup Dancer',
-          image: 'https://source.unsplash.com/300x400/?dancer,man,performance'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAz2QKodvHb0m5iE8zcoCgYah3GZGEj155XQ&s'
         }
       ]
     },
@@ -575,12 +581,12 @@ export class SharedService {
         {
           name: 'Katy Perry',
           role: 'Katy Perry',
-          image: 'https://source.unsplash.com/300x400/?female,singer,colorful'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-5InQIZ6n4bjmkSlOW9F4afnHpNk3gVHKRA&s'
         },
         {
           name: 'David Green',
           role: 'Lead Guitarist',
-          image: 'https://source.unsplash.com/300x400/?guitarist,rock,man'
+          image: 'https://americanahighways.org/wp-content/uploads/2024/06/Ryan-David-Green_Press-Photo-5_By-Taylor-Noel-Photography-e1711573236611.jpeg'
         }
       ]
     },
@@ -591,7 +597,7 @@ export class SharedService {
         {
           name: 'Ricky Gervais',
           role: 'Comedian',
-          image: 'https://source.unsplash.com/300x400/?comedian,man,microphone'
+          image: 'https://variety.com/wp-content/uploads/2023/12/GettyImages-1433370505-e1703205019114.jpg?w=1000&h=563&crop=1'
         }
       ]
     },
@@ -600,19 +606,19 @@ export class SharedService {
       showId: 7,
       cast: [
         {
-          name: 'Emma Stone',
-          role: 'Hermione Granger',
-          image: 'https://source.unsplash.com/300x400/?actress,book,glasses'
-        },
-        {
           name: 'Daniel Radcliffe',
           role: 'Harry Potter',
-          image: 'https://source.unsplash.com/300x400/?actor,glasses,scar'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTjgAU1UitAQVkRffri-vK2Pid4lzgO7wpig&s'
+        },
+        {
+          name: 'Emma Stone',
+          role: 'Hermione Granger',
+          image: 'https://pyxis.nymag.com/v1/imgs/546/20b/13e6835736d340862bd8788f0fd13b5b3f-26-emma-stone.rsquare.w400.jpg'
         },
         {
           name: 'Rupert Grint',
           role: 'Ron Weasley',
-          image: 'https://source.unsplash.com/300x400/?actor,redhair,young'
+          image: 'https://www.usatoday.com/gcdn/presto/2019/08/15/USAT/802e6fbd-9905-4455-8e1d-52382df19bd5-XXX_Rupert_Grint_rd319.JPG?crop=2096,2096,x0,y0'
         }
       ]
     },
@@ -623,12 +629,12 @@ export class SharedService {
         {
           name: 'Chris Martin',
           role: 'Lead Actor',
-          image: 'https://source.unsplash.com/300x400/?actor,man,stage'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy7yJTdsuhySgOHgFBjbPaCb-_fj6e7fJvjw9_dY0-ts_FZmOd1p7lNOGpj57iMvjJteY&usqp=CAU'
         },
         {
           name: 'Rachel Adams',
           role: 'Supporting Actor',
-          image: 'https://source.unsplash.com/300x400/?actress,women,theater'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnmriUofHbn4k48Z7t1ogevIcOVjsyhcglAVjb6i4Rybgm_tPx49T6jhZ0PK9XdU4NpJM&usqp=CAU'
         }
       ]
     },
@@ -639,12 +645,12 @@ export class SharedService {
         {
           name: 'Dev Patel',
           role: 'Pi Patel',
-          image: 'https://source.unsplash.com/300x400/?indian,actor,boat'
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9svlB15vQ7KvPvCzPBwKSaqpQNSUhEfd2pg&s'
         },
         {
           name: 'Irrfan Khan',
           role: 'Richard Parker',
-          image: 'https://source.unsplash.com/300x400/?tiger,animal,orange'
+          image: 'https://img.jagranjosh.com/imported/images/E/GK/Irrfan_khan_passes_away.webp'
         }
       ]
     }

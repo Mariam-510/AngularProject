@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SharedService, show, ShowTicket, Schedule, Review } from '../../../Services/shared.service';
+import { SharedService, show, ShowTicket, Schedule, Review, ShowCast, CastMember } from '../../../Services/shared.service';
 import { ToastrService } from '../../../Services/toastr.service';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
@@ -43,7 +43,7 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
   schedules: Schedule[] = []
   eventList: show[] = [];
   reviews: Review[] = [];
-  castList: any;
+  castList: CastMember[] = [];
 
 
   ngOnInit(): void {
