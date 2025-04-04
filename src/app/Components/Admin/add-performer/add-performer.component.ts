@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-add-performer',
@@ -12,7 +13,7 @@ import { RouterModule } from '@angular/router';
 export class AddPerformerComponent {
   performerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService) {
     this.performerForm = this.fb.group({
       performers: this.fb.array([this.createPerformer()])
     });
@@ -56,7 +57,7 @@ export class AddPerformerComponent {
   submitForm() {
     if (this.performerForm.valid) {
       console.log('Performers:', this.performerForm.value.performers);
-      alert('Performers saved successfully!');
+      this.toastr.success('Performers saved successfully!');
 
       // Reset the form
       this.performerForm.reset();

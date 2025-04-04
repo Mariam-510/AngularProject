@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-add-schedule',
@@ -13,7 +14,7 @@ export class AddScheduleComponent {
   scheduleForm: FormGroup;
   daysOfWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService) {
     this.scheduleForm = this.fb.group({
       schedules: this.fb.array([this.createSchedule()])  // Start with one empty row
     });
@@ -43,13 +44,13 @@ export class AddScheduleComponent {
   submitForm() {
     if (this.scheduleForm.valid) {
       console.log('Schedules:', this.scheduleForm.value.schedules);
-      alert('Schedules saved successfully!');
+      this.toastr.success('Schedules saved successfully!');
 
       // Reset the form and reinitialize with one empty schedule
       this.scheduleForm.reset();
       this.scheduleForm.setControl('schedules', this.fb.array([this.createSchedule()]));
     } else {
-      alert('Please fill all required fields.');
+      this.toastr.error('Please fill all required fields.');
     }
   }
 

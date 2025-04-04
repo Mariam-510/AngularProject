@@ -5,6 +5,7 @@ import { PaypalService } from '../../../Services/paypal.service';
 import { AuthService } from '../../../Services/auth.service';
 import { SharedService, show, CheckoutTicket, Schedule } from '../../../Services/shared.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from '../../../Services/toastr.service';
 
 declare var paypal: any;
 
@@ -16,7 +17,8 @@ declare var paypal: any;
 })
 export class BookingDetailsEventComponent implements OnInit {
 
-  constructor(private payPalService: PaypalService, private _sharedService: SharedService, private route: ActivatedRoute, private _authService: AuthService) { }
+  constructor(private payPalService: PaypalService, private _sharedService: SharedService, private route: ActivatedRoute,
+     private _authService: AuthService, private toastr: ToastrService) { }
 
   show: any;
 
@@ -97,11 +99,14 @@ export class BookingDetailsEventComponent implements OnInit {
           const order = await actions.order.capture();
           console.log('Payment captured:', order);
           // window.location.href = `/success?orderId=${data.orderID}`;
-          window.location.href = `/profile/bookingHistory`;
+          this.toastr.success('Payment successful!');
+          setTimeout(() => {
+            window.location.href = `/profile/bookingHistory`;
+          }, 2500);
         },
         onError: (err: any) => {
           console.error('PayPal Error:', err);
-          alert('Payment failed. Please try again.');
+          this.toastr.error('Payment failed. Please try again.');
         }
       }).render('#paypal-button-container');
 

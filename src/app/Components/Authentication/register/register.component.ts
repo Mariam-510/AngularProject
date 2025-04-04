@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } 
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../Services/auth.service';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,9 @@ import { AuthService } from '../../../Services/auth.service';
 })
 export class RegisterComponent {
 
-  constructor(private _authService: AuthService,private router: Router) { }
+
+  constructor(private _authService: AuthService, private toastr: ToastrService) { }
+
 
   registerForm = new FormGroup({
     firstName: new FormControl("", [
@@ -45,7 +48,7 @@ export class RegisterComponent {
 
   register() {
     if (this.registerForm.invalid) {
-      alert("Please fill in all required fields correctly.");
+      this.toastr.error('Please fill in all required fields correctly.');
       return;
     }
 

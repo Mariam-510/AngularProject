@@ -4,6 +4,7 @@ import { ESliderComponent } from '../../Entertainment/eslider/eslider.component'
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SharedService } from '../../../Services/shared.service';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-favourite',
@@ -14,7 +15,7 @@ import { SharedService } from '../../../Services/shared.service';
 export class FavouriteComponent implements OnInit {
   favoriteShows: any[] = [];
   favoriteMatches: any[] = [];
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private toastr: ToastrService) { }
   ngOnInit() {
     this.favoriteShows = this.sharedService.shows.filter(show => show.isFavorite);
 
@@ -112,7 +113,7 @@ export class FavouriteComponent implements OnInit {
         .catch(err => console.error('Sharing failed', err));
     } else {
       // Fallback for browsers that don’t support navigator.share
-      alert(`Copy and share this: ${shareText}`);
+      this.toastr.info(`Copy and share this: ${shareText}`);
     }
   }
 
@@ -131,7 +132,7 @@ export class FavouriteComponent implements OnInit {
         .catch(err => console.error('Sharing failed', err));
     } else {
       // Fallback for browsers that don’t support navigator.share
-      alert(`Copy and share this: ${shareText}`);
+      this.toastr.info(`Copy and share this: ${shareText}`);
     }
   }
 

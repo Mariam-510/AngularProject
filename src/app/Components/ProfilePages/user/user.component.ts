@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-user',
@@ -15,7 +16,7 @@ export class UserComponent {
   currentUser: any;
   MyForm!: FormGroup;
   
-  constructor(private router: Router, private _authService: AuthService) {}
+  constructor(private router: Router, private _authService: AuthService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     // this.MyForm.setValue({
@@ -92,7 +93,7 @@ export class UserComponent {
 
   register() {
     if (this.MyForm.invalid) {
-      alert("Please fill in all required fields correctly.");
+      this.toastr.error('Please fill in all required fields correctly.');
       return;
     }
 

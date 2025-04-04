@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { SharedService } from '../../../Services/shared.service';
+import { ToastrService } from '../../../Services/toastr.service';
 @Component({
   selector: 'app-create-event',
   imports: [ReactiveFormsModule, CommonModule, LeafletMapComponent],
@@ -25,7 +26,7 @@ export class CreateEventComponent implements OnInit {
     EventCategory: new FormControl("", [Validators.required]) // Added category field
   });
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.categories = this.sharedService.showCategories;
@@ -97,7 +98,8 @@ export class CreateEventComponent implements OnInit {
       this.MyForm.markAllAsTouched();
       return;
     }
-    alert('Event Created Successfully!');
+    this.toastr.success('Event Created Successfully!');
+
     const newEvent = this.MyForm.value;
 
     console.log(newEvent);

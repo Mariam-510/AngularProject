@@ -2,6 +2,7 @@ import { Component, AfterViewInit, Input, ElementRef, ViewChild, inject, input }
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from '../../Services/toastr.service';
 
 @Component({
   selector: 'app-leaflet-map',
@@ -18,6 +19,7 @@ export class LeafletMapComponent implements AfterViewInit {
   @Input() locationName: string = ''; // ✅ Change this to any location
   @Input() styleTxt: { [key: string]: string } = { height: '100%', width: '50%' };
 
+  constructor(private toastr: ToastrService){}
 
   private http = inject(HttpClient); // ✅ Correct way to inject HttpClient
 
@@ -77,11 +79,11 @@ export class LeafletMapComponent implements AfterViewInit {
         },
         (error) => {
           console.error('Error getting user location:', error);
-          alert('Unable to retrieve your location. Please ensure location services are enabled.');
+          this.toastr.error('Unable to retrieve your location. Please ensure location services are enabled.');
         }
       );
     } else {
-      alert('Geolocation is not supported by this browser.');
+      this.toastr.error('Geolocation is not supported by this browser.');
     }
   }
 

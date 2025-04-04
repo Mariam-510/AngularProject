@@ -3,8 +3,9 @@ declare var bootstrap: any; // Required for Bootstrap modal handling
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
-import { team, match, SharedService } from '../../../Services/shared.service';
 
+import { team, match, SharedService } from '../../../Services/shared.service';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-sdetails-page',
@@ -29,7 +30,9 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   private initialCardTop = 0;
   private stickyThreshold = 0;
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService, private cdr: ChangeDetectorRef) { }
+  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute,
+     private _sharedService: SharedService, private cdr: ChangeDetectorRef, private toastr: ToastrService) { }
+
 
   match: match = {
     id: 1,
@@ -128,7 +131,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
         .catch(err => console.error('Sharing failed', err));
     } else {
       // Fallback for browsers that don’t support navigator.share
-      alert(`Copy and share this: ${shareText}`);
+      this.toastr.info(`Copy and share this: ${shareText}`);
     }
   }
 
@@ -300,7 +303,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   copyToClipboard() {
     navigator.clipboard.writeText(this.locationUrl).then(() => {
-      alert('Location link copied to clipboard!');
+      this.toastr.info('Location link copied to clipboard!');
     });
   }
 

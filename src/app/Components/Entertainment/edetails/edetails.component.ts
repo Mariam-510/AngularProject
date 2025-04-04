@@ -3,6 +3,7 @@ import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedService } from '../../../Services/shared.service';
+import { ToastrService } from '../../../Services/toastr.service';
 
 declare var bootstrap: any; // Required for Bootstrap modal handling
 
@@ -33,7 +34,8 @@ export interface show {
 })
 export class EdetailsComponent implements AfterViewInit, OnInit {
 
-  constructor(private sharedService: SharedService, private route: ActivatedRoute, private renderer: Renderer2, private elRef: ElementRef, private cdr: ChangeDetectorRef) { }
+  constructor(private sharedService: SharedService, private route: ActivatedRoute, private renderer: Renderer2,
+     private elRef: ElementRef, private cdr: ChangeDetectorRef, private toastr: ToastrService) { }
 
   item: show =
     {
@@ -104,7 +106,7 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
         .catch(err => console.error('Sharing failed', err));
     } else {
       // Fallback for browsers that don’t support navigator.share
-      alert(`Copy and share this: ${shareText}`);
+      this.toastr.success(`Copy and share this: ${shareText}`);
     }
   }
 
@@ -317,7 +319,7 @@ export class EdetailsComponent implements AfterViewInit, OnInit {
 
   copyToClipboard() {
     navigator.clipboard.writeText(this.locationUrl).then(() => {
-      alert('Location link copied to clipboard!');
+      this.toastr.success('Location link copied to clipboard!');
     });
   }
 
