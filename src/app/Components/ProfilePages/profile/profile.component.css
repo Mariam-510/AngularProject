@@ -6,7 +6,7 @@
 }
 
 .sidebar {
-  width: 300px;
+  /* width: 300px; */
   max-height: 410px;
   position: fixed;
   left: 0;
