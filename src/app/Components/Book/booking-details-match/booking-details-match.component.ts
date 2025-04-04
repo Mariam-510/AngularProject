@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PaypalService } from '../../../Services/paypal.service';
 import { SharedService, match, CheckoutTicket } from '../../../Services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
+import { ToastrService } from '../../../Services/toastr.service';
 
 declare var paypal: any;
 
@@ -16,8 +17,14 @@ declare var paypal: any;
 })
 export class BookingDetailsMatchComponent implements OnInit {
 
+<<<<<<< Updated upstream
   constructor(private payPalService: PaypalService, private _sharedService: SharedService, private route: ActivatedRoute, private _authService: AuthService) { }
   
+=======
+  constructor(private payPalService: PaypalService, private _sharedService: SharedService, private route: ActivatedRoute,
+     private _authService: AuthService, private toastr: ToastrService) { }
+
+>>>>>>> Stashed changes
   match: any;
 
   currentUser: any;
@@ -92,12 +99,16 @@ export class BookingDetailsMatchComponent implements OnInit {
         onApprove: async (data: any, actions: any) => {
           const order = await actions.order.capture();
           console.log('Payment captured:', order);
-          // window.location.href = `/success?orderId=${data.orderID}`;
-          window.location.href = `/profile/bookingHistory`;
+          // // window.location.href = `/success?orderId=${data.orderID}`;
+          // window.location.href = `/profile/bookingHistory`;
+          this.toastr.success('Payment successful!');
+          setTimeout(() => {
+            window.location.href = `/profile/bookingHistory`;
+          }, 2500);
         },
         onError: (err: any) => {
-          console.error('PayPal Error:', err);
-          alert('Payment failed. Please try again.');
+          // console.error('PayPal Error:', err);
+          this.toastr.error('Payment failed. Please try again.');
         }
       }).render('#paypal-button-container');
 

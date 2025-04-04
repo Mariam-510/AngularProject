@@ -4,6 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharedService } from '../../../Services/shared.service';
 import { AuthService } from '../../../Services/auth.service';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,9 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private _shared: SharedService,
-    private router: Router,
-    private _authService: AuthService
-    
-    
-  ) {console.log(this.Loginform);}
-
+    private _shared: SharedService, private router: Router, private _authService: AuthService, private toastr: ToastrService) {
+    console.log(this.Loginform);
+  }
 
   ngOnInit(): void {
     this.mockUserDetails = this._authService.mockUser;
@@ -58,7 +55,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.Loginform.invalid) {
       this.markFormGroupTouched(this.Loginform);
-      alert("Please fill in all required fields correctly.");
+      this.toastr.error('Please fill in all required fields correctly.');
       return;
     }
 

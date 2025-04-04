@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from '../../../Services/toastr.service';
 
 @Component({
   selector: 'app-add-ticket',
@@ -13,7 +14,7 @@ export class AddTicketComponent {
   ticketForm: FormGroup;
   charCounts: number[] = []; // Array to track character count for each ticket description
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService) {
     this.ticketForm = this.fb.group({
       tickets: this.fb.array([]) // Start with an empty form array
     });
@@ -50,14 +51,14 @@ export class AddTicketComponent {
   submitForm() {
     if (this.ticketForm.valid) {
       console.log('Booked Tickets:', this.ticketForm.value);
-      alert('Tickets saved successfully!');
+      this.toastr.success('Tickets saved successfully!');
       // Reset the form and reinitialize with one empty ticket
       this.ticketForm.reset();
       this.ticketForm.setControl('tickets', this.fb.array([]));
       this.charCounts = [];
       this.addTicket(); // Add a new empty ticket after reset
     } else {
-      console.log('Form is invalid.');
+      this.toastr.error('Form is invalid.');
     }
   }
 

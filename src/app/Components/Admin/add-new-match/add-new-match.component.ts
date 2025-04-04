@@ -2,6 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
+<<<<<<< Updated upstream
+=======
+import { SharedService } from '../../../Services/shared.service';
+import { ToastrService } from '../../../Services/toastr.service';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-add-new-match',
@@ -61,7 +66,11 @@ export class AddNewMatchComponent implements OnInit {
 
   stadiums = this.stadiumData.map(stadium => stadium.name);
 
+<<<<<<< Updated upstream
   constructor(private fb: FormBuilder) {
+=======
+  constructor(private fb: FormBuilder,private sharedService: SharedService, private toastr: ToastrService) {
+>>>>>>> Stashed changes
     this.matchForm = this.fb.group({
       league: ['', Validators.required],
       homeTeam: ['', Validators.required],
@@ -158,8 +167,14 @@ export class AddNewMatchComponent implements OnInit {
       };
       
       console.log('Form submitted:', matchData);
+<<<<<<< Updated upstream
       alert('Match added successfully!');
       
+=======
+      this.toastr.success('Match added successfully!');
+      this.sharedService.addMatch(matchData);
+
+>>>>>>> Stashed changes
       // Reset the form
       this.matchForm.reset({
         location: 'Cairo'

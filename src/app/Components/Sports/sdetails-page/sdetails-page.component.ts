@@ -3,7 +3,13 @@ declare var bootstrap: any; // Required for Bootstrap modal handling
 import { Component, HostListener, ViewChild, ElementRef, AfterViewInit, Renderer2, OnInit } from '@angular/core';
 import { LeafletMapComponent } from '../../leaflet-map/leaflet-map.component';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
+<<<<<<< Updated upstream
 import { eventItem, team, match, SharedService } from '../../../Services/shared.service';
+=======
+import { team, match, SharedService } from '../../../Services/shared.service';
+import { ToastrService } from '../../../Services/toastr.service';
+
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-sdetails-page',
@@ -31,7 +37,36 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   private initialCardTop = 0;
   private stickyThreshold = 0;
 
+<<<<<<< Updated upstream
   constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute, private _sharedService: SharedService) { }
+=======
+  constructor(private renderer: Renderer2, private elRef: ElementRef, private route: ActivatedRoute,
+     private _sharedService: SharedService, private cdr: ChangeDetectorRef, private toastr: ToastrService) { }
+
+  match: match = {
+    id: 1,
+    venue: 'Cairo International Stadium, Cairo', // location
+    date: 'Fri 28 Mar 2025',
+    tournament: 'World Cup Qualifiers 2025', //title
+    staduim: 'img/cairo staduim.jpg',
+    matchNumber: 5,
+    time: '08:30 PM', //Kickoff
+    GatesOpen: '05:00 PM',
+    group: 'African Qualifiers Group B', //Group
+    team1: 'Egypt',
+    team2: 'Algeria',
+    team1Logo: 'img/egypt.svg',
+    team2Logo: 'img/algeria.svg',
+    isFavorite: true,
+    price: 1100,
+    word: "🔥 high",
+    adv: "⏳ Limited Seats",
+    category: '⚽ Football',
+    location: 'Cairo, Egypt'
+  };
+
+  description: string = `Football isn't just a sport—it's a passion that unites people across the world. It's more than just a game of skill and strategy; it's a celebration of culture, identity, and community. When the whistle blows, it signals the start of something bigger than a match—it’s an event that stirs emotions, fuels rivalries, and builds lifelong memories. Whether it’s the roar of the crowd, the anticipation of a goal, or the heartbreak of a last-minute loss, football has the power to bring people together, transcending borders and languages. It's a shared experience that connects fans in a way few other things can, making it a universal language spoken in every corner of the globe.`
+>>>>>>> Stashed changes
 
   item: eventItem =
     {
@@ -138,7 +173,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
         .catch(err => console.error('Sharing failed', err));
     } else {
       // Fallback for browsers that don’t support navigator.share
-      alert(`Copy and share this: ${shareText}`);
+      this.toastr.info(`Copy and share this: ${shareText}`);
     }
   }
 
@@ -265,7 +300,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   copyToClipboard() {
     navigator.clipboard.writeText(this.locationUrl).then(() => {
-      alert('Location link copied to clipboard!');
+      this.toastr.info('Location link copied to clipboard!');
     });
   }
 
