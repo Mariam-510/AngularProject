@@ -342,11 +342,6 @@
   .search-container input:focus {
     width: 160px;
   }
-
-  .user-greeting {
-    display: none;
-    /* Hide greeting on medium screens */
-  }
 }
 
 /* Large screens (993px - 1200px) */
@@ -371,7 +366,7 @@
 /* Medium screens (769px - 992px) */
 @media (min-width: 769px) and (max-width: 992px) {
   .header-container {
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
   }
 
   .header-middle nav ul {
@@ -454,11 +449,6 @@
 
   .user-email {
     font-size: 0.75rem;
-  }
-
-  .user-greeting {
-    display: none;
-    /* Hide greeting on mobile */
   }
 
   .user-menu-container {

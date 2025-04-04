@@ -40,7 +40,6 @@ export interface Schedule {
 //---------------------------------------------------------------------------------------------------
 export interface match {
   id: number;
-  image: string;
   venue: string;
   date: string;
   tournament: string;
@@ -110,7 +109,8 @@ export class SharedService {
         id: 2,
         title: 'Alvin Ailey American Dance',
         category: 'Dance',
-        imageSmall: 'img/Shows/d2.jpg',
+        // imageSmall: 'img/Shows/d2.jpg',
+        imageSmall: 'img/s.png',
         imageLarge: 'img/Shows/d22.jpg',
         rating: 3,
         description: `A breathtaking fusion of contemporary and African-American dance, this performance captivates with its raw emotion and powerful storytelling.`,
@@ -281,13 +281,14 @@ export class SharedService {
     console.log(this.shows);
 
   }
+
   convertTo12HourFormat(time: string): string {
     const [hours, minutes] = time.split(':').map(Number);
     const period = hours >= 12 ? 'PM' : 'AM';
     const formattedHours = hours % 12 || 12; // Convert 0 -> 12 for AM
     return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${period}`;
   }
-  
+
   addMatch(match: any) {
     const newMatch = {
       id: this.matches.length + 1,
@@ -461,6 +462,7 @@ export class SharedService {
     return reviews;
   }
 
+
   //---------------------------------------------------------------------------------------------------------
 
   cast = [
@@ -631,7 +633,6 @@ export class SharedService {
   matches: match[] = [
     {
       id: 1,
-      image: 'img/cairo staduim.jpg',
       venue: 'Cairo International Stadium, Cairo', // location
       date: 'Fri 28 Mar 2025',
       tournament: 'World Cup Qualifiers 2025', //title
@@ -654,7 +655,6 @@ export class SharedService {
 
     {
       id: 2,
-      image: 'img/s1.jpg',
       venue: 'Petro Sport Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
       tournament: 'Egypt Cup 2025',
@@ -677,7 +677,6 @@ export class SharedService {
 
     {
       id: 3,
-      image: 'img/s3.jpg',
       venue: 'Khaled Bichara Stadium, Gouna',
       date: 'Sun 23 Mar 2025',
       tournament: 'EPL 2024/2025',
@@ -700,7 +699,6 @@ export class SharedService {
 
     {
       id: 4,
-      image: 'img/m3.jpg',
       venue: 'Alexandria Stadium, Alexandria',
       date: 'Tue 25 Mar 2025',
       tournament: 'Derby Match',
@@ -723,7 +721,7 @@ export class SharedService {
 
     {
       id: 5,
-      image: 'img/cairo3.jpg',
+      staduim: 'img/cairo3.jpg',
       venue: 'Cairo International Stadium, Cairo', // Corrected venue
       date: 'Sat 22 Mar 2025',
       tournament: 'Championship League',
@@ -737,13 +735,15 @@ export class SharedService {
       team2Logo: 'img/Pyramids.png',
       isFavorite: true,
       price: 500, // Add price
-      category: '⚽ Egyptian Premier League',
+      word: "🔥 high",
+      adv: "⏳ Limited Seats",
+      category: '⚽ Football',
       location: 'Cairo, Egypt'
     },
 
     {
       id: 6,
-      image: 'img/m4.jpg',
+      staduim: 'img/m4.jpg',
       venue: 'Borg El Arab Stadium, Alexandria',
       date: 'Tue 15 Apr 2025',
       tournament: 'World Cup Qualifiers 2025',
@@ -765,7 +765,6 @@ export class SharedService {
 
     {
       id: 7,
-      image: 'img/cairo.jpg',
       venue: 'Cairo International Stadium, Cairo',
       date: 'Mon 24 Mar 2025',
       tournament: 'EPL 2024/2025',
@@ -788,7 +787,7 @@ export class SharedService {
 
     {
       id: 8,
-      image: 'img/m2.jpg',
+      staduim: 'img/m2.jpg',
       venue: 'Suez Canal Stadium, Ismailia',
       date: 'Sat 22 Mar 2025',
       tournament: 'EPL 2024/2025',
@@ -810,7 +809,7 @@ export class SharedService {
 
     {
       id: 9,
-      image: 'img/m1.jpg',
+      staduim: 'img/m1.jpg',
       venue: 'Suez Canal Stadium, Ismailia',
       date: 'Sat 22 Mar 2025',
       tournament: 'EPL 2024/2025',
@@ -832,7 +831,7 @@ export class SharedService {
 
     {
       id: 10,
-      image: 'img/cairo4.jpg',
+      staduim: 'img/cairo4.jpg',
       venue: 'Cairo International Stadium, Cairo',
       date: 'Tue 1 Apr 2025',
       tournament: 'Derby Match',
@@ -1047,6 +1046,13 @@ export class SharedService {
     }
   ];
 
+  scheduleDetails: Schedule =
+    {
+      date: '2025-06-13',
+      day: 'Friday',
+      time: '07:30 PM - 09:30 PM'
+    };
+
   // Define ShowTicket array using the interface
   generateMatchTicketsFromPrice(startingPrice: number): ShowTicket[] {
     // Create an array of ticket types with corresponding descriptions
@@ -1068,6 +1074,19 @@ export class SharedService {
     return tickets.sort((a, b) => b.price - a.price);
   }
 
+  generateDateMatch(matchDate: string): string {
+
+    const date = new Date(matchDate);
+
+    // Get the short month name, day, and year
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    // Format as "Month Day - Year"
+    return `${month} ${day} - ${year}`;
+  }
+
   generateReviewsForMatch(matchDate: string, numberOfReviews: number): any[] {
     const reviews: any[] = [];
     const comments = [
@@ -1082,6 +1101,9 @@ export class SharedService {
 
     // English names list
     const englishNames = ['Ahmed', 'Sara', 'Mariam', 'Omar', 'Nour', 'Ali', 'Fatima', 'Khaled', 'Jamila', 'Mohamed'];
+
+    matchDate = this.generateDateMatch(matchDate);
+    console.log(matchDate);
 
     // Generate reviews with random ratings and comments
     for (let i = 0; i < numberOfReviews; i++) {
@@ -1108,67 +1130,5 @@ export class SharedService {
 
   //---------------------------------------------------------------------------------------------------------
 
-
-
-  //---------------------------------------------------------------------------------------------------------
-  //favorite shows
-  private favoriteShowsSubject = new BehaviorSubject<show[]>(this.shows.filter(show => show.isFavorite));
-  favoriteShows$ = this.favoriteShowsSubject.asObservable();
-
-  // Toggle favorite status of a show by its ID
-  toggleFavorite(showId: number): void {
-    const show = this.shows.find(s => s.id === showId);
-    if (show) {
-      // Toggle the favorite status
-      show.isFavorite = !show.isFavorite;
-
-      // Update the favorite shows list and emit the updated array
-      this.favoriteShowsSubject.next(this.getFavoriteShows());
-    }
-  }
-
-  // Get the list of favorite shows (filtered)
-  getFavoriteShows(): any[] {
-    // Filter shows to get only those that are marked as favorite
-    return this.shows.filter(show => show.isFavorite);
-  }
-  // Add or set the shows list
-  setShows(shows: any[]): void {
-    this.shows = shows;
-    // Emit the updated list of favorites
-    this.favoriteShowsSubject.next(this.getFavoriteShows());
-  }
-
-
-  private favoriteMatchesSubject = new BehaviorSubject<match[]>(this.matches.filter(match => match.isFavorite));
-  favoriteMatches$ = this.favoriteMatchesSubject.asObservable();
-
-  // Toggle favorite status of a show by its ID
-  toggleFavoritematch(matchId: number): void {
-    const match = this.matches.find(m => m.id === matchId);
-    if (match) {
-      // Toggle the favorite status
-      match.isFavorite = !match.isFavorite;
-
-      // Update the favorite shows list and emit the updated array
-      this.favoriteMatchesSubject.next(this.getFavoriteShows());
-    }
-  }
-
-
-
-  //---------------------------------------------------------------------------------------------------------
-
-
-  getFavoriteMatches(): any[] {
-    // Filter shows to get only those that are marked as favorite
-    return this.matches.filter(match => match.isFavorite);
-  }
-  // Add or set the shows list
-  setMatches(matches: any[]): void {
-    this.matches = matches;
-    // Emit the updated list of favorites
-    this.favoriteMatchesSubject.next(this.getFavoriteMatches());
-  }
 
 }

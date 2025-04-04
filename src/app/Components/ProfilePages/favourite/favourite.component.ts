@@ -16,43 +16,24 @@ export class FavouriteComponent implements OnInit {
   favoriteMatches: any[] = [];
   constructor(private sharedService: SharedService) { }
   ngOnInit() {
-    this.favoriteShows = this.sharedService.getFavoriteShows();
+    this.favoriteShows = this.sharedService.shows.filter(show => show.isFavorite);
 
-    // Subscribe to BehaviorSubject to update favorites dynamically
-    this.sharedService.favoriteShows$.subscribe(favorites => {
-      this.favoriteShows = favorites;
-    });
-
-    this.favoriteMatches = this.sharedService.getFavoriteMatches();
-
-    // Subscribe to BehaviorSubject to update favorites dynamically
-    this.sharedService.favoriteMatches$.subscribe(favorites => {
-      this.favoriteMatches = favorites;
-    });
+    this.favoriteMatches = this.sharedService.matches.filter(match => match.isFavorite);;
 
   }
-  removeFavorite(showId: number) {
-    const show = this.favoriteShows.find((event) => event.id === showId);
-    if (show) {
-      this.sharedService.toggleFavorite(show);
-    }
-  }
-  //----------------------------------------------------------------------------------------------------------------------
-
 
   // --------------------------------------------------------------------------------------------------------------------
   Math = Math;
 
+  //----------------------------------------------------------------------------------------------------------------------
+  selectedCategory: 'events' | 'matches' = 'events';
+  toggleCategory(category: 'events' | 'matches') {
+    this.selectedCategory = category;
+  }
 
-
-  toggleFavoriteMatch(match: any) {
-    match.isFavorite = !match.isFavorite;
-    // Remove match from array when unfavorited
-
-    if (!match.isFavorite) {
-      this.favoriteMatches = this.favoriteMatches.filter(m => m !== match);
-    }
-
+  toggleCategory1(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedCategory = isChecked ? 'matches' : 'events';
   }
 
   // --------------------------------------------------------------------------------------------------------------------
@@ -87,17 +68,10 @@ export class FavouriteComponent implements OnInit {
   currentPageMatch = 1;
   // Calculate the total number of pages
   get totalPagesMatch() {
-
     return Math.ceil(this.favoriteMatches.length / this.itemsPerPage);
   }
 
   // Get paginated events
-  // let start = (this.currentPageEvent - 1) * this.itemsPerPage;
-  //   if (this.favoriteShows.slice(start, start + this.itemsPerPage).length == 0) {
-  //     this.changePageEvent(1);
-  //     start = 0;
-  //   }
-  //   return this.favoriteShows.slice(start, start + this.itemsPerPage);
   get paginatedMatches() {
     let start = (this.currentPageMatch - 1) * this.itemsPerPage;
     if (this.favoriteMatches.slice(start, start + this.itemsPerPage).length == 0) {
@@ -164,19 +138,17 @@ export class FavouriteComponent implements OnInit {
 
 
   //----------------------------------------------------------------------------------------------------------------------
-  selectedCategory: 'events' | 'matches' = 'events';
-  toggleCategory(category: 'events' | 'matches') {
-    this.selectedCategory = category;
-  }
 
-  toggleCategory1(event: Event): void {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    this.selectedCategory = isChecked ? 'matches' : 'events';
-  }
   toggleFavoriteEvent(event: any) {
     event.isFavorite = !event.isFavorite;
-    if (!event.isFavorite) {
-      this.favoriteShows = this.favoriteShows.filter(e => e !== event);
-    }
+    this.favoriteShows = this.favoriteShows.filter(e => e !== event);
   }
+
+  //----------------------------------------------------------------------------------------------------------------------
+  toggleFavoriteMatch(match: any) {
+    match.isFavorite = !match.isFavorite;
+    this.favoriteMatches = this.favoriteMatches.filter(m => m !== match);
+  }
+
+
 }

@@ -6,14 +6,14 @@
         <div class="cultural-presentation">
           <img [src]="showDetails.imageLarge" class="event-visual" />
           <div class="event-essentials">
-            <h2 class="event-headline fs-2">{{ showDetails.title }}</h2>
+            <h2 class="event-headline fs-2 ms-1">{{ showDetails.title }}</h2>
             <div class="venue-meta fs-4">
-              <span class="location-icon">📍</span>
-              {{ showDetails.location }}
+              <!-- <span class="location-icon">📍</span> -->
+              📌 {{ showDetails.location }}, {{ showDetails.fullLocation}}
             </div>
             <div class="temporal-info fs-4">
               <div class="event-timing">
-                <!-- 🕒 {{ showDetails.date | date }} • {{ bookingData.time }} -->
+                📅 {{scheduleDetails.day.slice(0,3)}}, {{ scheduleDetails.date | date }} | {{ scheduleDetails.time }}
               </div>
             </div>
           </div>

@@ -33,7 +33,6 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
   match: match = {
     id: 1,
-    image: 'img/cairo staduim.jpg',
     venue: 'Cairo International Stadium, Cairo', // location
     date: 'Fri 28 Mar 2025',
     tournament: 'World Cup Qualifiers 2025', //title
@@ -94,7 +93,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
       return (match.id !== this.match.id) &&
         ((match.price >= this.match.price - 100 && match.price <= this.match.price + 100)
           || match.venue === this.match.venue);
-    }).slice(0, 2);
+    });
 
     this.reviews = this._sharedService.generateReviewsForMatch(this.match.date, 5);
     this.tickets = this._sharedService.generateMatchTicketsFromPrice(this.match.price);
@@ -160,7 +159,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
 
     // Detect Scroll Direction
     const scrollingDown = (scrollY) > this.lastScrollTop;
-    console.log(card.offsetHeight);
+    // console.log(card.offsetHeight);
 
     // Stop scrolling effect at "YOU MIGHT ALSO LIKE"
     if (this.stopSection) {

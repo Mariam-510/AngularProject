@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, signal, ViewChild } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { PaypalService } from '../../../Services/paypal.service';
 import { AuthService } from '../../../Services/auth.service';
-import { SharedService, show, CheckoutTicket } from '../../../Services/shared.service';
+import { SharedService, show, CheckoutTicket, Schedule } from '../../../Services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 
 declare var paypal: any;
@@ -44,6 +44,12 @@ export class BookingDetailsEventComponent implements OnInit {
 
   checkoutTicket: CheckoutTicket[] = [];
 
+  scheduleDetails: Schedule = {
+    date: '',
+    day: '',
+    time: ''
+  };
+
   totalPrice: number = 0;
   clientId: string = '';
 
@@ -67,6 +73,8 @@ export class BookingDetailsEventComponent implements OnInit {
 
     this.checkoutTicket = this._sharedService.checkoutTicket;
     this.totalPrice = this.checkoutTicket.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0);
+    this.scheduleDetails = this._sharedService.scheduleDetails;
+
     });
 
     try {
