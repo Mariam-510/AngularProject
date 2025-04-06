@@ -1,10 +1,9 @@
 <header class="header-container">
   <!-- Left Section: Logo and Hamburger -->
   <div class="header-left">
-    <div class="logo">
-      <!-- <a routerLink="/"><i class="bi bi-music-note me-1"></i>Tick<span class="text-danger">E</span>taia</a> -->
-      <a routerLink="/" style="background: black; padding: 2px 5px; border-radius: 3px;">
-        <img src="https://cdn.discordapp.com/attachments/1351894413755945015/1357578983562154104/image.png?ex=67f0b774&is=67ef65f4&hm=155c724952373a849a0af0611568610e25218e302385c82fa45e1f68b0f8b3ea&" width="250">
+    <div class="logo ms-2 mb-1">
+      <a routerLink="/">
+        <img src="/Images/logo1.png" width="150" class="pb-2">
       </a>
     </div>
     <button class="hamburger" [class.active]="menuActive" (click)="toggleMenu($event)">
