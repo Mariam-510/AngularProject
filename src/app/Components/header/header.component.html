@@ -71,7 +71,7 @@
       }
       <div class="user-avatar">
         @if (currentUser) {
-        <img [src]="currentUser?.avatar" alt="User" class="user-avatar" />
+        <img [src]="currentUser?.avatar ? currentUser.avatar : 'img/userIcon.png'" alt="User" class="user-avatar" />
         } @else {
         <img src="img/userIcon.png" width="40px" />
         }
