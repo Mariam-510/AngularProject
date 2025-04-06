@@ -1,7 +1,7 @@
 <header class="header-container">
   <!-- Left Section: Logo and Hamburger -->
   <div class="header-left">
-    <div class="logo ms-2 mb-1">
+    <div class="logo ms-4 mb-1">
       <a routerLink="/">
         <img src="/Images/logo1.png" width="150" class="pb-2">
       </a>
@@ -64,7 +64,7 @@
 
   <!-- Right Section: Search and User Menu -->
   <div class="header-right">
-   
+
     <div class="user-menu-container" (click)="toggleUserMenu($event)">
       @if (currentUser) {
       <span class="user-greeting me-2">Hello, {{ currentUser.firstName }}</span>
