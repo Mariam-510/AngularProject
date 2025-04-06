@@ -48,10 +48,6 @@
   transition: transform 0.3s ease;
 }
 
-.footer-logo a:hover::after {
-  /* transform: scaleX(1); */
-}
-
 .footer-description {
   margin: 1rem auto;
   line-height: 1.6;
