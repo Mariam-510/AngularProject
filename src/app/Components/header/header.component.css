@@ -41,7 +41,7 @@
 }
 
 .logo a:hover::after {
-  transform: scaleX(1);
+  /* transform: scaleX(1); */
 }
 
 .hamburger {
