@@ -12,7 +12,7 @@ import { ToastrService } from '../../../Services/toastr.service';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  userImage: string = 'Images/Home/user.jpeg';
+  userImage: string = 'img/userIcon.png';
   currentUser: any;
   MyForm!: FormGroup;
   
@@ -27,7 +27,7 @@ export class UserComponent {
     //   confirmPassword: 'Ma12345@',
     //   phoneNum: '01144756069'
     // });
-
+      
     this.currentUser = this._authService.currentUser;
     this._authService.currentUser$.subscribe(user => {
       this.currentUser = user;
@@ -39,21 +39,21 @@ export class UserComponent {
   private _initializeForm() {
     this.MyForm = new FormGroup(
     {
-      firstName: new FormControl(this.currentUser.firstName, [
+      firstName: new FormControl(this.currentUser?.firstName, [
         Validators.required,
         Validators.minLength(3),
         Validators.pattern(/^[A-Za-z]+$/)
       ]),
-      lastName: new FormControl(this.currentUser.lastName? this.currentUser.lastName : "", [
+      lastName: new FormControl(this.currentUser?.lastName? this.currentUser.lastName : "", [
         // Validators.required,
         Validators.minLength(3),
         Validators.pattern(/^[A-Za-z]+$/)
       ]),
-      email: new FormControl(this.currentUser.email, [
+      email: new FormControl(this.currentUser?.email, [
         Validators.required,
         Validators.pattern(/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/)
       ]),
-      phoneNum: new FormControl(this.currentUser.phoneNum, [Validators.required, Validators.pattern('^[0-9]{11}$')]),
+      phoneNum: new FormControl(this.currentUser?.phoneNum, [Validators.required, Validators.pattern('^[0-9]{11}$')]),
       password: new FormControl("", [
         Validators.required,
         Validators.minLength(6),
