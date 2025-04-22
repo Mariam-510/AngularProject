@@ -243,11 +243,13 @@
 
         <!-- Description -->
         <p class="lead ms-3 text-justify fw-light fst-italic">
-          {{ item.description.length > 200 ? (showMore ? item.description : item.description.slice(0, 200) + '...') : item.description }}
+          {{ item.description.length > 200 ? (showMore ? item.description : item.description.slice(0, 200) + '...') :
+          item.description }}
         </p>
 
         <!-- Show More / Show Less Button (Only appears if description > 200) -->
-        <button *ngIf="item.description.length > 200" class="btn btn-light text-danger me-2" (click)="showMore = !showMore">
+        <button *ngIf="item.description.length > 200" class="btn btn-light text-danger me-2"
+          (click)="showMore = !showMore">
           <i class="bi" [ngClass]="showMore ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
           {{ showMore ? 'Show Less' : 'Show More' }}
         </button>
@@ -755,3 +757,5 @@
     </div>
     }
   </div>
+
+</div>
