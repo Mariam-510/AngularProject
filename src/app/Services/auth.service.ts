@@ -98,7 +98,9 @@ export class AuthService {
   // Google login - now initiates OAuth flow
   googleLogin(): void {
     const clientId = '934071894911-eotiiktppg6etv0ts1aqov0iv3808tc7.apps.googleusercontent.com';
-    const redirectUri = window.location.origin + '/home';
+    // const redirectUri = window.location.href + '/home';
+    const redirectUri = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'home';
+    console.log(redirectUri);
     const scope = 'email profile openid';
     const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
 
