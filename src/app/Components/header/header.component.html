@@ -3,7 +3,7 @@
   <div class="header-left">
     <div class="logo ms-4 mb-1">
       <a routerLink="/">
-        <img src="/Images/logo1.png" width="150" class="pb-2">
+        <img src="./Images/logo1.png" width="150" class="pb-2">
       </a>
     </div>
     <button class="hamburger" [class.active]="menuActive" (click)="toggleMenu($event)">
@@ -73,7 +73,7 @@
         @if (currentUser) {
         <img [src]="currentUser?.avatar ? currentUser.avatar : 'img/userIcon.png'" alt="User" class="user-avatar" />
         } @else {
-        <img src="img/userIcon.png" width="40px" />
+        <img src="./img/userIcon.png" width="40px" />
         }
       </div>
       <div class="user-dropdown" [class.active]="userMenuActive">

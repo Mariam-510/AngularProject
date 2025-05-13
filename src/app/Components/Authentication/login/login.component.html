@@ -1,4 +1,4 @@
-<div class="home-content">
+<div class="home-content" style="background: url('img/p1.jpg') no-repeat center center/cover;">
   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
   <div class="position-relative form-container">
@@ -43,17 +43,18 @@
             <i class="bi" [ngClass]="showPassword ? 'bi-eye' : 'bi-eye-slash'"></i>
           </span>
         </div>
-        <div *ngIf="Loginform.get('pass')?.hasError('required') && Loginform.get('pass')?.touched" class="text-danger small ps-2">
+        <div *ngIf="Loginform.get('pass')?.hasError('required') && Loginform.get('pass')?.touched"
+          class="text-danger small ps-2">
           Password is required.
         </div>
       </div>
-      
+
 
       @if (invalidCredentials){
-        <div class="text-danger fw-bold small ps-2">
-          Invalid Email/Password!
-        </div>
-      }   
+      <div class="text-danger fw-bold small ps-2">
+        Invalid Email/Password!
+      </div>
+      }
 
       <!-- Login Button -->
       <div class="d-flex justify-content-center">
