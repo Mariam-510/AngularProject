@@ -1,5 +1,5 @@
-<div class="home-content">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+<div class="home-content" style="background: url('img/p1.jpg') no-repeat center center/cover;">
+  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
   <div class="position-relative form-container">
     <form class=" form-Content shadow-lg rounded" [formGroup]="registerForm">
@@ -107,7 +107,7 @@
             <i class="bi" [ngClass]="showPassword ? 'bi-eye'  : 'bi-eye-slash'"></i>
           </span>
         </div>
-      
+
         <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
           class="text-danger small ps-2">
           Password is required.
@@ -122,10 +122,11 @@
         </div>
         <div *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')?.touched"
           class="text-danger small ps-2">
-          Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+          Password must contain at least one uppercase letter, one lowercase letter, one number, and one special
+          character.
         </div>
       </div>
-      
+
 
 
       <!-- Confirm Password -->
@@ -141,19 +142,20 @@
             <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye' : 'bi-eye-slash'"></i>
           </span>
         </div>
-      
-        <div *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched"
+
+        <div
+          *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched"
           class="text-danger small ps-2">
           Confirm Password is required.
         </div>
-      
+
         <div *ngIf="registerForm.get('password')?.touched && registerForm.get('confirmPassword')?.touched
             && registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value"
           class="text-danger small ps-2">
           Confirm Passwords do not match.
         </div>
       </div>
-      
+
 
 
 
