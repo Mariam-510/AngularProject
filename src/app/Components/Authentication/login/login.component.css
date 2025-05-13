@@ -1,5 +1,5 @@
 .home-content {
-  background: url('/img/p1.jpg') no-repeat center center/cover;
+  background: url("./img/p1.jpg") no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,6 @@
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-
 button {
   color: white;
   font-weight: bold;
@@ -23,12 +22,10 @@ button {
   transition: all 0.3s ease-in-out;
   border: none;
   width: 370px;
-
 }
 
 .red-icon {
   color: red !important;
-
 }
 
 input {
