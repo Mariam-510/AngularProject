@@ -10,8 +10,8 @@ import { ToastrService } from '../../../Services/toastr.service';
 @Component({
   selector: 'app-sdetails-page',
   imports: [CommonModule, LeafletMapComponent, RouterLink, RouterModule],
-  templateUrl: './sdetails-page.component.html',
-  styleUrl: './sdetails-page.component.css'
+  templateUrl: 'sdetails-page.component.html',
+  styleUrl: 'sdetails-page.component.css'
 })
 export class SDetailsPageComponent implements AfterViewInit, OnInit {
   matches: match[] = [];
@@ -38,15 +38,15 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
     venue: 'Cairo International Stadium, Cairo', // location
     date: 'Fri 28 Mar 2025',
     tournament: 'World Cup Qualifiers 2025', //title
-    staduim: 'img/cairo staduim.jpg',
+    staduim: './img/cairo staduim.jpg',
     matchNumber: 5,
     time: '08:30 PM', //Kickoff
     GatesOpen: '05:00 PM',
     group: 'African Qualifiers Group B', //Group
     team1: 'Egypt',
     team2: 'Algeria',
-    team1Logo: 'img/egypt.svg',
-    team2Logo: 'img/algeria.svg',
+    team1Logo: './img/egypt.svg',
+    team2Logo: './img/algeria.svg',
     isFavorite: true,
     price: 1100,
     word: "🔥 high",
@@ -61,7 +61,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   homeTeam: team = {
     id: 1,
     name: 'Egypt',
-    logo: '/img/egypt.svg',
+    logo: './img/egypt.svg',
     description: 'One of the most successful and storied teams in African football history. The team has won the Africa Cup of Nations (AFCON) a record seven times',
     coach: 'Hossam Hassan',
     keyPlayers: 'Mohamed Salah, Omar Marmoush, Zizo'
@@ -70,7 +70,7 @@ export class SDetailsPageComponent implements AfterViewInit, OnInit {
   awayTeam: team = {
     id: 2,
     name: 'Algeria',
-    logo: '/img/algeria.svg',
+    logo: './img/algeria.svg',
     description: 'One of the most prominent teams in African football. They have won the Africa Cup of Nations (AFCON) twice, in 1990 and 2019.',
     coach: 'Vladimir Petković',
     keyPlayers: 'Riyad Mahrez, Ismaël Bennacer, Saïd Benrahma'
