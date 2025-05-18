@@ -1,59 +1,83 @@
-# AngularProject
+# Ticketaia - Event & Match Booking Platform
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+An Angular-based platform for booking entertainment events and sports matches with Google authentication, payment integration, and admin dashboard.
 
-## Development server
+## Features
 
-To start a local development server, run:
+### Core Features
+- **Dual Navigation**
+  - 🎭 Entertainment (Concerts, Theater, Dance, Stand-Up Comedy)
+  - ⚽ Sports (Football Matches)
+- **Google Authentication** - Secure login/signup
+- **Responsive Design** - Cross-device compatibility
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Entertainment Section
 
-## Code scaffolding
+### 1. Home Page
+- Curated event carousels & category filters
+- News updates & wishlist shortcuts
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 2. View All Events
+- Toggle grid/list views
+- Search & sort (rating/date/price)
 
-```bash
-ng generate component component-name
-```
+### 3. Event Details
+- **Essentials**: Date/venue map (Leaflet)
+- **Tickets**: VIP/Standard tiers
+- **Community**: Reviews & social sharing
+- **Discover**: Similar event recommendations
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Sports Section
 
-## Building
+### 1. Matches Home
+- League filters & stadium selection
+- Price-range filtering
 
-To build the project run:
+### 2. Match Details
+- **Teams**: Logos, coaches, player stats
+- **Venue**: Stadium map & match rules
+- **Tickets**: VIP/CAT1/CAT2 tiers
+- **Fan Insights**: Reviews & recommendations
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Booking System
 
-## Running unit tests
+### 1. Process
+- Seat selection & quantity validation
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 2. Payments
+- PayPal REST API  
 
-```bash
-ng test
-```
+### 3. Tickets
+- QR codes & cancellation policies
+- Booking history tracking
 
-## Running end-to-end tests
+### 4. Profile
+- Wishlist sync & review history
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Admin Panel
 
-## Additional Resources
+### 1. Dashboard
+- Revenue analytics & user demographics
+- activity monitoring
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 2. Management
+- Add/edit events & matches
+- Role-based user controls
+
+---
+
+## Technical Stack
+- **Frontend**: Angular
+- **Maps**: Leaflet
+- **Payments**: PayPal REST API  
+
+---
