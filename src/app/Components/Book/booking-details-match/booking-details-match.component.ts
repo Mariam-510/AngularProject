@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PaypalService } from '../../../Services/paypal.service';
 import { SharedService, match, CheckoutTicket } from '../../../Services/shared.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
 import { ToastrService } from '../../../Services/toastr.service';
 
@@ -18,7 +18,7 @@ declare var paypal: any;
 export class BookingDetailsMatchComponent implements OnInit {
 
   constructor(private payPalService: PaypalService, private _sharedService: SharedService, private route: ActivatedRoute,
-     private _authService: AuthService, private toastr: ToastrService) { }
+     private _authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   match: any;
 
@@ -98,7 +98,7 @@ export class BookingDetailsMatchComponent implements OnInit {
           // window.location.href = `/profile/bookingHistory`;
           this.toastr.success('Payment successful!');
           setTimeout(() => {
-            window.location.href = `/profile/bookingHistory`;
+            this.router.navigate(['profile/bookingHistory']);
           }, 2500);
         },
         onError: (err: any) => {
